@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 
-const FilterInfo = () => {
+import { CloseButton, Flex, Box } from '@chakra-ui/react';
+
+interface FilterinfoProps {
+  children: ReactNode[];
+
+}
+
+const FilterInfo = ({ children }: FilterinfoProps) => {
   return (
-    <div>
-      FILTER INFO
-    </div>
-  )
+    <Flex justify={'space-between'}>
+      {children}
+    </Flex>
+  );
 }
 
 export default FilterInfo

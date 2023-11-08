@@ -1,12 +1,21 @@
-import React from 'react'
-import { FaHamsa } from 'react-icons/fa'
+import { Flex } from '@chakra-ui/react';
 
-const PhysicalIcon = () => {
+import { ReactNode } from 'react'
+
+interface PhysicalIconProps {
+  id: number;
+  icon: ReactNode;
+  color: string;
+  onClick: (id: number) => void;
+  currentFilter: number
+}
+
+const PhysicalIcon = ({id, icon, color, onClick, currentFilter}: PhysicalIconProps) => {
   return (
-    <div>
-      <FaHamsa/>
-    </div>
-  )
+    <Flex justify={'center'} align={'center'} width={'3rem'} height={ '3rem'} borderRadius={'50%'} border={`2px solid ${color}`} onClick={(() => onClick(id))}>
+      {icon}
+    </Flex>
+  );
 }
 
 export default PhysicalIcon

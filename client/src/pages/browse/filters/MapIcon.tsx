@@ -1,12 +1,23 @@
-import React from 'react'
-import { FaMap } from 'react-icons/fa'
+import { Box, Image } from '@chakra-ui/react'
 
-const MapIcon = () => {
+interface MapIcon {
+  id: number;
+  onClick: (id: number) => void;
+}
+
+const MapIcon = ({id, onClick}: MapIcon) => {
   return (
-    <div>
-      <FaMap/>
-    </div>
-  )
+    <Box
+      width={"4rem"}
+      height={"4rem"}
+      onClick={() => onClick(id)}
+      cursor={'pointer'}
+    >
+      <Image src={"../../../src/assets/map_icon.png"} />
+    </Box>
+  );
 }
 
 export default MapIcon
+
+// <a href="https://www.freepik.com/icon/park_2373927#fromView=search&term=map+trees&page=1&position=21&track=ais">Icon by Smashicons</a>

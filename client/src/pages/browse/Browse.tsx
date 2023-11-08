@@ -8,7 +8,8 @@ import BrowseTitle from "./BrowseTitle"
 const Browse = () => {
   return (
     <Flex direction={'column'}>
-      <BrowseTitle/>
+      <BrowseTitle />
+      {/* SEARCH BUTTON TO DETERMINE WHETEHR FILTERS ARE THERE */}
       <SearchFilters />
       <TreeList/>
     </Flex>
