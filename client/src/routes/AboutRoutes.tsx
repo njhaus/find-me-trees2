@@ -1,7 +1,7 @@
 const AboutRoutes = () => {
   return (
     <div>
-      
+      About
     </div>
   )
 }
