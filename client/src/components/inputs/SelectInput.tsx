@@ -13,16 +13,19 @@ interface SelectInputProps {
   values: string[];
   helperText?: string;
   formName: string;
+  onChange?: (...args: string[]) => void;
 }
 
-const SelectInput = ({ label, values, formName, helperText }: SelectInputProps) => {
+const SelectInput = ({ label, values, formName, helperText, onChange }: SelectInputProps) => {
   const [showHelpertext, setShowHelperText] = useState(false);
 
   return (
     <FormControl as="fieldset">
       <FormLabel as="legend">{label}</FormLabel>
-          <Select defaultValue={''}>
-              <option value='' disabled>Choose one</option>
+      <Select defaultValue={""} onChange={(e) => onChange?.(formName, e.target.value)}>
+        <option value="" disabled>
+          Choose one
+        </option>
         {values.map((val, i) => (
           <option key={i} value={val}>
             {val}
@@ -30,7 +33,7 @@ const SelectInput = ({ label, values, formName, helperText }: SelectInputProps) 
         ))}
       </Select>
       {helperText && (
-    <BsQuestionCircle onClick={() => setShowHelperText(!showHelpertext)} />
+        <BsQuestionCircle onClick={() => setShowHelperText(!showHelpertext)} />
       )}
       {showHelpertext === true && <FormHelperText>{helperText}</FormHelperText>}
     </FormControl>

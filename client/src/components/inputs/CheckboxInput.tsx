@@ -15,10 +15,11 @@ interface CheckboxInputProps {
   label: string;
   values: string[];
   formName: string;
+  onChange?: (...args: string[]) => void;
   helperText?: string;
 }
 
-const CheckboxInput = ({ label, values, formName, helperText }: CheckboxInputProps) => {
+const CheckboxInput = ({ label, values, formName, onChange, helperText }: CheckboxInputProps) => {
   const [showHelpertext, setShowHelperText] = useState(false);
 
   return (
@@ -27,7 +28,11 @@ const CheckboxInput = ({ label, values, formName, helperText }: CheckboxInputPro
       <CheckboxGroup>
         <HStack spacing="24px">
           {values.map((val, i) => (
-            <Checkbox key={i} value={val}>
+            <Checkbox
+              key={i}
+              value={val}
+              onChange={() => onChange?.(formName, val)}
+            >
               {val}
             </Checkbox>
           ))}

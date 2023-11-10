@@ -1,16 +1,18 @@
-import { createContext, useState } from "react"
+import { FormEvent, createContext, useContext, useState } from "react"
 
 import { Flex } from "@chakra-ui/react"
 
 import SearchFilters from "./SearchFilters"
 import TreeList from "./TreeList"
 import BrowseTitle from "./BrowseTitle"
+import { iFormData } from "./data/filterFormData";
 import initialFormData from "./data/filterFormData"
-import { FormData } from "./data/filterFormData"
 
+
+// Set form context (Form found in SearchFilters and inputs are in many children within SearchFilters)
 export interface iFormDataContext {
-  formData: FormData;
-  setFormData: React.Dispatch<React.SetStateAction<FormData>>;
+  formData: iFormData;
+  setFormData: React.Dispatch<React.SetStateAction<iFormData>>;
 }
 export const FormDataContext = createContext<iFormDataContext>({
   formData: initialFormData,
@@ -21,11 +23,20 @@ const Browse = () => {
   
   const [formData, setFormData] = useState(initialFormData);
 
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    console.log('At least the function triggered')
+    console.log(formData);
+  };
+
+
   return (
     <Flex direction={'column'}>
       <BrowseTitle />
       <FormDataContext.Provider value={{ formData, setFormData }}>
-        <SearchFilters />
+        <SearchFilters
+          onSubmit={handleSubmit}
+        />
         <TreeList />
       </FormDataContext.Provider>
     </Flex>

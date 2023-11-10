@@ -12,15 +12,16 @@ import {
 import { BsQuestionCircle } from "react-icons/bs";
 
 interface RadioInputProps {
-    label: string;
+  label: string;
   values: string[];
   formName: string;
+  onChange?: (...args: string[]) => void;
   helperText?: string;
 }
 
-const RadioInput = ({ label, values, formName, helperText }: RadioInputProps) => {
+const RadioInput = ({ label, values, formName, helperText, onChange }: RadioInputProps) => {
     
-    const [showHelpertext, setShowHelperText] = useState(false)
+  const [showHelpertext, setShowHelperText] = useState(false)
 
   return (
     <FormControl as="fieldset">
@@ -28,7 +29,11 @@ const RadioInput = ({ label, values, formName, helperText }: RadioInputProps) =>
       <RadioGroup defaultValue="">
         <HStack spacing="24px">
           {values.map((val, i) => (
-            <Radio key={i} value={val}>
+            <Radio
+              key={i}
+              value={val}
+              onChange = { () => onChange?.(formName, val)}
+            >
               {val}
             </Radio>
           ))}

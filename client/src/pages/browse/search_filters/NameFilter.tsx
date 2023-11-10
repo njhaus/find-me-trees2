@@ -1,11 +1,23 @@
-import { FormControl, FormLabel, Input } from "@chakra-ui/react";
+import TextInput from "../../../components/inputs/TextInput";
+import { useContext } from "react";
+import { FormDataContext, iFormDataContext } from "../Browse";
 
 const NameFilter = () => {
+
+  const { formData, setFormData }: iFormDataContext =
+    useContext(FormDataContext);
+
+  const handleChange = (key: string, val: string) => {
+    setFormData({ ...formData, [key]: val });
+  };
+
   return (
-    <FormControl display={'flex'}>
-      <FormLabel>Search by Name:</FormLabel>
-      <Input placeholder="Enter tree name" />
-    </FormControl>
+    <TextInput
+      label={"Search by name: "}
+      formName={"nameSearch"}
+      helperText={"Enter tree name"}
+      onChange={handleChange}
+    />
   );
 }
 

@@ -24,6 +24,7 @@ const FlowerFilter = () => {
           values={filter.values}
           helperText={filter.helperText}
           formName={filter.formName}
+          onChange={handleChange}
         />
       ))}
     </Flex>

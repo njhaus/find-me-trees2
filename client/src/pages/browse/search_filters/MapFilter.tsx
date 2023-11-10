@@ -23,6 +23,7 @@ const MapFilter = () => {
         label={"Choose a state:"}
         values={states}
         formName={"location"}
+        onChange={handleChange}
       />
       <Box>
         Or click your location on the map:

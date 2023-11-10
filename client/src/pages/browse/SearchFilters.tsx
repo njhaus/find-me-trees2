@@ -1,6 +1,6 @@
 import { Flex, Button, Heading, CloseButton } from "@chakra-ui/react";
 
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 import FilterInfo from "./search_filters/FilterInfo";
 import PhysicalIcon from "./search_filters/PhysicalIcon";
@@ -13,8 +13,11 @@ import { filters, mapFilter } from "./data/filterData";
 // styles
 import { iconHeadingProps as ihp } from "./styles/browseStyles";
 
+interface SearchFiltersProps {
+  onSubmit: (e: FormEvent) => void;
+}
 
-const SearchFilters = () => {
+const SearchFilters = ({onSubmit}: SearchFiltersProps) => {
   // STATE: filter icon clicked on determines which info child to display. -1 shows nothing, map is set to filters.length so it is always the last.
   const [showFilter, setShowFilter] = useState(-1);
 
@@ -35,7 +38,7 @@ const SearchFilters = () => {
     <form method="GET" action="/search">
       <Flex direction={"column"} padding={{ base: 3, md: 6 }}>
         {/* Filter by tree name */}
-        <NameFilter />
+        <NameFilter/>
         <Flex
           direction={"row"}
           justify={"space-around"}
@@ -88,7 +91,9 @@ const SearchFilters = () => {
           {currentFilter && currentFilter.dropDown}
           {currentFilter && <CloseButton onClick={() => handleFilter(-1)} />}
         </FilterInfo>
-        <Button width={"fit-content"}>Find Me Trees</Button>
+        <Button width={"fit-content"} onClick={(e) => {
+          onSubmit(e)
+        } }>Find Me Trees</Button>
       </Flex>
     </form>
   );

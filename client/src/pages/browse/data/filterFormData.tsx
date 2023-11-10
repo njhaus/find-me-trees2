@@ -69,11 +69,11 @@ export const flowerFilters: filterObj[] = [
 
 const allFilters = [leafFilters, barkFilters, fruitFilters, flowerFilters]
 
-export interface FormData {
+export interface iFormData {
   [key: string]: any;
 }
 
-const initialFormData: FormData = {
+const initialFormData: iFormData = {
   nameSearch: null,
   location: null,
 };
