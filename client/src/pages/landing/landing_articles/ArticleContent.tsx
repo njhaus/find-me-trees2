@@ -19,12 +19,13 @@ const ArticleContent = ({title, description, cta, children}: ArticleContentProps
     <Flex
       direction={"row"}
       bg={"blue.100"}
-      width={'60%'}
-      minWidth={'31.2rem'}
+      width={"60%"}
+      minWidth={{ base: "100%", sm: "31.2rem" }}
+      maxWidth={"100vw"}
       flexGrow={"2"}
       justifyContent={"space-between"}
       flexWrap={"nowrap"}
-      position={'relative'}
+      position={"relative"}
     >
       <Flex direction={"column"} width={"50%"}>
         <Heading as={"h3"} size={"md"}>
@@ -37,7 +38,7 @@ const ArticleContent = ({title, description, cta, children}: ArticleContentProps
           </Text>
         </Box>
       </Flex>
-      <Flex justifyContent={'flex-end'} width={"25%"}>
+      <Flex justifyContent={"flex-end"} width={"25%"}>
         <Button whiteSpace={"normal"}>{cta}</Button>
       </Flex>
     </Flex>

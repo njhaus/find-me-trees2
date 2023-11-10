@@ -1,11 +1,11 @@
 import { GiTreeBranch, GiOakLeaf, GiShinyApple } from "react-icons/gi";
 import { BsFlower1 } from "react-icons/bs";
 import { ReactNode } from "react";
-import LeafFilter from "../filters/LeafFilter";
-import BarkFilter from "../filters/BarkFilter";
-import FruitFilter from "../filters/FruitFilter";
-import FlowerFilter from "../filters/FlowerFilter";
-import MapFilter from "../filters/MapFilter";
+import LeafFilter from "../search_filters/LeafFilter";
+import BarkFilter from "../search_filters/BarkFilter";
+import FruitFilter from "../search_filters/FruitFilter";
+import FlowerFilter from "../search_filters/FlowerFilter";
+import MapFilter from "../search_filters/MapFilter";
 
 const iconStyles = {
   size: "2rem",

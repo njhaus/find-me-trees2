@@ -12,7 +12,7 @@ interface PhysicalIconProps {
 
 const PhysicalIcon = ({id, icon, color, onClick, currentFilter}: PhysicalIconProps) => {
   return (
-    <Flex justify={'center'} align={'center'} width={'3rem'} height={ '3rem'} borderRadius={'50%'} border={`2px solid ${color}`} onClick={(() => onClick(id))}>
+    <Flex justify={'center'} align={'center'} width={'3rem'} height={ '3rem'} borderRadius={'50%'} cursor={'pointer'} border={`2px solid ${color}`} onClick={(() => onClick(id))}>
       {icon}
     </Flex>
   );

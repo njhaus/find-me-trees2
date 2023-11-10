@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 
 import Landing from './pages/landing/Landing'
-import BrowseRoutes from './routes/BrowseRoutes'
+import Browse from './pages/browse/Browse'
 import TreeRoutes from './routes/TreeRoutes'
 import UserRoutes from './routes/UserRoutes'
 import AboutRoutes from './routes/AboutRoutes'
@@ -18,7 +18,7 @@ function App() {
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<Landing />} />
-          <Route path="/browse/*" element={<BrowseRoutes />} />
+          <Route path="/browse" element={<Browse />} />
           <Route path="/tree/*" element={<TreeRoutes />} />
           <Route path="/user/:id" element={<UserRoutes />} />
           <Route path="/about" element={<AboutRoutes />} />

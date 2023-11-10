@@ -5,7 +5,7 @@ const BrowseTitle = () => {
     <Flex justifyContent={"space-between"} bg={"purple.400"} padding={'0.5rem'}>
       <VStack align={"start"} flexGrow={"1"}>
         <Heading>Tree Guide</Heading>
-        <Text>Use physical features or location to find a tree.</Text>
+        <Text>Search for trees by name, physical features, or location.</Text>
       </VStack>
       <Image
         src={"../../../src/assets/placeholder-1.jpeg"}

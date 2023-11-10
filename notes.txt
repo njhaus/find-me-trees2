@@ -12,3 +12,4 @@ https://data.world/uci/plants
 
 Problems:
 pages/browse/iconData // NEED TO REFACTOR THIS-- CODE SMELLS WHEN HARDCODING THE COLOR IN TWO PLACES< BUT I AM HAVING TROUBLE ACCESSING THE COLOR FROM WITHIN THE OBJECT
+Filter Form (pages/browse/SearchFilters) Needs to be validated?

@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 
-import { Box, Image } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 
 import LandingArticle from "./LandingArticle";
 import ArticleImgScroll from "./ArticleImgScroll";
@@ -15,8 +15,6 @@ const LandingArticlesAll = () => {
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
   const handleScroll = () => {
-    console.log(visibleImg);
-    console.log(imgs[visibleImg])
     const articleContainer = scrollRef.current;
     if (articleContainer) {
       const nextArticle = (visibleImg * window.innerHeight + window.innerHeight / 2) * -1;

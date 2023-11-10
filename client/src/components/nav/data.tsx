@@ -2,20 +2,28 @@ import About from "../../pages/about/About"
 import Browse from "../../pages/browse/Browse"
 
 
-interface Links {
+interface Link {
     text: string,
     to: string
 }
 
-const links = [
-    {
-        text: 'Find Trees',
-        to: '/browse'
-    },
-    {
-        text: "About",
-        to: '/about'
-    }
-]
+const links: Link[] = [
+  {
+    text: "Find Trees",
+    to: "/browse",
+  },
+  {
+    text: "My Trees",
+    to: "/",
+  },
+  {
+    text: "Tree Test",
+    to: "/tree/test",
+  },
+  {
+    text: "About",
+    to: "/about",
+  },
+];
 
 export default links;

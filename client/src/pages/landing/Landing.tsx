@@ -6,7 +6,7 @@ import LandingArticlesAll from "./landing_articles/LandingArticlesContainer";
 
 const Landing = () => {
   return (
-    <Flex as={"section"} direction={"column"}>
+    <Flex as={"section"} direction={"column"} w={'100%'}>
       <LandingMain />
       <LandingArticlesAll />
       <LearnMore></LearnMore>

@@ -1,17 +1,15 @@
 import { Routes } from "react-router-dom";
 import { Route } from "react-router-dom";
+import BrowseRedirect from "../pages/tree/BrowseRedirect";
 
-import TreeLayout from "../layouts/TreeLayout";
-import Placeholder from "../pages/placeholder/Placeholder";
+import Tree from "../pages/tree/Tree";
 
 const TreeRoutes = () => {
   return (
     <>
       <Routes>
-        <Route element={<TreeLayout />}>
-          <Route index element={<Placeholder />} />
-          <Route path="tree/:title" element={<Placeholder />} />
-        </Route>
+        <Route index element={< BrowseRedirect />} />
+        <Route path=":tree" element={<Tree />} />
       </Routes>
     </>
   );

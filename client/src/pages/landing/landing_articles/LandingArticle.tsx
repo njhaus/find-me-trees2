@@ -1,10 +1,5 @@
 import {
-  Button,
   Flex,
-  Image,
-  Text,
-  Container,
-  Heading,
 } from "@chakra-ui/react";
 import ArticleImage from "./ArticleImage";
 import ArticleContent from "./ArticleContent";
