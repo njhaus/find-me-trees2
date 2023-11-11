@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import {
   Flex,
@@ -12,15 +12,23 @@ Checkbox,
 import { BsQuestionCircle } from "react-icons/bs";
 
 interface CheckboxInputProps {
+  formVal: string | undefined;
   label: string;
   values: string[];
   formName: string;
-  onChange?: (...args: string[]) => void;
+  onChange?: (...args: any[]) => void;
   helperText?: string;
 }
 
-const CheckboxInput = ({ label, values, formName, onChange, helperText }: CheckboxInputProps) => {
+const CheckboxInput = ({ formVal, label, values, formName, onChange, helperText }: CheckboxInputProps) => {
+
+  const [value, setValue] = useState<string | undefined>(formVal);
+
   const [showHelpertext, setShowHelperText] = useState(false);
+
+  useEffect(() => {
+    onChange?.(formName, value);
+  }, [value]);
 
   return (
     <FormControl as="fieldset">
@@ -31,7 +39,9 @@ const CheckboxInput = ({ label, values, formName, onChange, helperText }: Checkb
             <Checkbox
               key={i}
               value={val}
-              onChange={() => onChange?.(formName, val)}
+              onChange={() => {
+                value !== val ? setValue(val) : setValue(undefined);
+              }}
             >
               {val}
             </Checkbox>

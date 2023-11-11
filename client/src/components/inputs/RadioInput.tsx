@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import {
   Flex,
@@ -12,16 +12,22 @@ import {
 import { BsQuestionCircle } from "react-icons/bs";
 
 interface RadioInputProps {
+  formVal: string | undefined;
   label: string;
   values: string[];
   formName: string;
-  onChange?: (...args: string[]) => void;
+  onChange?: (...args: any[]) => void;
   helperText?: string;
 }
 
-const RadioInput = ({ label, values, formName, helperText, onChange }: RadioInputProps) => {
-    
-  const [showHelpertext, setShowHelperText] = useState(false)
+const RadioInput = ({ formVal, label, values, formName, helperText, onChange }: RadioInputProps) => {
+  const [value, setValue] = useState<string | undefined>(formVal);
+
+  const [showHelpertext, setShowHelperText] = useState(false);
+
+  useEffect(() => {
+    onChange?.(formName, value);
+  }, [value]);
 
   return (
     <FormControl as="fieldset">
@@ -32,7 +38,9 @@ const RadioInput = ({ label, values, formName, helperText, onChange }: RadioInpu
             <Radio
               key={i}
               value={val}
-              onChange = { () => onChange?.(formName, val)}
+              onChange={() => {
+                setValue(val);
+              }}
             >
               {val}
             </Radio>

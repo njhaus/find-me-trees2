@@ -25,8 +25,8 @@ const Browse = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log('At least the function triggered')
     console.log(formData);
+    setFormData(initialFormData);
   };
 
 

@@ -1,10 +1,14 @@
-import React from 'react'
+import { Flex, Text } from "@chakra-ui/react";
 
-const TreeIntro = () => {
+interface itreeIntro {
+  text: string;
+}
+
+const TreeIntro = ({text}: itreeIntro) => {
   return (
-    <div>
-      TreeIntro
-    </div>
+    <Flex>
+      <Text>{text}</Text>
+    </Flex>
   )
 }
 

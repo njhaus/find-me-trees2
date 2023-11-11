@@ -1,21 +1,27 @@
 import { Card, CardHeader, CardBody, CardFooter, Image, Stack, Text, Divider, ButtonGroup, Button, Heading } from "@chakra-ui/react";
 
+import { Link } from "react-router-dom";
+
 import { useImg } from "../../../hooks/useImg";
+import { iFormData } from "../data/filterFormData";
 
 interface TreeCardProps {
-    title: string;
-    imgSrc: string;
-    sciName: string;
-    searchTerms?: string[];
-
+  id: string;
+  title: string;
+  imgSrc: string;
+  sciName: string;
+  searchTerms: iFormData;
 }
 
-const TreeCard = ({ title, imgSrc, sciName, searchTerms }: TreeCardProps) => {
-    
-    const imageSource = useImg(imgSrc)
+const TreeCard = ({ id, title, imgSrc, sciName, searchTerms }: TreeCardProps) => {
+  
+  const imageSource = useImg(imgSrc)
+
+  const searchTermText = searchTerms ? Object.keys(searchTerms) : [];
+  const searchTermValues = searchTerms ? Object.values(searchTerms) : []
 
   return (
-    <Card maxW="sm" w="100%" align={'center'}>
+    <Card maxW="sm" w="100%" align={"center"}>
       <CardBody>
         <Heading size="md">{title}</Heading>
         <Image src={imageSource} alt={`Photo of ${title}`} borderRadius="lg" />
@@ -23,16 +29,24 @@ const TreeCard = ({ title, imgSrc, sciName, searchTerms }: TreeCardProps) => {
           <Text color="blue.600" fontSize="2xl">
             {sciName}
           </Text>
-          <Text>
-            Matches search terms {searchTerms && searchTerms.map((term, i) => `${term}`)}
-          </Text>
+          {searchTermValues.every((term) => term === null) ? '' :  (
+            <Text>Matches search terms:</Text>
+          )}
+          {searchTerms &&
+            searchTermText.map((term, i) => (
+              <Text key={i}>
+                {searchTermValues[i] !== null
+                  ? `${term}: ${searchTermValues[i]} `
+                  : ""}
+              </Text>
+            ))}
         </Stack>
       </CardBody>
       <Divider />
       <CardFooter>
         <ButtonGroup spacing="2">
           <Button variant="solid" colorScheme="blue">
-            View {title}
+            <Link to={`/tree/${id}`}>View {title}</Link>
           </Button>
         </ButtonGroup>
       </CardFooter>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import {
   FormControl,
@@ -9,21 +9,32 @@ import {
 import { BsQuestionCircle } from "react-icons/bs";
 
 interface SelectInputProps {
+  formVal: string | undefined;
   label: string;
   values: string[];
   helperText?: string;
   formName: string;
-  onChange?: (...args: string[]) => void;
+  onChange?: (...args: any[]) => void;
 }
 
-const SelectInput = ({ label, values, formName, helperText, onChange }: SelectInputProps) => {
+const SelectInput = ({ formVal, label, values, formName, helperText, onChange }: SelectInputProps) => {
+
+  const [value, setValue] = useState<string | undefined>(formVal)
+
   const [showHelpertext, setShowHelperText] = useState(false);
+
+
+  useEffect(() => {
+    onChange?.(formName, value);
+  }, [value]);
 
   return (
     <FormControl as="fieldset">
       <FormLabel as="legend">{label}</FormLabel>
-      <Select defaultValue={""} onChange={(e) => onChange?.(formName, e.target.value)}>
-        <option value="" disabled>
+      <Select defaultValue={""} onChange={(e) => {
+        e.target.value !== "" ? setValue(e.target.value) : setValue(undefined);
+      }}>
+        <option value="">
           Choose one
         </option>
         {values.map((val, i) => (

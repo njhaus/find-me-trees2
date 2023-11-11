@@ -2,24 +2,37 @@ import { Flex, Heading, Image } from "@chakra-ui/react";
 
 import TreeIntro from "./TreeIntro";
 import TreeUserOptions from "../user/TreeUserOptions";
-import TreeDescription from "./TreeDescription";
+import TreeTraits from "./TreeTraits";
 import TreeLocation from "./TreeLocation";
+
+// TEMPDATA -- REPLACE
+import { tempData } from "../browse/data/treeData";
+import Carousel from "../../components/ui-components/Carousel";
 
 const Tree = () => {
     
-    // const testData = {}
+    // REPLACE THIS WITH DATA FORUND FROM THE SERVER/DATABASE USING THE ID IN THE PARAMS (Review react router vid for how to capture this...)
+    const data = tempData;
     
     return (
         <Flex as={'section'} direction={"column"}>
             <Heading>Tree Heading</Heading>
             <Flex direction={"row"}>
-                <Image />
-                <TreeIntro/>
+                <Carousel
+                    imgs={data.imgSrc}
+                />
+                <TreeIntro
+                    text={data.intro}
+                />
             </Flex>
             <TreeUserOptions />
             <Flex>
-                <TreeDescription />
-                <TreeLocation/>
+                <TreeTraits
+                    traits={data.traits}
+                />
+                <TreeLocation
+                    location={data.location}
+                />
             </Flex>
     </Flex>
   )

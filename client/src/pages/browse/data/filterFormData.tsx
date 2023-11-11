@@ -74,14 +74,14 @@ export interface iFormData {
 }
 
 const initialFormData: iFormData = {
-  nameSearch: null,
-  location: null,
+  nameSearch: '',
+  location: undefined,
 };
 
 const completeInitialFormData = () => {
   allFilters.forEach((filterList) =>
     filterList.forEach((filter) => {
-      initialFormData[filter.formName] = null;
+      initialFormData[filter.formName] = undefined;
     })
   );
 };

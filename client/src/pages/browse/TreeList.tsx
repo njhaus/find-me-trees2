@@ -1,8 +1,14 @@
-import { Text, Flex, Grid, GridItem } from "@chakra-ui/react"
+import { useContext } from "react";
+
+import { Text, Flex, Grid, GridItem } from "@chakra-ui/react";
 
 import TreeCard from "./tree_list/TreeCard";
+import { FormDataContext, iFormDataContext } from "./Browse";
 
 const TreeList = () => {
+  const { formData, setFormData }: iFormDataContext =
+    useContext(FormDataContext);
+
   return (
     <Flex direction={"column"} padding={{ base: 3, md: 6 }}>
       <Text>Search terms here</Text>
@@ -17,33 +23,43 @@ const TreeList = () => {
       >
         {/* MAP THESE WITH DATA */}
         <TreeCard
-          title={'title placeholder'}
-          imgSrc={'placeholder-2.jpeg'}
+          id={"1"}
+          title={"title placeholder"}
+          imgSrc={"placeholder-2.jpeg"}
           sciName="sciname placeholder"
+          searchTerms={formData}
         />
         <TreeCard
-          title={'title placeholder'}
-          imgSrc={'placeholder-2.jpeg'}
+          id={"1"}
+          title={"title placeholder"}
+          imgSrc={"placeholder-2.jpeg"}
           sciName="sciname placeholder"
+          searchTerms={formData}
         />
         <TreeCard
-          title={'title placeholder'}
-          imgSrc={'placeholder-2.jpeg'}
+          id={"1"}
+          title={"title placeholder"}
+          imgSrc={"placeholder-2.jpeg"}
           sciName="sciname placeholder"
+          searchTerms={formData}
         />
         <TreeCard
-          title={'title placeholder'}
-          imgSrc={'placeholder-2.jpeg'}
+          id={"1"}
+          title={"title placeholder"}
+          imgSrc={"placeholder-2.jpeg"}
           sciName="sciname placeholder"
+          searchTerms={formData}
         />
         <TreeCard
-          title={'title placeholder'}
-          imgSrc={'placeholder-2.jpeg'}
+          id={"1"}
+          title={"title placeholder"}
+          imgSrc={"placeholder-2.jpeg"}
           sciName="sciname placeholder"
+          searchTerms={formData}
         />
       </Grid>
     </Flex>
   );
-}
+};
 
-export default TreeList
+export default TreeList;

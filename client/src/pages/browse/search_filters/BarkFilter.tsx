@@ -20,6 +20,7 @@ const BarkFilter = () => {
       {barkFilters.map((filter, i) => (
         <CheckboxInput
           key={i}
+          formVal={formData.formName}
           label={filter.label}
           values={filter.values}
           helperText={filter.helperText}

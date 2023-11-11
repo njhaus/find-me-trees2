@@ -20,6 +20,7 @@ const FlowerFilter = () => {
       {flowerFilters.map((filter, i) => (
         <RadioInput
           key={i}
+          formVal={formData.formName}
           label={filter.label}
           values={filter.values}
           helperText={filter.helperText}
