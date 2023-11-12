@@ -7,6 +7,7 @@ import {
   FormHelperText,
 } from "@chakra-ui/react";
 import { BsQuestionCircle } from "react-icons/bs";
+import { GiConsoleController } from "react-icons/gi";
 
 interface SelectInputProps {
   formVal: string | undefined;
@@ -23,7 +24,6 @@ const SelectInput = ({ formVal, label, values, formName, helperText, onChange }:
 
   const [showHelpertext, setShowHelperText] = useState(false);
 
-
   useEffect(() => {
     onChange?.(formName, value);
   }, [value]);
@@ -31,10 +31,10 @@ const SelectInput = ({ formVal, label, values, formName, helperText, onChange }:
   return (
     <FormControl as="fieldset">
       <FormLabel as="legend">{label}</FormLabel>
-      <Select defaultValue={""} onChange={(e) => {
+      <Select defaultValue={formVal} onChange={(e) => {
         e.target.value !== "" ? setValue(e.target.value) : setValue(undefined);
       }}>
-        <option value="">
+        <option value={undefined}>
           Choose one
         </option>
         {values.map((val, i) => (

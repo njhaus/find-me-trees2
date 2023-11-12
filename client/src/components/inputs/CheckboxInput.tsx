@@ -12,7 +12,7 @@ Checkbox,
 import { BsQuestionCircle } from "react-icons/bs";
 
 interface CheckboxInputProps {
-  formVal: string | undefined;
+  formVal: string[];
   label: string;
   values: string[];
   formName: string;
@@ -22,9 +22,11 @@ interface CheckboxInputProps {
 
 const CheckboxInput = ({ formVal, label, values, formName, onChange, helperText }: CheckboxInputProps) => {
 
-  const [value, setValue] = useState<string | undefined>(formVal);
+  const [value, setValue] = useState<string[]>(formVal);
 
   const [showHelpertext, setShowHelperText] = useState(false);
+
+  console.log(formVal)
 
   useEffect(() => {
     onChange?.(formName, value);
@@ -33,14 +35,17 @@ const CheckboxInput = ({ formVal, label, values, formName, onChange, helperText 
   return (
     <FormControl as="fieldset">
       <FormLabel as="legend">{label}</FormLabel>
-      <CheckboxGroup>
+      <CheckboxGroup defaultValue={value}>
         <HStack spacing="24px">
           {values.map((val, i) => (
             <Checkbox
               key={i}
               value={val}
+              isChecked={true}
               onChange={() => {
-                value !== val ? setValue(val) : setValue(undefined);
+                value.includes('Spiral')
+                  ? setValue(value.filter((v) => v !== val))
+                  : setValue([...value, val]);
               }}
             >
               {val}

@@ -19,7 +19,7 @@ const FruitFilter = () => {
       {fruitFilters.map((filter, i) => (
         <RadioInput
           key={i}
-          formVal={formData.formName}
+          formVal={formData[filter.formName]}
           label={filter.label}
           values={filter.values}
           helperText={filter.helperText}

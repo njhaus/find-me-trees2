@@ -17,9 +17,12 @@ const MapFilter = () => {
     setFormData({ ...formData, [key]: val });
   };
 
+
+
   return (
     <Flex>
       <SelectInput
+        formVal={formData.location}
         label={"Choose a state:"}
         values={states}
         formName={"location"}

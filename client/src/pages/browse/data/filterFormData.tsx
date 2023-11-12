@@ -67,7 +67,7 @@ export const flowerFilters: filterObj[] = [
   },
 ];
 
-const allFilters = [leafFilters, barkFilters, fruitFilters, flowerFilters]
+const allFilters = [leafFilters, fruitFilters, flowerFilters]
 
 export interface iFormData {
   [key: string]: any;
@@ -76,6 +76,8 @@ export interface iFormData {
 const initialFormData: iFormData = {
   nameSearch: '',
   location: undefined,
+  bark: [],
+  branches: [],
 };
 
 const completeInitialFormData = () => {
