@@ -1,4 +1,4 @@
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex, Heading, Text } from "@chakra-ui/react";
 
 interface itreeIntro {
   text: string;
@@ -7,6 +7,7 @@ interface itreeIntro {
 const TreeIntro = ({text}: itreeIntro) => {
   return (
     <Flex>
+      <Text>Note: styles here to make text not look so awkward.</Text>
       <Text>{text}</Text>
     </Flex>
   )

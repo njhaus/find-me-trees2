@@ -10,20 +10,20 @@ export const leafFilters: filterObj[] = [
         label: 'Leaf Type',
         values: ['Simple', 'Compound'],
     helperText: 'Leaf type helper text.',
-    formName: 'leaf-type',
+    formName: 'leafType',
         
     },
     {
         label: 'Leaf Shape',
         values: ['Needle', 'Smooth', 'Toothed', 'Lobed'],
         helperText: 'Leaf shape helper text.',
-        formName: 'leaf-shape',
+        formName: 'leafShape',
     },
     {
         label: 'Leaf Size',
         values: ['Under 2 inches', '2-6 inches', 'Over 6 inches'],
         helperText: 'Leaf size helper text.',
-        formName: 'leaf-size',
+        formName: 'leafSize',
     }
 ]
 
@@ -63,11 +63,13 @@ export const flowerFilters: filterObj[] = [
       "Green"
     ],
     helperText: "Flower helper text.",
-    formName: 'flower-color',
+    formName: 'flower',
   },
 ];
 
-const allFilters = [leafFilters, fruitFilters, flowerFilters]
+const radioFilters = [leafFilters, fruitFilters, flowerFilters]
+
+export const allFilters : filterObj[] = [...leafFilters, ...barkFilters, ...fruitFilters, ...flowerFilters];
 
 export interface iFormData {
   [key: string]: any;
@@ -81,7 +83,7 @@ const initialFormData: iFormData = {
 };
 
 const completeInitialFormData = () => {
-  allFilters.forEach((filterList) =>
+  radioFilters.forEach((filterList) =>
     filterList.forEach((filter) => {
       initialFormData[filter.formName] = undefined;
     })
