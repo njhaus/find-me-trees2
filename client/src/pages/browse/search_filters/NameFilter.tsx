@@ -1,5 +1,5 @@
 import TextInput from "../../../components/inputs/TextInput";
-import { useContext, useState } from "react";
+import { useContext, useState, useRef, useEffect } from "react";
 import { FormDataContext, iFormDataContext } from "../Browse";
 
 const NameFilter = () => {

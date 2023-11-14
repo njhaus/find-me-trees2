@@ -1,6 +1,6 @@
-import { Flex, Button, Heading, CloseButton, Text } from "@chakra-ui/react";
+import { FormEvent, useState, useEffect, useRef } from "react";
 
-import { FormEvent, useState, useEffect } from "react";
+import { Flex, Button, Heading, CloseButton, Text } from "@chakra-ui/react";
 
 import FilterInfo from "./search_filters/FilterInfo";
 import PhysicalIcon from "./search_filters/PhysicalIcon";
@@ -52,7 +52,7 @@ const SearchFilters = ({ onSubmit }: SearchFiltersProps) => {
         <form>
           <Flex direction={"column"} padding={{ base: 3, md: 6 }}>
             {/* Filter by tree name */}
-            <NameFilter />
+              <NameFilter />
             <Flex
               direction={"row"}
               justify={"space-around"}

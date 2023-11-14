@@ -7,6 +7,8 @@ import UserHeading from "./UserHeading";
 import { tempUserData } from "../../data/user_data/userData";
 
 import SavedPanel from "./user_panels/SavedPanel";
+import FoundPanel from "./user_panels/FoundPanel";
+import FavoritesPanel from "./user_panels/FavoritesPanel";
 
 const User = () => {
 
@@ -25,7 +27,7 @@ const User = () => {
         icon: <BsSearch />,
       },
       {
-        text: "My favortes",
+        text: "My favorite Trees",
         icon: <BsHeart />,
       },
     ];
@@ -44,12 +46,16 @@ const User = () => {
           ))}
         </TabList>
         <TabPanels>
-                  <SavedPanel
-                      data={userData.saved}
-                      collections={userData.collections}
-                  />
-          <BsSave />
-          <BsFan />,
+          <SavedPanel
+            data={userData.saved}
+            collections={userData.collections}
+          />
+          <FoundPanel
+            found={userData.found}
+          />
+          <FavoritesPanel
+            favorites={userData.favorites}
+          />
         </TabPanels>
       </Tabs>
     </Flex>

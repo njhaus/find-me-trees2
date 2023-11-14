@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, MutableRefObject, forwardRef } from "react";
 
 import { FormControl, FormLabel, Input } from "@chakra-ui/react";
 
@@ -8,15 +8,16 @@ interface TextInputProps {
   formName: string;
   onChange?: (...args: any[]) => void;
   helperText?: string;
+  // ref: MutableRefObject<null>
 }
 
-const TextInput = ({
-  formVal,
-  label,
-  formName,
-  helperText,
-  onChange,
-}: TextInputProps) => {
+
+
+const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
+  (
+    { formVal, label, formName, helperText, onChange }: TextInputProps,
+    ref
+  ) => {
 
   const [text, setText] = useState(formVal);
 
@@ -24,22 +25,35 @@ const TextInput = ({
     onChange?.(formName, text);
   }, [text]);
 
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (inputRef && inputRef.current) {
+    inputRef.current.focus();
+  }
+}, [focus, inputRef]);
+
+
   return (
     <FormControl display={"flex"}>
-      <FormLabel>{label}</FormLabel>
-          <Input
+      <FormLabel
+      htmlFor={formName}
+      >{label}</FormLabel>
+      <Input
+        ref={ref}
+        id={formName}
         value={text}
         placeholder={helperText}
         onChange={(e) => {
           setText(e.target.value);
         }}
         onClick={() => {
-          setText('')
-          onChange?.(formName, '')
+          setText("");
+          onChange?.(formName, "");
         }}
       />
     </FormControl>
   );
-};
+  });
 
 export default TextInput;

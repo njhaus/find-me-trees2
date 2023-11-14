@@ -26,15 +26,15 @@ const CheckboxInput = ({ formVal, label, values, formName, onChange, helperText 
 
   const [showHelpertext, setShowHelperText] = useState(false);
 
-  console.log(formVal)
-
   useEffect(() => {
     onChange?.(formName, value);
   }, [value]);
 
   return (
     <FormControl as="fieldset">
-      <FormLabel as="legend">{label}</FormLabel>
+      <FormLabel as="legend" htmlFor={formName}>
+        {label}
+      </FormLabel>
       <CheckboxGroup defaultValue={value}>
         <HStack spacing="24px">
           {values.map((val, i) => (
@@ -43,7 +43,7 @@ const CheckboxInput = ({ formVal, label, values, formName, onChange, helperText 
               value={val}
               isChecked={true}
               onChange={() => {
-                value.includes('Spiral')
+                value.includes("Spiral")
                   ? setValue(value.filter((v) => v !== val))
                   : setValue([...value, val]);
               }}

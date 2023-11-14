@@ -30,13 +30,19 @@ const SelectInput = ({ formVal, label, values, formName, helperText, onChange }:
 
   return (
     <FormControl as="fieldset">
-      <FormLabel as="legend">{label}</FormLabel>
-      <Select defaultValue={formVal} onChange={(e) => {
-        e.target.value !== "" ? setValue(e.target.value) : setValue(undefined);
-      }}>
-        <option value={undefined}>
-          Choose one
-        </option>
+      <FormLabel as="legend" htmlFor={formName}>
+        {label}
+      </FormLabel>
+      <Select
+        id={formName}
+        defaultValue={formVal}
+        onChange={(e) => {
+          e.target.value !== ""
+            ? setValue(e.target.value)
+            : setValue(undefined);
+        }}
+      >
+        <option value={undefined}>Choose one</option>
         {values.map((val, i) => (
           <option key={i} value={val}>
             {val}

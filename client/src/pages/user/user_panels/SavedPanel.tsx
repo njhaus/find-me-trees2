@@ -19,26 +19,30 @@ const SavedPanel = ({ data, collections }: iSavedPanel) => {
     
     const [currentCollection, setCurrentCollection] = useState('all');
 
-    console.log(currentCollection);
+  console.log(currentCollection);
+  console.log(data)
 
     const handleCollection = (collection: string) => {
         setCurrentCollection(collection);
     }
 
     return (
-      <TabPanel as={"article"} bg={'teal.200'}>
-        <Flex direction={'column'}>
-          <Flex direction={'row'} justify={'space-between'}>
-                    <CollectionMenu
-                        collections={collections}
-                        onClick={handleCollection}
-                    />
-                    <AddCollection/>
+      <TabPanel as={"article"} bg={"teal.200"}>
+        <Flex direction={"column"}>
+          <Flex direction={"row"} justify={"space-between"}>
+            <CollectionMenu
+              collections={collections}
+              onClick={handleCollection}
+            />
+            <AddCollection collections={collections} />
           </Flex>
-            </Flex>
-            <Flex>
-                <SavedCards/>
-            </Flex>
+        </Flex>
+        <Flex>
+          <SavedCards
+            data={data}
+            collections = {collections}
+          />
+        </Flex>
       </TabPanel>
     );
 };

@@ -95,6 +95,7 @@ export interface iTreeTraitsData {
 }
 
 export interface iTreeData {
+  id: string;
   title: string;
   imgSrc: string[];
   sciName: string;
@@ -105,6 +106,7 @@ export interface iTreeData {
 }
 
 export const tempTreeData = {
+  id: "testID123",
   title: "Big Tree",
   imgSrc: [useImg("placeholder-1.jpeg"), useImg("placeholder-2.jpeg")],
   sciName: "treeus maximus",

@@ -21,7 +21,7 @@ const CollectionMenu = ({collections, onClick }: iCollectionMenu) => {
   return (
     <Menu>
       <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-        Actions
+        My Collections
       </MenuButton>
           <MenuList>
               <MenuItem onClick={() => onClick('all')}>View All</MenuItem>

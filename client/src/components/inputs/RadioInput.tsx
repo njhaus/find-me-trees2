@@ -31,8 +31,10 @@ const RadioInput = ({ formVal, label, values, formName, helperText, onChange }: 
 
   return (
     <FormControl as="fieldset">
-      <FormLabel as="legend">{label}</FormLabel>
-      <RadioGroup defaultValue={value}>
+      <FormLabel as="legend" htmlFor={formName}>
+        {label}
+      </FormLabel>
+      <RadioGroup defaultValue={value} id={formName}>
         <HStack spacing="24px">
           {values.map((val, i) => (
             <Radio
