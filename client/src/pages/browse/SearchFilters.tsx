@@ -1,6 +1,6 @@
 import { Flex, Button, Heading, CloseButton, Text } from "@chakra-ui/react";
 
-import { FormEvent, useState , useEffect} from "react";
+import { FormEvent, useState, useEffect } from "react";
 
 import FilterInfo from "./search_filters/FilterInfo";
 import PhysicalIcon from "./search_filters/PhysicalIcon";
@@ -8,7 +8,7 @@ import MapIcon from "./search_filters/MapIcon";
 import NameFilter from "./search_filters/NameFilter";
 
 // data
-import { filters, mapFilter } from "./data/filterData";
+import { filters, mapFilter } from "../../data/browse_data/filterData";
 
 // styles
 import { iconHeadingProps as ihp } from "./styles/browseStyles";
@@ -17,7 +17,7 @@ interface SearchFiltersProps {
   onSubmit: (e: FormEvent) => void;
 }
 
-const SearchFilters = ({onSubmit}: SearchFiltersProps) => {
+const SearchFilters = ({ onSubmit }: SearchFiltersProps) => {
   // STATE: filter icon clicked on determines which info child to display. -1 shows nothing, map is set to filters.length so it is always the last.
   const [showFilter, setShowFilter] = useState(-1);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -27,9 +27,9 @@ const SearchFilters = ({onSubmit}: SearchFiltersProps) => {
     if (isSubmitting === true) {
       setTimeout(() => {
         setIsSubmitting(false);
-      }, 1000)
+      }, 1000);
     }
-  }, [isSubmitting])
+  }, [isSubmitting]);
 
   // Current filter shows inputs for current filter -- inputs are found
   const currentFilter =

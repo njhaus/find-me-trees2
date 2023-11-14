@@ -1,51 +1,110 @@
-import { useImg } from "../../../hooks/useImg";
+import { useImg } from "../hooks/useImg";
 
-type LeafType = 'simple' | 'compound';
-type LeafShape = 'needle' | 'smooth' | 'toothed' | 'lobed';
-type Bark = 'smooth' | 'rough' | 'peeling' | 'Brown' | 'Gray' | 'White' | null;
-type Branches = 'drooping' | 'spiral' | null;
-type Fruit = 'fleshy' | 'berry' | 'nut' | 'acorn' | 'ball' | 'key' | 'cone' | 'other';
-type Flower = 'red' | 'pink' | 'purple/blue' | 'orange/yellow' | 'white' | 'green' | 'other';
+type LeafType = "simple" | "compound";
+type LeafShape = "needle" | "smooth" | "toothed" | "lobed";
+type Bark = "smooth" | "rough" | "peeling" | "Brown" | "Gray" | "White" | null;
+type Branches = "drooping" | "spiral" | null;
+type Fruit =
+  | "fleshy"
+  | "berry"
+  | "nut"
+  | "acorn"
+  | "ball"
+  | "key"
+  | "cone"
+  | "other";
+type Flower =
+  | "red"
+  | "pink"
+  | "purple/blue"
+  | "orange/yellow"
+  | "white"
+  | "green"
+  | "other";
 export type UsState =
-  | 'AL' | 'AK' | 'AZ' | 'AR' | 'CA' | 'CO' | 'CT' | 'DE' | 'FL' | 'GA'
-  | 'HI' | 'ID' | 'IL' | 'IN' | 'IA' | 'KS' | 'KY' | 'LA' | 'ME' | 'MD'
-  | 'MA' | 'MI' | 'MN' | 'MS' | 'MO' | 'MT' | 'NE' | 'NV' | 'NH' | 'NJ'
-  | 'NM' | 'NY' | 'NC' | 'ND' | 'OH' | 'OK' | 'OR' | 'PA' | 'RI' | 'SC'
-  | 'SD' | 'TN' | 'TX' | 'UT' | 'VT' | 'VA' | 'WA' | 'WV' | 'WI' | 'WY';
-
+  | "AL"
+  | "AK"
+  | "AZ"
+  | "AR"
+  | "CA"
+  | "CO"
+  | "CT"
+  | "DE"
+  | "FL"
+  | "GA"
+  | "HI"
+  | "ID"
+  | "IL"
+  | "IN"
+  | "IA"
+  | "KS"
+  | "KY"
+  | "LA"
+  | "ME"
+  | "MD"
+  | "MA"
+  | "MI"
+  | "MN"
+  | "MS"
+  | "MO"
+  | "MT"
+  | "NE"
+  | "NV"
+  | "NH"
+  | "NJ"
+  | "NM"
+  | "NY"
+  | "NC"
+  | "ND"
+  | "OH"
+  | "OK"
+  | "OR"
+  | "PA"
+  | "RI"
+  | "SC"
+  | "SD"
+  | "TN"
+  | "TX"
+  | "UT"
+  | "VT"
+  | "VA"
+  | "WA"
+  | "WV"
+  | "WI"
+  | "WY";
 
 // Need to complete
 interface iSciInfo {
-    info: string;
+  info: string;
 }
 
 interface iLeaf {
   leafType: LeafType;
   leafShape: LeafShape;
-  leafSize: number
+  leafSize: number;
 }
 
 export interface iTreeTraitsData {
   leafType: LeafType;
   leafShape: LeafShape;
-  leafSize: number
-    bark: Bark[];
-    branches: Branches;
-    fruit: Fruit;
-    flower: Flower;
-}   
+  leafSize: number;
+  bark: Bark[];
+  branches: Branches;
+  fruit: Fruit;
+  flower: Flower;
+}
 
 export interface iTreeData {
   title: string;
   imgSrc: string[];
-    sciName: string;
-    intro: string;
-    sciInfo: iSciInfo;
-    traits: iTreeTraitsData;
-    location: UsState[]
+  sciName: string;
+  intro: string;
+  sciInfo: iSciInfo;
+  traits: iTreeTraitsData;
+  location: UsState[];
 }
 
-export const tempData = {
+export const tempTreeData = {
   title: "Big Tree",
   imgSrc: [useImg("placeholder-1.jpeg"), useImg("placeholder-2.jpeg")],
   sciName: "treeus maximus",

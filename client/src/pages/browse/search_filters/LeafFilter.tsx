@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { Flex } from "@chakra-ui/react";
 
 import RadioInput from "../../../components/inputs/RadioInput";
-import { leafFilters } from "../data/filterFormData";
+import { leafFilters } from "../../../data/browse_data/filterFormData";
 import { FormDataContext, iFormDataContext } from "../Browse";
 
 const LeafFilter = () => {

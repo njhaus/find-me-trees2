@@ -1,10 +1,9 @@
-import About from "../../pages/about/About"
-import Browse from "../../pages/browse/Browse"
-
+import About from "../pages/about/About";
+import Browse from "../pages/browse/Browse";
 
 interface Link {
-    text: string,
-    to: string
+  text: string;
+  to: string;
 }
 
 const links: Link[] = [
@@ -14,7 +13,7 @@ const links: Link[] = [
   },
   {
     text: "My Trees",
-    to: "/",
+    to: "/user/test",
   },
   {
     text: "Tree Test",

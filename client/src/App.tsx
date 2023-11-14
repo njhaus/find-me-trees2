@@ -20,7 +20,7 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/browse" element={<Browse />} />
           <Route path="/tree/*" element={<TreeRoutes />} />
-          <Route path="/user/:id" element={<UserRoutes />} />
+          <Route path="/user/*" element={<UserRoutes />} />
           <Route path="/about" element={<AboutRoutes />} />
           <Route path="*" element={<Error />} />
         </Route>

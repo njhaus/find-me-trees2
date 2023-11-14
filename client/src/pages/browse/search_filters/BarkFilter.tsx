@@ -1,21 +1,18 @@
 import { useContext } from "react";
 
-import { Flex } from "@chakra-ui/react"
+import { Flex } from "@chakra-ui/react";
 
-import CheckboxInput from "../../../components/inputs/CheckboxInput"
-import { barkFilters } from "../data/filterFormData"
+import CheckboxInput from "../../../components/inputs/CheckboxInput";
+import { barkFilters } from "../../../data/browse_data/filterFormData";
 import { FormDataContext, iFormDataContext } from "../Browse";
 
 const BarkFilter = () => {
-
   const { formData, setFormData }: iFormDataContext =
     useContext(FormDataContext);
 
   const handleChange = (key: string, val: string) => {
     setFormData({ ...formData, [key]: val });
   };
-
-  
 
   return (
     <Flex>
@@ -32,6 +29,6 @@ const BarkFilter = () => {
       ))}
     </Flex>
   );
-}
+};
 
-export default BarkFilter
+export default BarkFilter;

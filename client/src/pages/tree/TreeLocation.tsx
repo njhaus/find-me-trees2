@@ -1,14 +1,13 @@
-
 import { Flex, Box, Text, Heading } from "@chakra-ui/react";
 
-import { UsState } from "../browse/data/treeData"
+import { UsState } from "../../data/tree_data";
 
 interface iTreeLocation {
   title: string;
   location: UsState[];
 }
 
-const TreeLocation = ({title, location}: iTreeLocation) => {
+const TreeLocation = ({ title, location }: iTreeLocation) => {
   return (
     <Flex direction={"column"} alignItems={"center"}>
       <Heading as={"h2"}>{title} is found in: </Heading>
@@ -23,6 +22,6 @@ const TreeLocation = ({title, location}: iTreeLocation) => {
       <Flex>Map key goes here</Flex>
     </Flex>
   );
-}
+};
 
-export default TreeLocation
+export default TreeLocation;

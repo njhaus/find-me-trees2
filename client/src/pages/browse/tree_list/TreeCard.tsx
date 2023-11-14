@@ -1,9 +1,21 @@
-import { Card, CardHeader, CardBody, CardFooter, Image, Stack, Text, Divider, ButtonGroup, Button, Heading } from "@chakra-ui/react";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Image,
+  Stack,
+  Text,
+  Divider,
+  ButtonGroup,
+  Button,
+  Heading,
+} from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
 
 import { useImg } from "../../../hooks/useImg";
-import { iFormData } from "../data/filterFormData";
+import { iFormData } from "../../../data/browse_data/filterFormData";
 
 interface TreeCardProps {
   id: string;
@@ -13,12 +25,17 @@ interface TreeCardProps {
   searchTerms: iFormData;
 }
 
-const TreeCard = ({ id, title, imgSrc, sciName, searchTerms }: TreeCardProps) => {
-  
-  const imageSource = useImg(imgSrc)
+const TreeCard = ({
+  id,
+  title,
+  imgSrc,
+  sciName,
+  searchTerms,
+}: TreeCardProps) => {
+  const imageSource = useImg(imgSrc);
 
   const searchTermText = searchTerms ? Object.keys(searchTerms) : [];
-  const searchTermValues = searchTerms ? Object.values(searchTerms) : []
+  const searchTermValues = searchTerms ? Object.values(searchTerms) : [];
 
   return (
     <Card maxW="sm" w="100%" align={"center"}>
@@ -29,7 +46,9 @@ const TreeCard = ({ id, title, imgSrc, sciName, searchTerms }: TreeCardProps) =>
           <Text color="blue.600" fontSize="2xl">
             {sciName}
           </Text>
-          {searchTermValues.every((term) => term === null) ? '' :  (
+          {searchTermValues.every((term) => term === null) ? (
+            ""
+          ) : (
             <Text>Matches search terms:</Text>
           )}
           {searchTerms &&

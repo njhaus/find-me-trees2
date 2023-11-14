@@ -4,7 +4,7 @@ import { Flex, Image, Box } from "@chakra-ui/react";
 
 import { useImg } from "../../../hooks/useImg";
 import SelectInput from "../../../components/inputs/SelectInput";
-import { states } from "../data/statesData";
+import { states } from "../../../data/browse_data/statesData";
 import { FormDataContext, iFormDataContext } from "../Browse";
 
 const MapFilter = () => {
@@ -16,8 +16,6 @@ const MapFilter = () => {
   const handleChange = (key: string, val: string) => {
     setFormData({ ...formData, [key]: val });
   };
-
-
 
   return (
     <Flex>
