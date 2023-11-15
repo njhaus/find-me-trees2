@@ -10,7 +10,6 @@ interface iSavedCards {
 }
 
 const SavedCards = ({ data, collections }: iSavedCards) => {
-  console.log(data);
   return (
     <Grid
       templateColumns={{

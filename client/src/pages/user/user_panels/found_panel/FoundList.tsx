@@ -1,12 +1,12 @@
 import { Grid } from "@chakra-ui/react";
 
-import { iUserSaved } from "../../../../data/user_data/userData";
+import { iUserFound } from "../../../../data/user_data/userData";
 import FoundCard from "./FoundCard";
 import { iTreeData } from "../../../../data/tree_data";
 
 interface iFoundList {
-    data: iTreeData[];
-    location: string;
+  data: iUserFound[];
+  location: string;
 }
 
 const FoundList = ({ data, location }: iFoundList) => {
@@ -22,10 +22,10 @@ const FoundList = ({ data, location }: iFoundList) => {
       {data.map((tree, i) => (
         <FoundCard
           key={i}
-          id={tree.id}
-          title={tree.title}
-          imgSrc={tree.imgSrc}
-          sciName={tree.sciName}
+          id={tree.tree.id}
+          title={tree.tree.title}
+          imgSrc={tree.tree.imgSrc}
+          sciName={tree.tree.sciName}
         />
       ))}
     </Grid>

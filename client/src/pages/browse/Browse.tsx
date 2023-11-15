@@ -1,4 +1,4 @@
-import { FormEvent, createContext, useContext, useState } from "react";
+import { FormEvent, createContext, useState, useEffect } from "react";
 
 import { Flex } from "@chakra-ui/react";
 
@@ -20,6 +20,20 @@ export const FormDataContext = createContext<iFormDataContext>({
 
 const Browse = () => {
   const [formData, setFormData] = useState(initialFormData);
+
+  useEffect(() => {
+    const fetchData = async () => {
+        try {
+          const response = await fetch("http://localhost:3008/browse");
+          if (!response.ok) throw new Error('shit!')
+          const responseText = await response.text();
+          console.log(responseText)
+        } catch (err) {
+          console.log(err);
+        }
+    }
+    fetchData();
+  }, [])
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();

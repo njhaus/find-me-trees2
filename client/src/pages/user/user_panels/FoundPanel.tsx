@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { TabPanel, Flex, Text } from "@chakra-ui/react";
-import { iTreeData } from "../../../data/tree_data";
+import { iUserFound } from "../../../data/user_data/userData";
 
 import FoundSelect from "./found_panel/FoundSelect";
 import FoundMap from "./found_panel/FoundMap";
@@ -9,7 +9,7 @@ import FoundList from "./found_panel/FoundList";
 
 
 interface iFoundPanel {
-    found: iTreeData[];
+    found: iUserFound[];
 }
 
 const FoundPanel = ({ found }: iFoundPanel) => {

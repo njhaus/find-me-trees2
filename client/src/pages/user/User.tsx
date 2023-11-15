@@ -33,7 +33,7 @@ const User = () => {
     ];
 
     const userData = tempUserData;
-
+  
   return (
     <Flex as={"section"} direction={"column"}>
       <Flex>

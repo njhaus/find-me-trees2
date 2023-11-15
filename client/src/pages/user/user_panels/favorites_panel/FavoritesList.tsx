@@ -1,14 +1,13 @@
 import { Grid } from "@chakra-ui/react";
 
 import FavoritesCard from "./FavoritesCard";
-import { iTreeData } from "../../../../../data/tree_data";
+import { iUserFavorites } from "../../../../data/user_data/userData";
 
 interface iFavoritesList {
-  data: iTreeData[];
+  data: iUserFavorites[];
 }
 
 const FavoritesList = ({ data }: iFavoritesList) => {
-  console.log(data);
   return (
     <Grid
       templateColumns={{
@@ -21,10 +20,10 @@ const FavoritesList = ({ data }: iFavoritesList) => {
       {data.map((tree, i) => (
         <FavoritesCard
           key={i}
-          id={tree.id}
-          title={tree.title}
-          imgSrc={tree.imgSrc}
-          sciName={tree.sciName}
+          id={tree.tree.id}
+          title={tree.tree.title}
+          imgSrc={tree.tree.imgSrc}
+          sciName={tree.tree.sciName}
         />
       ))}
     </Grid>

@@ -2,17 +2,16 @@ import { useImg } from "../hooks/useImg";
 
 type LeafType = "simple" | "compound";
 type LeafShape = "needle" | "smooth" | "toothed" | "lobed";
-type Bark = "smooth" | "rough" | "peeling" | "Brown" | "Gray" | "White" | null;
-type Branches = "drooping" | "spiral" | null;
-type Fruit =
-  | "fleshy"
+type Bark = "smooth" | "rough" | "peeling" | "Brown" | "Gray" | "White" | undefined;
+type Branches = "drooping" | "spiral" | undefined;
+type Fruit = "fleshy"
   | "berry"
   | "nut"
   | "acorn"
   | "ball"
   | "key"
   | "cone"
-  | "other";
+  | "catkin" | "other" | undefined;
 type Flower =
   | "red"
   | "pink"
@@ -20,7 +19,8 @@ type Flower =
   | "orange/yellow"
   | "white"
   | "green"
-  | "other";
+  | "other"
+  | undefined;
 export type UsState =
   | "AL"
   | "AK"

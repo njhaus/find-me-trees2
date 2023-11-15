@@ -1,22 +1,19 @@
 import { useState } from "react";
 
-import { TabPanel, Flex, Button, Box} from "@chakra-ui/react";
-import { iTreeData } from "../../../data/tree_data";
+import { TabPanel, Flex, Button, Box } from "@chakra-ui/react";
+import { iUserFavorites } from "../../../data/user_data/userData";
 
 import Carousel from "../../../components/ui-components/Carousel";
-import FavoritesList from "./found_panel/favorites_panel/FavoritesList";
+import FavoritesList from "./favorites_panel/FavoritesList";
 
 interface iFavoritesPanel {
-  favorites: iTreeData[];
+  favorites: iUserFavorites[];
 }
 
 const FavoritesPanel = ({ favorites }: iFavoritesPanel) => {
-    
-    const [playSlideshow, setPlaySlideshow] = useState(false)
+  const [playSlideshow, setPlaySlideshow] = useState(false);
 
-    const imgs = favorites.map((tree, i) => (tree.imgSrc[0]));
-
-    console.log(imgs)
+  const imgs = favorites.map((tree, i) => tree.tree.imgSrc[0]);
 
   return (
     <TabPanel as={"article"} bg={"blue.200"} overflow={"hidden"} padding={0}>

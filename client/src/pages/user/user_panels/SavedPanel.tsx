@@ -19,9 +19,6 @@ const SavedPanel = ({ data, collections }: iSavedPanel) => {
     
     const [currentCollection, setCurrentCollection] = useState('all');
 
-  console.log(currentCollection);
-  console.log(data)
-
     const handleCollection = (collection: string) => {
         setCurrentCollection(collection);
     }
