@@ -3,25 +3,22 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-    MenuDivider,
   Button
 } from "@chakra-ui/react";
 
 import { ChevronDownIcon } from "@chakra-ui/icons";
 
 interface iCollectionMenu {
+  currentCol: string;
     collections: string[];
     onClick: (collection: string) => void;
 }
 
-const CollectionMenu = ({collections, onClick }: iCollectionMenu) => {
+const CollectionMenu = ({currentCol, collections, onClick }: iCollectionMenu) => {
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-        My Collections
+      <MenuButton as={Button} rightIcon={<ChevronDownIcon />} width={'11rem'}>
+        {currentCol === 'all' ? 'My Collections' : `${currentCol.split('')[0].toUpperCase()}${currentCol.slice(1)}`}
       </MenuButton>
           <MenuList>
               <MenuItem onClick={() => onClick('all')}>View All</MenuItem>

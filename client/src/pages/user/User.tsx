@@ -37,7 +37,10 @@ const User = () => {
   return (
     <Flex as={"section"} direction={"column"}>
       <Flex>
-        <UserHeading userName={userData.userName} />
+        <UserHeading
+          userName={userData.userName}
+          email={userData.email}
+        />
       </Flex>
       <Tabs isFitted variant="enclosed">
         <TabList mb="1em">

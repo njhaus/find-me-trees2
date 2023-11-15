@@ -31,6 +31,7 @@ const SavedPanel = ({ data, collections }: iSavedPanel) => {
         <Flex direction={"column"}>
           <Flex direction={"row"} justify={"space-between"}>
             <CollectionMenu
+              currentCol={currentCollection}
               collections={collections}
               onClick={handleCollection}
             />

@@ -1,11 +1,13 @@
 import { Flex, Text, Box } from "@chakra-ui/react"
-import { BsPerson } from "react-icons/bs";
 
-interface iUserheading {
-    userName: string;
+import UserProfile from "./UserProfile";
+
+interface iUserHeading {
+  userName: string;
+  email: string;
 }
 
-const UserHeading = ({userName}: iUserheading) => {
+const UserHeading = ({userName, email}: iUserHeading) => {
   return (
     <Flex
       direction={"row"}
@@ -14,16 +16,16 @@ const UserHeading = ({userName}: iUserheading) => {
       justify={"space-between"}
     >
       <Text>{userName}'s Trees</Text>
-          <Flex
-              justify={'center'}
-              align={'center'}
+      <Flex
+        justify={"center"}
+        align={"center"}
         width={"2.5rem"}
         height={"2.5rem"}
         border={"1px solid black"}
-              borderRadius={"50%"}
-              fontSize={'2rem'}
+        borderRadius={"50%"}
+        fontSize={"2rem"}
       >
-        <BsPerson />
+        <UserProfile userName={userName} email={email} />
       </Flex>
     </Flex>
   );

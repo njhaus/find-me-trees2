@@ -11,7 +11,6 @@ interface iFoundList {
 
 const FoundList = ({ data, location }: iFoundList) => {
     
-    console.log(data)
   return (
     <Grid
       templateColumns={{

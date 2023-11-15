@@ -7,7 +7,9 @@ import {
   Text,
   Heading,
   Button,
+  Flex
 } from "@chakra-ui/react";
+import { BsHeartFill } from "react-icons/bs";
 
 import { Link } from "react-router-dom";
 
@@ -34,6 +36,9 @@ const FavoritesCard = ({id, title, imgSrc, sciName}: iFavoritesCard) => {
 
       <Stack>
         <CardBody>
+          <Flex justify={'end'}>
+            <BsHeartFill />
+          </Flex>
           <Heading size="md">{title}</Heading>
 
           <Text py="2">{sciName}</Text>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { TabPanel, Flex, Button } from "@chakra-ui/react";
+import { TabPanel, Flex, Button, Box} from "@chakra-ui/react";
 import { iTreeData } from "../../../data/tree_data";
 
 import Carousel from "../../../components/ui-components/Carousel";
@@ -19,26 +19,27 @@ const FavoritesPanel = ({ favorites }: iFavoritesPanel) => {
     console.log(imgs)
 
   return (
-    <TabPanel
-      as={"article"}
-      bg={"orange.200"}
-      maxHeight={"100vh"}
-      overflow={"hidden"}
-      padding={0}
-    >
-      <Flex direction={"column"}>
-        <Button onClick={() => setPlaySlideshow(!playSlideshow)}>
+    <TabPanel as={"article"} bg={"blue.200"} overflow={"hidden"} padding={0}>
+      <Flex direction={"column"} padding={"1rem"}>
+        <Button
+          width={"10rem"}
+          onClick={() => setPlaySlideshow(!playSlideshow)}
+        >
           {playSlideshow ? "Stop" : "Play"} Slideshow
         </Button>
         {playSlideshow && (
-          <Flex>
-            <Carousel imgs={imgs} />
+          <Flex padding={"1rem"} justifyContent={"center"} marginY={"1rem"}>
+            <Box maxHeight={"30rem"} maxWidth={"30rem"}>
+              <Carousel imgs={imgs} />
+            </Box>
           </Flex>
         )}
 
         {!playSlideshow && (
-          <Flex >
-            <FavoritesList data={favorites} />
+          <Flex width={"100%"} justify={"center"} marginY={"1rem"}>
+            <Flex bg={"yellow.300"} padding={"1rem"} direction={"column"}>
+              <FavoritesList data={favorites} />
+            </Flex>
           </Flex>
         )}
       </Flex>

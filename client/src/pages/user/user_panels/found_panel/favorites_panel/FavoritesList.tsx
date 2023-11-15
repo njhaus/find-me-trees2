@@ -14,8 +14,9 @@ const FavoritesList = ({ data }: iFavoritesList) => {
       templateColumns={{
         base: "1fr",
         md: "repeat(2, 1fr)",
-        lg: "1fr",
+        xl: "repeat(3, 1fr)",
       }}
+      gap={"1rem"}
     >
       {data.map((tree, i) => (
         <FavoritesCard

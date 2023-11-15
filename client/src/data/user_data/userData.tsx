@@ -7,6 +7,7 @@ export interface iUserSaved {
 
 export const tempUserData = {
   userName: "bobby",
+  email: 'bobby@fake.com',
   collections: ["maples", "oaks", "other"],
   saved: [
     {

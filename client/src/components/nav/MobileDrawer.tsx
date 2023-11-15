@@ -59,7 +59,7 @@ const MobileDrawer = () => {
           <DrawerBody>
             {links.map((item, i) => (
               <Link key={i} to={item.to}>
-                <Button variant="nav">{item.text}</Button>
+                <Button variant="nav" onClick={onCloseDrawer}>{item.text}</Button>
               </Link>
             ))}
           </DrawerBody>
