@@ -8,7 +8,6 @@ interface TextInputProps {
   formName: string;
   onChange?: (...args: any[]) => void;
   helperText?: string;
-  // ref: MutableRefObject<null>
 }
 
 

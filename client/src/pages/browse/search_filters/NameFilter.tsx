@@ -13,9 +13,9 @@ const NameFilter = () => {
 
   return (
     <TextInput
-      formVal={formData.nameSearch}
+      formVal={formData.title}
       label={"Search by name: "}
-      formName={"nameSearch"}
+      formName={"title"}
       helperText={"Enter tree name"}
       onChange={handleChange}
     />

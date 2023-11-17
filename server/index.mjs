@@ -1,6 +1,7 @@
 // Imports
 import express from "express";
 import mongoose from "mongoose";
+import bodyParser from "body-parser";
 
 
 // Express Setup
@@ -15,6 +16,12 @@ app.listen(port, () => {
     console.log(`Listening on port ${port}`)
 })
 
+// Body-parser setup
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
 
 // Static setup
 // Import and initialize stuff to make __dirname work

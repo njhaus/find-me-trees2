@@ -20,25 +20,41 @@ export const FormDataContext = createContext<iFormDataContext>({
 
 const Browse = () => {
   const [formData, setFormData] = useState(initialFormData);
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
+    let isMounted = true;
     const fetchData = async () => {
         try {
-          const response = await fetch("http://localhost:3008/browse");
+          const response = await fetch("http://localhost:3008/browse", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData),
+          });
+          if (!isMounted) return;
           if (!response.ok) throw new Error('shit!')
           const responseText = await response.text();
           console.log(responseText)
         } catch (err) {
           console.log(err);
+        } finally {
+          if (isMounted) {
+             setSubmitting(false);
+          }
         }
     }
     fetchData();
-  }, [])
+
+    return () => {
+      isMounted = false;
+    }
+  }, [submitting])
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(formData);
-    setFormData(initialFormData);
+    setSubmitting(true);
   };
 
   return (

@@ -76,10 +76,10 @@ export interface iFormData {
 }
 
 const initialFormData: iFormData = {
-  nameSearch: '',
+  title: '',
   location: undefined,
   bark: [],
-  branches: [],
+  branches: undefined,
 };
 
 const completeInitialFormData = () => {
