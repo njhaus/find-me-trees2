@@ -19,7 +19,8 @@ import LogoImgOnly from "../logo/LogoImgOnly";
 import IconInput from "../inputs/IconInput";
 import { FaSadCry, FaGoogle, FaSmile, FaTree, FaEnvelope } from "react-icons/fa";
 
-import { passwordRegex, emailRegex } from "../../utils/login_utils";
+// Validation in login/utils files -- includes ZOD validators and validate function
+import { validate } from "../../utils/login_utils";
 
 interface LoginProps {
   isOpenLogin: boolean;
@@ -32,57 +33,45 @@ interface FormData {
   password: string;
 }
 
-const newUser = z.object({
-  username: z.string().min(4, { message: 'Username must be at leat 4 characters.' }),
-  email: z.string().regex(emailRegex, {message: 'Must use a valid email.'}),
-  password: z.string().min(8, {message: 'Password must be at least 8 characters'}).regex(passwordRegex, {message: 'Password must contain at least one uppercase letter, one lowercase letter, and one number or special character.'}),
-})
-
-type NewUser = z.infer<typeof newUser>
+const initialFormData = { username: "", email: "", password: "" };
 
 function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
 
-  const [formData, setFormData] = useState<FormData>({ username: '', email: '', password: '' })
+  const [formData, setFormData] = useState<FormData>(initialFormData)
   const [isRegistering, setIsRegistering] = useState(false);
   const [register, setRegister] = useState(false);
-  const [usernameError, setUsernameError] = useState('')
-  const [passwordError, setPasswordError] = useState("");
+  const [usernameError, setUsernameError] = useState('');
   const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
+  const errorSetters = [setUsernameError, setEmailError, setPasswordError];
 
   const initialRef = useRef(null);
 
   const handleForm = (e: ChangeEvent<HTMLInputElement>, dataType: string) => {
+    // Set value in formData
     const val = e.target.value;
     setFormData({ ...formData, [dataType]: val })
+    // validate IF form has already been validated once -- check for this by checking if there are errors.
+    if (usernameError || passwordError || emailError) validate({ ...formData, [dataType]: val }, errorSetters);
   }
 
-  const validate = () => {
-    console.log(formData);
-    try {
-      newUser.parse(formData);
-    } catch (err) {
-      if (err instanceof z.ZodError) {
-        const zodErrors: ZodError<any> = err;
-        const errorsArray = zodErrors.errors;
-        const errorsObj: FormData = {
-          username: '',
-          email: '',
-          password: '',
-        };
-        errorsArray.map((e) => (
-          errorsObj[e.path[0] as keyof FormData] = e.message
-        ))
-        console.log(errorsObj);
-      }
-    }
-  }
+  // Need a handleClose function to reset form and errors when login modal is closed
+  const handleClose = () => {
+    setFormData(initialFormData);
+    setUsernameError('');
+    setEmailError('')
+    setPasswordError('');
+    setIsRegistering(false);
+    onCloseLogin();
+}
 
   return (
     <>
       <Modal
         initialFocusRef={initialRef}
         isOpen={isOpenLogin}
-        onClose={onCloseLogin}
+        onClose={() => handleClose()}
       >
         <ModalOverlay />
         <ModalContent>
@@ -178,7 +167,7 @@ function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
                   width={"85%"}
                   margin={"1rem auto"}
                   variant="solid"
-                  onClick={() => validate()}
+                  onClick={() => validate(formData, errorSetters)}
                 >
                   Register
                 </Button>
@@ -196,7 +185,7 @@ function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
             )}
           </ModalBody>
           <ModalFooter>
-            <Button onClick={onCloseLogin}>Cancel</Button>
+            <Button onClick={() => handleClose()}>Cancel</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

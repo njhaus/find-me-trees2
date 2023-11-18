@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import passportLocalMongoose from 'passport-local-mongoose';
 
 import { GeoCodeSchema } from "./utility_schemas.js";
 
@@ -33,6 +34,8 @@ const UserSchema = new mongoose.Schema({
         notes: String,
     }]
 });
+
+UserSchema.plugin(passportLocalMongoose);
 
 const User = mongoose.model('User', UserSchema);
 

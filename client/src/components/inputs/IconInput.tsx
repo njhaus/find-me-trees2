@@ -1,6 +1,6 @@
 import { forwardRef, ReactNode, useRef, useEffect, ChangeEvent } from "react";
 
-import { InputGroup, InputLeftElement, Input, FormLabel, Stack } from "@chakra-ui/react";
+import { InputGroup, InputLeftElement, Input, FormLabel, Stack, Text } from "@chakra-ui/react";
 
 
 interface iIconInput {
@@ -14,7 +14,7 @@ interface iIconInput {
   error?: string;
 }
 
-const IconInput = forwardRef<HTMLInputElement, iIconInput>(({ icon, labelText, labelFor, inputPlaceholder, inputType, val, onChange}: iIconInput, ref) => {
+const IconInput = forwardRef<HTMLInputElement, iIconInput>(({ icon, labelText, labelFor, inputPlaceholder, inputType, val, onChange, error}: iIconInput, ref) => {
   
   
   const inputRef = useRef<HTMLInputElement>(null);
@@ -39,6 +39,7 @@ const IconInput = forwardRef<HTMLInputElement, iIconInput>(({ icon, labelText, l
           onChange={(e) => onChange(e, labelFor)}
         />
       </InputGroup>
+      <Text color={'red'}>{error}</Text> 
     </Stack>
   );
 });
