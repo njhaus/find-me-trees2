@@ -34,7 +34,7 @@ type NewUser = z.infer<typeof newUser>;
   export const validate = (
     data: FormData,
     errors: React.Dispatch<React.SetStateAction<string>>[]
-  ) => {
+  ): boolean => {
     // Reset errors
       errors.forEach((err) => (
         err('')
@@ -56,7 +56,9 @@ type NewUser = z.infer<typeof newUser>;
           const getErrors = Object.values(errorsObj);
           errors.forEach((err, i) => (
             err(getErrors[i])
-        ))
+          ))
+        return false;
       }
     }
+    return true;
   };

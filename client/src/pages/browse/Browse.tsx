@@ -34,8 +34,8 @@ const Browse = () => {
             body: JSON.stringify(formData),
           });
           if (!isMounted) return;
-          if (!response.ok) throw new Error('shit!')
-          const responseText = await response.text();
+          if (!response.ok) throw new Error('error retrievieg data!')
+          const responseText = await response.json();
           console.log(responseText)
         } catch (err) {
           console.log(err);

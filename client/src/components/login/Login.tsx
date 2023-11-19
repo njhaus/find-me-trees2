@@ -56,6 +56,44 @@ function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
     if (usernameError || passwordError || emailError) validate({ ...formData, [dataType]: val }, errorSetters);
   }
 
+  const submitRegistration = (valid: boolean) => {
+    if (valid) {
+      setRegister(true);
+      return true;
+    } else {
+      console.log("invalid registration attempt");
+      return false;
+    }
+  }
+
+  useEffect(() => {
+    let isMounted = true;
+    if (register) {
+      const registerNewUser = async () => {
+        try {
+          const response = await fetch("http://localhost:3008/login/register", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+          });
+          if (!isMounted) return;
+          if (!response.ok) throw new Error("error retrievieg data!");
+          const responseText = await response.text();
+          console.log(responseText);
+        } catch (err) {
+          console.log(err);
+        } finally {
+          if (isMounted) {
+            setRegister(false);
+          }
+        }
+      }
+      registerNewUser();
+    }
+  }, [register])
+
   // Need a handleClose function to reset form and errors when login modal is closed
   const handleClose = () => {
     setFormData(initialFormData);
@@ -64,7 +102,8 @@ function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
     setPasswordError('');
     setIsRegistering(false);
     onCloseLogin();
-}
+  }
+  
 
   return (
     <>
@@ -167,7 +206,7 @@ function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
                   width={"85%"}
                   margin={"1rem auto"}
                   variant="solid"
-                  onClick={() => validate(formData, errorSetters)}
+                  onClick={() => submitRegistration(validate(formData, errorSetters))}
                 >
                   Register
                 </Button>
