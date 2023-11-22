@@ -1,5 +1,6 @@
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
+import RouteTest from "./RouteTest";
 
 
 export interface LinkProps {
@@ -8,14 +9,34 @@ export interface LinkProps {
   key: number;
 }
 
+import useAuth from "../../hooks/useAuth";
+import { apiPost } from "../../services/api_client";
+import { iUserData } from "../../context/AuthProvider";
+
+export interface iNav {
+  auth: iUserData;
+  onLogout: (slug: string, body: {}) => void;
+}
+
 export function Nav() {
+
+  const { auth, setAuth } = useAuth();
+
+
+  const handleLogout = async (slug: string, body: {}) => {
+    const loggedInUser = await apiPost(slug, body);
+    console.log(loggedInUser)
+    setAuth({});
+  };
+
   return (
     //   BROWSER Navbar
     <>
+      <RouteTest />
       {/* DESKTOP HEADER */}
-      <DesktopNav/>
+      <DesktopNav auth={auth} onLogout={handleLogout} />
       {/* MOBILE HEADER */}
-      <MobileNav/>
+      <MobileNav auth={auth} onLogout={handleLogout} />
     </>
   );
 }

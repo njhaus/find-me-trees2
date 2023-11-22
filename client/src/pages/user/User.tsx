@@ -6,11 +6,17 @@ import UserTab from "./UserTab";
 import UserHeading from "./UserHeading";
 import { tempUserData } from "../../data/user_data/userData";
 
+import useAuth from "../../hooks/useAuth";
+
 import SavedPanel from "./user_panels/SavedPanel";
 import FoundPanel from "./user_panels/FoundPanel";
 import FavoritesPanel from "./user_panels/FavoritesPanel";
 
 const User = () => {
+
+  const { auth } = useAuth();
+  const username = auth.username ? auth.username : '';
+  const email = auth.email ? auth.email : "";
 
     interface iUserToggleData {
         text: string;
@@ -38,8 +44,8 @@ const User = () => {
     <Flex as={"section"} direction={"column"}>
       <Flex>
         <UserHeading
-          userName={userData.userName}
-          email={userData.email}
+          username={username}
+          email={email}
         />
       </Flex>
       <Tabs isFitted variant="enclosed">

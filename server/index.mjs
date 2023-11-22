@@ -4,11 +4,14 @@ import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import session from "express-session";
+import methodOverride from 'method-override';
+import cors from 'cors';
 
 
 // Auth and security
 import passport from 'passport'
 import LocalStrategy from 'passport-local'
+import crypto from "crypto";
 import dotenv from "dotenv";
 dotenv.config({ silent: process.env.NODE_ENV === "production" });
 
@@ -19,9 +22,41 @@ import User from "./models/user.js";
 const app = express();
 const port = 3008;
 
+// Express connection
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
+
+// Mongoose Setup/connection
+async function main() {
+  try {
+    await mongoose.connect("mongodb://127.0.0.1:27017/treesDB"), {
+      useNewUrlParser: true,
+      useCreateIndex: true,
+      useUnifiedToplology: true,
+      useFindAndModify: false
+    };
+    console.log("Mongoose Connection successful");
+  } catch (err) {
+    console.err(err);
+  }
+  // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
+}
+main();
+
+
+// middleware for allowing react to fetch() from server
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD"],
+    credentials: true,
+    preflightContinue: false,
+  })
+);
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true}))
 
 
 // Body parser -- parse application/json
@@ -38,42 +73,27 @@ const __dirname = dirname(__filename);
 
 app.use(express.static(path.join(__dirname, "client")));
 
-
-// Mongoose Setup/connection
-async function main() {
-  try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/treesDB");
-    console.log("Mongoose Connection successful");
-  } catch (err) {
-    console.err(err);
-  }
-  // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
-}
-main();
-
-
 // Cookie setup / cookie parser
-app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(cookieParser(process.env.SESSION_SECRET));
 
+// setup method override
+app.use(methodOverride("_method"));
 
 // Session setup
 const sessionConfig = {
+  name: "mr-session",
   secret: process.env.SESSION_SECRET,
-  name: "mr.sessionman",
+  // store: store,
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
   cookie: {
-    expires: new Date(Date.now() + 60 * 60 * 1000), // 1 hour
-    secure: true,
-    domain: "findmetrees.com",
+    httpOnly: true,
+    // secure: true,
+    // maxAge: 1000 * 60 * 60 * 24 * 7,
     httpOnly: true,
   },
 };
-
 app.use(session(sessionConfig));
-
-
-// Passport setup
 
 // Passport setup
 // Add this before defining routes But AFTER session setup
@@ -83,15 +103,6 @@ app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
-
-// middleware for allowing react to fetch() from server
-app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, OPTIONS');
-  next();
-});
 
 
 // Routes
@@ -106,9 +117,10 @@ app.use('/login', loginRoute);
 
 // Generic route -- for dev purposes only
 app.get("/", (req, res) => {
-  res.cookie("test_unsigned_cookie", "this is a not signed cookie test");
-  res.cookie('test_cookie', 'this is a test', {signed: true})
   // Cookies that have not been signed
+  console.log('/ GET route');
+  console.log(req.session);
+  console.log(req.isAuthenticated());
   console.log("Cookies: ", req.cookies);
 
   // Cookies that have been signed
@@ -116,12 +128,9 @@ app.get("/", (req, res) => {
   res.send("Express server is working.");
 });
 
-
-// Express connection
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
+app.post("/", (req, res) => {
+  res.send("Express server is working.");
 });
-
 
 // Error catching routes
 

@@ -9,20 +9,22 @@ import {
   DrawerContent,
   DrawerCloseButton,
   Button,
-  Input,
   useDisclosure as useDrawerDisclosure,
   useDisclosure as useLoginDisclosure,
   IconButton,
-  MenuButton,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 
 import { Link } from "react-router-dom";
 
 import links from "../../data/nav_data";
-import Login from "../login/Login";
+import Login from "../login_auth/Login";
 
-const MobileDrawer = () => {
+
+import { iNav } from "./Nav";
+
+const MobileDrawer = ({auth, onLogout}: iNav) => {
+
   const {
     isOpen: isOpenDrawer,
     onOpen: onOpenDrawer,
@@ -59,24 +61,40 @@ const MobileDrawer = () => {
           <DrawerBody>
             {links.map((item, i) => (
               <Link key={i} to={item.to}>
-                <Button variant="nav" onClick={onCloseDrawer}>{item.text}</Button>
+                <Button variant="nav" onClick={onCloseDrawer}>
+                  {item.text}
+                </Button>
               </Link>
             ))}
           </DrawerBody>
 
           <DrawerFooter>
-            <Button
-              onClick={() => {
-                onOpenLogin();
-                onCloseDrawer();
-              }}
-            >
-              Login
-            </Button>
+            {
+              !auth?.username ?
+                <Button
+                  onClick={() => {
+                    onOpenLogin();
+                    onCloseDrawer();
+                  }}
+                >
+                  Login
+                </Button> :
+                <Button
+                  
+                  onClick={() => {
+                    onLogout('login/logout', {});
+                    onCloseDrawer()
+                  }}
+                >
+                  Logout
+                </Button>
+            }
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
-      <Login isOpenLogin={isOpenLogin} onCloseLogin={onCloseLogin} />
+      {!auth?.username && (
+        <Login isOpenLogin={isOpenLogin} onCloseLogin={onCloseLogin} />
+      )}
     </>
   );
 };

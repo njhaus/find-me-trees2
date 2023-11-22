@@ -10,9 +10,10 @@ import { Link } from "react-router-dom";
 
 import links from "../../data/nav_data";
 import MainLogo from "../logo/MainLogo";
-import Login from "../login/Login";
 
-const DesktopNav = () => {
+import { iNav } from "./Nav";
+
+const DesktopNav = ({ auth, onLogout }: iNav) => {
   const {
     isOpen: isOpenLogin,
     onOpen: onOpenLogin,
@@ -34,7 +35,23 @@ const DesktopNav = () => {
           <Button onClick={onOpenLogin}>Login</Button>
         </HStack>
       </Flex>
-      <Login isOpenLogin={isOpenLogin} onCloseLogin={onCloseLogin} />
+      {!auth?.username ? (
+        <Button
+          onClick={() => {
+            onOpenLogin();
+          }}
+        >
+          Login
+        </Button>
+      ) : (
+        <Button
+          onClick={() => {
+            onLogout("login/logout", {});
+          }}
+        >
+          Logout
+        </Button>
+      )}
     </chakra.header>
   );
 };

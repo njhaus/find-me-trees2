@@ -1,16 +1,14 @@
 import {
-  useDisclosure,
   Flex,
-  Button,
-  HStack,
-  Image,
   chakra,
 } from "@chakra-ui/react";
 
 import MobileDrawer from "./MobileDrawer";
 import MainLogo from "../logo/MainLogo";
 
-const MobileNav = () => {
+import { iNav } from "./Nav";
+
+const MobileNav = ({ auth, onLogout }: iNav) => {
   return (
     <>
       <chakra.header id="header" display={{ base: "flex", md: "none" }}>
@@ -18,7 +16,7 @@ const MobileNav = () => {
           {/* // Logo */}
           <MainLogo />
           {/* // Dropdown Menu */}
-          <MobileDrawer />
+          <MobileDrawer auth={auth} onLogout={onLogout} />
         </Flex>
       </chakra.header>
     </>

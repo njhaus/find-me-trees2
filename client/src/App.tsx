@@ -10,21 +10,28 @@ import Error from './pages/error/Error'
 
 import MainLayout from './layouts/MainLayout'
 
+import AuthProvider from './context/AuthProvider'
+import RequireAuth from './components/login_auth/RequireAuth'
+
 function App() {
 
   return (
     <>
       {/* Possibly put Nav in a layout for everything except home -- see react router vid 21:00 ish, see 22:30 for using the layout <Outlet>*/}
-      <Routes>
-        <Route element={<MainLayout />}>
-          <Route path="/" element={<Landing />} />
-          <Route path="/browse" element={<Browse />} />
-          <Route path="/tree/*" element={<TreeRoutes />} />
-          <Route path="/user/*" element={<UserRoutes />} />
-          <Route path="/about" element={<AboutRoutes />} />
-          <Route path="*" element={<Error />} />
-        </Route>
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<Landing />} />
+            <Route path="/browse" element={<Browse />} />
+            <Route path="/tree/*" element={<TreeRoutes />} />
+            <Route element={<RequireAuth />}>
+              <Route path="/user/*" element={<UserRoutes />} />
+            </Route>
+            <Route path="/about" element={<AboutRoutes />} />
+            <Route path="*" element={<Error />} />
+          </Route>
+        </Routes>
+      </AuthProvider>
     </>
   );
 }

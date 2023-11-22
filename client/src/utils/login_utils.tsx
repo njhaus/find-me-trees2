@@ -1,62 +1,80 @@
+// ZOD validataion
 import { ZodError, z } from "zod";
 
 export const passwordRegex =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9!@#$%^&*])(?=.{8,})/;
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9!@#$%^&*])(?!.*\s)(?=.{8,})/;
+;
 
 export const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+export const noHtmlRegex = /^[^\s<>?'&"`]+$/g;
 
-export interface FormData {
+export const initialFormData = { username: "", email: "", password: "" };
+export const initialErrors = { username: "", email: "", password: "" };
+
+
+export interface iFormData {
   username: string;
   email: string;
   password: string;
 }
 
-export const initialFormData = { username: "", email: "", password: "" };
+export interface iFormErrors {
+  username: string;
+  email: string;
+  password: string;
+}
 
 
 export const newUser = z.object({
   username: z
     .string()
-    .min(4, { message: "Username must be at least 4 characters." }),
-  email: z.string().regex(emailRegex, { message: "Must use a valid email." }),
+    .min(4, { message: "Username must be at least 4 characters." })
+    .regex(noHtmlRegex, {
+      message: "Cannot contain spaces or invalid characters.",
+    }),
+  email: z
+    .string()
+    .regex(emailRegex, { message: "Must use a valid email." })
+    .regex(noHtmlRegex, {
+      message: "Cannot contain spaces or invalid characters.",
+    }),
   password: z
     .string()
     .min(8, { message: "Password must be at least 8 characters" })
     .regex(passwordRegex, {
       message:
         "Password must contain at least one uppercase letter, one lowercase letter, and one number or special character.",
+    })
+    .regex(noHtmlRegex, {
+      message: "Cannot contain spaces or invalid characters.",
     }),
 });
 
 type NewUser = z.infer<typeof newUser>;
 
-  export const validate = (
-    data: FormData,
-    errors: React.Dispatch<React.SetStateAction<string>>[]
+export const validate = (
+    data: iFormData,
+    setErrors: React.Dispatch<React.SetStateAction<iFormErrors>>,
   ): boolean => {
     // Reset errors
-      errors.forEach((err) => (
-        err('')
-    ))
+      setErrors(initialErrors)
     try {
       newUser.parse(data);
     } catch (err) {
       if (err instanceof z.ZodError) {
         const zodErrors: ZodError<any> = err;
         const errorsArray = zodErrors.errors;
-        const errorsObj: FormData = {
+        const errorsObj: iFormErrors = {
           username: "",
           email: "",
           password: "",
         };
         errorsArray.map(
-          (e) => (errorsObj[e.path[0] as keyof FormData] = e.message)
+          (e) => (errorsObj[e.path[0] as keyof iFormErrors] = e.message)
         );
-          const getErrors = Object.values(errorsObj);
-          errors.forEach((err, i) => (
-            err(getErrors[i])
-          ))
+        setErrors(errorsObj);
+
         return false;
       }
     }

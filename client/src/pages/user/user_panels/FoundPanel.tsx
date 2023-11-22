@@ -17,7 +17,6 @@ const FoundPanel = ({ found }: iFoundPanel) => {
     const [locationFilter, setLocationFilter] = useState('everywhere')
 
     const handleSelect = (form: null, location: string) => {
-      console.log(location);
       setLocationFilter(location);
     }
     

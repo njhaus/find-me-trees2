@@ -32,7 +32,7 @@ const UserSchema = new mongoose.Schema({
     favorites: [{
         tree: { type: mongoose.Schema.Types.ObjectId, ref: 'Tree' },
         notes: String,
-    }]
+  }],
 });
 
 UserSchema.plugin(passportLocalMongoose);
