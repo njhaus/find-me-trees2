@@ -1,6 +1,6 @@
 
-import { Flex, Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react"
-import { Bs123, BsFan, BsHeart, BsJournal, BsSave, BsSearch } from "react-icons/bs";
+import { Flex, TabList, TabPanels, Tabs } from "@chakra-ui/react"
+import { BsHeart, BsJournal, BsSearch } from "react-icons/bs";
 
 import UserTab from "./UserTab";
 import UserHeading from "./UserHeading";

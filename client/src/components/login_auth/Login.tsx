@@ -19,9 +19,12 @@ import { FaSadCry, FaGoogle, FaSmile, FaTree, FaEnvelope, FaLaughWink } from "re
 
 // Validation in login/utils files -- includes ZOD validators and validate function
 import { validate, iFormData, iFormErrors, initialErrors, initialFormData } from "../../utils/login_utils";
+
 import { apiPost } from "../../services/api_client";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate, useLocation } from "react-router-dom";
+import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
 
 
 interface LoginProps {
@@ -41,6 +44,8 @@ function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
 
   // Ref to set up initial focus on form when login modal is opened
   const initialRef = useRef(null);
+  // Ref to focus on error for screenreaders
+  const errorRef = useRef(null);
 
   // Set auth context upon register or login
   const { setAuth } = useAuth();
@@ -58,8 +63,12 @@ function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
     const val = e.target.value;
     setFormData({ ...formData, [dataType]: val });
     // validate IF form has already been validated once -- uses validate function from utils/login_utils.
-    if (errors.username || errors.password || errors.email)
-      validate({ ...formData, [dataType]: val }, setErrors);
+    const tempData = {
+      username: formData.username ? formData.username : "usernameplaceholder",
+      email: formData.email ? formData.email : "email@placeholder.com",
+      password: formData.password ? formData.password : "Placeholder1",
+    };
+      validate(tempData, setErrors);
   };
 
   // Form submission -- handles login and register (need to move to client)
@@ -67,6 +76,7 @@ function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
     const loggedInUser = await apiPost(slug, body);
     if (loggedInUser.username) {
       setAuth(loggedInUser);
+      console.log('success' + loggedInUser);
       handleClose();
       navigate(from, { replace: true });
     }
@@ -86,6 +96,11 @@ function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
       console.log("invalid registration attempt");
     }
   };
+
+  // Handle whether register or login is showing
+  const handleIsRegistering = (set: boolean) => {
+    setIsRegistering(set);
+  }
 
   // Need a handleClose function to reset form and errors when login modal is closed
   const handleClose = () => {
@@ -114,125 +129,30 @@ function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
               paddingBottom={"0.5rem"}
               marginX={"0.5rem"}
             >
-              <Heading as={"h4"}>Login</Heading>
+              <Heading as={"h4"}>{isRegistering ? 'Register' : 'Login' }</Heading>
               <LogoImgOnly />
             </Flex>
           </ModalHeader>
           <ModalCloseButton onClick={() => handleClose()} />
           <ModalBody pb={6}>
-            <IconInput
-              icon={<FaSadCry />}
-              labelText="Username:"
-              labelFor="username"
-              inputPlaceholder="username"
-              inputType="text"
-              ref={initialRef}
-              val={formData.username}
-              onChange={handleForm}
-              error={errors.username}
-            ></IconInput>
 
-            {isRegistering && (
-              <IconInput
-                icon={<FaEnvelope />}
-                labelText="Email:"
-                labelFor="email"
-                inputPlaceholder="email"
-                inputType="email"
-                val={formData.email}
-                onChange={handleForm}
-                error={errors.email}
-              ></IconInput>
-            )}
-
-            <IconInput
-              icon={<FaLaughWink />}
-              labelText="Password:"
-              labelFor="password"
-              inputPlaceholder="password"
-              inputType="password"
-              val={formData.password}
-              onChange={handleForm}
-              error={errors.password}
-            ></IconInput>
-
-            {!isRegistering && (
-              <>
-                <Button
-                  leftIcon={<FaSmile />}
-                  display={"block"}
-                  width={"85%"}
-                  margin={"1rem auto"}
-                  variant="solid"
-                  onClick={() =>
-                    handleSubmit("login/local", {
-                      username: formData.username,
-                      email: formData.email,
-                      password: formData.password,
-                    })
-                  }
-                >
-                  Login
-                </Button>
-                <Button
-                  leftIcon={<FaGoogle />}
-                  display={"block"}
-                  width={"85%"}
-                  margin={"1rem auto"}
-                  variant="solid"
-                >
-                  Login with Google
-                </Button>
-                <Button
-                  leftIcon={<FaTree />}
-                  display={"block"}
-                  width={"85%"}
-                  margin={"1rem auto"}
-                  variant="solid"
-                  onClick={() => setIsRegistering(true)}
-                >
-                  Create an account
-                </Button>
-              </>
-            )}
-            {isRegistering && (
-              <>
-                <Button
-                  leftIcon={<FaTree />}
-                  display={"block"}
-                  width={"85%"}
-                  margin={"1rem auto"}
-                  variant="solid"
-                  onClick={() =>
-                    submitLocalRegistration(validate(formData, setErrors))
-                  }
-                >
-                  Register
-                </Button>
-                <Button
-                  leftIcon={<FaTree />}
-                  display={"block"}
-                  width={"85%"}
-                  margin={"1rem auto"}
-                  variant="solid"
-                  onClick={() => console.log("Register with google")}
-                >
-                  Register with Google
-                </Button>
-                <Button
-                  leftIcon={<FaTree />}
-                  display={"block"}
-                  width={"85%"}
-                  margin={"1rem auto"}
-                  variant="solid"
-                  onClick={() => {
-                    setIsRegistering(false);
-                  }}
-                >
-                  Login with Existing Account
-                </Button>
-              </>
-            )}
+            {isRegistering
+              ? <RegisterForm
+                handleForm={handleForm}
+                handleIsRegistering={handleIsRegistering}
+                submitLocalRegistration={submitLocalRegistration}
+                formData={formData}
+                errors={errors}
+                setErrors={setErrors}
+              />
+              : <LoginForm
+               handleForm={handleForm}
+                handleIsRegistering={handleIsRegistering}
+                handleSubmit={handleSubmit}
+                formData={formData}
+                errors={errors}
+              />}
+            
           </ModalBody>
           <ModalFooter>
             <Button onClick={() => handleClose()}>Cancel</Button>

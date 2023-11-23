@@ -37,6 +37,7 @@ export function Nav() {
       <DesktopNav auth={auth} onLogout={handleLogout} />
       {/* MOBILE HEADER */}
       <MobileNav auth={auth} onLogout={handleLogout} />
+      
     </>
   );
 }

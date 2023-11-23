@@ -92,9 +92,6 @@ const MobileDrawer = ({auth, onLogout}: iNav) => {
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
-      {!auth?.username && (
-        <Login isOpenLogin={isOpenLogin} onCloseLogin={onCloseLogin} />
-      )}
     </>
   );
 };

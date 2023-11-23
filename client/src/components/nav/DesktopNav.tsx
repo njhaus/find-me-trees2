@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 
 import links from "../../data/nav_data";
 import MainLogo from "../logo/MainLogo";
+import Login from "../login_auth/Login";
 
 import { iNav } from "./Nav";
 
@@ -32,25 +33,27 @@ const DesktopNav = ({ auth, onLogout }: iNav) => {
               <Button variant="nav">{item.text}</Button>
             </Link>
           ))}
-          <Button onClick={onOpenLogin}>Login</Button>
+          {!auth?.username ? (
+            <Button
+              onClick={() => {
+                onOpenLogin();
+              }}
+            >
+              Login
+            </Button>
+          ) : (
+            <Button
+              onClick={() => {
+                onLogout("login/logout", {});
+              }}
+            >
+              Logout
+            </Button>
+          )}
         </HStack>
       </Flex>
-      {!auth?.username ? (
-        <Button
-          onClick={() => {
-            onOpenLogin();
-          }}
-        >
-          Login
-        </Button>
-      ) : (
-        <Button
-          onClick={() => {
-            onLogout("login/logout", {});
-          }}
-        >
-          Logout
-        </Button>
+      {!auth?.username && (
+        <Login isOpenLogin={isOpenLogin} onCloseLogin={onCloseLogin} />
       )}
     </chakra.header>
   );

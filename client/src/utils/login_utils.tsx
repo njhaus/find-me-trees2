@@ -29,25 +29,20 @@ export interface iFormErrors {
 export const newUser = z.object({
   username: z
     .string()
-    .min(4, { message: "Username must be at least 4 characters." })
     .regex(noHtmlRegex, {
-      message: "Cannot contain spaces or invalid characters.",
-    }),
-  email: z
-    .string()
-    .regex(emailRegex, { message: "Must use a valid email." })
-    .regex(noHtmlRegex, {
-      message: "Cannot contain spaces or invalid characters.",
-    }),
+      message: "Cannot contain spaces or invalid characters",
+    })
+    .min(4, { message: "Username must be at least 4 characters" }),
+  email: z.string().regex(emailRegex, { message: "Must use a valid email" }),
   password: z
     .string()
+    .regex(noHtmlRegex, {
+      message: "Cannot contain spaces or invalid characters",
+    })
     .min(8, { message: "Password must be at least 8 characters" })
     .regex(passwordRegex, {
       message:
-        "Password must contain at least one uppercase letter, one lowercase letter, and one number or special character.",
-    })
-    .regex(noHtmlRegex, {
-      message: "Cannot contain spaces or invalid characters.",
+        "Password must contain at least one uppercase letter, one lowercase letter, and one number or valid special character: ! # % ^ $ & *",
     }),
 });
 

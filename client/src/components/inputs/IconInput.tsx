@@ -12,9 +12,10 @@ interface iIconInput {
   val: string;
   onChange: (e: ChangeEvent<HTMLInputElement>, dataType: string) => void;
   error?: string;
+  onBlur?: () => void;
 }
 
-const IconInput = forwardRef<HTMLInputElement, iIconInput>(({ icon, labelText, labelFor, inputPlaceholder, inputType, val, onChange, error}: iIconInput, ref) => {
+const IconInput = forwardRef<HTMLInputElement, iIconInput>(({ icon, labelText, labelFor, inputPlaceholder, inputType, val, onChange, error, onBlur}: iIconInput, ref) => {
   
   
   const inputRef = useRef<HTMLInputElement>(null);
@@ -37,6 +38,7 @@ const IconInput = forwardRef<HTMLInputElement, iIconInput>(({ icon, labelText, l
           name={labelFor}
           placeholder={inputPlaceholder}
           onChange={(e) => onChange(e, labelFor)}
+          onBlur={onBlur}
         />
       </InputGroup>
       <Text color={'red'}>{error}</Text> 
