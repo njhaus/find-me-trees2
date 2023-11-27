@@ -8,6 +8,7 @@ export const apiPost = async (url: string, body: unknown) => {
         console.log("Api client running");
         const response = await fetch(`${baseUrl}${url}`, {
             method: "POST",
+            credentials: 'include',
             headers: {
                 "Content-Type": "application/json",
             },

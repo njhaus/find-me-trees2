@@ -1,3 +1,6 @@
+DO BEFORE DEPLOYMENT:
+1. Make sure cookies are sent httpOnly
+
 Style reference:
 
 

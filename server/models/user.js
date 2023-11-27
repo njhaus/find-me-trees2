@@ -33,6 +33,10 @@ const UserSchema = new mongoose.Schema({
         tree: { type: mongoose.Schema.Types.ObjectId, ref: 'Tree' },
         notes: String,
   }],
+  refreshToken: {
+    type: String,
+    default: '',
+  }
 });
 
 UserSchema.plugin(passportLocalMongoose);

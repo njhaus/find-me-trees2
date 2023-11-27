@@ -1,6 +1,9 @@
 import { Router } from "express";
 import User from "../models/user.js";
 import passport from "passport";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config({ silent: process.env.NODE_ENV === "production" });
 
 const router = Router();
 
@@ -26,20 +29,34 @@ router.post('/register/local', async (req, res, next) => {
         }
         else {
           console.log("user registered and logged in!");
-           const loggedInUser = {
-             username: registeredUser.username,
-             email: registeredUser.email,
-             collections: registeredUser.collections,
-             saved: registeredUser.saved,
-             found: registeredUser.found,
-             favorites: registeredUser.favorites,
-           };
-          return res.send(JSON.stringify(loggedInUser));
+          const accessToken = jwt.sign({
+            username: registeredUser.username,
+          }, 
+            process.env.ACCESS_TOKEN_SECRET,
+            {expiresIn: '60'}
+          );
+          const refreshToken = jwt.sign(
+            {
+              username: registeredUser.username
+            },
+            process.env.REFRESH_TOKEN_SECRET,
+            { expiresIn: "1d" }
+          );
+          User.findOneAndUpdate({ username: registeredUser.username }, { refreshToken: refreshToken })
+          res.cookie('jwt', {httpOnly: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000})
+          return res.json({
+            username: user.username,
+            email: user.email,
+            collections: user.collections,
+            saved: user.saved,
+            found: user.found,
+            favorites: user.favorites,
+            accessToken: accessToken,
+          });
         }
-            })   
+        })   
     } catch (err) {
-      let errMsg = "Error registering. Please try again later.";
-      if (err.code && err.code === 11000) errMsg = "There is already an account associated with this email address.";
+      let errMsg = "Error accessing database. Please try again later.";
       console.log(errMsg);
     }
   }
@@ -54,31 +71,76 @@ router.post('/register/local', async (req, res, next) => {
   }
 })
 
-
+// Log in user
 router.post(
   '/local',
   passport.authenticate("local", {
   failureMessage: true
   }),
   async (req, res) => {
-    console.log(req.isAuthenticated());
     console.log("successful login -- server login/local route");
-    const { username, passworrd } = req.body;
-    const user = await User.findOne({ username: username });
-    console.log(user);
-    const loggedInUser = {
-      username: user.username,
-      email: user.email,
-      collections: user.collections,
-      saved: user.saved,
-      found: user.found,
-      favorites: user.favorites
+    const { username } = req.body;
+    try {
+       const user = await User.findOne({ username: username });
+       const accessToken = jwt.sign(
+         {
+           username: user.username,
+         },
+         process.env.ACCESS_TOKEN_SECRET,
+         { expiresIn: "1m" }
+       );
+       const refreshToken = jwt.sign(
+         {
+           username: user.username,
+         },
+         process.env.REFRESH_TOKEN_SECRET,
+         { expiresIn: "1d" }
+       );
+       const logUser = await User.findOneAndUpdate(
+         { username: user.username },
+         { refreshToken: refreshToken }
+       );
+       res.cookie("jwt", refreshToken, {
+          httpOnly: true,
+         secure: true,
+         sameSite: "None",
+         maxAge: 24 * 60 * 60 * 1000,
+       });
+      console.log(accessToken);
+      return res.json({
+        username: user.username,
+        email: user.email,
+        collections: user.collections,
+        saved: user.saved,
+        found: user.found,
+        favorites: user.favorites,
+        accessToken: accessToken,
+      });
+
+    } catch (err) {
+      console.log('error finding user')
+      console.log(err)
     }
-    res.send(JSON.stringify(loggedInUser));
   })
 
-
-router.post("/logout", function (req, res, next) {
+// Log out
+router.post("/logout", async (req, res) => {
+  // Reset refreshToken saved in user
+  const token = req?.cookies?.jwt;
+  if (token) {
+    const logoutUser = await User.findOneAndUpdate(
+      { refreshToken: token },
+      { refreshToken: 'buttmunch' }
+    );  
+  }
+// Clear refresh token in cookies
+  res.clearCookie("jwt", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "None",
+    maxAge: 24 * 60 * 60 * 1000,
+  });
+  // Logout user with passport
   req.logout(function (err) {
     if (err) {
       res.send({ error: 'error logging out' })
@@ -86,6 +148,33 @@ router.post("/logout", function (req, res, next) {
     res.send({ message: "Successfully logged out" });
   });
 });
+
+
+router.get("/refresh", async (req, res) => {
+  const token = req?.cookies?.jwt;
+  if (!token) return res.status(401);
+  console.log(token);
+
+  const foundUser = await User.findOne({ refreshToken: token });
+  console.log(foundUser);
+  if (!foundUser) return res.status(403);
+
+  jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
+    if (err || foundUser.username !== decoded.username) return res.sendStatus(403);    
+    const accessToken = jwt.sign(
+      { username: decoded.username },
+      process.env.ACCESS_TOKEN_SECRET,
+      {expiresIn: '1m'}
+    )
+    console.log(accessToken);
+    res.json({ accessToken });
+  });
+})
+
+
+router.post('/test', (req, res, next) => {
+  console.log('tested route')
+})
 
 
 export default router;

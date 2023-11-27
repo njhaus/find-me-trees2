@@ -88,9 +88,9 @@ const sessionConfig = {
   saveUninitialized: true,
   cookie: {
     httpOnly: true,
-    // secure: true,
-    // maxAge: 1000 * 60 * 60 * 24 * 7,
-    httpOnly: true,
+    secure: true,
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+    sameSite: 'None',
   },
 };
 app.use(session(sessionConfig));
@@ -117,14 +117,7 @@ app.use('/login', loginRoute);
 
 // Generic route -- for dev purposes only
 app.get("/", (req, res) => {
-  // Cookies that have not been signed
-  console.log('/ GET route');
-  console.log(req.session);
-  console.log(req.isAuthenticated());
-  console.log("Cookies: ", req.cookies);
 
-  // Cookies that have been signed
-  console.log("Signed Cookies: ", req.signedCookies);
   res.send("Express server is working.");
 });
 
@@ -147,4 +140,13 @@ app.post("/", (req, res) => {
 //   console.log(message, status);
 //   res.status(status);
 //   res.render("error/error.ejs", { status, message });
+// });
+
+
+
+// // Crypto -- get random bytes
+
+// crypto.randomBytes(64, (err, buf) => {
+//   if (err) throw err;
+//   console.log(`${buf.length} bytes of random data: ${buf.toString('hex')}`);
 // });

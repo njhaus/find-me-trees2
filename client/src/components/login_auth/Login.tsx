@@ -76,11 +76,11 @@ function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
     const loggedInUser = await apiPost(slug, body);
     if (loggedInUser.username) {
       setAuth(loggedInUser);
-      console.log('success' + loggedInUser);
+      console.log('Login success ' + JSON.stringify(loggedInUser));
       handleClose();
       navigate(from, { replace: true });
     }
-    else console.log("error" + loggedInUser);
+    else console.log("Login error " + JSON.stringify(loggedInUser));
   };
 
 
