@@ -87,7 +87,7 @@ router.post(
            username: user.username,
          },
          process.env.ACCESS_TOKEN_SECRET,
-         { expiresIn: "1m" }
+         { expiresIn: "10s" }
        );
        const refreshToken = jwt.sign(
          {
@@ -151,25 +151,64 @@ router.post("/logout", async (req, res) => {
 
 
 router.get("/refresh", async (req, res) => {
+  console.log('this route is accessed');
   const token = req?.cookies?.jwt;
-  if (!token) return res.status(401);
+  if (!token) {
+    console.log("NO TOKEN");
+    return res.sendStatus(401);
+  }
   console.log(token);
 
   const foundUser = await User.findOne({ refreshToken: token });
   console.log(foundUser);
-  if (!foundUser) return res.status(403);
+  if (!foundUser) return res.sendStatus(403);
 
   jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
     if (err || foundUser.username !== decoded.username) return res.sendStatus(403);    
     const accessToken = jwt.sign(
       { username: decoded.username },
       process.env.ACCESS_TOKEN_SECRET,
-      {expiresIn: '1m'}
+      {expiresIn: '10s'}
     )
     console.log(accessToken);
     res.json({ accessToken });
-  });
+  }); 
 })
+
+
+router.get("/getuser", async (req, res) => {
+  console.log("the getuser route is accessed");
+  const token = req?.cookies?.jwt;
+  if (!token) {
+    console.log("NO TOKEN");
+    return res.sendStatus(401);
+  }
+  console.log(token);
+
+  const foundUser = await User.findOne({ refreshToken: token });
+  console.log(foundUser);
+  if (!foundUser) return res.sendStatus(403);
+
+  jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
+    if (err || foundUser.username !== decoded.username)
+      return res.sendStatus(403);
+    const accessToken = jwt.sign(
+      { username: decoded.username },
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: "10s" }
+    );
+    console.log(accessToken);
+    return res.json({
+      username: foundUser.username,
+      email: foundUser.email,
+      collections: foundUser.collections,
+      saved: foundUser.saved,
+      found: foundUser.found,
+      favorites: foundUser.favorites,
+      accessToken: accessToken,
+    });
+  });
+});
 
 
 router.post('/test', (req, res, next) => {

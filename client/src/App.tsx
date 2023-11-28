@@ -22,6 +22,7 @@ function App() {
         <Routes>
           <Route element={<MainLayout />}>
             <Route path="/" element={<Landing />} />
+            <Route path="/login" element={<Landing />} />
             <Route path="/browse" element={<Browse />} />
             <Route path="/tree/*" element={<TreeRoutes />} />
             <Route element={<RequireAuth />}>
