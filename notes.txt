@@ -14,5 +14,9 @@ https://data.world/uci/plants
 
 
 Problems:
-pages/browse/iconData // NEED TO REFACTOR THIS-- CODE SMELLS WHEN HARDCODING THE COLOR IN TWO PLACES< BUT I AM HAVING TROUBLE ACCESSING THE COLOR FROM WITHIN THE OBJECT
-Filter Form (pages/browse/SearchFilters) Needs to be validated?
+1. pages/browse/iconData : NEED TO REFACTOR THIS-- CODE SMELLS WHEN HARDCODING THE COLOR IN TWO PLACES< BUT I AM HAVING TROUBLE ACCESSING THE COLOR FROM WITHIN THE OBJECT
+
+2. useAuth / authContext : temporary accesstoken does not expire on client side. It feels pointless. (refresh token DOES expire, so that's good and is the more important of the two)
+
+Possible things to do:
+1. Filter Form (pages/browse/SearchFilters) Needs to be validated?

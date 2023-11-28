@@ -45,12 +45,12 @@ router.post('/register/local', async (req, res, next) => {
           User.findOneAndUpdate({ username: registeredUser.username }, { refreshToken: refreshToken })
           res.cookie('jwt', {httpOnly: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000})
           return res.json({
-            username: user.username,
-            email: user.email,
-            collections: user.collections,
-            saved: user.saved,
-            found: user.found,
-            favorites: user.favorites,
+            username: registeredUser.username,
+            email: registeredUser.email,
+            collections: registeredUser.collections,
+            saved: registeredUser.saved,
+            found: registeredUser.found,
+            favorites: registeredUser.favorites,
             accessToken: accessToken,
           });
         }

@@ -14,8 +14,6 @@ import {
 } from "@chakra-ui/react";
 
 import LogoImgOnly from "../logo/LogoImgOnly";
-import IconInput from "../inputs/IconInput";
-import { FaSadCry, FaGoogle, FaSmile, FaTree, FaEnvelope, FaLaughWink } from "react-icons/fa";
 
 // Validation in login/utils files -- includes ZOD validators and validate function
 import { validate, iFormData, iFormErrors, initialErrors, initialFormData } from "../../utils/login_utils";
@@ -63,12 +61,7 @@ function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
     const val = e.target.value;
     setFormData({ ...formData, [dataType]: val });
     // validate IF form has already been validated once -- uses validate function from utils/login_utils.
-    const tempData = {
-      username: formData.username ? formData.username : "usernameplaceholder",
-      email: formData.email ? formData.email : "email@placeholder.com",
-      password: formData.password ? formData.password : "Placeholder1",
-    };
-      validate(tempData, setErrors);
+      validate(formData, setErrors);
   };
 
   // Form submission -- handles login and register (need to move to client)

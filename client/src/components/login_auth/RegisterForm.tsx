@@ -17,7 +17,8 @@ import {
 import {
   validate,
   iFormData,
-    iFormErrors,
+  iFormErrors,
+    initialErrors
 } from "../../utils/login_utils";
 
 interface iRegisterForm {
@@ -31,21 +32,46 @@ interface iRegisterForm {
 
 
 const RegisterForm = forwardRef<HTMLInputElement, iRegisterForm>(
-    ({ handleForm, handleIsRegistering, submitLocalRegistration, formData, errors, setErrors }, ref) => {
+  ({ handleForm, handleIsRegistering, submitLocalRegistration, formData, errors, setErrors }, ref) => {
 
-        const handleBlur = () => {
-            const tempData = {
-              username: formData.username
-                ? formData.username
-                : "usernameplaceholder",
-              email: formData.email ? formData.email : "email@placeholder.com",
-              password: formData.password
-                ? formData.password
-                : "Placeholder1",
-            };
-            console.log('password:', tempData.password)
-            validate(tempData, setErrors);
-        }
+    const [reenterPassword, setReenterPassword] = useState('');
+    const [reenterError, setReenterError] = useState('');
+    // FC = First Check (Keeps errors from showing if user hasn't even finished typing for their first time)
+    const [usernameFC, setUsernameFC] = useState(false);
+    const [emailFC, setEmailFC] = useState(false);
+    const [passwordFC, setPasswordFC] = useState(false);
+    const [reenterFirstCheck, setReenterFirstCheck] = useState(false);
+    const [isValid, setIsValid] = useState(false);
+
+    
+
+    const handleReenterPassword = (e: ChangeEvent<HTMLInputElement>) => {
+      setReenterPassword(e.target.value);
+      if (reenterFirstCheck) {
+        handleReenterError();
+      }
+    };
+
+    const handleReenterError = () => {
+      console.log(formData.password);
+      console.log(reenterPassword);
+      if (formData.password && reenterPassword !== formData.password) {
+        setReenterError('Passwords must match');
+      }
+      else {
+        setReenterError("");
+      }
+    }
+    
+    const handleBlur = (
+          checker: string,
+          setter: React.Dispatch<React.SetStateAction<boolean>>
+    ) => {
+      if (checker) {
+        setter(true);
+        validate(formData, setErrors);
+      }
+        };
 
     return (
       <>
@@ -59,8 +85,8 @@ const RegisterForm = forwardRef<HTMLInputElement, iRegisterForm>(
             ref={ref}
             val={formData.username}
             onChange={handleForm}
-            error={errors.username}
-            onBlur={() => handleBlur()}
+            error={usernameFC ? errors.username: ''}
+            onBlur={() => handleBlur(formData.username, setUsernameFC)}
           ></IconInput>
           <IconInput
             ref={ref}
@@ -71,8 +97,8 @@ const RegisterForm = forwardRef<HTMLInputElement, iRegisterForm>(
             inputType="email"
             val={formData.email}
             onChange={handleForm}
-            error={errors.email}
-            onBlur={() => handleBlur()}
+            error={emailFC ? errors.email : ''}
+            onBlur={() => handleBlur(formData.email, setEmailFC)}
           ></IconInput>
           <IconInput
             icon={<FaLaughWink />}
@@ -82,19 +108,27 @@ const RegisterForm = forwardRef<HTMLInputElement, iRegisterForm>(
             inputType="password"
             val={formData.password}
             onChange={handleForm}
-            error={errors.password}
-            onBlur={() => handleBlur()}
+            error={passwordFC ? errors.password : ''}
+            onBlur={() => handleBlur(formData.password, setPasswordFC)}
           ></IconInput>
-          {/* <IconInput
+          <IconInput
             icon={<FaLaughWink />}
-            labelText="Re-enter password:"
-            labelFor="password"
-            inputPlaceholder="password"
+            labelText="Re-Enter Password:"
+            labelFor="reenter-password"
+            inputPlaceholder="Re-enter Password"
             inputType="password"
             val={''}
-            onChange={handleForm}
-            error={errors.password}
-          ></IconInput> */}
+            onChange={(e) => {
+              handleReenterPassword(e)
+              }
+            }
+            onBlur={() => {
+              setReenterFirstCheck(true);
+              handleReenterError()
+              }
+            }
+            error={reenterFirstCheck ? reenterError : ''}
+          ></IconInput>
           <Button
             leftIcon={<FaTree />}
             display={"block"}
@@ -104,6 +138,7 @@ const RegisterForm = forwardRef<HTMLInputElement, iRegisterForm>(
             onClick={() =>
               submitLocalRegistration(validate(formData, setErrors))
             }
+            
           >
             Register
           </Button>

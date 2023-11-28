@@ -49,7 +49,7 @@ export const newUser = z.object({
 type NewUser = z.infer<typeof newUser>;
 
 export const validate = (
-    data: iFormData,
+  data: iFormData,
     setErrors: React.Dispatch<React.SetStateAction<iFormErrors>>,
   ): boolean => {
     // Reset errors
