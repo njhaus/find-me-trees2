@@ -2,7 +2,7 @@ import { apiGet } from '../services/api_client'
 import useAuth from './useAuth'
 
 const useRefreshToken = () => {
-    const { auth, setAuth } = useAuth();
+    const { setAuth } = useAuth();
     const refresh = async () => {
         console.log("refresh token running");
         const response = await apiGet('login/refresh');
@@ -19,9 +19,6 @@ const useRefreshToken = () => {
             console.log('error refreshing access token');
         }
     }
-    console.log('refreshed auth: ')
-    console.log(auth);
-
     return refresh;
 }
 

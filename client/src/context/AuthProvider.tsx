@@ -1,19 +1,10 @@
 import React, { useState, createContext, ReactNode, useEffect } from "react";
 
-import { iUserSaved, iUserFound, iUserFavorites } from "../data/user_data/userData";
+import { iUserSaved, iUserFound, iUserFavorites, initialUserData } from "../data/user_data/userData";
 import useApiIntercept from "../hooks/useApiIntercept";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
-
-export interface iUserData {
-  username?: string;
-  email?: string;
-  collections?: string[];
-  saved?: iUserSaved[];
-  found?: iUserFound[];
-  favorites?: iUserFavorites[];
-  accessToken?: string;
-}
+import { iUserData } from "../data/user_data/userData";
 
 interface AuthContextProps {
   auth: iUserData;
@@ -22,12 +13,12 @@ interface AuthContextProps {
 
 
 export const AuthContext = createContext<AuthContextProps>({
-  auth: {},
+  auth: initialUserData,
   setAuth: () => {}, // Provide a default function for setAuth
 });
 
 const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [auth, setAuth] = useState({});
+  const [auth, setAuth] = useState(initialUserData);
   const apiIntercept = useApiIntercept();
   const location = useLocation();
 
@@ -45,6 +36,7 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         isMounted && setAuth(response.data)
       } catch (err) {
         console.log(err);  
+        setAuth(initialUserData);
       }
     }
     getUser();

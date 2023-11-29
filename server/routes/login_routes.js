@@ -15,6 +15,7 @@ router.get("/", (req, res, next) => {
 // -need to add flash messages or other feedback mechanism for failed / successful registration
 // -Need to connect to JOI User schema validation
 router.post('/register/local', async (req, res, next) => {
+  console.log('register route accessed');
   const { username, email, password } = req.body;
   const existingUsername = await User.findOne({ username: username });
   const existingUserEmail = await User.findOne({ email: email });
@@ -29,44 +30,59 @@ router.post('/register/local', async (req, res, next) => {
         }
         else {
           console.log("user registered and logged in!");
-          const accessToken = jwt.sign({
-            username: registeredUser.username,
-          }, 
-            process.env.ACCESS_TOKEN_SECRET,
-            {expiresIn: '60'}
-          );
-          const refreshToken = jwt.sign(
-            {
-              username: registeredUser.username
-            },
-            process.env.REFRESH_TOKEN_SECRET,
-            { expiresIn: "1d" }
-          );
-          User.findOneAndUpdate({ username: registeredUser.username }, { refreshToken: refreshToken })
-          res.cookie('jwt', {httpOnly: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000})
-          return res.json({
-            username: registeredUser.username,
-            email: registeredUser.email,
-            collections: registeredUser.collections,
-            saved: registeredUser.saved,
-            found: registeredUser.found,
-            favorites: registeredUser.favorites,
-            accessToken: accessToken,
-          });
         }
-        })   
+      })   
+      const accessToken = jwt.sign(
+        {
+          username: newUser.username,
+        },
+        process.env.ACCESS_TOKEN_SECRET,
+        { expiresIn: "60" }
+      );
+      const refreshToken = jwt.sign(
+        {
+          username: newUser.username,
+        },
+        process.env.REFRESH_TOKEN_SECRET,
+        { expiresIn: "1d" }
+      );
+      console.log("here is the token created by the register route:");
+      console.log(typeof refreshToken);
+
+      const userWithToken = await User.findOneAndUpdate(
+        { username: newUser.username },
+        { $set: { refreshToken: refreshToken } },
+        { new: true }
+      );
+      res.cookie("jwt", refreshToken, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "None",
+        maxAge: 24 * 60 * 60 * 1000,
+      });
+      return res.json({
+        username: newUser.username,
+        email: newUser.email,
+        collections: newUser.collections,
+        saved: newUser.saved,
+        found: newUser.found,
+        favorites: newUser.favorites,
+        accessToken: accessToken,
+      });
     } catch (err) {
-      let errMsg = "Error accessing database. Please try again later.";
-      console.log(errMsg);
+      console.log(err);
     }
   }
   else if (existingUsername) {
+    console.log('existing username');
     res.send({error: 'A user with that username already exists'});
   }
   else if (existingUserEmail) {
+    console.log("existing email");
     res.send({error: "A user with that email already exists"});
   }
   else {
+    console.log("unspecified error");
     res.send({error: "An error occurred while making your request."});
   }
 })
@@ -130,7 +146,7 @@ router.post("/logout", async (req, res) => {
   if (token) {
     const logoutUser = await User.findOneAndUpdate(
       { refreshToken: token },
-      { refreshToken: 'buttmunch' }
+      { refreshToken: '' }
     );  
   }
 // Clear refresh token in cookies
@@ -151,7 +167,7 @@ router.post("/logout", async (req, res) => {
 
 
 router.get("/refresh", async (req, res) => {
-  console.log('this route is accessed');
+  console.log('the refresh route is accessed');
   const token = req?.cookies?.jwt;
   if (!token) {
     console.log("NO TOKEN");
@@ -160,6 +176,7 @@ router.get("/refresh", async (req, res) => {
   console.log(token);
 
   const foundUser = await User.findOne({ refreshToken: token });
+  console.log("here is the User:");
   console.log(foundUser);
   if (!foundUser) return res.sendStatus(403);
 
@@ -183,9 +200,11 @@ router.get("/getuser", async (req, res) => {
     console.log("NO TOKEN");
     return res.sendStatus(401);
   }
+  console.log('here is the token:')
   console.log(token);
 
   const foundUser = await User.findOne({ refreshToken: token });
+  console.log("here is the User:");
   console.log(foundUser);
   if (!foundUser) return res.sendStatus(403);
 

@@ -13,7 +13,6 @@ import SavedPanel from "./user_panels/SavedPanel";
 import FoundPanel from "./user_panels/FoundPanel";
 import FavoritesPanel from "./user_panels/FavoritesPanel";
 import { useEffect } from "react";
-import { apiIntercept } from "../../services/api_client";
 
 
     interface iUserToggleData {
@@ -42,32 +41,33 @@ const User = () => {
   const { auth } = useAuth();
   
   const navigate = useNavigate();
-  const userExists = auth &&
+  const userExists =
+    auth &&
     auth.username &&
     auth.email &&
     auth.collections &&
     auth.favorites &&
     auth.found &&
-    auth.saved;
+    auth.saved && 
+    auth.accessToken
+
+    
 
   useEffect(() => {
     // Checking if user is not loggedIn
+    console.log('checking if user exists')
+    console.log(auth)
+    console.log(userExists);
     if (
       !userExists
     ) {
-      console.log('yabba dabba doo')
-      navigate("/login");
+      console.log('Valid user does not exist')
+      navigate("/login", { state: { from: location, redirect: true } });
     }
   }, [auth, userExists]);
   
   return (
-    (auth &&
-    auth.username &&
-    auth.email &&
-    auth.collections &&
-    auth.favorites &&
-    auth.found &&
-    auth.saved) && (
+    (userExists) && (
       <Flex as={"section"} direction={"column"}>
         <Flex>
           <UserHeading username={auth.username} email={auth.email} />

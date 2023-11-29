@@ -13,9 +13,9 @@ import {
   FaLaughWink
 } from "react-icons/fa";
 
-// Validation in login/utils files -- includes ZOD validators and validate function
+// Validation in login/utils files -- includes ZOD validators and validateNewUser function
 import {
-  validate,
+  validateNewUser,
   iFormData,
   iFormErrors,
     initialErrors
@@ -24,7 +24,7 @@ import {
 interface iRegisterForm {
   handleForm: (e: ChangeEvent<HTMLInputElement>, dataType: string) => void;
   handleIsRegistering: (set: boolean) => void;
-  submitLocalRegistration: (valid: boolean) => void;
+  submitLocalRegistration: (valid: boolean, slug: string) => void;
   formData: iFormData;
   errors: iFormErrors;
   setErrors: React.Dispatch<React.SetStateAction<iFormErrors>>;
@@ -41,7 +41,6 @@ const RegisterForm = forwardRef<HTMLInputElement, iRegisterForm>(
     const [emailFC, setEmailFC] = useState(false);
     const [passwordFC, setPasswordFC] = useState(false);
     const [reenterFirstCheck, setReenterFirstCheck] = useState(false);
-    const [isValid, setIsValid] = useState(false);
 
     
 
@@ -62,14 +61,14 @@ const RegisterForm = forwardRef<HTMLInputElement, iRegisterForm>(
         setReenterError("");
       }
     }
-    
+
     const handleBlur = (
           checker: string,
           setter: React.Dispatch<React.SetStateAction<boolean>>
     ) => {
       if (checker) {
         setter(true);
-        validate(formData, setErrors);
+        validateNewUser(formData, setErrors);
       }
         };
 
@@ -79,71 +78,77 @@ const RegisterForm = forwardRef<HTMLInputElement, iRegisterForm>(
           <IconInput
             icon={<FaSadCry />}
             labelText="Username:"
-            labelFor="username"
+            labelFor="reg-username"
             inputPlaceholder="username"
             inputType="text"
             ref={ref}
             val={formData.username}
             onChange={handleForm}
-            error={usernameFC ? errors.username: ''}
+            error={usernameFC ? errors.username : ""}
             onBlur={() => handleBlur(formData.username, setUsernameFC)}
           ></IconInput>
           <IconInput
             ref={ref}
             icon={<FaEnvelope />}
             labelText="Email:"
-            labelFor="email"
+            labelFor="reg-email"
             inputPlaceholder="email"
             inputType="email"
             val={formData.email}
             onChange={handleForm}
-            error={emailFC ? errors.email : ''}
+            error={emailFC ? errors.email : ""}
             onBlur={() => handleBlur(formData.email, setEmailFC)}
           ></IconInput>
           <IconInput
             icon={<FaLaughWink />}
             labelText="Password:"
-            labelFor="password"
+            labelFor="reg-password"
             inputPlaceholder="password"
             inputType="password"
             val={formData.password}
             onChange={handleForm}
-            error={passwordFC ? errors.password : ''}
+            error={passwordFC ? errors.password : ""}
             onBlur={() => handleBlur(formData.password, setPasswordFC)}
           ></IconInput>
           <IconInput
             icon={<FaLaughWink />}
             labelText="Re-Enter Password:"
-            labelFor="reenter-password"
+            labelFor="reg-reenter-password"
             inputPlaceholder="Re-enter Password"
             inputType="password"
-            val={''}
+            val={reenterPassword}
             onChange={(e) => {
-              handleReenterPassword(e)
-              }
-            }
+              handleReenterPassword(e);
+            }}
             onBlur={() => {
               setReenterFirstCheck(true);
-              handleReenterError()
-              }
-            }
-            error={reenterFirstCheck ? reenterError : ''}
+              handleReenterError();
+            }}
+            error={reenterFirstCheck ? reenterError : ""}
           ></IconInput>
           <Button
+            isDisabled={
+              validateNewUser(formData) && reenterPassword === formData.password
+                ? false
+                : true
+            }
             leftIcon={<FaTree />}
             display={"block"}
             width={"85%"}
             margin={"1rem auto"}
             variant="solid"
             onClick={() =>
-              submitLocalRegistration(validate(formData, setErrors))
+              submitLocalRegistration(
+                validateNewUser(formData, setErrors),
+                "login/register/local"
+              )
             }
-            
           >
             Register
           </Button>
         </form>
         <Button
+          isDisabled={true}
           type={"button"}
           leftIcon={<FaTree />}
           display={"block"}

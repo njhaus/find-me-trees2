@@ -1,7 +1,7 @@
-import { ChangeEvent, forwardRef} from "react";
+import { ChangeEvent, forwardRef, useState, useEffect} from "react";
 
 import {
-  Button,
+  Button, Text
 } from "@chakra-ui/react";
 
 import IconInput from "../inputs/IconInput";
@@ -13,24 +13,40 @@ import {
   FaLaughWink,
 } from "react-icons/fa";
 
-// Validation in login/utils files -- includes ZOD validators and validate function
+// Validation in login/utils files -- includes ZOD validators and validateTextInput function
 import {
   iFormData,
-  iFormErrors,
+    iFormErrors,
 } from "../../utils/login_utils";
 
+import { validateTextInput } from "../../utils/input_utils";
+
 interface iLoginForm {
-    handleForm: (e: ChangeEvent<HTMLInputElement>, dataType: string) => void;
-    handleIsRegistering: (set: boolean) => void;
-     handleSubmit: (slug: string, body: iFormData) => void;
-    formData: iFormData;
-    errors: iFormErrors;
+  handleForm: (e: ChangeEvent<HTMLInputElement>, dataType: string) => void;
+  handleIsRegistering: (set: boolean) => void;
+  submitLogin: (valid: boolean, slug: string) => void;
+  formData: iFormData;
+  errors: iFormErrors;
 }
 
-const LoginForm = forwardRef<HTMLInputElement, iLoginForm>(({handleForm, handleIsRegistering, handleSubmit, formData, errors}, ref) => {
+const LoginForm = forwardRef<HTMLInputElement, iLoginForm>(({handleForm, handleIsRegistering, submitLogin, formData, errors}, ref) => {
+    
+    const [error, setError] = useState('');
+    
+    // Need to reformat data for use in noHTML validator-- this just retypes the iFormData object so the validateTextInput function can understand it
+    const transformedData: { [key: string]: string } = {
+        username: formData.username,
+        password: formData.password
+    };
+
+    useEffect(() => {
+        setError('')
+    }, [formData])
+    
     return (
     <>
-        <form>
+            <form>
+                {error && <Text>{error}</Text>}
             <IconInput
                 icon={<FaSadCry />}
                 labelText="Username:"
@@ -53,24 +69,22 @@ const LoginForm = forwardRef<HTMLInputElement, iLoginForm>(({handleForm, handleI
                 onChange={handleForm}
                 error={''}
             ></IconInput>
-            <Button
+                <Button
+                    isDisabled={(!formData.username || !formData.password) ? true : false }
                 leftIcon={<FaSmile />}
                 display={"block"}
                 width={"85%"}
                 margin={"1rem auto"}
                 variant="solid"
                 onClick={() =>
-                handleSubmit("login/local", {
-                    username: formData.username,
-                    email: formData.email,
-                    password: formData.password,
-                })
+                submitLogin(validateTextInput(transformedData, setError), "login/local")
                 }
             >
                 Login
             </Button>
         </form>
-        <Button
+            <Button
+                isDisabled={true}
             type={"button"}
             leftIcon={<FaGoogle />}
             display={"block"}

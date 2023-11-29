@@ -1,13 +1,13 @@
 // ZOD validataion
 import { ZodError, z } from "zod";
+import { noHtmlRegex } from "./input_utils";
 
 export const passwordRegex =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9!@#$%^&*])(?!.*\s)(?=.{8,})/;
 ;
 
-export const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-export const noHtmlRegex = /^[^\s<>?'&"`]+$/g;
+export const emailRegex =
+  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 export const initialFormData = { username: "", email: "", password: "" };
 export const initialErrors = { username: "", email: "", password: "" };
@@ -24,7 +24,6 @@ export interface iFormErrors {
   email: string;
   password: string;
 }
-
 
 export const newUser = z.object({
   username: z
@@ -48,12 +47,12 @@ export const newUser = z.object({
 
 type NewUser = z.infer<typeof newUser>;
 
-export const validate = (
+export const validateNewUser = (
   data: iFormData,
-    setErrors: React.Dispatch<React.SetStateAction<iFormErrors>>,
+    setErrors?: React.Dispatch<React.SetStateAction<iFormErrors>>,
   ): boolean => {
-    // Reset errors
-      setErrors(initialErrors)
+  // Reset errors
+  if(setErrors) setErrors(initialErrors)
     try {
       newUser.parse(data);
     } catch (err) {
@@ -68,10 +67,10 @@ export const validate = (
         errorsArray.map(
           (e) => (errorsObj[e.path[0] as keyof iFormErrors] = e.message)
         );
-        setErrors(errorsObj);
+        if(setErrors) setErrors(errorsObj);
 
         return false;
       }
     }
     return true;
-  };
+};

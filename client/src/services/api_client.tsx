@@ -13,7 +13,7 @@ export const apiPost = async (url: string, body: unknown) => {
     return response.data;
   } catch (err) {
     console.log(err);
-    return "error";
+    return err;
   }
 };
 

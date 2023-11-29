@@ -1,5 +1,24 @@
 import { iTreeData, tempTreeData } from "../tree_data";
 
+export interface iUserData {
+  username: string;
+  email: string;
+  collections: string[];
+  saved: iUserSaved[];
+  found: iUserFound[];
+  favorites: iUserFavorites[];
+  accessToken: string;
+}
+
+export const initialUserData: iUserData = {
+  username: '',
+  email: '',
+  collections: [],
+  saved: [],
+  found: [],
+  favorites: [],
+  accessToken: ''
+}
 
  export interface iLocationData{
    type: string,

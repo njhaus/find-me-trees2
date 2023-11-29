@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 
 import {
   Drawer,
@@ -24,18 +24,20 @@ import Login from "../login_auth/Login";
 import { iNav } from "./Nav";
 
 const MobileDrawer = ({auth, onLogout}: iNav) => {
-
   const {
     isOpen: isOpenDrawer,
     onOpen: onOpenDrawer,
     onClose: onCloseDrawer,
   } = useDrawerDisclosure();
+
   const {
     isOpen: isOpenLogin,
     onOpen: onOpenLogin,
     onClose: onCloseLogin,
   } = useLoginDisclosure();
+
   const btnRef = useRef(null);
+
 
   return (
     <>
@@ -69,29 +71,31 @@ const MobileDrawer = ({auth, onLogout}: iNav) => {
           </DrawerBody>
 
           <DrawerFooter>
-            {
-              !auth?.username ?
-                <Button
-                  onClick={() => {
-                    onOpenLogin();
-                    onCloseDrawer();
-                  }}
-                >
-                  Login
-                </Button> :
-                <Button
-                  
-                  onClick={() => {
-                    onLogout('login/logout', {});
-                    onCloseDrawer()
-                  }}
-                >
-                  Logout
-                </Button>
-            }
+            {!auth?.username ? (
+              <Button
+                onClick={() => {
+                  onOpenLogin();
+                  onCloseDrawer();
+                }}
+              >
+                Login
+              </Button>
+            ) : (
+              <Button
+                onClick={() => {
+                  onLogout("login/logout", {});
+                  onCloseDrawer();
+                }}
+              >
+                Logout
+              </Button>
+            )}
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
+      {!auth?.username && (
+        <Login isOpenLogin={isOpenLogin} onCloseLogin={onCloseLogin} />
+      )}
     </>
   );
 };

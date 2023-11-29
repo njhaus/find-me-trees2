@@ -2,6 +2,8 @@ import { forwardRef, ReactNode, useRef, useEffect, ChangeEvent } from "react";
 
 import { InputGroup, InputLeftElement, Input, FormLabel, Stack, Text } from "@chakra-ui/react";
 
+import { BsExclamationTriangleFill } from "react-icons/bs";
+
 
 interface iIconInput {
   icon: ReactNode;
@@ -39,9 +41,12 @@ const IconInput = forwardRef<HTMLInputElement, iIconInput>(({ icon, labelText, l
           placeholder={inputPlaceholder}
           onChange={(e) => onChange(e, labelFor)}
           onBlur={onBlur}
+          autoComplete="off"
+          aria-invalid={error ? 'true' : 'false'}
+          aria-describedby={error}
         />
       </InputGroup>
-      <Text color={'red'}>{error}</Text> 
+      {(error && val) && <Text className="errText" color={'red'} aria-live="assertive" display={'flex'} flexDirection={'row'}><BsExclamationTriangleFill />{error}</Text>}
     </Stack>
   );
 });

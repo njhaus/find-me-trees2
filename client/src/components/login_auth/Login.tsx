@@ -1,4 +1,4 @@
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 
 import {
   Button,
@@ -11,12 +11,13 @@ import {
   ModalFooter,
   Flex,
   Heading,
+  Text
 } from "@chakra-ui/react";
 
 import LogoImgOnly from "../logo/LogoImgOnly";
 
 // Validation in login/utils files -- includes ZOD validators and validate function
-import { validate, iFormData, iFormErrors, initialErrors, initialFormData } from "../../utils/login_utils";
+import { validateNewUser, iFormData, iFormErrors, initialErrors, initialFormData } from "../../utils/login_utils";
 
 import { apiPost } from "../../services/api_client";
 import useAuth from "../../hooks/useAuth";
@@ -30,7 +31,8 @@ interface LoginProps {
   onCloseLogin: () => void;
 }
 
-function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
+function Login({ isOpenLogin, onCloseLogin }: LoginProps) {  
+  
   // Set initial form data to blank on opening of login modal
   const [formData, setFormData] = useState<iFormData>(initialFormData);
 
@@ -39,6 +41,9 @@ function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
 
   // Set error messages -- these come from ZOD (For front-end validataion) OR from the server response (For back-end validation)
   const [errors, setErrors] = useState<iFormErrors>(initialErrors);
+
+  // Server-side error (incorrect login creds / username or password already taken)
+  const [serverError, setServerError] = useState("");
 
   // Ref to set up initial focus on form when login modal is opened
   const initialRef = useRef(null);
@@ -51,36 +56,39 @@ function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
   // Navigate user to /user page when logged in/registered
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || '/user/test';
+  const from = location.state?.from?.pathname || "/user/test";
 
   // Handles form values by listening for change events in child input components
-  // AND validates(if form has been initially validated.
+  // AND NewUsers(if form has been initially validated.
   // This only happens after initial validation to avoid constant error messages popping up before user hs even tried to type anything)
   const handleForm = (e: ChangeEvent<HTMLInputElement>, dataType: string) => {
     // Set value in formData
     const val = e.target.value;
     setFormData({ ...formData, [dataType]: val });
     // validate IF form has already been validated once -- uses validate function from utils/login_utils.
-      validate(formData, setErrors);
+    validateNewUser(formData, setErrors);
   };
 
   // Form submission -- handles login and register (need to move to client)
   const handleSubmit = async (slug: string, body: iFormData) => {
+    setServerError("");
     const loggedInUser = await apiPost(slug, body);
     if (loggedInUser.username) {
       setAuth(loggedInUser);
-      console.log('Login success ' + JSON.stringify(loggedInUser));
+      console.log("Login success " + JSON.stringify(loggedInUser));
       handleClose();
       navigate(from, { replace: true });
-    }
-    else console.log("Login error " + JSON.stringify(loggedInUser));
+    } else if (loggedInUser.message === "Request failed with status code 401") {
+      setServerError("Incorrect Username or Password");
+    } else if (loggedInUser.error) {
+      setServerError(loggedInUser.error);
+    } else setServerError("An error occured");
   };
 
-
   // --the 'valid' argument is achieved by running the validataion function (found in utils/loginutils -- see function call in register button below)
-  const submitLocalRegistration = (valid: boolean) => {
+  const submitValidForm = (valid: boolean, slug: string) => {
     if (valid) {
-      handleSubmit("login/register/local", {
+      handleSubmit(slug, {
         username: formData.username,
         email: formData.email,
         password: formData.password,
@@ -93,7 +101,7 @@ function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
   // Handle whether register or login is showing
   const handleIsRegistering = (set: boolean) => {
     setIsRegistering(set);
-  }
+  };
 
   // Need a handleClose function to reset form and errors when login modal is closed
   const handleClose = () => {
@@ -101,7 +109,23 @@ function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
     setErrors(initialErrors);
     setIsRegistering(false);
     onCloseLogin();
+    navigate('/', { state: { from: location, redirect: false } });
   };
+
+  // Reset server errors upon change of registering or not
+  useEffect(() => {
+    setServerError("");
+  }, [isRegistering]);
+
+  // Open login if redirected from another page with 'you must log in to see this page' message
+  useEffect(() => {
+    if (location.state?.redirect) {
+      setServerError("You must log in to access this page.");
+    }
+    else {
+      setServerError("");
+    }
+  }, [location.state?.redirect]);
 
   return (
     <>
@@ -122,30 +146,33 @@ function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
               paddingBottom={"0.5rem"}
               marginX={"0.5rem"}
             >
-              <Heading as={"h4"}>{isRegistering ? 'Register' : 'Login' }</Heading>
+              <Heading as={"h4"}>
+                {isRegistering ? "Register" : "Login"}
+              </Heading>
               <LogoImgOnly />
             </Flex>
           </ModalHeader>
           <ModalCloseButton onClick={() => handleClose()} />
           <ModalBody pb={6}>
-
-            {isRegistering
-              ? <RegisterForm
+            {serverError && <Text>{serverError}</Text>}
+            {isRegistering ? (
+              <RegisterForm
                 handleForm={handleForm}
                 handleIsRegistering={handleIsRegistering}
-                submitLocalRegistration={submitLocalRegistration}
+                submitLocalRegistration={submitValidForm}
                 formData={formData}
                 errors={errors}
                 setErrors={setErrors}
               />
-              : <LoginForm
-               handleForm={handleForm}
+            ) : (
+              <LoginForm
+                handleForm={handleForm}
                 handleIsRegistering={handleIsRegistering}
-                handleSubmit={handleSubmit}
+                submitLogin={submitValidForm}
                 formData={formData}
                 errors={errors}
-              />}
-            
+              />
+            )}
           </ModalBody>
           <ModalFooter>
             <Button onClick={() => handleClose()}>Cancel</Button>
