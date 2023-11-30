@@ -25,7 +25,7 @@ export const apiGet = async (url: string) => {
     return response.data;
   } catch (err) {
     console.log(err);
-    return "error";
+    return err;
   }
 };
 

@@ -31,8 +31,7 @@ interface LoginProps {
   onCloseLogin: () => void;
 }
 
-function Login({ isOpenLogin, onCloseLogin }: LoginProps) {  
-  
+function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
   // Set initial form data to blank on opening of login modal
   const [formData, setFormData] = useState<iFormData>(initialFormData);
 
@@ -44,11 +43,6 @@ function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
 
   // Server-side error (incorrect login creds / username or password already taken)
   const [serverError, setServerError] = useState("");
-
-  // Ref to set up initial focus on form when login modal is opened
-  const initialRef = useRef(null);
-  // Ref to focus on error for screenreaders
-  const errorRef = useRef(null);
 
   // Set auth context upon register or login
   const { setAuth } = useAuth();
@@ -62,6 +56,7 @@ function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
   // AND NewUsers(if form has been initially validated.
   // This only happens after initial validation to avoid constant error messages popping up before user hs even tried to type anything)
   const handleForm = (e: ChangeEvent<HTMLInputElement>, dataType: string) => {
+    setServerError("");
     // Set value in formData
     const val = e.target.value;
     setFormData({ ...formData, [dataType]: val });
@@ -71,7 +66,6 @@ function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
 
   // Form submission -- handles login and register (need to move to client)
   const handleSubmit = async (slug: string, body: iFormData) => {
-    setServerError("");
     const loggedInUser = await apiPost(slug, body);
     if (loggedInUser.username) {
       setAuth(loggedInUser);
@@ -101,6 +95,7 @@ function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
   // Handle whether register or login is showing
   const handleIsRegistering = (set: boolean) => {
     setIsRegistering(set);
+    setServerError("");
   };
 
   // Need a handleClose function to reset form and errors when login modal is closed
@@ -108,32 +103,23 @@ function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
     setFormData(initialFormData);
     setErrors(initialErrors);
     setIsRegistering(false);
-    onCloseLogin();
-    navigate('/', { state: { from: location, redirect: false } });
-  };
-
-  // Reset server errors upon change of registering or not
-  useEffect(() => {
     setServerError("");
-  }, [isRegistering]);
+    onCloseLogin();
+    navigate("/", { state: { from: location, redirect: false } });
+  };
 
   // Open login if redirected from another page with 'you must log in to see this page' message
   useEffect(() => {
     if (location.state?.redirect) {
       setServerError("You must log in to access this page.");
-    }
-    else {
+    } else {
       setServerError("");
     }
   }, [location.state?.redirect]);
 
   return (
     <>
-      <Modal
-        initialFocusRef={initialRef}
-        isOpen={isOpenLogin}
-        onClose={() => handleClose()}
-      >
+      <Modal isOpen={isOpenLogin} onClose={() => handleClose()}>
         <ModalOverlay onClick={() => handleClose()} />
         <ModalContent>
           <ModalHeader marginTop={"1rem"}>
@@ -154,7 +140,7 @@ function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
           </ModalHeader>
           <ModalCloseButton onClick={() => handleClose()} />
           <ModalBody pb={6}>
-            {serverError && <Text>{serverError}</Text>}
+            {/* <p ref={errorRef} tabIndex={0}>{serverError && serverError}</p> */}
             {isRegistering ? (
               <RegisterForm
                 handleForm={handleForm}
@@ -170,7 +156,8 @@ function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
                 handleIsRegistering={handleIsRegistering}
                 submitLogin={submitValidForm}
                 formData={formData}
-                errors={errors}
+                  errors={errors}
+                  serverError={serverError}
               />
             )}
           </ModalBody>

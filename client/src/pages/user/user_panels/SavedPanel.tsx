@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import {
     TabPanel,
     Flex,
@@ -7,15 +9,16 @@ import {
 import CollectionMenu from "./saved_panel/CollectionMenu";
 import SavedCards from "./saved_panel/SavedCards";
 import AddCollection from "./saved_panel/AddCollection";
-import { iUserSaved } from "../../../data/user_data/userData";
-import { useState } from "react";
+import { iUserSaved, iUserData } from "../../../data/user_data/userData";
+
 
 interface iSavedPanel {
     data: iUserSaved[];
-    collections: string[];
+  collections: string[];
+  updateUser: (dataType: keyof iUserData, data: any) => void
 }
 
-const SavedPanel = ({ data, collections }: iSavedPanel) => {
+const SavedPanel = ({ data, collections, updateUser }: iSavedPanel) => {
     
     const [currentCollection, setCurrentCollection] = useState('all');
 
@@ -32,7 +35,10 @@ const SavedPanel = ({ data, collections }: iSavedPanel) => {
               collections={collections}
               onClick={handleCollection}
             />
-            <AddCollection collections={collections} />
+            <AddCollection
+              collections={collections}
+              updateCollections={updateUser}
+            />
           </Flex>
         </Flex>
         <Flex>

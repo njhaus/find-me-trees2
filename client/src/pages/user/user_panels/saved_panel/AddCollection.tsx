@@ -1,8 +1,8 @@
 
-import { FormEvent, useState, useRef } from "react";
-import { useDisclosure } from "@chakra-ui/react";
+import { FormEvent, useState, useRef, useEffect } from "react";
 
 import {
+  useDisclosure,
   Popover,
   PopoverTrigger,
   PopoverContent,
@@ -11,42 +11,69 @@ import {
   PopoverFooter,
   PopoverArrow,
   PopoverCloseButton,
-    PopoverAnchor,
+  PopoverAnchor,
   Button,
+  CheckboxGroup,
+  Checkbox,
+  FormControl,
+  FormLabel,
+  Input,
+  HStack,
 } from "@chakra-ui/react";
-import TextInput from "../../../../components/inputs/TextInput";
-import RadioInput from "../../../../components/inputs/RadioInput";
+import { iUserData } from "../../../../data/user_data/userData";
+import GenTextInput from "../../../../components/inputs/GenTextInput";
 
 interface iAddCollection {
   collections: string[];
+  updateCollections: (dataType: keyof iUserData, data: any) => void;
 }
 
-type colFormLabel = "addCollection" | "deleteCollection";
-
-interface iColFormData {
+interface iAmSoSickOfTypescript {
   addCollection: string;
-  deleteCollection: string[];
+  deleteCollections: string[];
 }
 
-const initialColFormData: iColFormData = {
+const initialEditCollections = {
   addCollection: "",
-  deleteCollection: [],
+  deleteCollections: [],
 };
 
+const AddCollection = ({ collections, updateCollections }: iAddCollection) => {
 
+  console.log('INITIAL COLLECTIONS');
+  console.log(collections);
 
-const AddCollection = ({collections}: iAddCollection) => {
+  const [editCollections, setEditCollections] = useState<iAmSoSickOfTypescript>(initialEditCollections);
 
-  const [colFormData, setColFormData] = useState(initialColFormData);
-
-  const handleFormData = (formName: keyof iColFormData, data: string | string[]) => {
-    setColFormData((prevFormData) => ({ ...prevFormData, [formName]: data }));
+  const handleAddCollection = (val: string) => {
+    console.log(editCollections)
+    if (!collections.includes(val) && val !== '') {
+      setEditCollections({ ...editCollections, addCollection: val })
+    }
   }
+
+  const handleDeleteCollections = (val: string) => {
+    let deleteCols
+    if (editCollections.deleteCollections.includes(val)) {
+      deleteCols = editCollections.deleteCollections.filter(col => col !== val)
+    }
+    else {
+      deleteCols = [...editCollections.deleteCollections, val];
+    }
+    setEditCollections({ ...editCollections, deleteCollections: deleteCols });
+  } 
+  
 
   // This will probably need to be moved into an effect
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(colFormData);
+    const newCollections =
+      collections
+        .filter(col => !editCollections.deleteCollections.includes(col));
+      if(editCollections.addCollection !== '') newCollections.push(editCollections.addCollection);
+    console.log('newcollections');
+    console.log(newCollections);
+    updateCollections('collections', newCollections);
   }
 
   // Popover Controls
@@ -66,29 +93,52 @@ const AddCollection = ({collections}: iAddCollection) => {
         </PopoverTrigger>
         <PopoverContent>
           <PopoverArrow />
-          <PopoverCloseButton />
+          <PopoverCloseButton
+            onClick={() => {
+              onClose();
+              setEditCollections(initialEditCollections);
+            }}
+          />
           <PopoverBody>
             <PopoverHeader>Add Collection</PopoverHeader>
             <form>
-              <TextInput
-                formVal={""}
-                label={"Name your collection:"}
-                formName={"addCollection"}
-                onChange={handleFormData}
+              <GenTextInput
+                formVal=""
+                label="New Collection:"
+                formName="new-collection"
+                onChange={handleAddCollection}
                 ref={initialFocusRef}
               />
               <PopoverHeader>Edit Collections</PopoverHeader>
-              <RadioInput
-                formVal={""}
-                label={""}
-                values={collections}
-                formName={"deleteCollection"}
-                onChange={handleFormData}
-              />
-              <Button onClick={(e) => {
-                handleSubmit(e);
-                onClose();
-              }}>Save</Button>
+              <FormControl as="fieldset">
+                <FormLabel as="legend">
+                  Delete Collections: 
+                </FormLabel>
+                <CheckboxGroup>
+                  <HStack spacing="24px">
+                    {collections.map((col, i) => (
+                      <Checkbox
+                        key={i}
+                        value={col}
+                        isChecked={true}
+                        onChange={() => {handleDeleteCollections(col)
+                        }}
+                      >
+                        {col}
+                      </Checkbox>
+                    ))}
+                  </HStack>
+                </CheckboxGroup>
+              </FormControl>
+              <Button
+                onClick={(e) => {
+                  handleSubmit(e);
+                  setEditCollections(initialEditCollections);
+                  onClose();
+                }}
+              >
+                Save
+              </Button>
             </form>
           </PopoverBody>
         </PopoverContent>

@@ -1,4 +1,4 @@
-import { ChangeEvent, forwardRef, useState} from "react";
+import { ChangeEvent, forwardRef, useState, useRef, useEffect} from "react";
 
 import {
   Button,
@@ -31,18 +31,23 @@ interface iRegisterForm {
 }
 
 
-const RegisterForm = forwardRef<HTMLInputElement, iRegisterForm>(
-  ({ handleForm, handleIsRegistering, submitLocalRegistration, formData, errors, setErrors }, ref) => {
-
-    const [reenterPassword, setReenterPassword] = useState('');
-    const [reenterError, setReenterError] = useState('');
+const RegisterForm =
+  ({ handleForm, handleIsRegistering, submitLocalRegistration, formData, errors, setErrors }: iRegisterForm) => {
+    const [reenterPassword, setReenterPassword] = useState("");
+    const [reenterError, setReenterError] = useState("");
     // FC = First Check (Keeps errors from showing if user hasn't even finished typing for their first time)
     const [usernameFC, setUsernameFC] = useState(false);
     const [emailFC, setEmailFC] = useState(false);
     const [passwordFC, setPasswordFC] = useState(false);
     const [reenterFirstCheck, setReenterFirstCheck] = useState(false);
 
-    
+    // Ref to set up initial focus on form when login modal is opened
+    const initialRef = useRef<HTMLInputElement>(null);
+
+
+    useEffect(() => {
+      if (initialRef && initialRef.current) initialRef.current.focus();
+    }, []);
 
     const handleReenterPassword = (e: ChangeEvent<HTMLInputElement>) => {
       setReenterPassword(e.target.value);
@@ -52,25 +57,22 @@ const RegisterForm = forwardRef<HTMLInputElement, iRegisterForm>(
     };
 
     const handleReenterError = () => {
-      console.log(formData.password);
-      console.log(reenterPassword);
       if (formData.password && reenterPassword !== formData.password) {
-        setReenterError('Passwords must match');
-      }
-      else {
+        setReenterError("Passwords must match");
+      } else {
         setReenterError("");
       }
-    }
+    };
 
     const handleBlur = (
-          checker: string,
-          setter: React.Dispatch<React.SetStateAction<boolean>>
+      checker: string,
+      setter: React.Dispatch<React.SetStateAction<boolean>>
     ) => {
       if (checker) {
         setter(true);
         validateNewUser(formData, setErrors);
       }
-        };
+    };
 
     return (
       <>
@@ -78,20 +80,19 @@ const RegisterForm = forwardRef<HTMLInputElement, iRegisterForm>(
           <IconInput
             icon={<FaSadCry />}
             labelText="Username:"
-            labelFor="reg-username"
+            labelFor="username"
             inputPlaceholder="username"
             inputType="text"
-            ref={ref}
+            ref={initialRef}
             val={formData.username}
             onChange={handleForm}
             error={usernameFC ? errors.username : ""}
             onBlur={() => handleBlur(formData.username, setUsernameFC)}
           ></IconInput>
           <IconInput
-            ref={ref}
             icon={<FaEnvelope />}
             labelText="Email:"
-            labelFor="reg-email"
+            labelFor="email"
             inputPlaceholder="email"
             inputType="email"
             val={formData.email}
@@ -102,7 +103,7 @@ const RegisterForm = forwardRef<HTMLInputElement, iRegisterForm>(
           <IconInput
             icon={<FaLaughWink />}
             labelText="Password:"
-            labelFor="reg-password"
+            labelFor="password"
             inputPlaceholder="password"
             inputType="password"
             val={formData.password}
@@ -113,7 +114,7 @@ const RegisterForm = forwardRef<HTMLInputElement, iRegisterForm>(
           <IconInput
             icon={<FaLaughWink />}
             labelText="Re-Enter Password:"
-            labelFor="reg-reenter-password"
+            labelFor="reenter-password"
             inputPlaceholder="Re-enter Password"
             inputType="password"
             val={reenterPassword}
@@ -127,10 +128,10 @@ const RegisterForm = forwardRef<HTMLInputElement, iRegisterForm>(
             error={reenterFirstCheck ? reenterError : ""}
           ></IconInput>
           <Button
-            isDisabled={
-              validateNewUser(formData) && reenterPassword === formData.password
-                ? false
-                : true
+            isDisabled={ false
+              // validateNewUser(formData) && reenterPassword === formData.password
+              //   ? false
+              //   : true
             }
             leftIcon={<FaTree />}
             display={"block"}
@@ -174,7 +175,6 @@ const RegisterForm = forwardRef<HTMLInputElement, iRegisterForm>(
         </Button>
       </>
     );
-  }
-);
+  };
 
 export default RegisterForm;

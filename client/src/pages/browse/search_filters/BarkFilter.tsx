@@ -2,7 +2,7 @@ import { useContext } from "react";
 
 import { Flex } from "@chakra-ui/react";
 
-import CheckboxInput from "../../../components/inputs/CheckboxInput";
+import CheckboxInput from "../../../components/inputs/BrowseCheckboxInput";
 import { barkFilters } from "../../../data/browse_data/filterFormData";
 import { FormDataContext, iFormDataContext } from "../Browse";
 

@@ -43,7 +43,7 @@ const CheckboxInput = ({ formVal, label, values, formName, onChange, helperText 
               value={val}
               isChecked={true}
               onChange={() => {
-                value.includes("Spiral")
+                value.includes(val)
                   ? setValue(value.filter((v) => v !== val))
                   : setValue([...value, val]);
               }}

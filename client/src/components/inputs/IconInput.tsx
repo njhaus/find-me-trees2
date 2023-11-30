@@ -18,16 +18,7 @@ interface iIconInput {
 }
 
 const IconInput = forwardRef<HTMLInputElement, iIconInput>(({ icon, labelText, labelFor, inputPlaceholder, inputType, val, onChange, error, onBlur}: iIconInput, ref) => {
-  
-  
-  const inputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    if (inputRef && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [focus, inputRef]);
-  
   return (
     <Stack>
       <FormLabel htmlFor={labelFor}>{labelText}</FormLabel>
@@ -46,7 +37,7 @@ const IconInput = forwardRef<HTMLInputElement, iIconInput>(({ icon, labelText, l
           aria-describedby={error}
         />
       </InputGroup>
-      {(error && val) && <Text className="errText" color={'red'} aria-live="assertive" display={'flex'} flexDirection={'row'}><BsExclamationTriangleFill />{error}</Text>}
+      {(error && val) && <Text className="errText" color={'red'} aria-live="assertive" display={'flex'} flexDirection={'row'} tabIndex={0}><BsExclamationTriangleFill /><span className='sr-only'>{ labelText} error</span>{error}</Text>}
     </Stack>
   );
 });

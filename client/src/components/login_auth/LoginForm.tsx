@@ -1,7 +1,7 @@
-import { ChangeEvent, forwardRef, useState, useEffect} from "react";
+import { ChangeEvent, useRef, useState, useEffect, forwardRef} from "react";
 
 import {
-  Button, Text
+  Button, Text, TextProps
 } from "@chakra-ui/react";
 
 import IconInput from "../inputs/IconInput";
@@ -26,86 +26,105 @@ interface iLoginForm {
   handleIsRegistering: (set: boolean) => void;
   submitLogin: (valid: boolean, slug: string) => void;
   formData: iFormData;
-  errors: iFormErrors;
+    errors: iFormErrors;
+    serverError: string;
 }
 
-const LoginForm = forwardRef<HTMLInputElement, iLoginForm>(({handleForm, handleIsRegistering, submitLogin, formData, errors}, ref) => {
-    
-    const [error, setError] = useState('');
-    
-    // Need to reformat data for use in noHTML validator-- this just retypes the iFormData object so the validateTextInput function can understand it
-    const transformedData: { [key: string]: string } = {
-        username: formData.username,
-        password: formData.password
-    };
+const LoginForm = forwardRef<HTMLInputElement, iLoginForm>(({handleForm, handleIsRegistering, submitLogin, formData, errors, serverError}, ref) => {
+  const [error, setError] = useState("");
 
-    useEffect(() => {
-        setError('')
-    }, [formData])
-    
-    return (
+  // Ref to focus on error for screenreaders -- this error is ONLY for form validation (no html in this case)
+  const errorRef = useRef<HTMLParagraphElement>(null);
+  // Ref to set up initial focus on form when login modal is opened
+  const initialRef = useRef<HTMLInputElement>(null);
+  // Error ref for screenreaders -- this will focus on all server errors
+  const serverErrorRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (errorRef && errorRef.current && errorRef.current?.innerText !== "")
+      errorRef.current.focus();
+    // else if (initialRef && initialRef.current) initialRef.current.focus();
+  }, [serverError, error]);
+
+  // Need to reformat data for use in noHTML validator-- this just retypes the iFormData object so the validateTextInput function can understand it
+  const transformedData: { [key: string]: string } = {
+    username: formData.username,
+    password: formData.password,
+  };
+
+  useEffect(() => {
+    setError("");
+  }, [formData]);
+
+  return (
     <>
-            <form>
-                {error && <Text>{error}</Text>}
-            <IconInput
-                icon={<FaSadCry />}
-                labelText="Username:"
-                labelFor="username"
-                inputPlaceholder="username"
-                inputType="text"
-                ref={ref}
-                val={formData.username}
-                onChange={handleForm}
-                error={''}
-            ></IconInput>
+      <form>
+        <Text ref={errorRef} tabIndex={0}>
+                  {error && error}
+                  {serverError && serverError}
+        </Text>
+        <IconInput
+          icon={<FaSadCry />}
+          labelText="Username:"
+          labelFor="username"
+          inputPlaceholder="username"
+          inputType="text"
+          ref={ref}
+          val={formData.username}
+          onChange={handleForm}
+          error={""}
+        ></IconInput>
 
-            <IconInput
-                icon={<FaLaughWink />}
-                labelText="Password:"
-                labelFor="password"
-                inputPlaceholder="password"
-                inputType="password"
-                val={formData.password}
-                onChange={handleForm}
-                error={''}
-            ></IconInput>
-                <Button
-                    isDisabled={(!formData.username || !formData.password) ? true : false }
-                leftIcon={<FaSmile />}
-                display={"block"}
-                width={"85%"}
-                margin={"1rem auto"}
-                variant="solid"
-                onClick={() =>
-                submitLogin(validateTextInput(transformedData, setError), "login/local")
-                }
-            >
-                Login
-            </Button>
-        </form>
-            <Button
-                isDisabled={true}
-            type={"button"}
-            leftIcon={<FaGoogle />}
-            display={"block"}
-            width={"85%"}
-            margin={"1rem auto"}
-            variant="solid"
-        >
-            Login with Google
-        </Button>
+        <IconInput
+          icon={<FaLaughWink />}
+          labelText="Password:"
+          labelFor="password"
+          inputPlaceholder="password"
+          inputType="password"
+          val={formData.password}
+          onChange={handleForm}
+          error={""}
+        ></IconInput>
         <Button
-            type={"button"}
-            leftIcon={<FaTree />}
-            display={"block"}
-            width={"85%"}
-            margin={"1rem auto"}
-            variant="solid"
-            onClick={() => handleIsRegistering(true)}
+          isDisabled={!formData.username || !formData.password ? true : false}
+          leftIcon={<FaSmile />}
+          display={"block"}
+          width={"85%"}
+          margin={"1rem auto"}
+          variant="solid"
+          onClick={() =>
+            submitLogin(
+              validateTextInput(transformedData, setError),
+              "login/local"
+            )
+          }
         >
-            Create an account
+          Login
         </Button>
-      </>
+      </form>
+      <Button
+        isDisabled={true}
+        type={"button"}
+        leftIcon={<FaGoogle />}
+        display={"block"}
+        width={"85%"}
+        margin={"1rem auto"}
+        variant="solid"
+      >
+        Login with Google
+      </Button>
+      <Button
+        type={"button"}
+        leftIcon={<FaTree />}
+        display={"block"}
+        width={"85%"}
+        margin={"1rem auto"}
+        variant="solid"
+        onClick={() => handleIsRegistering(true)}
+      >
+        Create an account
+      </Button>
+    </>
   );
 });
 

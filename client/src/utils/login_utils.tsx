@@ -50,7 +50,7 @@ type NewUser = z.infer<typeof newUser>;
 export const validateNewUser = (
   data: iFormData,
     setErrors?: React.Dispatch<React.SetStateAction<iFormErrors>>,
-  ): boolean => {
+): boolean => {
   // Reset errors
   if(setErrors) setErrors(initialErrors)
     try {
@@ -67,8 +67,7 @@ export const validateNewUser = (
         errorsArray.map(
           (e) => (errorsObj[e.path[0] as keyof iFormErrors] = e.message)
         );
-        if(setErrors) setErrors(errorsObj);
-
+        if (setErrors) setErrors(errorsObj);
         return false;
       }
     }
