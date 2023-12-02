@@ -53,7 +53,7 @@ const DesktopNav = ({ auth, onLogout, redirect }: iNav) => {
           ) : (
             <Button
               onClick={() => {
-                onLogout("login/logout", {});
+                onLogout();
               }}
             >
               Logout

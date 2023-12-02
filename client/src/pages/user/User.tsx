@@ -13,8 +13,9 @@ import useAuth from "../../hooks/useAuth";
 import SavedPanel from "./user_panels/SavedPanel";
 import FoundPanel from "./user_panels/FoundPanel";
 import FavoritesPanel from "./user_panels/FavoritesPanel";
-import { apiPost } from "../../services/api_client";
+import { apiPatch } from "../../services/api_client";
 import { iUserData } from "../../data/user_data/userData";
+import useLogout from "../../hooks/useLogout";
 
 
     interface iUserToggleData {
@@ -40,9 +41,11 @@ import { iUserData } from "../../data/user_data/userData";
 
 const User = () => {
 
-  const { auth } = useAuth();
+  const { auth, setAuth } = useAuth();
 
   const [userData, setUserData] = useState<iUserData>(auth)
+
+  const logout = useLogout();
   
   const navigate = useNavigate();
   const userExists =
@@ -66,17 +69,28 @@ const User = () => {
   }, [auth, userExists, userData]);
 
   const handleUpdateUser = (dataType: keyof iUserData, data: any) => { 
-    console.log(data)
-    // 
     setUserData({ ...userData, [dataType]: data })
     console.log({ ...userData, [dataType]: data });
-    // apiPost("user", { ...userData, [dataType]: data })
-    //   .then(res => console.log(res.data()))
-    //   .catch(err => {
-    //     console.log(err);
-    //     setUserData(userData);
-    //   });
+    apiPatch("user/update", { ...userData, [dataType]: data })
+      .then(res => {
+        if (res.code) {
+          console.log(res.message)
+          setUserData(userData);
+          logout();
+        }
+        else {
+          console.log('NO ERROR!');
+          console.log(res)
+          setUserData(res);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        setUserData(userData);
+        logout();
+      });
   }
+
 
   return (
     (userExists) && (

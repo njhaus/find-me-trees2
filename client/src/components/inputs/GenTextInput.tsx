@@ -1,4 +1,4 @@
-import  { forwardRef, useState } from 'react'
+import  { forwardRef, useState, useEffect } from 'react'
 import { FormControl, FormLabel, Input } from '@chakra-ui/react';
 
 
@@ -18,6 +18,10 @@ const GenTextInput = forwardRef<HTMLInputElement, TextInputProps>(
   ) =>
   {
     const [inputVal, setInputVal] = useState(formVal);
+
+    useEffect(() => {
+      setInputVal(formVal);
+    }, [formVal])
 
   return (
     <FormControl display={"flex"}>

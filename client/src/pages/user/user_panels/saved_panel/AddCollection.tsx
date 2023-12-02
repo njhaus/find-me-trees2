@@ -40,9 +40,6 @@ const initialEditCollections = {
 
 const AddCollection = ({ collections, updateCollections }: iAddCollection) => {
 
-  console.log('INITIAL COLLECTIONS');
-  console.log(collections);
-
   const [editCollections, setEditCollections] = useState<iAmSoSickOfTypescript>(initialEditCollections);
 
   const handleAddCollection = (val: string) => {
@@ -62,7 +59,6 @@ const AddCollection = ({ collections, updateCollections }: iAddCollection) => {
     }
     setEditCollections({ ...editCollections, deleteCollections: deleteCols });
   } 
-  
 
   // This will probably need to be moved into an effect
   const handleSubmit = (e: FormEvent) => {
@@ -76,16 +72,21 @@ const AddCollection = ({ collections, updateCollections }: iAddCollection) => {
     updateCollections('collections', newCollections);
   }
 
+  const handleClose = () => {
+    onClose();
+    setEditCollections(initialEditCollections);
+  }
+
   // Popover Controls
   const { onOpen, onClose, isOpen } = useDisclosure();
-  const initialFocusRef = useRef(null)
+  const initialFocusRef = useRef<HTMLInputElement>(null)
 
     return (
       <Popover
         initialFocusRef={initialFocusRef}
         isOpen={isOpen}
         onOpen={onOpen}
-        onClose={onClose}
+        onClose={handleClose}
         closeOnBlur={true}
       >
         <PopoverTrigger>
@@ -95,18 +96,18 @@ const AddCollection = ({ collections, updateCollections }: iAddCollection) => {
           <PopoverArrow />
           <PopoverCloseButton
             onClick={() => {
-              onClose();
-              setEditCollections(initialEditCollections);
+              handleClose()
             }}
           />
           <PopoverBody>
             <PopoverHeader>Add Collection</PopoverHeader>
             <form>
               <GenTextInput
-                formVal=""
+                formVal={editCollections.addCollection}
                 label="New Collection:"
                 formName="new-collection"
                 onChange={handleAddCollection}
+                
                 ref={initialFocusRef}
               />
               <PopoverHeader>Edit Collections</PopoverHeader>

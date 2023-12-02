@@ -12,12 +12,13 @@ export interface LinkProps {
 import useAuth from "../../hooks/useAuth";
 import { apiPost } from "../../services/api_client";
 import { iUserData } from "../../data/user_data/userData";
-import { initialUserData } from "../../data/user_data/userData";
+import useLogout from "../../hooks/useLogout";
 import { useLocation } from "react-router-dom";
+import NavDialog from "./NavDialog";
 
 export interface iNav {
   auth: iUserData;
-  onLogout: (slug: string, body: {}) => void;
+  onLogout: () => void;
   redirect?: boolean
 }
 
@@ -27,27 +28,26 @@ export function Nav() {
   const location = useLocation();
   const redirectData = location.state;
 
-  const handleLogout = async (slug: string, body: {}) => {
-    const loggedInUser = await apiPost(slug, body);
-    console.log(loggedInUser)
-    setAuth(initialUserData);
-  };
+  console.log(redirectData);
+
+  const logout = useLogout();
 
   return (
     //   BROWSER Navbar
     <>
       <RouteTest />
+      {/* Dialog message -- for logged out,  */}
+      <NavDialog
+        message={redirectData?.message ? redirectData.message : ''}
+      />
       {/* DESKTOP HEADER */}
       <DesktopNav
         auth={auth}
-        onLogout={handleLogout}
+        onLogout={logout}
         redirect={redirectData?.redirect ? true : false}
       />
       {/* MOBILE HEADER */}
-      <MobileNav
-        auth={auth}
-        onLogout={handleLogout}
-      />
+      <MobileNav auth={auth} onLogout={logout} />
     </>
   );
 }

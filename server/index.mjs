@@ -49,7 +49,7 @@ main();
 app.use(
   cors({
     origin: "http://localhost:5173",
-    methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD"],
+    methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD", "PATCH"],
     credentials: true,
     preflightContinue: false,
   })
@@ -126,6 +126,11 @@ app.post("/", (req, res) => {
 });
 
 // Error catching routes
+
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(403).send(err);
+});
 
 // app.use("*", (req, res, next) => {
 //   const error = new AppError("This route does not exist.", 404);

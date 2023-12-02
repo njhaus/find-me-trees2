@@ -33,6 +33,10 @@ const UserSchema = new mongoose.Schema({
         tree: { type: mongoose.Schema.Types.ObjectId, ref: 'Tree' },
         notes: String,
   }],
+  accessToken: {
+    type: String,
+    default: '',
+    },
   refreshToken: {
     type: String,
     default: '',

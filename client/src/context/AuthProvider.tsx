@@ -28,6 +28,7 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     let isMounted = true;
     const controller = new AbortController();
     const getUser = async () => {
+      console.log('updating token')
       try {
         const response = await apiIntercept.get('/login/getuser', {
           signal: controller.signal
@@ -39,11 +40,15 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         setAuth(initialUserData);
       }
     }
+    const intervalId = setInterval(() => {
+      getUser();
+    }, 10 * 60 * 1000);
     getUser();
 
     return () => {
       isMounted = false;
       controller.abort();
+      clearInterval(intervalId);
     }
   }, [location.pathname, apiIntercept])
 

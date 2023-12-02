@@ -83,7 +83,7 @@ const MobileDrawer = ({auth, onLogout}: iNav) => {
             ) : (
               <Button
                 onClick={() => {
-                  onLogout("login/logout", {});
+                  onLogout();
                   onCloseDrawer();
                 }}
               >
