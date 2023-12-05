@@ -16,6 +16,7 @@ import FavoritesPanel from "./user_panels/FavoritesPanel";
 import { apiPatch } from "../../services/api_client";
 import { iUserData } from "../../data/user_data/userData";
 import useLogout from "../../hooks/useLogout";
+import useUpdateUser from "../../hooks/useUpdateUser"
 
 
     interface iUserToggleData {
@@ -42,8 +43,7 @@ import useLogout from "../../hooks/useLogout";
 const User = () => {
 
   const { auth, setAuth } = useAuth();
-
-  const [userData, setUserData] = useState<iUserData>(auth)
+  const { userData, handleUpdateUser } = useUpdateUser();
 
   const logout = useLogout();
   
@@ -68,28 +68,28 @@ const User = () => {
     }
   }, [auth, userExists, userData]);
 
-  const handleUpdateUser = (dataType: keyof iUserData, data: any) => { 
-    setUserData({ ...userData, [dataType]: data })
-    console.log({ ...userData, [dataType]: data });
-    apiPatch("user/update", { ...userData, [dataType]: data })
-      .then(res => {
-        if (res.code) {
-          console.log(res.message)
-          setUserData(userData);
-          logout();
-        }
-        else {
-          console.log('NO ERROR!');
-          console.log(res)
-          setUserData(res);
-        }
-      })
-      .catch(err => {
-        console.log(err);
-        setUserData(userData);
-        logout();
-      });
-  }
+  // const handleUpdateUser = (dataType: keyof iUserData, data: any) => { 
+  //   setUserData({ ...userData, [dataType]: data })
+  //   console.log({ ...userData, [dataType]: data });
+  //   apiPatch("user/update", { ...userData, [dataType]: data })
+  //     .then(res => {
+  //       if (res.code) {
+  //         console.log(res.message)
+  //         setUserData(userData);
+  //         logout();
+  //       }
+  //       else {
+  //         console.log('NO ERROR!');
+  //         console.log(res)
+  //         setUserData(res);
+  //       }
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //       setUserData(userData);
+  //       logout();
+  //     });
+  // }
 
 
   return (
