@@ -28,8 +28,6 @@ export function Nav() {
   const location = useLocation();
   const redirectData = location.state;
 
-  console.log(redirectData);
-
   const logout = useLogout();
 
   return (

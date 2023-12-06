@@ -2,7 +2,7 @@ import React, { useState, createContext, ReactNode, useEffect } from "react";
 
 import { iUserSaved, iUserFound, iUserFavorites, initialUserData } from "../data/user_data/userData";
 import useApiIntercept from "../hooks/useApiIntercept";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useLocation } from "react-router-dom";
 import { iUserData } from "../data/user_data/userData";
 
@@ -24,11 +24,11 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
 
   useEffect(() => {
-    console.log('checking auth');
+    console.log('checking auth in AuthProvider');
     let isMounted = true;
     const controller = new AbortController();
     const getUser = async () => {
-      console.log('updating token')
+      console.log('updating token in AuthProvider')
       try {
         const response = await apiIntercept.get('/login/getuser', {
           signal: controller.signal
@@ -36,8 +36,10 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         console.log(response.data);
         isMounted && setAuth(response.data)
       } catch (err) {
-        console.log(err);  
-        setAuth(initialUserData);
+        if (axios.isAxiosError(err)) {
+          if (err.message.includes('401')) console.log('Error in AuthProvider getting user -- no user is logged in.')
+          setAuth(initialUserData); 
+        }
       }
     }
     const intervalId = setInterval(() => {

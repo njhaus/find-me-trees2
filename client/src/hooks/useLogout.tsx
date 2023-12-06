@@ -3,7 +3,8 @@ import { apiPost } from "../services/api_client";
 import { initialUserData } from "../data/user_data/userData";
 import { useNavigate } from "react-router-dom";
 
-const useLogout = () => {
+const useLogout = (message?: string) => {
+
 
     const { auth, setAuth } = useAuth();
     const navigate = useNavigate();
@@ -14,7 +15,7 @@ const useLogout = () => {
         setAuth(initialUserData);
         navigate("/", {
           state: {
-            message: "You have been logged out.",
+            message: message || "You have been logged out.",
           },
         });
     }

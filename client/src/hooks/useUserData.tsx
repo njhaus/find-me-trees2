@@ -1,5 +1,5 @@
 
-// THIS HOOK IS PROBABLY UNNECESSARY -- USERDATA IS PASSED IN THE useUpdateUser HOOK.
+// THIS HOOK IS PROBABLY UNNECESSARY -- USERDATA IS PASSED IN THE authContext OR useUpdateUser HOOK.
 
 import { useState, useEffect } from "react";
 import useAuth from "./useAuth";
