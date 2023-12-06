@@ -27,17 +27,17 @@ export const initialUserData: iUserData = {
 
 
 export interface iUserSaved {
-    tree: iTreeData;
+  _id: string;
   collections: string[];
 }
 
 export interface iUserFound {
-  tree: iTreeData;
+  _id: string;
   location: iLocationData;
 }
 
 export interface iUserFavorites {
-  tree: iTreeData;
+  _id: string;
   notes: String
 }
 
@@ -47,103 +47,103 @@ export const tempUserData = {
   collections: ["maples", "oaks", "other"],
   saved: [
     {
-      tree: tempTreeData,
+      _id: tempTreeData,
       collections: ["none"],
     },
     {
-      tree: tempTreeData,
+      _id: tempTreeData,
       collections: ["none"],
     },
     {
-      tree: tempTreeData,
+      _id: tempTreeData,
       collections: ["none"],
     },
     {
-      tree: tempTreeData,
+      _id: tempTreeData,
       collections: ["none"],
     },
     {
-      tree: tempTreeData,
+      _id: tempTreeData,
       collections: ["none"],
     },
     {
-      tree: tempTreeData,
+      _id: tempTreeData,
       collections: ["none"],
     },
   ],
   found: [
     {
-      tree: tempTreeData,
+      _id: tempTreeData,
       location: { type: 'point', coordinates: [ -73.360846, 41.45940210000001 ]},
     },
     {
-      tree: tempTreeData,
+      _id: tempTreeData,
       location: { type: 'point', coordinates: [ -72.360846, 41.45940210000001 ]},
     },
     {
-      tree: tempTreeData,
+      _id: tempTreeData,
       location: { type: 'point', coordinates: [ -74.360846, 41.45940210000001 ]},
     },
     {
-      tree: tempTreeData,
+      _id: tempTreeData,
       location: { type: 'point', coordinates: [ -75.360846, 41.45940210000001 ]},
     },
     {
-      tree: tempTreeData,
+      _id: tempTreeData,
       location: { type: 'point', coordinates: [ -76.360846, 41.45940210000001 ]},
     },
     {
-      tree: tempTreeData,
+      _id: tempTreeData,
       location: { type: 'point', coordinates: [ -72.360846, 40.45940210000001 ]},
     },
     {
-      tree: tempTreeData,
+      _id: tempTreeData,
       location: { type: 'point', coordinates: [ -72.360846, 39.45940210000001 ]},
     },
     {
-      tree: tempTreeData,
+      _id: tempTreeData,
       location: { type: 'point', coordinates: [ -72.360846, 38.45940210000001 ]},
     },
     {
-      tree: tempTreeData,
+      _id: tempTreeData,
       location: { type: 'point', coordinates: [ -72.360846, 37.45940210000001 ]},
     },
   ],
   favorites: [
     {
-      tree: tempTreeData,
+      _id: tempTreeData,
       notes: 'temp note'
     },
     {
-      tree: tempTreeData,
+      _id: tempTreeData,
       notes: 'temp note'
     },
     {
-      tree: tempTreeData,
+      _id: tempTreeData,
       notes: 'temp note'
     },
     {
-      tree: tempTreeData,
+      _id: tempTreeData,
       notes: 'temp note'
     },
     {
-      tree: tempTreeData,
+      _id: tempTreeData,
       notes: 'temp note'
     },
     {
-      tree: tempTreeData,
+      _id: tempTreeData,
       notes: 'temp note'
     },
     {
-      tree: tempTreeData,
+      _id: tempTreeData,
       notes: 'temp note'
     },
     {
-      tree: tempTreeData,
+      _id: tempTreeData,
       notes: 'temp note'
     },
     {
-      tree: tempTreeData,
+      _id: tempTreeData,
       notes: 'temp note'
     },
   ],

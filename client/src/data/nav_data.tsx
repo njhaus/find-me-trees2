@@ -17,7 +17,7 @@ const links: Link[] = [
   },
   {
     text: "Tree Test",
-    to: "/tree/test",
+    to: "/tree/656f7f726bf52aa3c8cb540f",
   },
   {
     text: "About",

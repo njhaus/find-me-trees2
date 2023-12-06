@@ -9,7 +9,7 @@ const TreeRoutes = () => {
     <>
       <Routes>
         <Route index element={< BrowseRedirect />} />
-        <Route path=":tree" element={<Tree />} />
+        <Route path=":id" element={<Tree/>} />
       </Routes>
     </>
   );

@@ -1,6 +1,7 @@
 import axios from "axios";
 const baseUrl = "http://localhost:3008/";
 
+
 export const apiPost = async (url: string, body: unknown) => {
   try {
     console.log("Api post client running");
@@ -33,10 +34,11 @@ export const apiPatch = async (url: string, body: unknown) => {
   }
 };
 
-export const apiGet = async (url: string) => {
+export const apiGet = async (url: string, abortController: AbortController) => {
   try {
     const response = await axios.get(`${baseUrl}${url}`, {
       withCredentials: true,
+      signal: abortController.signal,
     });
     return response.data;
   } catch (err) {

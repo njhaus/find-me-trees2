@@ -166,7 +166,8 @@ router.post("/logout", async (req, res) => {
   });
 });
 
-// Get user route does the same thing...don't think I need this route.
+// .......Get user route does the same thing...don't think I need this route.........
+
 // router.get("/refresh", async (req, res) => {
 //   console.log('the refresh route is accessed');
 //   const token = req?.cookies?.jwt;
@@ -194,8 +195,7 @@ router.post("/logout", async (req, res) => {
 //   }); 
 // })
 
-
-
+// Refresh token or check token and send user data
 router.get("/getuser", async (req, res) => {
   console.log("the getuser route is accessed");
   const token = req?.cookies?.jwt;
@@ -207,9 +207,27 @@ router.get("/getuser", async (req, res) => {
 
   const foundUser = await User.findOne({ refreshToken: token });
 
+  console.log(foundUser);
+  if (!foundUser) {
+    res.clearCookie("jwt", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+      maxAge: 12 * 60 * 60 * 1000,
+    });
+    return res.sendStatus(403);
+  }
+
   jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
-    if (err || foundUser.username !== decoded.username)
+    if (err || foundUser?.username !== decoded.username) {
+      res.clearCookie("jwt", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "None",
+        maxAge: 12 * 60 * 60 * 1000,
+      });
       return res.sendStatus(403);
+    }
   });
 
   const accessToken = jwt.sign(
@@ -224,7 +242,15 @@ router.get("/getuser", async (req, res) => {
     {returnNewDocument: true}
   );
 
-  if (!updatedUser) return res.sendStatus(403);
+  if (!updatedUser) {
+    res.clearCookie("jwt", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+      maxAge: 12 * 60 * 60 * 1000,
+    });
+    return res.sendStatus(403);
+  }
 
   return res.json(
     {

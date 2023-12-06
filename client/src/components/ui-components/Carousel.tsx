@@ -7,6 +7,9 @@ interface iCarousel {
 
 const Carousel = ({ imgs }: iCarousel) => {
 
+  console.log('CAROUSEL IMGS:')
+  console.log(...imgs)
+
     const [infiniteImgs, setInfiniteImgs] = useState([...imgs])
   const [showImg, setShowImg] = useState(0);
   const imgSliderRef = useRef<HTMLDivElement | null>(null);
@@ -24,7 +27,7 @@ const Carousel = ({ imgs }: iCarousel) => {
       const timeoutId = setTimeout(() => {
         setInfiniteImgs([...infiniteImgs, infiniteImgs[showImg]])
       setShowImg((prevShowImg) => prevShowImg + 1);
-    }, 3000);
+    }, 30000);
 
     return () => clearTimeout(timeoutId);
   }, [showImg]);

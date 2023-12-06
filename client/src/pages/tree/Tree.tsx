@@ -1,5 +1,7 @@
 import { Flex, Heading, Image, Box } from "@chakra-ui/react";
 
+import { useParams } from "react-router-dom";
+
 import TreeIntro from "./TreeIntro";
 import TreeUserOptions from "./TreeUserOptions";
 import TreeTraits from "./TreeTraits";
@@ -9,24 +11,55 @@ import { allFilters } from "../../data/browse_data/filterFormData";
 // tempTreeData -- REPLACE
 import { iTreeData, iTreeTraitsData, tempTreeData } from "../../data/tree_data";
 import Carousel from "../../components/ui-components/Carousel";
+import { useEffect, useState } from "react";
+import { apiGet } from "../../services/api_client";
+import useUpdateUser from "../../hooks/useUpdateUser";
+import useAuth from "../../hooks/useAuth";
+
 
 const Tree = () => {
-  console.log(tempTreeData);
-  console.log(allFilters);
 
-  // REPLACE THIS WITH DATA FORUND FROM THE SERVER/DATABASE USING THE ID IN THE PARAMS (Review react router vid for how to capture this...)
-  const data = tempTreeData;
+  const [treeData, setTreeData] = useState(tempTreeData);
+  // Id for tree is sent by params
+  const { id } = useParams();
+  // Need to extract images so they are loaded before carousel starts
+  const imgs = [...treeData.imgSrc]
+  
+  useEffect(() => {
+    const abortController = new AbortController();
+
+    const fetchData = async () => {
+      apiGet(`tree/${id}`, abortController)
+        .then((res) => {
+          if (res.code) {
+            console.log(res.code);
+          } else {
+            console.log("good response");
+            console.log(res);
+            setTreeData(res);
+          }
+        })
+        .catch((err) => console.log("error fetching tree data"));
+    }
+    fetchData();
+
+    return () => {
+      abortController.abort(); // Abort the request if the component unmounts
+    };
+
+  }, [])
 
   return (
     <Flex as={"section"} direction={"column"}>
-      <Heading textAlign={"center"}>Tree Heading</Heading>
+      <Heading textAlign={"center"}>{treeData.title}</Heading>
       <Flex direction={"row"} flexWrap={"wrap"} gap={"1rem"}>
         <Box
           as={"article"}
           width={{ base: "100%", md: "40%" }}
           maxHeight={{ base: "100vh", md: "80vh" }}
         >
-          <Carousel imgs={data.imgSrc} />
+          <Image src={treeData.imgSrc[0]}></Image>
+          {/* <Carousel imgs={imgs} /> */}
         </Box>
         <Box
           as={"article"}
@@ -36,11 +69,11 @@ const Tree = () => {
           overflowX={"scroll"}
           bg={"red.200"}
         >
-          <TreeIntro text={data.intro} />
+          <TreeIntro text={treeData.intro} />
         </Box>
       </Flex>
       <Box as={"article"} width={"100%"} bg={"purple.200"}>
-        <TreeUserOptions />
+        <TreeUserOptions id={treeData._id} />
       </Box>
       <Flex direction={"row"} flexWrap={"wrap"} gap={"1rem"}>
         <Flex
@@ -50,13 +83,13 @@ const Tree = () => {
           maxHeight={{ base: "100vh", md: "80vh" }}
           direction={"column"}
         >
-          <Heading>{data.title} Traits</Heading>
+          <Heading>{treeData.title} Traits</Heading>
           {allFilters.map(
             (f, i) =>
-              data.traits[f.formName as keyof iTreeTraitsData] && (
+              treeData.traits[f.formName as keyof iTreeTraitsData] && (
                 <TreeTraits
                   key={i}
-                  trait={data.traits[f.formName as keyof iTreeTraitsData]}
+                  trait={treeData.traits[f.formName as keyof iTreeTraitsData]}
                   label={f.label}
                   helperText={f.helperText}
                 />
@@ -70,7 +103,11 @@ const Tree = () => {
           overflowX={"scroll"}
           bg={"yellow.200"}
         >
-          <TreeLocation location={data.location} title={data.title} />
+          {location ? (
+            <TreeLocation location={treeData.location} title={treeData.title} />
+          ) : (
+            `No states listed where ${treeData.title} is found`
+          )}
         </Box>
       </Flex>
     </Flex>

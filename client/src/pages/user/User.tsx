@@ -68,30 +68,6 @@ const User = () => {
     }
   }, [auth, userExists, userData]);
 
-  // const handleUpdateUser = (dataType: keyof iUserData, data: any) => { 
-  //   setUserData({ ...userData, [dataType]: data })
-  //   console.log({ ...userData, [dataType]: data });
-  //   apiPatch("user/update", { ...userData, [dataType]: data })
-  //     .then(res => {
-  //       if (res.code) {
-  //         console.log(res.message)
-  //         setUserData(userData);
-  //         logout();
-  //       }
-  //       else {
-  //         console.log('NO ERROR!');
-  //         console.log(res)
-  //         setUserData(res);
-  //       }
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //       setUserData(userData);
-  //       logout();
-  //     });
-  // }
-
-
   return (
     (userExists) && (
       <Flex as={"section"} direction={"column"}>

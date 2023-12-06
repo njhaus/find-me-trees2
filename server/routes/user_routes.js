@@ -12,6 +12,8 @@ router.patch('/update', verifyAccessToken, async (req, res) => {
     console.log('user route accessed')
     console.log(req.body);
     const userData = req.body;
+  console.log('saved/faves/found')
+  console.log(req.body.favorites)
     try {
         const updatedUser = await User.findOneAndUpdate(
           {
