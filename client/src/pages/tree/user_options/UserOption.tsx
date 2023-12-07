@@ -56,14 +56,15 @@ const UserOption = ({ text, successText, icon, id, userDataKey, dataFormat }: iU
     }
   };
   
+  // Need to update userData AFTER it has been loaded and set buttons accordingly
   useEffect(() => {
     const userKeyData = userData[userDataKey];
     console.log("USER KEY DATA");
     console.log(userKeyData);
     if (Array.isArray(userKeyData)) {
       console.log("IS IT TRUE?")
-      console.log(userKeyData.some((item) => item._id === id));
-      setBtnSlide(userKeyData.some((item) => item._id === id));
+      console.log(userKeyData.some((item) => item._id._id === id));
+      setBtnSlide(userKeyData.some((item) => item._id._id === id));
     }
     else {
       setBtnSlide(false);

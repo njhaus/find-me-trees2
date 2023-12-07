@@ -7,24 +7,24 @@ const RouteTest = () => {
   // const refresh = useRefreshToken();
   const { auth } = useAuth();
 
-  // const testApi = async () => {
-  //   try {
-  //     console.log("click");
-  //     const response = await fetch("http://localhost:3008/login/refresh", {
-  //       method: "GET",
-  //       credentials: "include",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
+  const testApi = async () => {
+    try {
+      console.log("click");
+      const response = await fetch("http://localhost:3008/login/test", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-  //     if (!response.ok) throw new Error("error retrieving data!");
-  //     const responseText = await response.text();
-  //     console.log(responseText);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
+      if (!response.ok) throw new Error("error retrieving data!");
+      const responseText = await response.text();
+      console.log(responseText);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   // const handleRefreshClick = async () => {
   //   console.log('click');
@@ -40,8 +40,9 @@ const RouteTest = () => {
   // };
 
   return <Button onClick={() => {
-    console.log('AUTH is currently:')
-    console.log(auth)
+    testApi();
+    // console.log('AUTH is currently:')
+    // console.log(auth)
   }
   }>Test backend</Button>;
 };

@@ -22,15 +22,15 @@ const UserSchema = new mongoose.Schema({
     },
     collections: [String],
     saved: [{
-        tree: { type: mongoose.Schema.Types.ObjectId, ref: 'Tree' },
+        _id: { type: mongoose.Schema.Types.ObjectId, ref: 'Tree' },
         collections: [String],
     }],
     found: [{
-        tree: { type: mongoose.Schema.Types.ObjectId, ref: 'Tree' },
+        _id: { type: mongoose.Schema.Types.ObjectId, ref: 'Tree' },
         location: [GeoCodeSchema],
     }],
     favorites: [{
-        tree: { type: mongoose.Schema.Types.ObjectId, ref: 'Tree' },
+        _id: { type: mongoose.Schema.Types.ObjectId, ref: 'Tree' },
         notes: String,
   }],
   accessToken: {

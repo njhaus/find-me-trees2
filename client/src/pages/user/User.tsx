@@ -92,12 +92,12 @@ const User = () => {
               collections={userData.collections}
               updateUser={handleUpdateUser}
             />
-            <FoundPanel
+            {/* <FoundPanel
               found={userData.found}
             />
             <FavoritesPanel
               favorites={userData.favorites}
-            />
+            /> */}
           </TabPanels>
         </Tabs>
       </Flex>

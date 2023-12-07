@@ -114,8 +114,12 @@ router.post(
          {
            accessToken: accessToken,
            refreshToken: refreshToken,
-         }
-       );
+         },
+         { new: true }
+       )
+         .populate("saved._id")
+         .populate("found._id")
+         .populate("favorites._id");
        res.cookie("jwt", refreshToken, {
          httpOnly: true,
          secure: true,
@@ -206,8 +210,6 @@ router.get("/getuser", async (req, res) => {
   }
 
   const foundUser = await User.findOne({ refreshToken: token });
-
-  console.log(foundUser);
   if (!foundUser) {
     res.clearCookie("jwt", {
       httpOnly: true,
@@ -239,8 +241,11 @@ router.get("/getuser", async (req, res) => {
   const updatedUser = await User.findOneAndUpdate(
     { refreshToken: token },
     { accessToken: accessToken },
-    {returnNewDocument: true}
-  );
+    { new: true }
+  )
+    .populate("saved._id")
+    .populate("found._id")
+    .populate("favorites._id");
 
   if (!updatedUser) {
     res.clearCookie("jwt", {
@@ -254,20 +259,26 @@ router.get("/getuser", async (req, res) => {
 
   return res.json(
     {
-      username: foundUser.username,
-      email: foundUser.email,
-      collections: foundUser.collections,
-      saved: foundUser.saved,
-      found: foundUser.found,
-      favorites: foundUser.favorites,
+      username: updatedUser.username,
+      email: updatedUser.email,
+      collections: updatedUser.collections,
+      saved: updatedUser.saved,
+      found: updatedUser.found,
+      favorites: updatedUser.favorites,
       accessToken: accessToken,
     },
   );
 });
 
 
-router.post('/test', (req, res, next) => {
-  console.log('tested route')
+// Used for testing
+router.get('/test', async (req, res, next) => {
+  const foundUser = await User.findOne({ username: 'njhaus' })
+    .populate('saved._id')
+    .populate('found._id')
+    .populate('favorites._id');
+  console.log(foundUser);
+  res.send(foundUser);
 })
 
 

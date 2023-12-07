@@ -22,8 +22,8 @@ const Tree = () => {
   const [treeData, setTreeData] = useState(tempTreeData);
   // Id for tree is sent by params
   const { id } = useParams();
-  // Need to extract images so they are loaded before carousel starts
-  const imgs = [...treeData.imgSrc]
+  // Need to extract images so I can get them from user Data when loaded (it loads after page) -- see useEffect below
+  let imgs = [...treeData.imgSrc]
   
   useEffect(() => {
     const abortController = new AbortController();

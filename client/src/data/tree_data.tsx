@@ -95,7 +95,7 @@ export interface iTreeTraitsData {
 }
 
 export interface iTreeData {
-  id: string;
+  _id: string;
   title: string;
   imgSrc: string[];
   sciName: string;

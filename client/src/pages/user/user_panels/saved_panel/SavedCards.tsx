@@ -18,16 +18,19 @@ const SavedCards = ({ data, collections }: iSavedCards) => {
         lg: "repeat(3, 1fr)",
         xl: "repeat(4, 1fr)",
       }}
-      gap={'1rem'}
-      margin={'1rem'}
+      gap={"1rem"}
+      margin={"1rem"}
     >
       {data.map((tree, i) => (
         <SavedTreeCard
-        key={i}
-          id={ tree.tree.id}
-          title={tree.tree.title}
-          imgSrc={tree.tree.imgSrc}
-          sciName={tree.tree.sciName}
+          key={i}
+          id={tree._id._id}
+          title={'Title placeholder'}
+          imgSrc={['placeholder']}
+          sciName={'sciName Placeholder'}
+          // title={tree.tree.title}
+          // imgSrc={tree.tree.imgSrc}
+          // sciName={tree.tree.sciName}
           collections={collections}
         />
       ))}

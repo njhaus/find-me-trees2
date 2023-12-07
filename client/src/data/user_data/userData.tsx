@@ -27,17 +27,17 @@ export const initialUserData: iUserData = {
 
 
 export interface iUserSaved {
-  _id: string;
+  _id: iTreeData;
   collections: string[];
 }
 
 export interface iUserFound {
-  _id: string;
+  _id: iTreeData;
   location: iLocationData;
 }
 
 export interface iUserFavorites {
-  _id: string;
+  _id: iTreeData;
   notes: String
 }
 
