@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import {
     TabPanel,
@@ -15,16 +15,19 @@ import { iUserSaved, iUserData } from "../../../data/user_data/userData";
 interface iSavedPanel {
     data: iUserSaved[];
   collections: string[];
-  updateUser: (dataType: keyof iUserData, data: any) => void
 }
 
-const SavedPanel = ({ data, collections, updateUser }: iSavedPanel) => {
+const SavedPanel = ({ data, collections}: iSavedPanel) => {
     
     const [currentCollection, setCurrentCollection] = useState('all');
 
     const handleCollection = (collection: string) => {
         setCurrentCollection(collection);
     }
+  
+  useEffect(() => {
+    setCurrentCollection('all');
+    }, [collections])
 
     return (
       <TabPanel as={"article"} bg={"teal.200"}>
@@ -37,14 +40,14 @@ const SavedPanel = ({ data, collections, updateUser }: iSavedPanel) => {
             />
             <AddCollection
               collections={collections}
-              updateCollections={updateUser}
             />
           </Flex>
         </Flex>
         <Flex>
           <SavedCards
             data={data}
-            collections = {collections}
+            collections={collections}
+            currentCollection = {currentCollection}
           />
         </Flex>
       </TabPanel>

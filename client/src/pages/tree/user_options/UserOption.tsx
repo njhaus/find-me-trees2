@@ -57,11 +57,7 @@ const UserOption = ({ text, successText, icon, id, userDataKey, dataFormat }: iU
   // ._id._id is the tree id stored in the user, then the actual id of the tree in the populated tree data. I want to change this, but when I tried it broke everything, so I will need to come back to it.
   useEffect(() => {
     const userKeyData = userData[userDataKey];
-    console.log("USER KEY DATA");
-    console.log(userKeyData);
     if (Array.isArray(userKeyData)) {
-      console.log("IS IT TRUE?");
-      console.log(userKeyData.some((item) => item._id._id === id));
       setBtnSlide(userKeyData.some((item) => item._id._id === id));
     } else {
       setBtnSlide(false);

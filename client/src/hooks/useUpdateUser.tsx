@@ -14,41 +14,44 @@ const useUpdateUser = () => {
   const [errMsg, setErrMsg] = useState('');
   const [isLoading, setIsLoading] = useState('');
 
-  const handleUpdateUser = (dataType: keyof iUserData, data: any) => {
+  const handleUpdateUser = async(dataType: keyof iUserData, data: any) => {
     // Hold previos user data in case of save error
     const prevUserData = userData;
-
+    console.log("AUTH IS NOW:")
+    console.log(auth);
     // Update userData for saving and User Interface
     const updatedUserData = { ...userData, [dataType]: data };
     setUserData(updatedUserData);
 
     // Optimistic update: set auth data to user data (This includes the accessToken which hasn't changed.)
     setAuth(updatedUserData);
+    try {
+      const res = await apiPatch("user/update", updatedUserData);
 
-    apiPatch("user/update", updatedUserData)
-      .then((res) => {
-        if (res.code) {
-          console.log("ERROR updating user in useUpdateUser");
-          console.log(res.message);
-          // On error, reset data to previous user data and log out
-          setUserData(prevUserData);
-          setAuth(prevUserData);
-          logout();
-        } else {
-          console.log("NO ERROR updating user in useUpdateUser!");
-          console.log(res);
-          // Officially set auth to response from server -- saved to server. 
-            setAuth(res);
-        }
-      })
-      .catch((err) => {
+      if (res.code) {
         console.log("ERROR updating user in useUpdateUser");
-        console.log(err);
+        console.log(res.message);
         // On error, reset data to previous user data and log out
         setUserData(prevUserData);
         setAuth(prevUserData);
         logout();
-      });
+        // return prevUserData;
+      } else {
+        console.log("NO ERROR updating user in useUpdateUser!");
+        console.log(res);
+        // Officially set auth to response from server -- saved to server.
+        setAuth(res);
+        // return updatedUserData;
+      }
+    } catch (err) {
+      console.log("ERROR updating user in useUpdateUser");
+      console.log(err);
+      // On error, reset data to previous user data and log out
+      setUserData(prevUserData);
+      setAuth(prevUserData);
+      logout();
+      // return updatedUserData;
+    }
   };
     
     

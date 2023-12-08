@@ -20,13 +20,16 @@ import { Link } from "react-router-dom";
 import { useImg } from "../../../../hooks/useImg";
 import AddToColBtn from "./saved_tree_card/AddToColBtn";
 import RemoveBtn from "./saved_tree_card/RemoveBtn";
+import RemoveFromColButton from "./saved_tree_card/RemoveFromColButton";
 
 interface iSavedTreeCard {
   id: string;
   title: string;
   imgSrc: string[];
   sciName: string;
-    collections: string[];
+  collections: string[];
+  treeCollections: string[];
+  currentCollection: string;
 }
 
 const SavedTreeCard = ({
@@ -34,20 +37,12 @@ const SavedTreeCard = ({
   title,
   imgSrc,
   sciName,
-  collections
+  treeCollections,
+  collections,
+  currentCollection
 }: iSavedTreeCard) => {
-    const imageSource = useImg(imgSrc[0]);
-
-
-  //  const handleAddToCol = (collection: string) => {
-  //    console.log('add' + title, collection);
-  //  };
+    const imageSource = imgSrc[0];
   
-  const handleRemove = () => {
-    console.log('remove' + title)
-  }
-
-
   return (
     <Card maxW="sm" w="100%" align={"center"}>
       <CardBody>
@@ -67,12 +62,19 @@ const SavedTreeCard = ({
               <Link to={`/tree/${id}`}>View {title}</Link>
             </Button>
           </Flex>
-            <Flex width={"100%"} direction={'row'} justify={'space-evenly'} flexWrap={'wrap'} gap={'0.5rem'}>
-            <AddToColBtn collections={collections}
-              id={id}
-                          // onAdd={handleAddToCol}
-                      />
-            <RemoveBtn title={title} onRemove={ handleRemove} />
+          <Flex
+            width={"100%"}
+            direction={"row"}
+            justify={"space-evenly"}
+            flexWrap={"wrap"}
+            gap={"0.5rem"}
+          >
+            {!treeCollections.includes(currentCollection) ? (
+              <AddToColBtn collections={collections} id={id} />
+            ) : (
+              <RemoveFromColButton collection={currentCollection} id={id} />
+            )}
+            <RemoveBtn title={title} id={id} dataKey={'saved'} />
           </Flex>
         </Flex>
       </CardFooter>

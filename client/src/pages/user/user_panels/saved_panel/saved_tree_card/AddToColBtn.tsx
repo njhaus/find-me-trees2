@@ -13,6 +13,7 @@ import {
   Button,
   useDisclosure,
   Text,
+  Box
 } from "@chakra-ui/react";
 
 import RadioInput from "../../../../../components/inputs/BrowseRadioInput";
@@ -28,10 +29,12 @@ interface iAddToColBtn {
 const AddToColBtn = ({
   collections,
   id,
-  // onAdd
 }: iAddToColBtn) => {
   const { userData, handleUpdateUser } = useUpdateUser();
   const [selectedCol, setSelectedCol] = useState("none");
+  const currentTree = userData.saved.find((tree) => tree._id._id === id);
+
+  const collectionsTreeIsIn = currentTree?.collections;
 
   const { onOpen, onClose, isOpen } = useDisclosure();
   const addRef = useRef(null);
@@ -41,17 +44,18 @@ const AddToColBtn = ({
   };
 
   const handleAddToCol = (collection: string) => {
-    const updatedTree = userData.saved.find(tree => tree._id._id === id);
-    if (updatedTree) {
-      updatedTree?.collections.push(collection);
-      // remove old version of tree
-      const filteredKey = userData.saved.filter(tree => !(tree._id._id === id))
-      // Put new version in
-      const updatedKey = [...filteredKey, updatedTree];
-      console.log('second try??')
-      console.log(updatedTree);
-      console.log(updatedKey);
-       handleUpdateUser('saved', updatedKey);
+    if (currentTree) {
+      // Only push collection if it doesn't already exist
+      if (!currentTree.collections.includes(collection)) {
+        currentTree?.collections.push(collection);
+        // remove old version of tree
+        const filteredKey = userData.saved.filter(
+          (tree) => !(tree._id._id === id)
+        );
+        // Put new version in
+        const updatedKey = [...filteredKey, currentTree];
+        handleUpdateUser("saved", updatedKey);
+      }
     }
    };
 
@@ -65,22 +69,34 @@ const AddToColBtn = ({
       closeOnBlur={false}
     >
       <PopoverTrigger>
-        <Button>Add to collection</Button>
+        <Button>Add to a collection</Button>
       </PopoverTrigger>
       <PopoverContent>
         <PopoverArrow />
         <PopoverCloseButton />
         <PopoverBody>
-          <Text>Choose a Collection: </Text>
-          <form>
-            <RadioInput
-              formVal={""}
-              label={""}
-              values={collections}
-              formName={"addToCollection"}
-              onChange={handleSelectCol}
-            />
-          </form>
+          <Box>
+            <Text>{currentTree?._id.title} is in the collections:</Text>
+            <ul>
+              {collections.map(
+                (col) => collectionsTreeIsIn?.includes(col) && <li key={col }>{col}</li>
+              )}
+            </ul>
+          </Box>
+          <Box>
+            <Text>Add {currentTree?._id.title} to collection:</Text>
+            <form>
+              <RadioInput
+                formVal={""}
+                label={""}
+                values={collections.filter(
+                  (col) => !collectionsTreeIsIn?.includes(col)
+                )}
+                formName={"addToCollection"}
+                onChange={handleSelectCol}
+              />
+            </form>
+          </Box>
         </PopoverBody>
         <PopoverFooter>
           <Button

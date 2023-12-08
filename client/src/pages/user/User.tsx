@@ -90,12 +90,11 @@ const User = () => {
             <SavedPanel
               data={userData.saved}
               collections={userData.collections}
-              updateUser={handleUpdateUser}
             />
-            {/* <FoundPanel
+            <FoundPanel
               found={userData.found}
             />
-            <FavoritesPanel
+            {/* <FavoritesPanel
               favorites={userData.favorites}
             /> */}
           </TabPanels>

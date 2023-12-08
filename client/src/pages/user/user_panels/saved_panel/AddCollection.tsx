@@ -22,13 +22,14 @@ import {
 } from "@chakra-ui/react";
 import { iUserData } from "../../../../data/user_data/userData";
 import GenTextInput from "../../../../components/inputs/GenTextInput";
+import useUpdateUser from "../../../../hooks/useUpdateUser";
+import useAuth from "../../../../hooks/useAuth";
 
 interface iAddCollection {
   collections: string[];
-  updateCollections: (dataType: keyof iUserData, data: any) => void;
 }
 
-interface iAmSoSickOfTypescript {
+interface iEditCollections {
   addCollection: string;
   deleteCollections: string[];
 }
@@ -38,12 +39,13 @@ const initialEditCollections = {
   deleteCollections: [],
 };
 
-const AddCollection = ({ collections, updateCollections }: iAddCollection) => {
+const AddCollection = ({ collections }: iAddCollection) => {
 
-  const [editCollections, setEditCollections] = useState<iAmSoSickOfTypescript>(initialEditCollections);
+  const [editCollections, setEditCollections] = useState<iEditCollections>(initialEditCollections);
+
+  const { userData, handleUpdateUser } = useUpdateUser();
 
   const handleAddCollection = (val: string) => {
-    console.log(editCollections)
     if (!collections.includes(val) && val !== '') {
       setEditCollections({ ...editCollections, addCollection: val })
     }
@@ -60,17 +62,31 @@ const AddCollection = ({ collections, updateCollections }: iAddCollection) => {
     setEditCollections({ ...editCollections, deleteCollections: deleteCols });
   } 
 
-  // This will probably need to be moved into an effect
-  const handleSubmit = (e: FormEvent) => {
+  //I had to move the second call into an effect. There is probably a better way to make 2 calls since the collections need to be updated, then the trees (must delete the deleted collection) beacuse this won't actually update the tree array until the next render...But the user will never notice, so this works for now.
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    // Set Update collections
     const newCollections =
       collections
         .filter(col => !editCollections.deleteCollections.includes(col));
-      if(editCollections.addCollection !== '') newCollections.push(editCollections.addCollection);
-    console.log('newcollections');
-    console.log(newCollections);
-    updateCollections('collections', newCollections);
+    if (editCollections.addCollection !== '') newCollections.push(editCollections.addCollection);
+        handleUpdateUser("collections", newCollections);
+      // Handle errors if any during the update process
   }
+
+  useEffect(() => {
+    console.log('effect Running');
+     // Set update trees
+        const updateSavedTrees = userData.saved.map((tree) => ({
+          ...tree,
+          collections: tree.collections.filter((col) =>
+            collections.includes(col)
+          ),
+        }));
+        // Second update operation (Delete collections from trees that were in the collection)
+        handleUpdateUser("saved", updateSavedTrees);
+  }, [])
+
 
   const handleClose = () => {
     onClose();
