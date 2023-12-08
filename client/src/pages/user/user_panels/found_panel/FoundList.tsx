@@ -14,18 +14,19 @@ const FoundList = ({ data, location }: iFoundList) => {
   return (
     <Grid
       templateColumns={{
-        base: '1fr',
-        md: "repeat(2, 1fr)",
+        base: "1fr",
+        sm: "repeat(2, 1fr)",
+        md: "repeat(3, 1fr)",
         lg: "1fr",
       }}
     >
       {data.map((tree, i) => (
         <FoundCard
           key={i}
-          id={tree.tree.id}
-          title={tree.tree.title}
-          imgSrc={tree.tree.imgSrc}
-          sciName={tree.tree.sciName}
+          id={tree._id._id}
+          title={tree._id.title}
+          imgSrc={tree._id.imgSrc}
+          sciName={tree._id.sciName}
         />
       ))}
     </Grid>

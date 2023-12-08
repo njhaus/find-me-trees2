@@ -1,6 +1,7 @@
-import { Image, Card, Stack, CardBody, CardFooter, Text, Heading, Button } from "@chakra-ui/react";
+import { Image, Card, Stack, CardBody, CardFooter, Text, Heading, Button, Flex } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
+import RemoveBtn from "../saved_panel/saved_tree_card/RemoveBtn";
 
 interface iFoundCard {
   id: string;
@@ -11,14 +12,10 @@ interface iFoundCard {
 
 const FoundCard = ({id, title, imgSrc, sciName}: iFoundCard) => {
   return (
-    <Card
-      direction={{ base: "column", sm: "row" }}
-      overflow="hidden"
-      variant="outline"
-    >
+    <Card direction={{ base: "row" }} overflow="hidden" variant="outline">
       <Image
         objectFit="cover"
-        maxW={{ base: "100%", sm: "200px" }}
+        maxW={"5rem"}
         src={imgSrc[0]}
         alt={`Photo of ${title}`}
       />
@@ -31,9 +28,12 @@ const FoundCard = ({id, title, imgSrc, sciName}: iFoundCard) => {
         </CardBody>
 
         <CardFooter>
-          <Button variant="solid" colorScheme="blue">
-            <Link to={`/tree/${id}`}>View {title}</Link>
-          </Button>
+          <Flex direction={'column'}>
+            <Button variant="solid" colorScheme="blue">
+              <Link to={`/tree/${id}`}>View {title}</Link>
+            </Button>
+            <RemoveBtn title={title} id={id} dataKey={"found"} />
+          </Flex>
         </CardFooter>
       </Stack>
     </Card>
