@@ -1,4 +1,4 @@
-import { Grid } from "@chakra-ui/react";
+import { Grid, Text } from "@chakra-ui/react";
 
 import FavoritesCard from "./FavoritesCard";
 import { iUserFavorites } from "../../../../data/user_data/userData";
@@ -17,15 +17,19 @@ const FavoritesList = ({ data }: iFavoritesList) => {
       }}
       gap={"1rem"}
     >
-      {data.map((tree, i) => (
+      {data?.length > 0 ?
+        data.map((tree, i) => (
         <FavoritesCard
           key={i}
-          id={tree.tree.id}
-          title={tree.tree.title}
-          imgSrc={tree.tree.imgSrc}
-          sciName={tree.tree.sciName}
+          id={tree._id._id}
+          title={tree._id.title}
+          imgSrc={tree._id.imgSrc}
+          sciName={tree._id.sciName}
         />
-      ))}
+        ))
+        :
+        <Text>You have not saved any favorites yet.</Text>
+      }
     </Grid>
   );
 };

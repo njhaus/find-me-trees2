@@ -12,6 +12,7 @@ import {
 import { BsHeartFill } from "react-icons/bs";
 
 import { Link } from "react-router-dom";
+import RemoveBtn from "../saved_panel/saved_tree_card/RemoveBtn";
 
 interface iFavoritesCard {
   id: string;
@@ -45,9 +46,16 @@ const FavoritesCard = ({id, title, imgSrc, sciName}: iFavoritesCard) => {
         </CardBody>
 
         <CardFooter>
-          <Button variant="solid" colorScheme="blue">
-            <Link to={`/tree/${id}`}>View {title}</Link>
-          </Button>
+          <Flex direction={'column'}>
+            <Button variant="solid" colorScheme="blue">
+              <Link to={`/tree/${id}`}>View {title}</Link>
+            </Button>
+            <RemoveBtn
+              title={title}
+              id={id}
+              dataKey={'favorites'}
+              />
+            </Flex>
         </CardFooter>
       </Stack>
     </Card>

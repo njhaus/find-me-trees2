@@ -13,7 +13,7 @@ interface iFavoritesPanel {
 const FavoritesPanel = ({ favorites }: iFavoritesPanel) => {
   const [playSlideshow, setPlaySlideshow] = useState(false);
 
-  const imgs = favorites.map((tree, i) => tree.tree.imgSrc[0]);
+  const imgs = favorites.map((tree, i) => tree._id.imgSrc[0]);
 
   return (
     <TabPanel as={"article"} bg={"blue.200"} overflow={"hidden"} padding={0}>

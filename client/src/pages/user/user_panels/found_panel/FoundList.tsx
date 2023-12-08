@@ -1,4 +1,4 @@
-import { Grid } from "@chakra-ui/react";
+import { Grid, Text } from "@chakra-ui/react";
 
 import { iUserFound } from "../../../../data/user_data/userData";
 import FoundCard from "./FoundCard";
@@ -20,7 +20,8 @@ const FoundList = ({ data, location }: iFoundList) => {
         lg: "1fr",
       }}
     >
-      {data.map((tree, i) => (
+      {data?.length > 0 ?
+        data.map((tree, i) => (
         <FoundCard
           key={i}
           id={tree._id._id}
@@ -28,7 +29,10 @@ const FoundList = ({ data, location }: iFoundList) => {
           imgSrc={tree._id.imgSrc}
           sciName={tree._id.sciName}
         />
-      ))}
+        ))
+        :
+        <Text>You have not found any trees yet.</Text>
+      }
     </Grid>
   );
 }

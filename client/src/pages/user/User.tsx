@@ -94,9 +94,9 @@ const User = () => {
             <FoundPanel
               found={userData.found}
             />
-            {/* <FavoritesPanel
+            <FavoritesPanel
               favorites={userData.favorites}
-            /> */}
+            />
           </TabPanels>
         </Tabs>
       </Flex>
