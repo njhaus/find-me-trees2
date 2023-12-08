@@ -19,18 +19,17 @@ interface iUserOption {
 }
 
 const UserOption = ({ text, successText, icon, id, userDataKey, dataFormat }: iUserOption) => {
-  
   const { userData, handleUpdateUser } = useUpdateUser();
   // Object to hold data that will be put into userData if updated
-  const optionData = { ...dataFormat, _id: id }
-  
+  const optionData = { ...dataFormat, _id: id };
+
   // button slides to success message after clicked (Useslide hook does this)
   const [btnSlide, setBtnSlide] = useState(false);
   const sliderRef = useRef<HTMLDivElement | null>(null);
   useSlide(btnSlide, sliderRef);
 
   // Show 'log in! message when button clicked if not logged in.
-  const [noUserMsg, setNoUserMsg] = useState(false)
+  const [noUserMsg, setNoUserMsg] = useState(false);
 
   const userExists =
     userData &&
@@ -45,31 +44,29 @@ const UserOption = ({ text, successText, icon, id, userDataKey, dataFormat }: iU
   const handleUpdate = (key: keyof iUserData) => {
     if (userExists) {
       if (btnSlide !== true) {
-        setBtnSlide(true)
-        const updatedKey = [...userData[key], optionData]
+        setBtnSlide(true);
+        const updatedKey = [...userData[key], optionData];
         handleUpdateUser(key, updatedKey);
-      } 
-    }
-    else {
+      }
+    } else {
       setNoUserMsg(!noUserMsg);
-
     }
   };
-  
+
   // Need to update userData AFTER it has been loaded and set buttons accordingly
+  // ._id._id is the tree id stored in the user, then the actual id of the tree in the populated tree data. I want to change this, but when I tried it broke everything, so I will need to come back to it.
   useEffect(() => {
     const userKeyData = userData[userDataKey];
     console.log("USER KEY DATA");
     console.log(userKeyData);
     if (Array.isArray(userKeyData)) {
-      console.log("IS IT TRUE?")
+      console.log("IS IT TRUE?");
       console.log(userKeyData.some((item) => item._id._id === id));
       setBtnSlide(userKeyData.some((item) => item._id._id === id));
-    }
-    else {
+    } else {
       setBtnSlide(false);
     }
-  }, [userData])
+  }, [userData]);
 
   return (
     <>
@@ -87,10 +84,10 @@ const UserOption = ({ text, successText, icon, id, userDataKey, dataFormat }: iU
         </Flex>
       </Flex>
       {noUserMsg && (
-        <Flex position={'absolute'}>
+        <Flex position={"absolute"}>
           <Text>
-            Log in to add this tree to your {userDataKey.replace(/\b(\w+?)s\b/g, "$1")}{" "}
-            trees!
+            Log in to add this tree to your{" "}
+            {userDataKey.replace(/\b(\w+?)s\b/g, "$1")} trees!
           </Text>
           <CloseButton onClick={() => setNoUserMsg(false)}></CloseButton>
         </Flex>

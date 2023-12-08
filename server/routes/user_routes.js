@@ -29,9 +29,9 @@ router.patch('/update', verifyAccessToken, async (req, res) => {
           },
           { new: true }
         )
-          .populate("saved.tree")
-          .populate("found.tree")
-          .populate("favorites.tree");
+          .populate("saved._id")
+          .populate("found._id")
+          .populate("favorites._id");
         return res.send({
           username: updatedUser.username,
           email: updatedUser.email,

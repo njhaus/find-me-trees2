@@ -25,12 +25,9 @@ const SavedCards = ({ data, collections }: iSavedCards) => {
         <SavedTreeCard
           key={i}
           id={tree._id._id}
-          title={'Title placeholder'}
-          imgSrc={['placeholder']}
-          sciName={'sciName Placeholder'}
-          // title={tree.tree.title}
-          // imgSrc={tree.tree.imgSrc}
-          // sciName={tree.tree.sciName}
+          title={tree._id.title}
+          imgSrc={tree._id.imgSrc}
+          sciName={tree._id.sciName}
           collections={collections}
         />
       ))}

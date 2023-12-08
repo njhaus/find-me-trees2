@@ -39,9 +39,9 @@ const SavedTreeCard = ({
     const imageSource = useImg(imgSrc[0]);
 
 
-   const handleAddToCol = (collection: string) => {
-     console.log('add' + title, collection);
-   };
+  //  const handleAddToCol = (collection: string) => {
+  //    console.log('add' + title, collection);
+  //  };
   
   const handleRemove = () => {
     console.log('remove' + title)
@@ -68,8 +68,9 @@ const SavedTreeCard = ({
             </Button>
           </Flex>
             <Flex width={"100%"} direction={'row'} justify={'space-evenly'} flexWrap={'wrap'} gap={'0.5rem'}>
-                      <AddToColBtn collections={collections}
-                          onAdd={handleAddToCol}
+            <AddToColBtn collections={collections}
+              id={id}
+                          // onAdd={handleAddToCol}
                       />
             <RemoveBtn title={title} onRemove={ handleRemove} />
           </Flex>

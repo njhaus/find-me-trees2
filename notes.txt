@@ -18,5 +18,22 @@ Problems:
 
 2. useAuth / authContext : temporary accesstoken does not expire on client side. It feels pointless. (refresh token DOES expire, so that's good and is the more important of the two)
 
+
 Possible things to do:
 1. Filter Form (pages/browse/SearchFilters) Needs to be validated?
+
+2. I hate the _id name in the User model for the tree id. It causes stupid object nesting issues such as 'item._id._id'. I want to change it, but it leads to so many other changes that just don't work.
+EXAMPLE: (in UserOption)
+// ._id._id is the tree id stored in the user, then the actual id of the tree in the populated tree data. I want to change this, but when I tried it broke everything, so I will need to come back to it.
+  useEffect(() => {
+    const userKeyData = userData[userDataKey];
+    console.log("USER KEY DATA");
+    console.log(userKeyData);
+    if (Array.isArray(userKeyData)) {
+      console.log("IS IT TRUE?");
+      console.log(userKeyData.some((item) => item._id._id === id));
+      setBtnSlide(userKeyData.some((item) => item._id._id === id));
+    } else {
+      setBtnSlide(false);
+    }
+  }, [userData]);
