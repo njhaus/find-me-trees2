@@ -19,7 +19,7 @@ interface iNavDialog {
 const NavDialog = ({ message }: iNavDialog) => {
     
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const cancelRef = useRef(null);
+    const closeRef = useRef(null);
 
     useEffect(() => {
         if (message) {
@@ -35,7 +35,7 @@ const NavDialog = ({ message }: iNavDialog) => {
 
         <AlertDialog
           isOpen={isOpen}
-          leastDestructiveRef={cancelRef}
+          leastDestructiveRef={closeRef}
           onClose={onClose}
         >
           <AlertDialogOverlay>
@@ -44,15 +44,15 @@ const NavDialog = ({ message }: iNavDialog) => {
                 Delete Customer
               </AlertDialogHeader> */}
 
-              <AlertDialogBody>
-                {message}
-              </AlertDialogBody>
+              <AlertDialogBody>{message}</AlertDialogBody>
 
               <AlertDialogFooter>
-                <Button ref={cancelRef} onClick={onClose}>
-                  Cancel
-                </Button>
-                <Button colorScheme="red" onClick={onClose} ml={3}>
+                <Button
+                  colorScheme="red"
+                  ref={closeRef}
+                   onClick={onClose
+    }              ml={3
+                }>
                   Close
                 </Button>
               </AlertDialogFooter>

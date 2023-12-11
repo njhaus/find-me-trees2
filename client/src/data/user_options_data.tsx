@@ -42,6 +42,7 @@ export const options: {
   dataFormat: DataFormat;
   color: string;
   icon: React.ReactElement;
+  hoverMsg?: string;
 }[] = [
   {
     text: "Save",
@@ -78,5 +79,6 @@ export const options: {
     },
     color: "red.100",
     icon: <BsSearch />,
+    hoverMsg: 'Enable location services or enter a location to save your find!'
   },
 ];

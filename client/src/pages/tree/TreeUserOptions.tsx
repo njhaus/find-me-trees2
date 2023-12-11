@@ -29,6 +29,7 @@ const TreeUserOptions = ({ id }: iTreeUserOptions) => {
             id={id}
             userDataKey={op.userDataKey as userOptionsKey}
             dataFormat={op.dataFormat}
+            hoverMsg={op.hoverMsg}
           />
         </Box>
       ))}

@@ -1,11 +1,18 @@
 import { useState, useEffect, useRef } from 'react';
 
-import { Flex, Button, Box, Text, CloseButton } from '@chakra-ui/react'
+import {
+  Flex,
+  Button,
+  Box,
+  Text,
+  CloseButton,
+} from "@chakra-ui/react";
 import { CheckIcon } from '@chakra-ui/icons';
 import { iUserData } from '../../../data/user_data/userData';
 import useUpdateUser from '../../../hooks/useUpdateUser';
 import { DataFormat, userOptionsKey } from '../../../data/user_options_data';
 import useSlide from '../../../hooks/ui_hooks/useSlide';
+import OptionPopup from './OptionPopup';
 
 
 interface iUserOption {
@@ -16,9 +23,10 @@ interface iUserOption {
   id: string;
   userDataKey: userOptionsKey;
   dataFormat: DataFormat;
+  hoverMsg?: string
 }
 
-const UserOption = ({ text, successText, icon, id, userDataKey, dataFormat }: iUserOption) => {
+const UserOption = ({ text, successText, icon, id, userDataKey, dataFormat, hoverMsg }: iUserOption) => {
   const { userData, handleUpdateUser } = useUpdateUser();
   // Object to hold data that will be put into userData if updated
   const optionData = { ...dataFormat, _id: id };
@@ -31,6 +39,9 @@ const UserOption = ({ text, successText, icon, id, userDataKey, dataFormat }: iU
   // Show 'log in! message when button clicked if not logged in.
   const [noUserMsg, setNoUserMsg] = useState(false);
 
+  // Show popup if popup exists
+  const [showPopup, setShowPopup] = useState(false);
+
   const userExists =
     userData &&
     userData.username &&
@@ -41,11 +52,11 @@ const UserOption = ({ text, successText, icon, id, userDataKey, dataFormat }: iU
     userData.saved &&
     userData.accessToken;
 
-  const handleUpdate = (key: keyof iUserData) => {
+  const handleUpdate = (key: keyof iUserData, newData: DataFormat) => {
     if (userExists) {
       if (btnSlide !== true) {
         setBtnSlide(true);
-        const updatedKey = [...userData[key], optionData];
+        const updatedKey = [...userData[key], newData];
         handleUpdateUser(key, updatedKey);
       }
     } else {
@@ -68,9 +79,23 @@ const UserOption = ({ text, successText, icon, id, userDataKey, dataFormat }: iU
     <>
       <Flex width={"100%"} overflowX={"hidden"} ref={sliderRef}>
         <Flex minWidth={"100%"}>
-          <Button width={"100%"} onClick={() => handleUpdate(userDataKey)}>
-            {text}
-          </Button>
+          {hoverMsg ? (
+            <Box width={'100%'}>
+              <OptionPopup
+                text={text}
+                handleUpdate={handleUpdate}
+                hoverMsg={hoverMsg}
+                userDataKey={userDataKey}
+                userData={userData}
+                dataFormat={dataFormat}
+                id={id}
+              />
+            </Box>
+          ) : (
+            <Button width={"100%"} onClick={() => handleUpdate(userDataKey, optionData)}>
+              {text}
+            </Button>
+          )}
         </Flex>
         <Flex minWidth={"100%"}>
           <Flex width={"100%"}>
