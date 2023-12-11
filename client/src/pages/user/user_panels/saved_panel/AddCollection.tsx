@@ -122,7 +122,7 @@ const AddCollection = ({ collections }: iAddCollection) => {
                 formVal={editCollections.addCollection}
                 label="New Collection:"
                 formName="new-collection"
-                onChange={handleAddCollection}
+                onSubmit={handleAddCollection}
                 
                 ref={initialFocusRef}
               />

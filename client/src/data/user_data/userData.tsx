@@ -38,7 +38,7 @@ export interface iUserFound {
 
 export interface iUserFavorites {
   _id: iTreeData;
-  notes: String
+  notes: string
 }
 
 export const tempUserData = {

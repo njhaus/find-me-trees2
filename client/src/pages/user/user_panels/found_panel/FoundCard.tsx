@@ -2,15 +2,17 @@ import { Image, Card, Stack, CardBody, CardFooter, Text, Heading, Button, Flex }
 
 import { Link } from "react-router-dom";
 import RemoveBtn from "../saved_panel/saved_tree_card/RemoveBtn";
+import { iLocationData } from "../../../../data/user_data/userData";
 
 interface iFoundCard {
   id: string;
   title: string;
   imgSrc: string[];
   sciName: string;
+  locationFound: iLocationData
 }
 
-const FoundCard = ({id, title, imgSrc, sciName}: iFoundCard) => {
+const FoundCard = ({id, title, imgSrc, sciName, locationFound}: iFoundCard) => {
   return (
     <Card direction={{ base: "row" }} overflow="hidden" variant="outline">
       <Image
@@ -25,6 +27,7 @@ const FoundCard = ({id, title, imgSrc, sciName}: iFoundCard) => {
           <Heading size="md">{title}</Heading>
 
           <Text py="2">{sciName}</Text>
+          {/* <Text>Found at { locationFound.coordinates[0].toString() + ', ' + locationFound.coordinates[1].toString()}</Text> */}
         </CardBody>
 
         <CardFooter>

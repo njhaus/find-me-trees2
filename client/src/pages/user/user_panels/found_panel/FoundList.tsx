@@ -6,7 +6,7 @@ import { iTreeData } from "../../../../data/tree_data";
 
 interface iFoundList {
   data: iUserFound[];
-  location: string;
+  location: [number, number];
 }
 
 const FoundList = ({ data, location }: iFoundList) => {
@@ -27,7 +27,8 @@ const FoundList = ({ data, location }: iFoundList) => {
           id={tree._id._id}
           title={tree._id.title}
           imgSrc={tree._id.imgSrc}
-          sciName={tree._id.sciName}
+            sciName={tree._id.sciName}
+            locationFound={tree.location}
         />
         ))
         :

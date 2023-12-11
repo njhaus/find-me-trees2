@@ -24,7 +24,8 @@ const FavoritesList = ({ data }: iFavoritesList) => {
           id={tree._id._id}
           title={tree._id.title}
           imgSrc={tree._id.imgSrc}
-          sciName={tree._id.sciName}
+            sciName={tree._id.sciName}
+            data={data}
         />
         ))
         :

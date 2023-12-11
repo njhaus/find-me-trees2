@@ -6,14 +6,14 @@ interface TextInputProps {
   formVal: string | undefined;
   label: string;
   formName: string;
-  onChange: (...args: any[]) => void;
+  onSubmit: (...args: any[]) => void;
   helperText?: string;
 }
 
 
 const GenTextInput = forwardRef<HTMLInputElement, TextInputProps>(
   (
-    { formVal, label, formName, helperText, onChange }: TextInputProps,
+    { formVal, label, formName, helperText, onSubmit }: TextInputProps,
     ref
   ) =>
   {
@@ -30,11 +30,11 @@ const GenTextInput = forwardRef<HTMLInputElement, TextInputProps>(
         ref={ref}
         id={formName}
         value={inputVal}
-        placeholder="New Collection"
+        placeholder={formVal}
         onChange={(e) => {
             setInputVal(e.target.value);
         }}
-        onBlur={(e) => onChange(e.target.value)}
+        onBlur={(e) => onSubmit(e.target.value)}
         onClick={() => {
           setInputVal("");
         }}

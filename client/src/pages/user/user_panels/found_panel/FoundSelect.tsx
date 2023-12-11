@@ -3,7 +3,7 @@ import SelectInput from '../../../../components/inputs/SelectInput'
 import { states } from '../../../../data/browse_data/statesData';
 
 interface iFoundSelect {
-    onSelect: (form: null, state: string) => void;
+  onSelect: (form: null, location: [number, number]) => void;
 }
 
 const FoundSelect = ({onSelect}: iFoundSelect) => {

@@ -13,15 +13,18 @@ import { BsHeartFill } from "react-icons/bs";
 
 import { Link } from "react-router-dom";
 import RemoveBtn from "../saved_panel/saved_tree_card/RemoveBtn";
+import FavoriteNotes from "./FavoriteNotes";
+import { iUserFavorites } from "../../../../data/user_data/userData";
 
 interface iFavoritesCard {
   id: string;
   title: string;
   imgSrc: string[];
   sciName: string;
+  data: iUserFavorites[];
 }
 
-const FavoritesCard = ({id, title, imgSrc, sciName}: iFavoritesCard) => {
+const FavoritesCard = ({id, title, imgSrc, sciName, data}: iFavoritesCard) => {
   return (
     <Card
       direction={{ base: "column", sm: "row" }}
@@ -43,6 +46,10 @@ const FavoritesCard = ({id, title, imgSrc, sciName}: iFavoritesCard) => {
           <Heading size="md">{title}</Heading>
 
           <Text py="2">{sciName}</Text>
+          <FavoriteNotes
+            data={data}
+            id={id}
+          />
         </CardBody>
 
         <CardFooter>
