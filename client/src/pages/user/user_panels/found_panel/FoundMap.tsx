@@ -20,9 +20,24 @@ const FoundMap = ({ data, onClick, location }: iFoundMap) => {
   
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const map = useRef<Map | null>(null);
-  const [zoom] = useState(5);
+  const [zoom] = useState(1);
   const [API_KEY] = useState("2XZKg54dnt7JS7AZhe7J");
   const currentLocation = location;
+  const mapData = {
+    type: "FeatureCollection",
+    features: data.map((found) => ({
+      type: "feature",
+      properties: {
+        id: found._id._id,
+        title: found._id.title,
+        imgSrc: found._id.imgSrc[0],
+      },
+      geometry: {
+        type: "Point",
+        coordinates: found.location.coordinates,
+      },
+    })),
+  };
 
   useEffect(() => {
     if (mapContainer.current && location) {
@@ -37,11 +52,11 @@ const FoundMap = ({ data, onClick, location }: iFoundMap) => {
           // Add a new source from our GeoJSON data and
           // set the 'cluster' option to true. GL-JS will
           // add the point_count property to your source data.
-          map.current.addSource("earthquakes", {
+          map.current.addSource("trees", {
             type: "geojson",
             // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
             // from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
-            data: "https://maplibre.org/maplibre-gl-js/docs/assets/earthquakes.geojson",
+            data: mapData,
             cluster: true,
             clusterMaxZoom: 14, // Max zoom to cluster points on
             clusterRadius: 50, // Radius of each cluster when clustering points (defaults to 50)
@@ -50,7 +65,7 @@ const FoundMap = ({ data, onClick, location }: iFoundMap) => {
           map.current.addLayer({
             id: "clusters",
             type: "circle",
-            source: "earthquakes",
+            source: "trees",
             filter: ["has", "point_count"],
             paint: {
               // Use step expressions (https://maplibre.org/maplibre-style-spec/#expressions-step)
@@ -82,7 +97,7 @@ const FoundMap = ({ data, onClick, location }: iFoundMap) => {
           map.current.addLayer({
             id: "cluster-count",
             type: "symbol",
-            source: "earthquakes",
+            source: "trees",
             filter: ["has", "point_count"],
             layout: {
               "text-field": "{point_count_abbreviated}",
@@ -94,7 +109,7 @@ const FoundMap = ({ data, onClick, location }: iFoundMap) => {
           map.current.addLayer({
             id: "unclustered-point",
             type: "circle",
-            source: "earthquakes",
+            source: "trees",
             filter: ["!", ["has", "point_count"]],
             paint: {
               "circle-color": "#11b4da",
@@ -112,7 +127,7 @@ const FoundMap = ({ data, onClick, location }: iFoundMap) => {
               });
               const clusterId = features[0].properties.cluster_id;
               if (map.current) {
-                const source = map.current.getSource("earthquakes");
+                const source = map.current.getSource("trees");
                 if (source) {
                   // @ts-ignore
                   source.getClusterExpansionZoom(clusterId, (err, zoom) => {
@@ -144,14 +159,11 @@ const FoundMap = ({ data, onClick, location }: iFoundMap) => {
             // @ts-ignore
             const coordinates = e.features[0].geometry.coordinates.slice();
             // @ts-ignore
-            const mag = e.features[0].properties.mag;
-            let tsunami;
-
-            if (1 < 3) {
-              tsunami = "yes";
-            } else {
-              tsunami = "no";
-            }
+            const title = e.features[0].properties.title;
+            // @ts-ignore
+            const imgSrc = e.features[0].properties.imgSrc;
+            // @ts-ignore
+            const id = e.features[0].properties.id;
 
             // Ensure that if the map is zoomed out such that
             // multiple copies of the feature are visible, the
@@ -159,12 +171,28 @@ const FoundMap = ({ data, onClick, location }: iFoundMap) => {
             while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
               coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
             }
+
+            // Create elements for popup
+            const popupContainer = document.createElement('div');
+            const popupTitle = document.createElement('h4');
+            popupTitle.textContent = title;
+            const popupImg = document.createElement('img');
+            popupImg.setAttribute('src', imgSrc)
+            const popupLink = document.createElement('a');
+            popupLink.textContent = `View ${title}`;
+            popupLink.setAttribute('href', `/tree/${id}`);
+
+            // Place popup elements in container
+            popupContainer.append(popupTitle);
+            popupContainer.append(popupImg);
+            popupContainer.append(popupLink);
+
             if (map.current) {
               new maplibregl.Popup()
                 .setLngLat(coordinates)
-                .setHTML(
-                  `magnitude: ${mag}<br>Was there a tsunami?: ${tsunami}`
-                )
+                .setHTML(`<h5>${title}</h5><br><a href="/tree/${id}">View${title}</a>`)
+                // Place popup container into popup
+                .setDOMContent(popupContainer)
                 .addTo(map.current);
             }
           });

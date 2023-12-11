@@ -30,7 +30,6 @@ const FoundPanel = ({ found }: iFoundPanel) => {
 
     function success(pos: GeolocationPosition) {
       const crd = pos.coords;
-      console.log([crd.longitude, crd.latitude]);
       setLocationFilter([crd.longitude, crd.latitude])
     }
 
