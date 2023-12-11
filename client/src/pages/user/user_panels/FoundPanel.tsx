@@ -19,6 +19,8 @@ const FoundPanel = ({ found }: iFoundPanel) => {
     const handleSelect = (form: null, location: [number, number]) => {
       setLocationFilter(location);
     };
+  
+  console.log(locationFilter);
     
   useEffect(() => {
     const options = {
@@ -66,11 +68,11 @@ const FoundPanel = ({ found }: iFoundPanel) => {
           minWidth={"32rem"}
           align={"center"}
         >
-          <FoundSelect onSelect={handleSelect} />
+          {/* <FoundSelect onSelect={() => handleSelect(null, [1, 2])} /> */}
           <FoundMap
             data={found}
             onClick={handleSelect}
-            location={[1, 2]}
+            location={locationFilter}
           />
         </Flex>
         <Flex

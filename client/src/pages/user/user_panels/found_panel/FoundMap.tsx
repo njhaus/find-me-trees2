@@ -6,6 +6,8 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import "../../styles/map.css";
 
 import { iUserFound } from "../../../../data/user_data/userData";
+import { current } from "immer";
+import { GiConsoleController } from "react-icons/gi";
 
 interface iFoundMap {
   data: iUserFound[];
@@ -15,18 +17,22 @@ interface iFoundMap {
 
 
 const FoundMap = ({ data, onClick, location }: iFoundMap) => {
+
+  console.log("LOCAITON")
+  console.log(location)
   
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const map = useRef<Map | null>(null);
   const [zoom] = useState(5);
   const [API_KEY] = useState("2XZKg54dnt7JS7AZhe7J");
+  const currentLocation = location;
 
   useEffect(() => {
-    if (mapContainer.current) {
+    if (mapContainer.current && location) {
       map.current = new maplibregl.Map({
         container: mapContainer.current,
         style: `https://api.maptiler.com/maps/streets-v2/style.json?key=${API_KEY}`,
-        center: [location[0], location[1]],
+        center: [currentLocation[0], currentLocation[1]],
         zoom: zoom,
       });
       map.current.on("load", () => {
@@ -172,12 +178,12 @@ const FoundMap = ({ data, onClick, location }: iFoundMap) => {
               : console.warn("Error setting mouse actions on popovers");
           });
           map.current.on("mouseleave", "clusters", () => {
-            map.current ? map.current.getCanvas().style.cursor = "": console.warn('Error setting mouse actions on popovers');
+            map.current ? map.current.getCanvas().style.cursor = "" : console.warn('Error setting mouse actions on popovers');
           });
         }
       });
     }
-  }, [API_KEY, zoom, location]);
+  }, [API_KEY, zoom, location[1], location[0]]);
 
   return (
       <div className="map-wrap">
