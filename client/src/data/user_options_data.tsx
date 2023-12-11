@@ -13,7 +13,7 @@ type DataFormatWithCollections = {
   _id: string;
   collections: string[];
   notes?: string;
-  location?: [number, number];
+  location?: GeoCode;
 };
 
 type DataFormatWithNotes = {

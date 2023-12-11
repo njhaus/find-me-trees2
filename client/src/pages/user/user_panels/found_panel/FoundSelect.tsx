@@ -8,9 +8,11 @@ interface iFoundSelect {
 
 const FoundSelect = ({onSelect}: iFoundSelect) => {
 
+// NEED TO REDO THIS COMPONENT
+
     return (
         <SelectInput
-          formVal={'foundStateSelect'}
+          formVal={location}
           label={"Select a state"}
           values={states}
           formName={"location"}

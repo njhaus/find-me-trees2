@@ -13,6 +13,7 @@ interface iFoundCard {
 }
 
 const FoundCard = ({id, title, imgSrc, sciName, locationFound}: iFoundCard) => {
+  
   return (
     <Card direction={{ base: "row" }} overflow="hidden" variant="outline">
       <Image

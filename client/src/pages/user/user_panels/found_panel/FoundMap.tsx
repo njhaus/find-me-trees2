@@ -17,9 +17,6 @@ interface iFoundMap {
 
 
 const FoundMap = ({ data, onClick, location }: iFoundMap) => {
-
-  console.log("LOCAITON")
-  console.log(location)
   
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const map = useRef<Map | null>(null);

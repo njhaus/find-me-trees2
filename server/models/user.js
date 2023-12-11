@@ -27,7 +27,7 @@ const UserSchema = new mongoose.Schema({
     }],
     found: [{
         _id: { type: mongoose.Schema.Types.ObjectId, ref: 'Tree' },
-        location: [GeoCodeSchema],
+        location: GeoCodeSchema,
     }],
     favorites: [{
         _id: { type: mongoose.Schema.Types.ObjectId, ref: 'Tree' },
