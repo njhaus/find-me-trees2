@@ -68,7 +68,7 @@ export const options: {
   },
   {
     text: "Found it",
-    successText: "Nice find!",
+    successText: "Nice",
     userDataKey: "found" as keyof iUserData,
     dataFormat: {
       _id: "",
@@ -79,6 +79,6 @@ export const options: {
     },
     color: "red.100",
     icon: <BsSearch />,
-    hoverMsg: 'Enable location services or enter a location to save your find!'
+    hoverMsg: 'Enable location services or use the map to save your find!'
   },
 ];
