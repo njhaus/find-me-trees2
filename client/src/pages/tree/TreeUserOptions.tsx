@@ -20,7 +20,7 @@ const TreeUserOptions = ({ id }: iTreeUserOptions) => {
       paddingX={"1rem"}
     >
       {options.map((op, i) => (
-        <Box key={i} width={"8rem"}>
+        <Box key={i} width={"10rem"}>
           <UserOption
             text={op.text}
             successText={op.successText}

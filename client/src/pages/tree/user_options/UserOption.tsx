@@ -39,8 +39,8 @@ const UserOption = ({ text, successText, icon, id, userDataKey, dataFormat, hove
   // Show 'log in! message when button clicked if not logged in.
   const [noUserMsg, setNoUserMsg] = useState(false);
 
-  // Show popup if popup exists
-  const [showPopup, setShowPopup] = useState(false);
+  // Hacky way to make found it button behave differntly (text changes instead of button slides), but I didn't want to refactor the whole thing right now.
+  const [foundIt, setFoundIt] = useState(text);
 
   const userExists =
     userData &&
@@ -55,8 +55,12 @@ const UserOption = ({ text, successText, icon, id, userDataKey, dataFormat, hove
   const handleUpdate = (key: keyof iUserData, newData: DataFormat) => {
     if (userExists) {
       if (btnSlide !== true) {
-        setBtnSlide(true);
+        if (text !== 'Found it') {
+          setBtnSlide(true);
+        } 
+        console.log([...userData[key]]);
         const updatedKey = [...userData[key], newData];
+        console.log(updatedKey);
         handleUpdateUser(key, updatedKey);
       }
     } else {
@@ -69,20 +73,29 @@ const UserOption = ({ text, successText, icon, id, userDataKey, dataFormat, hove
   useEffect(() => {
     const userKeyData = userData[userDataKey];
     if (Array.isArray(userKeyData)) {
-      setBtnSlide(userKeyData.some((item) => item._id._id === id));
+      if (
+        text === "Found it"
+        &&
+        userKeyData.some((item) => item._id._id === id)
+      ) {
+        setFoundIt("Found it again");
+      } else {
+        setBtnSlide(userKeyData.some((item) => item._id._id === id));
+      }
     } else {
+      // console.log(text);
       setBtnSlide(false);
     }
-  }, [userData]);
+  }, [userData, text]);
 
   return (
     <>
       <Flex width={"100%"} overflowX={"hidden"} ref={sliderRef}>
         <Flex minWidth={"100%"}>
           {hoverMsg ? (
-            <Box width={'100%'}>
+            <Box width={"100%"}>
               <OptionPopup
-                text={text}
+                text={foundIt}
                 handleUpdate={handleUpdate}
                 hoverMsg={hoverMsg}
                 userDataKey={userDataKey}
@@ -92,15 +105,20 @@ const UserOption = ({ text, successText, icon, id, userDataKey, dataFormat, hove
               />
             </Box>
           ) : (
-            <Button width={"100%"} onClick={() => handleUpdate(userDataKey, optionData)}>
-              {text}
+            <Button
+              width={"100%"}
+              onClick={() => handleUpdate(userDataKey, optionData)}
+            >
+                {text}
             </Button>
           )}
         </Flex>
         <Flex minWidth={"100%"}>
           <Flex width={"100%"}>
             <CheckIcon />
-            <Text>{successText}</Text>
+            <Box>
+              <Text>{successText}</Text>
+            </Box>
           </Flex>
         </Flex>
       </Flex>

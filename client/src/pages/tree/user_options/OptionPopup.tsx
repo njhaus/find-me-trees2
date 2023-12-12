@@ -7,12 +7,14 @@ import {
   PopoverTrigger,
   PopoverContent,
   PopoverHeader,
-  PopoverBody,
-  PopoverFooter,
+  Text,
   PopoverArrow,
   PopoverCloseButton,
-  Button
+  Button,
+  useDisclosure
 } from "@chakra-ui/react";
+
+import FoundOptionMap from "./foundOptionMap";
 
 interface iOptionPopup {
   text: string;
@@ -26,21 +28,44 @@ interface iOptionPopup {
 
 const OptionPopup = ({ text, handleUpdate, hoverMsg, userDataKey, userData, dataFormat, id }: iOptionPopup) => {
     
-    // const [location, setLocation] = useState([-80, 41])
-    const [newData, setNewData] = useState({ ...dataFormat, _id: id })
+    const { onOpen, onClose, isOpen } = useDisclosure();
+
+  const [newData, setNewData] = useState({ ...dataFormat, _id: id })
+  const [showMap, setShowMap] = useState(false);
+  // Coordinates for setting location with map
+  const [coordinates, setCoordinates] = useState([-74, 39])
+
+  const handleCoordinates = (coords: [number, number]) => {
+    setCoordinates(coords)
+    setNewData({
+      location: {
+        type: "point",
+        coordinates: [coords[0], coords[1]],
+      },
+      _id: id,
+    });
+  }
+
+  const onUpdate = () => {
+    console.log(coordinates)
+    console.log(newData);
+    handleUpdate(userDataKey, newData);
+    setShowMap(false);
+    onClose();
+  }
 
     useEffect(() => {
-        // Id wasn't picked up by state, so had to set it like this.
-        setNewData({ ...dataFormat, _id: id });
-        // get location
-    const options = {
-      enableHighAccuracy: true,
-      timeout: 7000,
-      maximumAge: 0,
-    };
+      // Id wasn't picked up by useState, so had to set it like this.
+      setNewData({ ...dataFormat, _id: id });
+      // get location
+      const options = {
+        enableHighAccuracy: true,
+        timeout: 7000,
+        maximumAge: 0,
+      };
 
-    function success(pos: GeolocationPosition) {
-      const crd = pos.coords;
+      function success(pos: GeolocationPosition) {
+        const crd = pos.coords;
         setNewData({
           location: {
             type: "point",
@@ -48,26 +73,45 @@ const OptionPopup = ({ text, handleUpdate, hoverMsg, userDataKey, userData, data
           },
           _id: id,
         });
-    }
+      }
 
-    function error(err: GeolocationPositionError) {
-      console.warn(`ERROR(${err.code}): ${err.message}`);
-    }
+      function error(err: GeolocationPositionError) {
+        console.warn(`ERROR(${err.code}): ${err.message}`);
+      }
 
       navigator.geolocation.getCurrentPosition(success, error, options);
-  }, []);
+    }, [onOpen, onClose, isOpen]);
 
   return (
-    <Popover>
+    <Popover
+      returnFocusOnClose={false}
+      isOpen={isOpen}
+      onClose={onClose}
+      placement="right"
+    >
       <PopoverTrigger>
-        <Button width={"100%"}>{text}</Button>
+        <Button width={"100%"} onClick={onOpen}>{text}</Button>
       </PopoverTrigger>
       <PopoverContent>
         <PopoverArrow />
         <PopoverCloseButton />
         <PopoverHeader>{hoverMsg}</PopoverHeader>
-        <Button onClick={() => handleUpdate(userDataKey, newData)}>Use My Location</Button>
-        <Button>Input a Location</Button>
+        <Button onClick={() => onUpdate()}>Use My Location</Button>
+        {!showMap ? (
+          <Button onClick={() => setShowMap(true)}>Find location on Map</Button>
+        ) : (
+          <>
+            <Button onClick={() => onUpdate()}>
+              Save Location (
+              {coordinates
+                .map((coord) => coord.toFixed(3))
+                .reverse()
+                .join(", ")}
+              )
+            </Button>
+            <FoundOptionMap handleCoordinates={handleCoordinates} />
+          </>
+        )}
       </PopoverContent>
     </Popover>
   );
