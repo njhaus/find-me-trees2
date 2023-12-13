@@ -20,7 +20,7 @@ const TreeSchema = new mongoose.Schema({
       enum: ["needle", "smooth", "toothed", "lobed"],
     },
     leafSize: Number,
-    bark: [String],
+    bark: String,
     branches: String,
       fruit: {
           type: String,

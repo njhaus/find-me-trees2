@@ -30,7 +30,7 @@ export const leafFilters: filterObj[] = [
 export const barkFilters: filterObj[] = [
   {
     label: "Bark",
-    values: ["Smooth", "Rough", "Peeling", "Brown", "Gray", "White"],
+    values: ["Smooth", "Rough", "Peeling"],
     helperText: "Bark helper text.",
     formName: 'bark',
   },

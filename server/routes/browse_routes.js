@@ -12,7 +12,7 @@ router.post("/", async (req, res) => {
     leafType: undefined,
     leafShape: undefined,
     leafSize: undefined,
-    bark: [],
+    bark: undefined,
     fruit: undefined,
     flower: undefined,
     location: []
@@ -35,7 +35,7 @@ router.post("/", async (req, res) => {
     "traits.leafType": filters.leafType ? filters.leafType : undefined,
     "traits.leafShape": filters.leafShape ? filters.leafShape : undefined,
     "traits.leafSize": filters.leafSize ? filters.leafSize : undefined,
-    "traits.bark": filters.bark.length > 0 ? { $all: [...filters.bark] } : undefined,
+    "traits.bark": filters.bark ? filters.bark : undefined,
     "traits.fruit": filters.fruit ? filters.fruit : undefined,
     "traits.flower": filters.flower ? filters.flower : undefined,
     "traits.location": filters.location.length > 0 ? { $all: [...filters.location] } : undefined,

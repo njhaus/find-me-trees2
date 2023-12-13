@@ -2,7 +2,7 @@ import { useImg } from "../hooks/useImg";
 
 type LeafType = "simple" | "compound";
 type LeafShape = "needle" | "smooth" | "toothed" | "lobed";
-type Bark = "smooth" | "rough" | "peeling" | "Brown" | "Gray" | "White" | undefined;
+type Bark = "smooth" | "rough" | "peeling" | undefined;
 type Branches = "drooping" | "spiral" | undefined;
 type Fruit = "fleshy"
   | "berry"
@@ -88,7 +88,7 @@ export interface iTreeTraitsData {
   leafType: LeafType;
   leafShape: LeafShape;
   leafSize: number;
-  bark: Bark[];
+  bark: Bark;
   branches: Branches;
   fruit: Fruit;
   flower: Flower;
@@ -119,7 +119,7 @@ export const tempTreeData = {
     leafType: "simple" as LeafType,
     leafShape: "compound" as LeafShape,
     leafSize: 3,
-    bark: ["smooth" as Bark],
+    bark: "smooth" as Bark,
     branches: "spiral" as Branches,
     fruit: "fleshy" as Fruit,
     flower: "green" as Flower,

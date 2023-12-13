@@ -21,7 +21,8 @@ main();
 import Tree from "../tree.js";
 
 async function seedTreeDb(data) {
-    const treeSeed = data;
+  const treeSeed = data;
+  console.log(treeSeed);
     try {
         const seeded = await Tree.insertMany(treeSeed);
         if(seeded) console.log(seeded);

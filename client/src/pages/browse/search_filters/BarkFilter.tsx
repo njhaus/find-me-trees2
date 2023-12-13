@@ -5,6 +5,7 @@ import { Flex } from "@chakra-ui/react";
 import CheckboxInput from "../../../components/inputs/BrowseCheckboxInput";
 import { barkFilters } from "../../../data/browse_data/filterFormData";
 import { FormDataContext, iFormDataContext } from "../Browse";
+import RadioInput from "../../../components/inputs/BrowseRadioInput";
 
 const BarkFilter = () => {
   const { formData, setFormData }: iFormDataContext =
@@ -17,7 +18,7 @@ const BarkFilter = () => {
   return (
     <Flex>
       {barkFilters.map((filter, i) => (
-        <CheckboxInput
+        <RadioInput
           key={i}
           formVal={formData[filter.formName]}
           label={filter.label}
