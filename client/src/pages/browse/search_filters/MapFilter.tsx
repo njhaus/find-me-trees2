@@ -5,55 +5,60 @@ import maplibregl, { Map } from "maplibre-gl";
 import { Flex, Image, Box } from "@chakra-ui/react";
 
 import { useImg } from "../../../hooks/useImg";
-import SelectInput from "../../../components/inputs/SelectInput";
+import SelectInput from "../../../components/inputs/BrowseSelectInput";
 import { states } from "../../../data/browse_data/statesData";
 import { FormDataContext, iFormDataContext } from "../Browse";
 import { GeocodeData } from "../../../data/browse_data/filterFormData";
+import { statesMap } from "../../../data/browse_data/statesData";
 
 const MapFilter = () => {
-
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const map = useRef<Map | null>(null);
   const [zoom] = useState(3);
   const [API_KEY] = useState("2XZKg54dnt7JS7AZhe7J");
 
-  const [state, setState] = useState('')
-  const [errorMsg, setErrorMsg] = useState('')
-
+  const [state, setState] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const { formData, setFormData }: iFormDataContext =
     useContext(FormDataContext);
 
   const handleChange = (key: string, val: string) => {
-    setFormData({ ...formData, [key]: val });
+    setState(val);
+    setFormData({
+      ...formData,
+      [key]: statesMap[val as keyof typeof statesMap],
+    });
   };
 
   console.log(formData);
 
-  const handleCoordinates = async(coords: [number, number]) => {
+  const handleCoordinates = async (coords: [number, number]) => {
     try {
       const response = await fetch(
         `https://api.radar.io/v1/geocode/reverse?coordinates=${coords[1]},${coords[0]}`,
         {
           headers: {
-            Authorization: 'prj_test_pk_9755543cb702cecadcdd869bc9045909d187e28e',
+            Authorization:
+              "prj_test_pk_9755543cb702cecadcdd869bc9045909d187e28e",
           },
-        });
-      if (!response.ok) throw new Error('Unable to find location');
-      else {
-        const responseJson: GeocodeData = await response.json()
-        if (responseJson.addresses[0].state) {
-          setState(responseJson.addresses[0].state);
         }
-        else {
-          setErrorMsg('Only locations in the United States are supported at this time.')
+      );
+      if (!response.ok) throw new Error("Unable to find location");
+      else {
+        const responseJson: GeocodeData = await response.json();
+        if (responseJson.addresses[0].state) {
+          handleChange("location", responseJson.addresses[0].state);
+        } else {
+          setErrorMsg(
+            "Only locations in the United States are supported at this time."
+          );
         }
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   };
-
 
   useEffect(() => {
     if (mapContainer.current) {
@@ -74,7 +79,6 @@ const MapFilter = () => {
     }
   }, []);
 
-
   return (
     <Flex width={"100%"} flexWrap={"wrap"}>
       <Box width={"15rem"}>
@@ -86,7 +90,12 @@ const MapFilter = () => {
           onChange={handleChange}
         />
       </Box>
-      <Flex flexDirection={"column"} alignItems={"center"} flexGrow={1} min-width={"30rem"}>
+      <Flex
+        flexDirection={"column"}
+        alignItems={"center"}
+        flexGrow={1}
+        min-width={"30rem"}
+      >
         Or click your location on the map:
         <div className="map-wrap">
           <div ref={mapContainer} className="map" />

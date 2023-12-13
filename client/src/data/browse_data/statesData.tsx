@@ -51,7 +51,7 @@ export const states = [
   "Wyoming"
 ];
 
-const stateAbbreviations = {
+export const statesMap = {
   'Alabama': 'AL',
   'Alaska': 'AK',
   'Arizona': 'AZ',

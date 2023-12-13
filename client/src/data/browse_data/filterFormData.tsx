@@ -80,7 +80,7 @@ export interface iFormData {
 const initialFormData: iFormData = {
   title: '',
   location: undefined,
-  bark: [],
+  bark: undefined,
   branches: undefined,
 };
 

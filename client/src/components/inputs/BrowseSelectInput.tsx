@@ -15,7 +15,7 @@ interface SelectInputProps {
   values: string[];
   helperText?: string;
   formName: string;
-  onChange?: (...args: any[]) => void;
+  onChange: (key: string, val: string) => void;
 }
 
 const SelectInput = ({ formVal, label, values, formName, helperText, onChange }: SelectInputProps) => {
@@ -23,10 +23,6 @@ const SelectInput = ({ formVal, label, values, formName, helperText, onChange }:
   const [value, setValue] = useState<string | undefined>(formVal)
 
   const [showHelpertext, setShowHelperText] = useState(false);
-
-  useEffect(() => {
-    onChange?.(formName, value);
-  }, [value, formVal]);
 
   useEffect(() => {
     setValue(formVal)
@@ -39,11 +35,11 @@ const SelectInput = ({ formVal, label, values, formName, helperText, onChange }:
       </FormLabel>
       <Select
         id={formName}
-        value={formVal}
+        value={value}
         onChange={(e) => {
-          e.target.value !== ""
-            ? setValue(e.target.value)
-            : setValue(undefined);
+          if (e.target.value) {
+            onChange("location", e.target.value) 
+          }
         }}
       >
         <option value={undefined}>Choose one</option>

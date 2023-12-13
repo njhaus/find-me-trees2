@@ -19,15 +19,22 @@ router.post("/", async (req, res) => {
   };
 
   // Lowercase all values and add to filters
-  for (let f in req.body) {
-    const val = req.body[f]
-    if (typeof val === 'string') {
-      filters[f] = val.toLowerCase();
-    } else if (Array.isArray(f)) {
-      filters[f] = val.map((item) => (typeof item === 'string' ? item.toLowerCase() : item));
+  for (let filter in req.body) {
+    const val = req.body[filter]
+    if (typeof val === 'string' && filter !== 'location') {
+      filters[filter] = val.toLowerCase();
+    } else if (Array.isArray(filter)) {
+      filters[filter] = val.map((item) => (typeof item === 'string' ? item.toLowerCase() : item));
+    }
+    else {
+      filters[filter] = val;
     }
   }
 
+
+
+  console.log("FILTERS");
+  console.log(filters);
   
   // Construct query object
   const query = {
@@ -38,8 +45,12 @@ router.post("/", async (req, res) => {
     "traits.bark": filters.bark ? filters.bark : undefined,
     "traits.fruit": filters.fruit ? filters.fruit : undefined,
     "traits.flower": filters.flower ? filters.flower : undefined,
-    "traits.location": filters.location.length > 0 ? { $all: [...filters.location] } : undefined,
+    "traits.location": filters.location ? { $all: filters.location } : undefined,
   };
+
+
+  console.log("QUERy Object");
+  console.log(query);
 
   // Get rid of nonexistant queries
   const existingQueries = Object.keys(query).reduce((result, key) => {
@@ -49,12 +60,14 @@ router.post("/", async (req, res) => {
     return result;
   }, {}); 
 
+  console.log("QUERIES")
+  console.log(existingQueries)
   // Find trees that match criteria
   const foundTrees = await Tree.find(
     existingQueries
   );
 
-  console.log(foundTrees);
+  // console.log(foundTrees);
   res.send(foundTrees);
 });
 
