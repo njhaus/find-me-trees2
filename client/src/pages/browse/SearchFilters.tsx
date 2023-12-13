@@ -112,6 +112,7 @@ const SearchFilters = ({ onSubmit }: SearchFiltersProps) => {
               onClick={(e) => {
                 onSubmit(e);
                 setIsSubmitting(true);
+                handleFilter(-1);
               }}
             >
               Find Me Trees

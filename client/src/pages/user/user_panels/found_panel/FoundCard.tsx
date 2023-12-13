@@ -28,7 +28,7 @@ const FoundCard = ({id, title, imgSrc, sciName, locationFound}: iFoundCard) => {
           <Heading size="md">{title}</Heading>
 
           <Text py="2">{sciName}</Text>
-          {/* <Text>Found at { locationFound.coordinates[0].toString() + ', ' + locationFound.coordinates[1].toString()}</Text> */}
+          <Text>Found at { locationFound.coordinates[1].toFixed(2).toString() + ', ' + locationFound.coordinates[0].toFixed(2).toString()}</Text>
         </CardBody>
 
         <CardFooter>

@@ -26,7 +26,11 @@ const SelectInput = ({ formVal, label, values, formName, helperText, onChange }:
 
   useEffect(() => {
     onChange?.(formName, value);
-  }, [value]);
+  }, [value, formVal]);
+
+  useEffect(() => {
+    setValue(formVal)
+  }, [formVal])
 
   return (
     <FormControl as="fieldset">
@@ -35,7 +39,7 @@ const SelectInput = ({ formVal, label, values, formName, helperText, onChange }:
       </FormLabel>
       <Select
         id={formName}
-        defaultValue={formVal}
+        value={formVal}
         onChange={(e) => {
           e.target.value !== ""
             ? setValue(e.target.value)

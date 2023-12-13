@@ -1,6 +1,6 @@
 import {
   Card,
-  CardHeader,
+  Box,
   CardBody,
   CardFooter,
   Image,
@@ -10,12 +10,14 @@ import {
   ButtonGroup,
   Button,
   Heading,
+  filter,
 } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
 
 import { useImg } from "../../../hooks/useImg";
 import { iFormData } from "../../../data/browse_data/filterFormData";
+import { filtersTextMap } from "../../../data/browse_data/filterData";
 
 interface TreeCardProps {
   id: string;
@@ -32,7 +34,6 @@ const TreeCard = ({
   sciName,
   searchTerms,
 }: TreeCardProps) => {
-  const imageSource = useImg(imgSrc);
 
   const searchTermText = searchTerms ? Object.keys(searchTerms) : [];
   const searchTermValues = searchTerms ? Object.values(searchTerms) : [];
@@ -41,21 +42,36 @@ const TreeCard = ({
     <Card maxW="sm" w="100%" align={"center"}>
       <CardBody>
         <Heading size="md">{title}</Heading>
-        <Image src={imageSource} alt={`Photo of ${title}`} borderRadius="lg" />
-        <Stack mt="6" spacing="3">
-          <Text color="blue.600" fontSize="2xl">
+        <Box>
+          <Image
+            src={imgSrc}
+            alt={`Photo of ${title}`}
+            maxHeight={"15rem"}
+            aspectRatio={"1/1"}
+
+            objectFit={"cover"}
+            borderRadius="lg"
+          />
+        </Box>
+        <Stack mt="6" spacing="0">
+          <Text as={"h2"} fontSize="1.5rem">
+            {title}
+          </Text>
+          <Text color="blue.600" fontSize="1.25rem">
             {sciName}
           </Text>
-          {searchTermValues.every((term) => term === null) ? (
+          {searchTermValues.every(
+            (term) => term === undefined || term?.length < 1
+          ) ? (
             ""
           ) : (
             <Text>Matches search terms:</Text>
           )}
           {searchTerms &&
-            searchTermText.map((term, i) => (
+            searchTermText.map((term, i: number) => (
               <Text key={i}>
-                {searchTermValues[i] !== null
-                  ? `${term}: ${searchTermValues[i]} `
+                {searchTermValues[i] && searchTermValues[i]?.length > 0
+                  ? `${filtersTextMap[term as keyof typeof filtersTextMap]}: ${searchTermValues[i]} `
                   : ""}
               </Text>
             ))}

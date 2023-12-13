@@ -56,7 +56,7 @@ const OptionPopup = ({ text, handleUpdate, hoverMsg, userDataKey, userData, data
 
     useEffect(() => {
       // Id wasn't picked up by useState, so had to set it like this.
-      setNewData({ ...dataFormat, _id: id });
+      // setNewData({ ...dataFormat, _id: id });
       // get location
       const options = {
         enableHighAccuracy: true,
@@ -80,7 +80,7 @@ const OptionPopup = ({ text, handleUpdate, hoverMsg, userDataKey, userData, data
       }
 
       navigator.geolocation.getCurrentPosition(success, error, options);
-    }, [onOpen, onClose, isOpen]);
+    }, [onOpen, onClose, isOpen, id]);
 
   return (
     <Popover

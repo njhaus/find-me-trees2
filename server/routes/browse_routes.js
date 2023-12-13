@@ -5,6 +5,7 @@ import Tree from "../models/tree.js";
 const router = Router();
 
 router.post("/", async (req, res) => {
+  console.log(req.body);
   // Set up filter object
   const filters = {
     title: '',

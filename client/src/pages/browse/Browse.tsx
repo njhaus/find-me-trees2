@@ -21,6 +21,9 @@ export const FormDataContext = createContext<iFormDataContext>({
 const Browse = () => {
   const [formData, setFormData] = useState(initialFormData);
   const [submitting, setSubmitting] = useState(false);
+  const [filteredTrees, setFilteredTrees] = useState([]);
+  // Need to store search terms to be sent to treelist, but not reset when form is reset
+  const [searchTerms, setSearchTerms] = useState(initialFormData);
 
   useEffect(() => {
     let isMounted = true;
@@ -34,9 +37,10 @@ const Browse = () => {
             body: JSON.stringify(formData),
           });
           if (!isMounted) return;
-          if (!response.ok) throw new Error('error retrievieg data!')
-          const responseText = await response.json();
-          console.log(responseText)
+          if (!response.ok) throw new Error('error retrieving data!')
+          const responseJson = await response.json();
+          setFilteredTrees(responseJson)
+          setSearchTerms(formData)
         } catch (err) {
           console.log(err);
         } finally {
@@ -52,6 +56,11 @@ const Browse = () => {
     }
   }, [submitting])
 
+  // Need to reset search terms so the form resets, but not everything else
+  useEffect(() => {
+    setFormData(initialFormData)
+  }, [filteredTrees])
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
@@ -62,7 +71,10 @@ const Browse = () => {
       <BrowseTitle />
       <FormDataContext.Provider value={{ formData, setFormData }}>
         <SearchFilters onSubmit={handleSubmit} />
-        <TreeList />
+        <TreeList
+          filteredTrees={filteredTrees}
+          searchTerms={searchTerms}
+        />
       </FormDataContext.Provider>
     </Flex>
   );

@@ -4,14 +4,24 @@ import { Text, Flex, Grid, GridItem } from "@chakra-ui/react";
 
 import TreeCard from "./tree_list/TreeCard";
 import { FormDataContext, iFormDataContext } from "./Browse";
+import { iTreeData } from "../../data/tree_data";
+import { iFormData } from "../../data/browse_data/filterFormData";
 
-const TreeList = () => {
-  const { formData, setFormData }: iFormDataContext =
-    useContext(FormDataContext);
+interface iTreeList {
+  filteredTrees: iTreeData[],
+  searchTerms: iFormData
+}
 
+const TreeList = ({ filteredTrees, searchTerms}: iTreeList) => {
+  
   return (
     <Flex direction={"column"} padding={{ base: 3, md: 6 }}>
-      <Text>Search terms here</Text>
+      {(filteredTrees.length < 1) ?
+        <Text>No trees matching search terms were found.</Text> :
+        Object.values(searchTerms).some(val => val?.length > 0) ? 
+          <Text>{filteredTrees.length} trees found with search terms.</Text> :
+          <Text>Use the filters to narrow your search</Text>
+      } 
       <Grid
         templateColumns={{
           base: "1fr",
@@ -21,42 +31,18 @@ const TreeList = () => {
         }}
         gap={6}
       >
-        {/* MAP THESE WITH DATA */}
-        <TreeCard
-          id={"1"}
-          title={"title placeholder"}
-          imgSrc={"placeholder-2.jpeg"}
-          sciName="sciname placeholder"
-          searchTerms={formData}
-        />
-        <TreeCard
-          id={"1"}
-          title={"title placeholder"}
-          imgSrc={"placeholder-2.jpeg"}
-          sciName="sciname placeholder"
-          searchTerms={formData}
-        />
-        <TreeCard
-          id={"1"}
-          title={"title placeholder"}
-          imgSrc={"placeholder-2.jpeg"}
-          sciName="sciname placeholder"
-          searchTerms={formData}
-        />
-        <TreeCard
-          id={"1"}
-          title={"title placeholder"}
-          imgSrc={"placeholder-2.jpeg"}
-          sciName="sciname placeholder"
-          searchTerms={formData}
-        />
-        <TreeCard
-          id={"1"}
-          title={"title placeholder"}
-          imgSrc={"placeholder-2.jpeg"}
-          sciName="sciname placeholder"
-          searchTerms={formData}
-        />
+        {
+          filteredTrees.map((tree) => (
+            <TreeCard
+              key={tree._id}
+              id={tree._id}
+              title={tree.title}
+              imgSrc={tree.imgSrc[0]}
+              sciName={tree.sciName}
+              searchTerms={searchTerms}
+            />
+          ))
+        }
       </Grid>
     </Flex>
   );

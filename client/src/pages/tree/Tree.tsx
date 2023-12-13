@@ -1,4 +1,4 @@
-import { Flex, Heading, Image, Box } from "@chakra-ui/react";
+import { Flex, Heading, Image, Box, Spinner, Skeleton, Stack } from "@chakra-ui/react";
 
 import { useParams } from "react-router-dom";
 
@@ -20,6 +20,8 @@ import useAuth from "../../hooks/useAuth";
 const Tree = () => {
 
   const [treeData, setTreeData] = useState(tempTreeData);
+  // Loading indicator while trees are being fetched
+  const [loading, setLoading] = useState(true); 
   // Id for tree is sent by params
   const { id } = useParams();
   // Need to extract images so I can get them from user Data when loaded (it loads after page) -- see useEffect below
@@ -37,6 +39,7 @@ const Tree = () => {
             console.log("good response");
             console.log(res);
             setTreeData(res);
+            setLoading(false);
           }
         })
         .catch((err) => console.log("error fetching tree data"));
@@ -47,7 +50,24 @@ const Tree = () => {
       abortController.abort(); // Abort the request if the component unmounts
     };
 
-  }, [])
+  }, [id])
+
+  if (loading) {
+    return (
+      <Stack>
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
+        <Skeleton height="20px" />
+        <Skeleton height="20px" />
+        <Skeleton height="20px" />
+      </Stack>
+    );
+  }
 
   return (
     <Flex as={"section"} direction={"column"}>

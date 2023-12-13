@@ -54,3 +54,14 @@ export const filters: Filter[] = [
 export const mapFilter = {
   dropDown: <MapFilter />,
 };
+
+export const filtersTextMap = {
+  bark: 'Bark',
+  branches: 'Branches',
+  flower: 'Flower',
+  fruit: 'Fruit',
+  leafShape: 'Leaf Shape',
+  leafType: 'Leaf Type',
+  location: 'Location',
+  title: 'Name'
+}

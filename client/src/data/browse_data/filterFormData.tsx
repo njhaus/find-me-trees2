@@ -57,8 +57,10 @@ export const flowerFilters: filterObj[] = [
     values: [
       "Red",
       "Pink",
-      "Purple/Blue",
-      "Orange/Yellow",
+      "Purple",
+      "Blue",
+      "Orange",
+      "Yellow",
       "White",
       "Green"
     ],
@@ -90,5 +92,35 @@ const completeInitialFormData = () => {
   );
 };
 completeInitialFormData();
+
+export interface GeocodeData {
+  meta: {
+    code: number;
+  };
+  addresses: {
+    latitude: number;
+    longitude: number;
+    geometry: {
+      type: string;
+      coordinates: [number, number];
+    };
+    addressLabel: string;
+    formattedAddress: string;
+    country: string;
+    countryCode: string;
+    countryFlag: string;
+    state: string;
+    stateCode: string;
+    postalCode: string;
+    city: string;
+    borough: string;
+    county: string;
+    neighborhood: string;
+    number: string;
+    distance: number;
+    layer: string;
+  }[];
+}
+
 
 export default initialFormData;
