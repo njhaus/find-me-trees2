@@ -2,14 +2,14 @@ import { Flex, Text} from "@chakra-ui/react"
 
 
 interface iCurrentProfile {
-  userName: string;
+  username: string;
   email: string;
 }
 
-const CurrentProfile = ({userName, email}: iCurrentProfile) => {
+const CurrentProfile = ({username, email}: iCurrentProfile) => {
   return (
     <Flex direction={'column'} gap={'1rem'}>
-      <Text>Username: {userName}</Text>
+      <Text>Username: {username}</Text>
       <Text>email: {email}</Text>
     </Flex>
   );

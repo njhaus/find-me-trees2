@@ -6,24 +6,25 @@ import User from "../models/user.js";
 
 export const verifyAccessToken = async (req, res, next) => {
     console.log('accesstoken middleware running')
-    console.log(req.body);
     const { accessToken, username } = req.body;
+    console.log(username);
+    console.log(accessToken);
     const foundUser = await User.findOne(
         {
             username: username,
         }
     )
-    console.log(foundUser.accessToken)
+    console.log(foundUser)
     if (!foundUser) {
         console.log('no matching creds')
-        return next('error')
+        return res.send("error: no user found")
     }
 
     jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
         if (err || foundUser.username !== decoded.username) {
             const errMsg = err ? err : 'Unverified Credentials'
             console.log(errMsg);
-            return next(err);
+            return res.send("error: incorrect token")
       }
     });
     console.log("accesstoken middleware no errors\n\n");

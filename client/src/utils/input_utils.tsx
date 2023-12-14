@@ -13,7 +13,6 @@ export const validateTextInput = (
     let error = '';
     for (let k in data) {
         const val = data[k];
-        console.log(val);
         try {
           validTextInput.parse(val);
         } catch (err) {
@@ -24,6 +23,5 @@ export const validateTextInput = (
           }
         }
     }
-    console.log('valid form!')
     return true;
 };

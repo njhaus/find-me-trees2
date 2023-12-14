@@ -2,6 +2,7 @@ import { Router } from "express";
 import User from "../models/user.js";
 import { verifyAccessToken } from "../middleware/jwt_middleware.js";
 import { validateUpdateUser } from "../middleware/joi_middleware.js";
+import passport from "passport";
 
 const router = Router();
 
@@ -45,5 +46,53 @@ router.patch("/update", validateUpdateUser, verifyAccessToken, async (req, res) 
     return res.sendStatus(401);
   }
 });
+
+router.patch(
+  "/profileupdate",
+  verifyAccessToken,
+  passport.authenticate("local", {
+    failureMessage: true,
+  }),
+  async (req, res) => {
+    console.log("UPDATE PROFILE ROUTE ACCESSED");
+    const { username, newUsername, newEmail, newPassword } = req.body;
+    const updateObject = {
+      username: newUsername,
+      email: newEmail
+    };
+    const foundUser = await User.findOneAndUpdate(
+      { username: username },
+      updateObject,
+      { new: true }
+    );
+    if (newPassword) {
+      const deletedUser = await User.deleteOne({ username: newUsername });
+      const newUserObject = {
+        username: foundUser.username,
+        email: foundUser.email,
+        collections: foundUser.collections,
+        accessToken: foundUser.accessToken,
+        refreshToken: foundUser.refreshToken,
+        saved: foundUser.saved,
+        found: foundUser.found,
+        favorites: foundUser.favorites,
+      };
+      const newUser = await new User(newUserObject);
+      const registeredUser = await User.register(newUser, newPassword);
+      await req.login(registeredUser, function (err) {
+        if (err) {
+          console.log("error logging in");
+          return res.send("error logging in.");
+        } else {
+          console.log("user registered and logged in!");
+        }
+      });
+      res.send(registeredUser);
+    }
+    else {
+      res.send(foundUser);
+    }
+  }
+);
 
 export default router;

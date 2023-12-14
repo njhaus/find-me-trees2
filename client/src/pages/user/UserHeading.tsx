@@ -1,13 +1,13 @@
 import { Flex, Text } from "@chakra-ui/react"
 
 import UserProfile from "./UserProfile";
+import { iUserData } from "../../data/user_data/userData";
 
 interface iUserHeading {
-  username: string;
-  email: string;
+  userData: iUserData
 }
 
-const UserHeading = ({username, email}: iUserHeading) => {
+const UserHeading = ({userData}: iUserHeading) => {
   return (
     <Flex
       direction={"row"}
@@ -15,7 +15,7 @@ const UserHeading = ({username, email}: iUserHeading) => {
       padding={"1rem"}
       justify={"space-between"}
     >
-      <Text>{username}'s Trees</Text>
+      <Text>{userData.username}'s Trees</Text>
       <Flex
         justify={"center"}
         align={"center"}
@@ -25,7 +25,7 @@ const UserHeading = ({username, email}: iUserHeading) => {
         borderRadius={"50%"}
         fontSize={"2rem"}
       >
-        <UserProfile userName={username} email={email} />
+        <UserProfile userData = {userData} />
       </Flex>
     </Flex>
   );
