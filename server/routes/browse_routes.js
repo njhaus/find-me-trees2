@@ -5,25 +5,25 @@ import Tree from "../models/tree.js";
 const router = Router();
 
 router.post("/", async (req, res) => {
+  console.log("\n\nbrowse route running!")
+  console.log(req.body)
   // Set up filter object
   const filters = {
     title: '',
-    leafType: undefined,
-    leafShape: undefined,
-    leafSize: undefined,
-    bark: undefined,
-    fruit: undefined,
-    flower: undefined,
-    location: undefined
+    leafType: '',
+    leafShape: '',
+    leafSize: '',
+    bark: '',
+    fruit: '',
+    flower: '',
+    location: ''
   };
 
   // Lowercase all values and add to filters
   for (let filter in req.body) {
     const val = req.body[filter]
-    if (typeof val === 'string' && filter !== 'location') {
+    if (filter !== 'location') {
       filters[filter] = val.toLowerCase();
-    } else if (Array.isArray(filter)) {
-      filters[filter] = val.map((item) => (typeof item === 'string' ? item.toLowerCase() : item));
     }
     else {
       filters[filter] = val;

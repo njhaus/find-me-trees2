@@ -26,6 +26,6 @@ export const verifyAccessToken = async (req, res, next) => {
             return next(err);
       }
     });
-    console.log("accesstoken no errors");
+    console.log("accesstoken middleware no errors\n\n");
     next();
 };

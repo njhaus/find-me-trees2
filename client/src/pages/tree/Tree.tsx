@@ -124,7 +124,7 @@ const Tree = () => {
           bg={"yellow.200"}
         >
           {location ? (
-            <TreeLocation location={treeData.location} title={treeData.title} />
+            <TreeLocation location={treeData.traits.location} title={treeData.title} />
           ) : (
             `No states listed where ${treeData.title} is found`
           )}

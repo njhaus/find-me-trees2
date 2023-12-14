@@ -79,15 +79,15 @@ export interface iFormData {
 
 const initialFormData: iFormData = {
   title: '',
-  location: undefined,
-  bark: undefined,
-  branches: undefined,
+  location: '',
+  bark: '',
+  branches: '',
 };
 
 const completeInitialFormData = () => {
   radioFilters.forEach((filterList) =>
     filterList.forEach((filter) => {
-      initialFormData[filter.formName] = undefined;
+      initialFormData[filter.formName] = '';
     })
   );
 };

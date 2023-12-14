@@ -92,6 +92,7 @@ export interface iTreeTraitsData {
   branches: Branches;
   fruit: Fruit;
   flower: Flower;
+  location: UsState[];
 }
 
 export interface iTreeData {
@@ -102,7 +103,6 @@ export interface iTreeData {
   intro: string;
   sciInfo: iSciInfo;
   traits: iTreeTraitsData;
-  location: UsState[];
 }
 
 export const tempTreeData = {
@@ -123,6 +123,6 @@ export const tempTreeData = {
     branches: "spiral" as Branches,
     fruit: "fleshy" as Fruit,
     flower: "green" as Flower,
+    location: ["CA" as UsState, "WA" as UsState, "OR" as UsState],
   },
-  location: ["CA" as UsState, "WA" as UsState, "OR" as UsState],
 };
