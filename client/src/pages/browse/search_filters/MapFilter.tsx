@@ -10,6 +10,7 @@ import { states } from "../../../data/browse_data/statesData";
 import { FormDataContext, iFormDataContext } from "../Browse";
 import { GeocodeData } from "../../../data/browse_data/filterFormData";
 import { statesMap } from "../../../data/browse_data/statesData";
+import '../styles/browseMap.css'
 
 const MapFilter = () => {
   const mapContainer = useRef<HTMLDivElement | null>(null);

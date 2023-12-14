@@ -5,7 +5,6 @@ import Tree from "../models/tree.js";
 const router = Router();
 
 router.post("/", async (req, res) => {
-  console.log(req.body);
   // Set up filter object
   const filters = {
     title: '',
@@ -15,7 +14,7 @@ router.post("/", async (req, res) => {
     bark: undefined,
     fruit: undefined,
     flower: undefined,
-    location: []
+    location: undefined
   };
 
   // Lowercase all values and add to filters
@@ -30,11 +29,6 @@ router.post("/", async (req, res) => {
       filters[filter] = val;
     }
   }
-
-
-
-  console.log("FILTERS");
-  console.log(filters);
   
   // Construct query object
   const query = {
@@ -48,10 +42,6 @@ router.post("/", async (req, res) => {
     "traits.location": filters.location ? { $all: filters.location } : undefined,
   };
 
-
-  console.log("QUERy Object");
-  console.log(query);
-
   // Get rid of nonexistant queries
   const existingQueries = Object.keys(query).reduce((result, key) => {
     if (query[key]) {
@@ -60,14 +50,11 @@ router.post("/", async (req, res) => {
     return result;
   }, {}); 
 
-  console.log("QUERIES")
-  console.log(existingQueries)
   // Find trees that match criteria
   const foundTrees = await Tree.find(
     existingQueries
   );
 
-  // console.log(foundTrees);
   res.send(foundTrees);
 });
 
