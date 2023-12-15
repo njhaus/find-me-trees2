@@ -12,7 +12,6 @@ export const validateTextInput = (
 ): boolean => {
     let error = '';
   for (let k in data) {
-    console.log(data[k]);
     if(!data[k]) return true
         const val = data[k];
         try {

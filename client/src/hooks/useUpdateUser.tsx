@@ -4,6 +4,7 @@ import { apiPatch } from "../services/api_client";
 import { iUserData } from "../data/user_data/userData";
 import useAuth from "./useAuth";
 import { initialUserData } from "../data/user_data/userData";
+import useServerError from "./useServerError";
 
 const useUpdateUser = () => {
   const logout = useLogout("You have been logged out due to an error.");
@@ -11,14 +12,14 @@ const useUpdateUser = () => {
 
   const [userData, setUserData] = useState<iUserData>(auth || initialUserData);
 
-  const [errMsg, setErrMsg] = useState('');
-  const [isLoading, setIsLoading] = useState('');
+  const { setServerError } = useServerError();
 
   const handleUpdateUser = async(dataType: keyof iUserData, data: any) => {
     // Hold previos user data in case of save error
     const prevUserData = userData;
     console.log("AUTH IS NOW:")
     console.log(auth);
+
     // Update userData for saving and User Interface
     const updatedUserData = { ...userData, [dataType]: data };
     setUserData(updatedUserData);
@@ -29,13 +30,10 @@ const useUpdateUser = () => {
       const res = await apiPatch("user/update", updatedUserData);
 
       if (res.code) {
-        console.log("ERROR updating user in useUpdateUser");
-        console.log(res.message);
-        // On error, reset data to previous user data and log out
-        setUserData(prevUserData);
-        setAuth(prevUserData);
-        logout();
-        // return prevUserData;
+        console.error("ERROR updating user in useUpdateUser");
+        console.error(res.code);
+        console.error(res.message);
+        throw new Error(res.message)
       } else {
         console.log("NO ERROR updating user in useUpdateUser!");
         console.log(res);
@@ -43,13 +41,13 @@ const useUpdateUser = () => {
         setAuth(res);
         // return updatedUserData;
       }
-    } catch (err) {
+    } catch (err: any) {
       console.log("ERROR updating user in useUpdateUser");
       console.log(err);
-      // On error, reset data to previous user data and log out
+      // On error, reset data to previous user data and send error message
       setUserData(prevUserData);
       setAuth(prevUserData);
-      logout();
+      setServerError(err.message);
       // return updatedUserData;
     }
   };

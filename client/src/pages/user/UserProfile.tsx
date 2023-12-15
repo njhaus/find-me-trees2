@@ -72,7 +72,6 @@ const [isEditing, setIsEditing] = useState(false)
     );
   };
 
-  console.log(updatedData);
 
   const handleProfileChange = (
     e: ChangeEvent<HTMLInputElement>,
