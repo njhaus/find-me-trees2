@@ -1,8 +1,9 @@
-import { forwardRef, ReactNode, useRef, useEffect, ChangeEvent } from "react";
+import { forwardRef, ReactNode, useRef, useEffect, ChangeEvent, useState } from "react";
 
 import { InputGroup, InputLeftElement, Input, FormLabel, Stack, Text } from "@chakra-ui/react";
 
 import { BsExclamationTriangleFill } from "react-icons/bs";
+import { validateTextInput } from "../../utils/input_utils";
 
 
 interface iIconInput {
@@ -19,18 +20,26 @@ interface iIconInput {
 
 const IconInput = forwardRef<HTMLInputElement, iIconInput>(({ icon, labelText, labelFor, inputPlaceholder, inputType, val, onChange, error, onBlur}: iIconInput, ref) => {
 
+  const [value, setValue] = useState(val)
+
   return (
     <Stack>
       <FormLabel htmlFor={labelFor}>{labelText}</FormLabel>
       <InputGroup>
         <InputLeftElement pointerEvents="none">{icon}</InputLeftElement>
         <Input
+          value={value}
           ref={ref}
           type={inputType}
           id={labelFor}
           name={labelFor}
           placeholder={inputPlaceholder}
-          onChange={(e) => onChange(e, labelFor)}
+          onChange={(e) => {
+            if (validateTextInput({ data: e.target.value })) {
+              setValue(e.target.value)
+              onChange(e, labelFor)
+            }
+          }}
           onBlur={onBlur}
           autoComplete="off"
           aria-invalid={error ? 'true' : 'false'}

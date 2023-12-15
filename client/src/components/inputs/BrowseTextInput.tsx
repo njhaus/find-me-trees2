@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, MutableRefObject, forwardRef } from "react";
+import { validateTextInput } from "../../utils/input_utils";
 
 import { FormControl, FormLabel, Input } from "@chakra-ui/react";
 
@@ -44,7 +45,9 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
         value={text}
         placeholder={helperText}
         onChange={(e) => {
-          setText(e.target.value);
+          if (validateTextInput({ data: e.target.value })) {
+            setText(e.target.value);
+          }
         }}
         onClick={() => {
           setText("");

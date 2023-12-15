@@ -1,9 +1,9 @@
 import { ZodError, z } from "zod";
 
-export const noHtmlRegex = /^[^\s<>?'&"`]+$/g;
+export const noHtmlRegex = /^[^<>?'&"`]+$/g;
 
 export const validTextInput = z.string().regex(noHtmlRegex, {
-  message: "Cannot contain spaces or invalid characters",
+  message: "Cannot contain invalid characters",
 });
 
 export const validateTextInput = (
@@ -11,7 +11,9 @@ export const validateTextInput = (
     setError?: React.Dispatch<React.SetStateAction<string>>
 ): boolean => {
     let error = '';
-    for (let k in data) {
+  for (let k in data) {
+    console.log(data[k]);
+    if(!data[k]) return true
         const val = data[k];
         try {
           validTextInput.parse(val);

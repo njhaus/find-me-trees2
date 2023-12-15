@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, ChangeEvent } from "react";
 
 import {
   Drawer,
@@ -14,6 +14,7 @@ import {
   Flex,
   FormControl,
   FormLabel,
+  Text,
   FormErrorMessage,
   FormHelperText,
 } from "@chakra-ui/react";
@@ -24,7 +25,9 @@ import EditProfile from "./EditProfile";
 import CurrentProfile from "./CurrentProfile";
 
 import { iUserData } from "../../data/user_data/userData";
-import { apiPatch } from "../../services/api_client";
+import useUpdateProfile from "../../hooks/useUpdateProfile";
+import { validateNewUser, iFormErrors, initialErrors } from "../../utils/login_utils";
+
 
 interface iUserProfile {
     userData: iUserData
@@ -34,7 +37,7 @@ export type updatedDataT = {
   username: string;
   email: string;
   password: string;
-  checkPassword?: string;
+  checkPassword: string;
 };
 
 
@@ -56,29 +59,55 @@ const [isEditing, setIsEditing] = useState(false)
 
   const [updatedData, setUpdatedData] = useState<updatedDataT>(initialFormData);
 
-  const handleProfileChange = (key: keyof updatedDataT, val: string) => {
-    setUpdatedData((prevData) => ({ ...prevData, [key]: val }));
+  const [errors, setErrors] = useState<iFormErrors>(initialErrors);
+
+  const validateOnChange = () => {
+    validateNewUser(
+      {
+        username: updatedData.username,
+        email: updatedData.email,
+        password: updatedData.password || currPassword,
+      },
+      setErrors
+    );
   };
 
-  const handleSubmit = async() => {
-    // Need to send old username and access token through for validation and finding user.
-    const body = {
-      newUsername: updatedData.username
-        ? updatedData.username
-        : userData.username,
-      newEmail: updatedData.email ? updatedData.email : userData.email,
-      newPassword: updatedData.password,
-      accessToken: userData.accessToken,
-      username: userData.username,
-      password: currPassword,
-    };
-    try {
-      const updatedUserData = await apiPatch('user/profileupdate', body);
-      console.log(updatedUserData)
-    } catch (err) {
-      console.log(err)
+  console.log(updatedData);
+
+  const handleProfileChange = (
+    e: ChangeEvent<HTMLInputElement>,
+    dataType: string
+  ) => {
+    const val = e.target.value;
+    setUpdatedData((prevData) => ({ ...prevData, [dataType]: val }));
+    validateOnChange();
+  };
+
+  const { handleUpdateProfile } = useUpdateProfile();
+
+  const handleValidateAndUpdate = (
+    oldData: iUserData,
+    newData: updatedDataT,
+    currPassword: string
+  ) => {
+    // Validate new user returns true if there are no errors / returns false with errors and sets errors
+    if (
+      validateNewUser(
+        {
+          username: updatedData.username,
+          email: updatedData.email,
+          password: updatedData.password || currPassword,
+        },
+        setErrors
+      )
+    ) {
+      handleUpdateProfile(oldData, newData, currPassword);
+      // if success...
+      setIsEditing(!isEditing);
+      setErrors(initialErrors);
+      setUpdatedData(initialFormData);
     }
-  }
+  };
 
   return (
     <>
@@ -91,7 +120,7 @@ const [isEditing, setIsEditing] = useState(false)
         height={"2.5rem"}
         borderRadius={"50%"}
       >
-        <BsPerson width={"2rem"} height={"2rem"} />
+        <BsPerson width={"2rem"} height={"2rem"} cursor={"pointer"} />
       </Flex>
       <Drawer
         isOpen={isOpen}
@@ -117,6 +146,7 @@ const [isEditing, setIsEditing] = useState(false)
                 email={userData.email}
                 updatedData={updatedData}
                 handleProfileChange={handleProfileChange}
+                errors={errors}
               />
             )}
             {isEditing ? (
@@ -126,35 +156,44 @@ const [isEditing, setIsEditing] = useState(false)
                     Type your current password to save changes:
                   </FormLabel>
                   <Input
+                    value={currPassword}
                     type="password"
                     onChange={(e) => setCurrPassword(e.target.value)}
                   />
+                  {/* <Text> Incorrect password</Text> */}
                 </FormControl>
                 <Button
                   marginY={"1rem"}
                   onClick={() => {
                     setIsEditing(!isEditing);
+                    setCurrPassword("");
+                    setUpdatedData(initialFormData)
+                    setErrors(initialErrors)
                   }}
                 >
                   Cancel
                 </Button>
                 <Button
                   isDisabled={
-                    updatedData.password !== updatedData.checkPassword
+                    updatedData.password !== updatedData.checkPassword ||
+                    !currPassword
                   }
                   marginY={"1rem"}
                   onClick={() => {
-                    setIsEditing(!isEditing);
-                    handleSubmit();
+                    handleValidateAndUpdate(
+                      userData,
+                      updatedData,
+                      currPassword
+                    );
                     setUpdatedData(initialFormData);
+                    setCurrPassword("");
                   }}
                 >
-                  {isEditing ? "Save Changes" : "Edit Account"}
+                  Save Changes
                 </Button>
               </>
             ) : (
               <Button
-                isDisabled={updatedData.password !== updatedData.checkPassword}
                 marginY={"1rem"}
                 onClick={() => {
                   setIsEditing(!isEditing);

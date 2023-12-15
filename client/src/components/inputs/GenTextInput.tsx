@@ -1,5 +1,6 @@
 import  { forwardRef, useState, useEffect } from 'react'
 import { FormControl, FormLabel, Input } from '@chakra-ui/react';
+import { validateTextInput } from '../../utils/input_utils';
 
 
 interface TextInputProps {
@@ -32,7 +33,9 @@ const GenTextInput = forwardRef<HTMLInputElement, TextInputProps>(
         value={inputVal}
         placeholder={formVal}
         onChange={(e) => {
-            setInputVal(e.target.value);
+          if (validateTextInput({ data: e.target.value })) {
+            setInputVal(e.target.value); 
+          }
         }}
         onBlur={(e) => onSubmit(e.target.value)}
         onClick={() => {

@@ -54,10 +54,13 @@ const OptionPopup = ({ text, handleUpdate, hoverMsg, userDataKey, userData, data
     onClose();
   }
 
+  console.log(newData);
+  
     useEffect(() => {
       // Id wasn't picked up by useState, so had to set it like this.
       // setNewData({ ...dataFormat, _id: id });
       // get location
+      console.log(newData);
       const options = {
         enableHighAccuracy: true,
         timeout: 7000,

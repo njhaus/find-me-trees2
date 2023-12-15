@@ -10,7 +10,9 @@ import {
   PopoverArrow,
   PopoverCloseButton,
   PopoverAnchor,
-  Button
+  Button,
+  Text,
+  useDisclosure
 } from "@chakra-ui/react";
 
 import { GiNotebook } from "react-icons/gi";
@@ -24,6 +26,8 @@ interface iFavoriteNotes {
 }
 
 const FavoriteNotes = ({ data, id }: iFavoriteNotes) => {
+
+  const { onOpen, onClose, isOpen } = useDisclosure();
 
   const [isEditing, setIsEditing] = useState(false);
   const [favorites, setFavorites] = useState(data);
@@ -48,7 +52,12 @@ const FavoriteNotes = ({ data, id }: iFavoriteNotes) => {
   }
 
   return (
-    <Popover>
+    <Popover
+      returnFocusOnClose={false}
+      isOpen={isOpen}
+      onClose={onClose}
+      onOpen={onOpen}
+    >
       <PopoverTrigger>
         <Button>
           <GiNotebook />
@@ -60,7 +69,13 @@ const FavoriteNotes = ({ data, id }: iFavoriteNotes) => {
         <PopoverCloseButton />
         {!isEditing && (
           <PopoverBody>
-            {thisTree?.notes && thisTree.notes}
+            {thisTree?.notes ? (
+              <Text>{thisTree.notes}</Text>
+            ) : (
+              <Text fontStyle={"italic"} color={"grey"}>
+                No notes yet
+              </Text>
+            )}
           </PopoverBody>
         )}
         {isEditing ? (
@@ -72,11 +87,16 @@ const FavoriteNotes = ({ data, id }: iFavoriteNotes) => {
               onSubmit={handleEditedNote}
             />
             <Button onClick={() => saveEditedNote()}>Save</Button>
+            <Button onClick={() => {
+              setFavorites(data);
+              setIsEditing(false)
+            }
+            }>Cancel</Button>
           </>
         ) : (
-          <Button onClick={() => setIsEditing(true)}>
-            {thisTree?.notes ? "Edit" : "Add"} Note
-          </Button>
+            <Button onClick={() => setIsEditing(true)}>
+              {thisTree?.notes ? "Edit" : "Add"} Note
+            </Button>
         )}
       </PopoverContent>
     </Popover>
