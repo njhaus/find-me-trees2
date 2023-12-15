@@ -1,7 +1,7 @@
 import { Router } from "express";
 import User from "../models/user.js";
 import { verifyAccessToken } from "../middleware/jwt_middleware.js";
-import { validateUpdateUser } from "../middleware/joi_middleware.js";
+import { validateNewUser, validateUpdateUser } from "../middleware/joi_middleware.js";
 import passport from "passport";
 
 const router = Router();
@@ -10,7 +10,7 @@ router.get('/', (req, res, next) => {
     res.send('user route works!')
 })
 
-// Update user
+// Update user trees
 router.patch("/update", validateUpdateUser, verifyAccessToken, async (req, res) => {
   console.log("UPDATE user route accessed");
   const userData = req.body;
@@ -47,9 +47,12 @@ router.patch("/update", validateUpdateUser, verifyAccessToken, async (req, res) 
   }
 });
 
+
+// Update user profile -- validate new user because all tree data is not being passed through
 router.patch(
   "/profileupdate",
   verifyAccessToken,
+  validateNewUser,
   passport.authenticate("local", {
     failureMessage: true,
   }),
@@ -64,7 +67,10 @@ router.patch(
       { username: username },
       updateObject,
       { new: true }
-    );
+    )
+      .populate("saved._id")
+      .populate("found._id")
+      .populate("favorites._id");;
     if (newPassword) {
       const deletedUser = await User.deleteOne({ username: newUsername });
       const newUserObject = {
@@ -78,7 +84,10 @@ router.patch(
         favorites: foundUser.favorites,
       };
       const newUser = await new User(newUserObject);
-      const registeredUser = await User.register(newUser, newPassword);
+      const registeredUser = await User.register(newUser, newPassword)
+        .populate("saved._id")
+        .populate("found._id")
+        .populate("favorites._id");;
       await req.login(registeredUser, function (err) {
         if (err) {
           console.log("error logging in");
@@ -87,9 +96,11 @@ router.patch(
           console.log("user registered and logged in!");
         }
       });
+      console.log("UPDATE PROFILE SUCCESS! (with password change)")
       res.send(registeredUser);
     }
     else {
+      console.log('UPDATE PROFILE SUCCCESS! (No password change)')
       res.send(foundUser);
     }
   }

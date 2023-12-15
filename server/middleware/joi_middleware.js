@@ -2,11 +2,8 @@ import Joi from 'joi'
 
 // Existing user will have access token and saved/found/favories
 const userSchema = Joi.object({
-  username: Joi.string().alphanum().min(4).max(20),
-  email: Joi.string()
-    .email()
-    .min(4)
-    .max(30),
+  username: Joi.string().alphanum().min(4).max(20).required(),
+  email: Joi.string().email().min(4).max(30),
   password: Joi.string()
     .pattern(
       new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9!@#$%^&*])(?!.*s)(?=.{8,})")
@@ -19,15 +16,22 @@ const userSchema = Joi.object({
   favorites: Joi.array(),
 });
 
-// New user will not have access token or saved/found/favorites
+// New user will not have access token or saved/found/favorites. Includes items from updateing profile such as 'newUsername, etc.', but NOT required as these are only used when updating user profile
 const newUserSchema = Joi.object({
-  username: Joi.string().alphanum().min(4).max(20),
-  email: Joi.string().email().min(4).max(30),
+  username: Joi.string().alphanum().min(4).max(20).required(),
+  email: Joi.string().email().min(4).max(30).required(),
   password: Joi.string()
     .pattern(
       new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9!@#$%^&*])(?!.*s)(?=.{8,})")
     )
     .min(8)
+    .required(),
+  newUsername: Joi.string().alphanum().min(4).max(20),
+  newEmail: Joi.string().email().min(4).max(30),
+  newPassword: Joi.string()
+    .empty("")
+    .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9!@#$%^&*])(?!.*\s)(?=.{8,})/),
+  accessToken: Joi.string(),
 });
 
 
