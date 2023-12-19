@@ -6,7 +6,11 @@ Style reference:
 
 DATA:
 Taxonomy:
-https://hort.ifas.ufl.edu/database/trees/trees_scientific.shtml
+  https://hort.ifas.ufl.edu/database/trees/trees_scientific.shtml
+
+  USDA database -- trees
+  https://plants.usda.gov/home/factSheetPlantGuideSearchResults?resultId=383b6b10-0e68-4394-a931-4b03102e235a
+  Citation information: https://plants.usda.gov/home/help
 
 Location:
 https://data.world/uci/plants
