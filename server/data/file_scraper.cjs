@@ -12,27 +12,124 @@ const pdf = require("pdf-parse");
 
 const getFileData = async (file) => {
   try {
-    const data = await fs.readFile(`./raw/${file}`, "utf8");
+    const data = await fs.readFile(`./test/${file}`, "utf8");
     console.log("FILE DATA:");
     const splitWords = [
       "introduction",
       "General Information",
       "Scientific name:",
-      "Common name(s):",
+      "Pronunciation:",
+      "Common name",
       "Family:",
-      "USDA Hardiness Zones:",
+      "USDA hardiness zones:",
       "Origin:",
       "Uses:",
-      "Avaliability:",
+      "Availability:",
+      "description",
       "Leaf type:",
-      "Leaflet margin:", "Leaf margin:",
-      "Leaflet shape:", "leaf shape:",
-      "leaflet venation:", "leaf venation:",
-      'flower color:'
-    ];
+      "Leaflet margin:",
+      "Leaf margin:",
+      "Leaflet shape:",
+      "Leaf shape:",
+      "Leaflet venation:",
+      "Leaf venation:",
+      "Leaf type and persistence:",
+      "Leaf blade length:",
+      "Leaf color:",
+      "Flower color:",
+      "Flower characteristics:",
+      "Trunk/bark/branches:",
+      "Pruning requirement:",
+    ]; 3
+
     const regex = new RegExp(`(${splitWords.join("|")})`, "i");
-    const dataArray = data.toString().split(regex).filter(Boolean);
+    const dataArray = data.toString().split(regex).filter(Boolean).map((str) => str.replaceAll(/\n/g, " ").trim(),);
+
+    const intro = dataArray[dataArray.findIndex(str => str.match('INTRODUCTION')) + 1];
+    const sciName = dataArray[dataArray.findIndex((str) => str.match("Scientific name:")) + 1].split(',')[0];
+    const commonName = dataArray[
+      dataArray.findIndex((str) => str.match("Common name")) + 1
+    ]
+      .split(/,|:/)[1]
+      ;
+    const commonNames = dataArray[
+      dataArray.findIndex((str) => str.match("Common name")) + 1
+    ]
+      .split(":")[1]
+      ;
+    const leafType =
+      dataArray[dataArray.findIndex((str) => str.match("Leaf type:")) + 1];
+    const leafShape =
+      dataArray[dataArray.findIndex((str) => str.match("Leaf shape:")) + 1];
+    const leafletShape =
+      dataArray[dataArray.findIndex((str) => str.match("Leaflet shape:")) + 1];
+    const leafSize =
+      dataArray[dataArray.findIndex((str) => str.match("Leaf blade length:")) + 1];
+    const leafVeins =
+      dataArray[dataArray.findIndex((str) => str.match("venation:")) + 1];
+    const flower = dataArray[
+      dataArray.findIndex((str) => str.match("Flower color:")) + 1
+    ]
+      .split("\n")[0]
+      ;
+    const barkBranches =
+      dataArray[
+        dataArray.findIndex((str) => str.match("Trunk/bark/branches:")) + 1
+      ];
+    const family = dataArray[
+      dataArray.findIndex((str) => str.match("Family:")) + 1
+    ];
+     const hardinessZone =
+       dataArray[
+         dataArray.findIndex((str) => str.match("USDA hardiness zones:")) + 1
+       ].split("(")[0]
+      ;
+    const origin = dataArray[
+      dataArray.findIndex((str) => str.match("Origin:")) + 1
+    ];
+    const uses = dataArray[
+      dataArray.findIndex((str) => str.match("Uses:")) + 1
+    ];
+    const availability = dataArray[
+      dataArray.findIndex((str) => str.match("Availability:")) + 1
+    ];
+    
+    const dataObject = {
+      title: capitalize(commonName),
+      imgSrc: [
+        "https://source.unsplash.com/random/400×300/?shrub",
+        "https://source.unsplash.com/random/400×300/?shrub",
+      ],
+      sciName: capitalize(sciName),
+      intro: capitalize(intro),
+      sciInfo: {
+        scientificName: capitalize(sciName),
+        commonNames: capitalize(commonNames),
+        family: capitalize(family),
+        hardinessZone: capitalize(hardinessZone),
+        origin: capitalize(origin),
+        uses: capitalize(uses),
+        availability: capitalize(availability),
+      },
+      traits: {
+        leafType: capitalize(leafType),
+        leafShape: leafShape.match("Fact")
+          ? capitalize(leafletShape)
+          : capitalize(leafShape),
+        leafSize: capitalize(leafSize),
+        leafVeins: capitalize(leafVeins),
+        bark: capitalize(barkBranches),
+        // branches: "spiral",
+        // fruit: "fleshy",
+        flower: capitalize(flower),
+        location: ["CA"],
+      },
+    };
     console.log(dataArray);
+    console.log(dataObject);
+
+    console.log(commonName);
+
     return dataArray;
   } catch (err) {
     console.error(err);
@@ -42,7 +139,7 @@ const getFileData = async (file) => {
 
 const getFiles = async () => {
   try {
-    const files = await fs.readdir("./raw");
+    const files = await fs.readdir("./test");
     console.log("Current directory filenames:");
     files.forEach((file) => {
       console.log(file);
@@ -67,3 +164,8 @@ getFiles()
 
 
 const treeList = [];
+
+
+const capitalize = (str) => {
+  return str.slice(0, 1).toUpperCase() + str.slice(1);
+}
