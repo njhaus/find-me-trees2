@@ -1,19 +1,12 @@
 const fs = require("fs").promises;
 const pdf = require("pdf-parse");
 
-
-// const getTreeData = (dataArray) => {
-//   const treeData = dataArray.map(data => (
-//     {
-      
-//     }
-//   ))
-// }
+const treeList = [];
 
 const getFileData = async (file) => {
   try {
-    const data = await fs.readFile(`./test/${file}`, "utf8");
-    console.log("FILE DATA:");
+    const data = await fs.readFile(`./raw/${file}`, "utf8");
+    // console.log("FILE DATA:");
     const splitWords = [
       "introduction",
       "General Information",
@@ -125,10 +118,10 @@ const getFileData = async (file) => {
         location: ["CA"],
       },
     };
-    console.log(dataArray);
+    // console.log(dataArray);
     console.log(dataObject);
 
-    console.log(commonName);
+    // console.log(commonName);
 
     return dataArray;
   } catch (err) {
@@ -139,8 +132,7 @@ const getFileData = async (file) => {
 
 const getFiles = async () => {
   try {
-    const files = await fs.readdir("./test");
-    console.log("Current directory filenames:");
+    const files = await fs.readdir("./raw");
     files.forEach((file) => {
       console.log(file);
     });
@@ -155,17 +147,22 @@ getFiles()
   .then((files) => {
     // console.log(files)
     // getTreeData(
-      files.forEach(file => getFileData(file))
+    files.forEach(file => {
+      treeList.push(getFileData(file));
+    })
     // )
   })
+  .then(trees => console.log(trees))
   .catch((err) => {
     console.error("Error in getFiles:", err);
   });
 
 
-const treeList = [];
-
-
 const capitalize = (str) => {
-  return str.slice(0, 1).toUpperCase() + str.slice(1);
+  if (str) {
+    return str.slice(0, 1).toUpperCase() + str.slice(1);
+  }
+  else {
+    return '';
+  }
 }
