@@ -21,8 +21,8 @@ This site was not completed as part of any course. It is a completely original a
 * Save trees into categories.
 
 #### Planned Features:
-*Share trees you've found or favorited with friends.
-*Filter favorites, finds, and saved trees.
+* Share trees you've found or favorited with friends.
+* Filter favorites, finds, and saved trees.
 
 ---
 
