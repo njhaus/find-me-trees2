@@ -28,6 +28,7 @@ const getFileData = async (file) => {
       "Leaf venation:",
       "Leaf type and persistence:",
       "Leaf blade length:",
+      "Leaflet blade length:",
       "Leaf color:",
       "Flower color:",
       "Flower characteristics:",
@@ -58,6 +59,10 @@ const getFileData = async (file) => {
       dataArray[dataArray.findIndex((str) => str.match("Leaflet shape:")) + 1];
     const leafSize =
       dataArray[dataArray.findIndex((str) => str.match("Leaf blade length:")) + 1];
+    const leafletSize =
+      dataArray[
+        dataArray.findIndex((str) => str.match("Leaflet blade length:")) + 1
+      ];
     const leafVeins =
       dataArray[dataArray.findIndex((str) => str.match("venation:")) + 1];
     const flower = dataArray[
@@ -109,21 +114,22 @@ const getFileData = async (file) => {
         leafShape: leafShape.match("Fact")
           ? capitalize(leafletShape)
           : capitalize(leafShape),
-        leafSize: capitalize(leafSize),
+        leafSize: leafShape.match("Fact")
+          ? capitalize(leafletSize)
+          : capitalize(leafSize),
         leafVeins: capitalize(leafVeins),
         bark: capitalize(barkBranches),
         // branches: "spiral",
         // fruit: "fleshy",
         flower: capitalize(flower),
-        location: ["CA"],
+        location: [],
       },
     };
     // console.log(dataArray);
-    console.log(dataObject);
 
     // console.log(commonName);
-
-    return dataArray;
+    if (!dataObject.title || dataObject.sciName.match(/Logo/)) {return null}
+    else {return dataObject;}
   } catch (err) {
     console.error(err);
     return null;
@@ -133,10 +139,10 @@ const getFileData = async (file) => {
 const getFiles = async () => {
   try {
     const files = await fs.readdir("./raw");
-    files.forEach((file) => {
-      console.log(file);
-    });
-    return files; // Return the array of files if needed
+    const promises = files.map(file => {
+      return getFileData(file)
+    })
+    return Promise.all(promises); // Return the array of files if needed
   } catch (err) {
     console.error("Error reading directory:", err);
     return []; // Return an empty array or handle the error as required
@@ -145,14 +151,15 @@ const getFiles = async () => {
 
 getFiles()
   .then((files) => {
-    // console.log(files)
-    // getTreeData(
     files.forEach(file => {
-      treeList.push(getFileData(file));
+      treeList.push(file);
     })
     // )
   })
-  .then(trees => console.log(trees))
+  .then(trees => {
+    console.log("howdy doody");
+    console.log(treeList);
+  })
   .catch((err) => {
     console.error("Error in getFiles:", err);
   });
