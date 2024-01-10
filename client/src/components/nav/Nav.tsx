@@ -33,7 +33,6 @@ export function Nav() {
   return (
     //   BROWSER Navbar
     <>
-      <RouteTest />
       {/* Dialog message -- for logged out,  */}
       <NavDialog
         message={redirectData?.message ? redirectData.message : ''}

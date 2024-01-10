@@ -12,7 +12,7 @@ const MobileNav = ({ auth, onLogout }: iNav) => {
   return (
     <>
       <chakra.header id="header" display={{ base: "flex", md: "none" }}>
-        <Flex w="100%" px="6" py="5" align="center" justify="space-between">
+        <Flex w="100%" align="center" justify="space-between">
           {/* // Logo */}
           <MainLogo />
           {/* // Dropdown Menu */}

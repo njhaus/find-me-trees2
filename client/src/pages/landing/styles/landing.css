@@ -1,0 +1,31 @@
+.rotating-text {
+    opacity: 0;
+    animation: rotating-text 6035ms forwards infinite;
+}
+
+.video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@keyframes rotating-text {
+    0% {
+        opacity: 0;
+    }
+    5% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    85% {
+        opacity: 1;
+    }
+    95% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}

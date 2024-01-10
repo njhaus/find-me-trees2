@@ -1,8 +1,10 @@
-import { Box, Flex, Image } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 
 import LandingMain from "./LandingMain";
 import LearnMore from "./LearnMore";
 import LandingArticlesAll from "./landing_articles/LandingArticlesAll";
+
+import './styles/landing.css'
 
 const Landing = () => {
   return (

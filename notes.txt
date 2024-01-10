@@ -2,7 +2,8 @@ DO BEFORE DEPLOYMENT:
 1. Make sure cookies are sent httpOnly
 
 Style reference:
-
+https://oregonforestsforever.com/
+https://theoceancleanup.com/?gad_source=1&gclid=CjwKCAiA-vOsBhAAEiwAIWR0TcudrhQ5gczBtHmOApA7Ivt4YH-kdF-Rfo8eJBqtg9Xzrx-SRIgcqRoCoM8QAvD_BwE
 
 DATA:
 Taxonomy:
