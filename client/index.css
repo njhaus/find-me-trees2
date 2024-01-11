@@ -1,3 +1,21 @@
+:root {
+    --main-font: 'Montserrat', Verdana,
+        sans-serif;
+    --fancy-font: 'Kaushan Script', cursive;
+
+    --main-color: green;
+
+    --secondary-color: lightgreen;
+
+    --accent-color: purple;
+
+    --neutral-color: goldenrod;
+
+    --light-color: white;
+
+    --dark-color: black;
+}
+
 .src-only {
     position: 'absolute';
     width: '1px';
@@ -9,3 +27,18 @@
     white-space: 'nowrap';
     border-width: '0';
 }
+
+/* Text */
+
+* {
+    font-family: var(--main-font) !important;
+}
+
+.text-fancy {
+    font-family: var(--fancy-font) !important;
+}
+
+.text-main {
+    font-family: var(--main-font);
+}
+

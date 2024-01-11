@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 
 import {
+  Box,
   Flex,
   Button,
   HStack,
@@ -32,11 +33,17 @@ const DesktopNav = ({ auth, onLogout, redirect }: iNav) => {
 
   return (
     <chakra.header id="header" display={{ base: "none", md: "flex" }}>
-      <Flex w="100%"  align="center" justify="space-between">
+      <Flex w="100%" align="center" justify="space-between">
         {/* // Logo */}
-        <MainLogo />
+        <Box
+          className="header-logo"
+          backgroundColor={'#ddf0c7'}
+          pe={'8rem'}
+        >
+          <MainLogo />
+        </Box>
         {/* // Nav Items */}
-        <HStack as="nav" spacing="1">
+        <HStack as="nav" spacing="1" px={"1.5rem"}>
           {links.map((item, i) => (
             <Link key={i} to={item.to}>
               <Button variant="nav">{item.text}</Button>

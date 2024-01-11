@@ -1,6 +1,6 @@
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
-import RouteTest from "./RouteTest";
+import './styles/header.css'
 
 
 export interface LinkProps {
@@ -10,7 +10,6 @@ export interface LinkProps {
 }
 
 import useAuth from "../../hooks/useAuth";
-import { apiPost } from "../../services/api_client";
 import { iUserData } from "../../data/user_data/userData";
 import useLogout from "../../hooks/useLogout";
 import { useLocation } from "react-router-dom";

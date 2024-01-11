@@ -18,7 +18,7 @@ const LandingMain = () => {
             // NEED TO ADD CSS FADE IN_OUT CLASSES
             if (rotatingText + 1 >= textForRotating.length) setRotatingText(0)
             else setRotatingText(rotatingText + 1)
-      }, 6035);
+      }, 6030);
 
       //Clearing the interval
       return () => clearInterval(interval);
@@ -41,14 +41,28 @@ const LandingMain = () => {
         align={"center"}
         bg={"transparent"}
         zIndex={1}
-        marginBottom={"5%"}
+        marginBottom={"2%"}
       >
-        <Heading variant="h1">For the arborist in all of us</Heading>
-        <Text className='rotating-text'>{textForRotating[rotatingText]}</Text>
+        <Heading
+          className="text-fancy"
+          variant="h1"
+          fontSize={"4rem"}
+          textShadow={"0px 0px 2px black"}
+        >
+          For the arborist in all of us
+        </Heading>
+        <Text
+          className="rotating-text"
+          margin={"0.75rem"}
+          fontSize={"1.5rem"}
+          textShadow={"0px 0px 2px black"}
+        >
+          {textForRotating[rotatingText]}
+        </Text>
       </Flex>
       <Box position={"absolute"} w={"100%"} h={"100%"} bg={"white"}>
         <video
-          className='video'
+          className="video"
           src="../../../public/find-me-trees-vid.mp4"
           autoPlay
           loop

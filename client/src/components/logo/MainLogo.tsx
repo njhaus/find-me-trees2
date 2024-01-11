@@ -6,12 +6,17 @@ const MainLogo = () => {
     <Link to={"/"}>
       <HStack
           h={'100%'}
-        bg={'rgb(235, 234, 207)'}
-        px={'1rem'}
+        bg={'transparent'}
+        px={'1.5rem'}
         py={'0.5rem'}
+
       >
         <Image src={"../../../public/findmetreeslogo2.png"} h="50px" />
-        <Heading as={'h2'} size={'xl'}>Find Me Trees</Heading>
+        <Heading
+          as={'h2'}
+          size={'xl'}
+          fontWeight={'300'}
+        >Find Me Trees</Heading>
       </HStack>
     </Link>
   );
