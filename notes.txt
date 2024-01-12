@@ -17,6 +17,10 @@ Location:
 https://data.world/uci/plants
 
 
+Photo credits:
+pinre tree mask: Image by <a href="https://www.freepik.com/free-vector/gradient-mountain-landscape_19852072.htm#query=pine%20forest%20black%20and%20white&position=46&from_view=search&track=ais&uuid=591e4551-6768-4391-ae5f-a05d2a96ad08">Freepik</a>
+
+
 
 Problems:
 1. pages/browse/iconData : NEED TO REFACTOR THIS-- CODE SMELLS WHEN HARDCODING THE COLOR IN TWO PLACES< BUT I AM HAVING TROUBLE ACCESSING THE COLOR FROM WITHIN THE OBJECT

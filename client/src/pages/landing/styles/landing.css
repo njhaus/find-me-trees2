@@ -1,6 +1,6 @@
 .rotating-text {
-    opacity: 0;
-    animation: rotating-text 6025ms forwards infinite;
+    opacity: 1;
+    animation: rotating-text 6030ms forwards infinite;
 }
 
 .video {

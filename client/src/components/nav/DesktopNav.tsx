@@ -32,16 +32,30 @@ const DesktopNav = ({ auth, onLogout, redirect }: iNav) => {
   }, [redirect])
 
   return (
-    <chakra.header id="header" display={{ base: "none", md: "flex" }}>
-      <Flex w="100%" align="center" justify="space-between">
+    <chakra.header
+      id="header"
+      display={{ base: "none", md: "flex" }}
+      h={"4rem"}
+      zIndex={"5"}
+    >
+      <Flex w="100%" align="center" justify="space-between" h={"100%"}>
         {/* // Logo */}
-        <Box
-          className="header-logo"
-          backgroundColor={'#ddf0c7'}
-          pe={'8rem'}
-        >
-          <MainLogo />
-        </Box>
+        <HStack h={"100%"} gap={0}>
+          <Box
+            className="header-logo"
+            backgroundColor={"secondary.900"}
+            pe={"1rem"}
+          >
+            <MainLogo />
+          </Box>
+          <Box
+            className="forest-mask"
+            backgroundColor={"secondary.900"}
+            h={"100%"}
+            aspectRatio={"2.7/1"}
+            zIndex={"5"}
+          ></Box>
+        </HStack>
         {/* // Nav Items */}
         <HStack as="nav" spacing="1" px={"1.5rem"}>
           {links.map((item, i) => (

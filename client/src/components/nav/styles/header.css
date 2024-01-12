@@ -1,0 +1,5 @@
+.forest-mask {
+    mask-image: url('../../../../public/trees-mask.png');
+    mask-size: cover;
+    mask-repeat: no-repeat;
+}
