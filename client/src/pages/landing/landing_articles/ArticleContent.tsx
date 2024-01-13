@@ -14,7 +14,7 @@ interface ArticleContentProps {
     children?: JSX.Element[];
 }
 
-const ArticleContent = ({title, description, cta, children}: ArticleContentProps) => {
+const ArticleContent = ({title, description, cta}: ArticleContentProps) => {
   return (
     <Flex
       direction={"column"}
@@ -27,7 +27,7 @@ const ArticleContent = ({title, description, cta, children}: ArticleContentProps
       position={"relative"}
       gap={"2rem"}
       px={"2rem"}
-      pb={"15%"}
+      pb={"5%"}
     >
       <Flex direction={"column"} gap={"1rem"}>
         <Heading

@@ -18,7 +18,7 @@ const LandingMain = () => {
             // NEED TO ADD CSS FADE IN_OUT CLASSES
             if (rotatingText + 1 >= textForRotating.length) setRotatingText(0)
             else setRotatingText(rotatingText + 1)
-      }, 6028);
+      }, 6026);
 
       //Clearing the interval
       return () => clearInterval(interval);
