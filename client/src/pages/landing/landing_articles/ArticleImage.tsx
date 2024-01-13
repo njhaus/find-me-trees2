@@ -1,4 +1,4 @@
-import { Flex, Image, Text } from "@chakra-ui/react";
+import { Flex, Image } from "@chakra-ui/react";
 
 interface ArticleImageProps {
     imgUrl: string;
@@ -7,7 +7,7 @@ interface ArticleImageProps {
 const ArticleImage = ({ imgUrl }: ArticleImageProps) => {
   return (
     <Flex
-      bg={"blue.300"}
+      bg={"transparent"}
       width={"35%"}
       flexGrow={{ base: "1", md: "0" }}
       alignItems={"center"}

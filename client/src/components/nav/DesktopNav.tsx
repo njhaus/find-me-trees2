@@ -12,10 +12,10 @@ import {
 import { Link } from "react-router-dom";
 
 import links from "../../data/nav_data";
-import MainLogo from "../logo/MainLogo";
 import Login from "../login_auth/Login";
 
 import { iNav } from "./Nav";
+import LogoContainer from "./LogoContainer";
 
 const DesktopNav = ({ auth, onLogout, redirect }: iNav) => {
   const {
@@ -37,25 +37,11 @@ const DesktopNav = ({ auth, onLogout, redirect }: iNav) => {
       display={{ base: "none", md: "flex" }}
       h={"4rem"}
       zIndex={"5"}
+      backgroundColor={"main.900"}
     >
       <Flex w="100%" align="center" justify="space-between" h={"100%"}>
         {/* // Logo */}
-        <HStack h={"100%"} gap={0}>
-          <Box
-            className="header-logo"
-            backgroundColor={"secondary.900"}
-            pe={"1rem"}
-          >
-            <MainLogo />
-          </Box>
-          <Box
-            className="forest-mask"
-            backgroundColor={"secondary.900"}
-            h={"100%"}
-            aspectRatio={"2.7/1"}
-            zIndex={"5"}
-          ></Box>
-        </HStack>
+        <LogoContainer/>
         {/* // Nav Items */}
         <HStack as="nav" spacing="1" px={"1.5rem"}>
           {links.map((item, i) => (

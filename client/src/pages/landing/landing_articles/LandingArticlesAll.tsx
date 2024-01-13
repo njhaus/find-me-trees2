@@ -5,7 +5,9 @@ import { Box } from "@chakra-ui/react";
 import LandingArticle from "./LandingArticle";
 import ArticleImgScroll from "./ArticleImgScroll";
 
-import { articles, Article } from "./data/articleData";
+import { articles } from "./data/articleData";
+
+import '../styles/landing.css'
 
 const LandingArticlesAll = () => {
   const [visibleImg, setVisibleImg] = useState(0);
@@ -40,9 +42,11 @@ const LandingArticlesAll = () => {
 
   return (
     <Box
+      className="landing-articles"
       ref={scrollRef}
       width={"100%"}
       position={"relative"}
+      bg={"secondary.100"}
     >
       {articles.map((a) => (
         <LandingArticle
@@ -56,10 +60,7 @@ const LandingArticlesAll = () => {
             a.children.map((child, i) => <Box key={i}>{child}</Box>)}
         </LandingArticle>
       ))}
-      <ArticleImgScroll
-        imgs={imgs}
-        visibleImg={visibleImg}
-      />
+      <ArticleImgScroll imgs={imgs} visibleImg={visibleImg} />
     </Box>
   );
 };

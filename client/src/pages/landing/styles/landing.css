@@ -1,6 +1,8 @@
+/* Landing Main */
+
 .rotating-text {
     opacity: 1;
-    animation: rotating-text 6030ms forwards infinite;
+    animation: rotating-text 6032ms forwards infinite;
 }
 
 .video {
@@ -28,4 +30,18 @@
     100% {
         opacity: 0;
     }
+}
+
+/* Lanfing Articles */
+
+.landing-articles {
+    /* padding-top: 4rem;
+    margin-top: -4rem;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgb(2, 30, 10) 4rem,
+        rgb(2, 30, 10) 100%
+    ) */
+
 }

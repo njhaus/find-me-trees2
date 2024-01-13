@@ -18,7 +18,7 @@ const LandingMain = () => {
             // NEED TO ADD CSS FADE IN_OUT CLASSES
             if (rotatingText + 1 >= textForRotating.length) setRotatingText(0)
             else setRotatingText(rotatingText + 1)
-      }, 6030);
+      }, 6028);
 
       //Clearing the interval
       return () => clearInterval(interval);
@@ -44,10 +44,12 @@ const LandingMain = () => {
         marginBottom={"2%"}
       >
         <Heading
-          className="text-fancy"
           variant="h1"
-          fontSize={"4rem"}
+          fontSize={{ base: '2.75rem', md: "4rem"}}
           textShadow={"0px 0px 2px black"}
+          textAlign={'center'}
+          px={'2rem'}
+          fontFamily={'display'}
         >
           For the arborist in all of us
         </Heading>

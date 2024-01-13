@@ -31,14 +31,7 @@
 /* Text */
 
 * {
-    font-family: var(--main-font) !important;
-}
-
-.text-fancy {
-    font-family: var(--fancy-font) !important;
-}
-
-.text-main {
     font-family: var(--main-font);
 }
+
 

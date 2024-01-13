@@ -17,23 +17,37 @@ interface ArticleContentProps {
 const ArticleContent = ({title, description, cta, children}: ArticleContentProps) => {
   return (
     <Flex
-      direction={"row"}
-      bg={"blue.100"}
+      direction={"column"}
       width={"60%"}
       minWidth={{ base: "100%", sm: "31.2rem" }}
       maxWidth={"100vw"}
       flexGrow={"2"}
-      justifyContent={"space-between"}
+      justifyContent={"center"}
       flexWrap={"nowrap"}
       position={"relative"}
+      gap={"2rem"}
+      px={"2rem"}
+      pb={"15%"}
     >
-      <Flex direction={"column"} width={"50%"}>
-        <Heading as={"h3"} size={"md"}>
+      <Flex direction={"column"} gap={"1rem"}>
+        <Heading
+          as={"h3"}
+          size={"2xl"}
+          color={"white"}
+          fontFamily={"main"}
+          fontWeight={"700"}
+        >
           {title}
         </Heading>
-        {children}
+        {/* {children} */}
         <Box maxWidth={"100%"}>
-          <Text maxWidth={"100%"} whiteSpace={"normal"}>
+          <Text
+            maxWidth={"100%"}
+            whiteSpace={"normal"}
+            fontFamily={"main"}
+            color={"main.900"}
+            fontSize={"1.25rem"}
+          >
             {description}
           </Text>
         </Box>

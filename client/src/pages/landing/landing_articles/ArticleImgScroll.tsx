@@ -9,7 +9,6 @@ interface ArticleImgScrollProps {
 const ArticleImgScroll = ({imgs, visibleImg}: ArticleImgScrollProps) => {
   return (
     <Box
-      bg={"green.400"}
       width={"35%"}
       height={"100%"}
       display={{ base: "none", md: "block" }}
@@ -19,6 +18,7 @@ const ArticleImgScroll = ({imgs, visibleImg}: ArticleImgScrollProps) => {
       right={"0"}
       top={"0"}
       paddingTop={'40vh'}
+      bg={'transparent'}
     >
       <Image
         position={"sticky"}
