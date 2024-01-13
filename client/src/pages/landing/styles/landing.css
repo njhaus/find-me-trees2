@@ -2,7 +2,7 @@
 
 .rotating-text {
     opacity: 1;
-    animation: rotating-text 6028ms forwards infinite;
+    animation: rotating-text 6000ms forwards infinite;
 }
 
 .video {
@@ -34,14 +34,14 @@
 
 /* Lanfing Articles */
 
-.landing-articles {
-    /* padding-top: 4rem;
+/* .landing-articles {
+    padding-top: 4rem;
     margin-top: -4rem;
     background: linear-gradient(
         to bottom,
         transparent 0%,
         rgb(2, 30, 10) 4rem,
         rgb(2, 30, 10) 100%
-    ) */
+    )
 
-}
+} */
