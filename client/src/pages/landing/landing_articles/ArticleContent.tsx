@@ -6,6 +6,7 @@ import {
     Button,
     Box
 } from "@chakra-ui/react";
+import Boundary from "../../../components/ui-components/Boundary";
 
 interface ArticleContentProps {
     title: string;
@@ -27,7 +28,8 @@ const ArticleContent = ({title, description, cta}: ArticleContentProps) => {
       position={"relative"}
       gap={"2rem"}
       px={"2rem"}
-      pb={"5%"}
+      pt={"5%"}
+      pb={"10%"}
     >
       <Flex direction={"column"} gap={"1rem"}>
         <Heading
@@ -36,10 +38,11 @@ const ArticleContent = ({title, description, cta}: ArticleContentProps) => {
           color={"white"}
           fontFamily={"main"}
           fontWeight={"700"}
+          mb={"1rem"}
         >
           {title}
         </Heading>
-        {/* {children} */}
+        <Boundary color={"white"} width={"75%"} />
         <Box maxWidth={"100%"}>
           <Text
             maxWidth={"100%"}
@@ -47,14 +50,13 @@ const ArticleContent = ({title, description, cta}: ArticleContentProps) => {
             fontFamily={"main"}
             color={"main.900"}
             fontSize={"1.25rem"}
+            mt={"1rem"}
           >
             {description}
           </Text>
         </Box>
       </Flex>
-      <Flex justifyContent={"flex-end"} width={"25%"}>
-        <Button whiteSpace={"normal"}>{cta}</Button>
-      </Flex>
+      <Button whiteSpace={"normal"} w={'12rem'}>{cta}</Button>
     </Flex>
   );
 }

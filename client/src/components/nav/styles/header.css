@@ -3,3 +3,9 @@
     mask-size: cover;
     mask-repeat: no-repeat;
 }
+
+.drawer-decoration {
+    mask-image: url('../../../../public/forest_trees_glyphLarge.png');
+    mask-size: cover;
+    mask-repeat: no-repeat;
+}

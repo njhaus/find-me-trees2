@@ -33,7 +33,7 @@ const findTreesChildren: JSX.Element[] = [<FindTreesArticle />];
 const findTreesArticle = new Article(
   uuidv4(),
   "Find Trees Anywhere",
-  "Search for trees by physical traits, location, or both.",
+  "Search for trees by their physical traits, location, or both.",
   "../../../src/assets/placeholder-1.jpeg",
   "Find Trees!",
   findTreesChildren
@@ -41,14 +41,14 @@ const findTreesArticle = new Article(
 const mapArticle = new Article(
   uuidv4(),
   "Map Your Finds",
-  "Plot your finds on a map to keep track of your find.",
+  "Plot your finds on a map to keep track of the trees you find.",
   "../../../src/assets/placeholder-2.jpeg",
   "Log in to begin"
 );
 const favoriteArticle = new Article(
   uuidv4(),
   "Save Your Favorite Trees",
-  "Keep track of your favorites and visit them again!",
+  "Remember your favorite trees and visit them again!",
   "../../../src/assets/placeholder-3.jpeg",
   "Log in to begin"
 );

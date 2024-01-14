@@ -12,6 +12,8 @@ import {
   useDisclosure as useDrawerDisclosure,
   useDisclosure as useLoginDisclosure,
   IconButton,
+  Box,
+  VStack,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 
@@ -19,7 +21,8 @@ import { Link } from "react-router-dom";
 
 import links from "../../data/nav_data";
 import Login from "../login_auth/Login";
-
+import MainLogo from "../logo/MainLogo";
+import Boundary from "../ui-components/Boundary";
 
 import { iNav } from "./Nav";
 
@@ -40,7 +43,7 @@ const MobileDrawer = ({auth, onLogout}: iNav) => {
 
 
   return (
-    <>
+    <Box className="mobile-drawer" me={"1rem"}>
       <Button
         as={IconButton}
         aria-label="Options"
@@ -57,17 +60,37 @@ const MobileDrawer = ({auth, onLogout}: iNav) => {
       >
         <DrawerOverlay />
         <DrawerContent>
+          <Box
+            className="drawer-decoration"
+            height={"100%"}
+            width={"100%"}
+            position={"absolute"}
+            top={"0"}
+            left={"0"}
+            backgroundColor={"secondary.800"}
+            marginTop={"11rem"}
+          ></Box>
           <DrawerCloseButton />
-          <DrawerHeader>Find Me Trees</DrawerHeader>
+          <DrawerHeader>
+            <MainLogo />
+            <Boundary color={'main.100'} width={ '90%'} />
+          </DrawerHeader>
 
           <DrawerBody>
-            {links.map((item, i) => (
-              <Link key={i} to={item.to}>
-                <Button variant="nav" onClick={onCloseDrawer}>
-                  {item.text}
-                </Button>
-              </Link>
-            ))}
+            <VStack>
+              {links.map((item, i) => (
+                <Link key={i} to={item.to}>
+                  <Button
+                    variant="nav"
+                    textTransform={"uppercase"}
+                    fontSize={"0.9rem"}
+                    onClick={onCloseDrawer}
+                  >
+                    {item.text}
+                  </Button>
+                </Link>
+              ))}
+            </VStack>
           </DrawerBody>
 
           <DrawerFooter>
@@ -77,6 +100,7 @@ const MobileDrawer = ({auth, onLogout}: iNav) => {
                   onOpenLogin();
                   onCloseDrawer();
                 }}
+                variant={"login"}
               >
                 Login
               </Button>
@@ -96,7 +120,7 @@ const MobileDrawer = ({auth, onLogout}: iNav) => {
       {!auth?.username && (
         <Login isOpenLogin={isOpenLogin} onCloseLogin={onCloseLogin} />
       )}
-    </>
+    </Box>
   );
 };
 export default MobileDrawer;

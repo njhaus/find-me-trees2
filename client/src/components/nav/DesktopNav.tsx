@@ -41,12 +41,18 @@ const DesktopNav = ({ auth, onLogout, redirect }: iNav) => {
     >
       <Flex w="100%" align="center" justify="space-between" h={"100%"}>
         {/* // Logo */}
-        <LogoContainer/>
+        <LogoContainer />
         {/* // Nav Items */}
         <HStack as="nav" spacing="1" px={"1.5rem"}>
           {links.map((item, i) => (
             <Link key={i} to={item.to}>
-              <Button variant="nav">{item.text}</Button>
+              <Button
+                variant="nav"
+                textTransform={"uppercase"}
+                fontSize={"0.9rem"}
+              >
+                {item.text}
+              </Button>
             </Link>
           ))}
           {!auth?.username ? (
@@ -54,6 +60,7 @@ const DesktopNav = ({ auth, onLogout, redirect }: iNav) => {
               onClick={() => {
                 onOpenLogin();
               }}
+              variant={'login'}
             >
               Login
             </Button>
