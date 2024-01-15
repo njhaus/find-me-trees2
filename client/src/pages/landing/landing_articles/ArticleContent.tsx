@@ -21,7 +21,7 @@ const ArticleContent = ({title, description, cta}: ArticleContentProps) => {
       direction={"column"}
       width={"60%"}
       minWidth={{ base: "100%", sm: "31.2rem" }}
-      maxWidth={"100vw"}
+      maxWidth={{ base: "100vw", md: "40rem" }}
       flexGrow={"2"}
       justifyContent={"center"}
       flexWrap={"nowrap"}
@@ -56,7 +56,9 @@ const ArticleContent = ({title, description, cta}: ArticleContentProps) => {
           </Text>
         </Box>
       </Flex>
-      <Button whiteSpace={"normal"} w={'12rem'}>{cta}</Button>
+      <Button whiteSpace={"normal"} w={"12rem"}>
+        {cta}
+      </Button>
     </Flex>
   );
 }

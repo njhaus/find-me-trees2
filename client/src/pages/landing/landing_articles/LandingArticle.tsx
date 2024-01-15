@@ -24,7 +24,7 @@ const LandingArticle = ({
       as="article"
       width={"100%"}
       height={"95vh"}
-      justifyContent={"space-between"}
+      justifyContent={"space-around"}
       flexWrap={"wrap"}
       
     >

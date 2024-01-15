@@ -11,10 +11,13 @@ const ArticleImage = ({ imgUrl }: ArticleImageProps) => {
       width={"35%"}
       flexGrow={{ base: "1", md: "0" }}
       alignItems={"center"}
-      justifyContent={"end"}
+      justifyContent={"center"}
+      overflowX={'hidden'}
     >
       <Image
         display={{ base: "block", md: "none" }}
+        maxWidth={"30rem"}
+        maxHeight={'50vh'}
         src={imgUrl}
       ></Image>
     </Flex>

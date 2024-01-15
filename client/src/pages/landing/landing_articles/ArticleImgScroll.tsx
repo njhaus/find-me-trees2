@@ -15,10 +15,12 @@ const ArticleImgScroll = ({imgs, visibleImg}: ArticleImgScrollProps) => {
       zIndex={"1"}
       marginLeft={"auto"}
       position={"absolute"}
-      right={"0"}
+      right={"22%"}
+      transform={'translateX(50%)'}
       top={"0"}
-      paddingTop={'40vh'}
-      bg={'transparent'}
+      paddingTop={"40vh"}
+      bg={"transparent"}
+      maxWidth={"30rem"}
     >
       <Image
         position={"sticky"}

@@ -18,9 +18,11 @@ https://data.world/uci/plants
 
 
 Photo credits:
-pinre tree mask: Image by <a href="https://www.freepik.com/free-vector/gradient-mountain-landscape_19852072.htm#query=pine%20forest%20black%20and%20white&position=46&from_view=search&track=ais&uuid=591e4551-6768-4391-ae5f-a05d2a96ad08">Freepik</a>
-
-
+pine tree mask: Image by <a href="https://www.freepik.com/free-vector/gradient-mountain-landscape_19852072.htm#query=pine%20forest%20black%20and%20white&position=46&from_view=search&track=ais&uuid=591e4551-6768-4391-ae5f-a05d2a96ad08">Freepik</a>
+tree searchers: <a href="https://www.freepik.com/free-vector/flat-tourists-illustration_17721808.htm#query=forest%20hike&position=9&from_view=search&track=ais&uuid=ad0f86ce-7d94-4701-bb57-aa903396fd4b">Image by pikisuperstar</a> on Freepik
+map: <a href="https://www.freepik.com/free-vector/backpackers-concept-illustration_26233866.htm#query=map%20hike&position=3&from_view=search&track=ais&uuid=dec3a4cf-e48a-4053-a938-d40ccc0819f9">Image by storyset</a> on Freepik
+Pine icon: <a href="https://www.freepik.com/icon/tree_6102200#fromView=search&term=pine+tree&track=ais&page=1&position=8&uuid=2fdbb211-5327-4c23-8b7d-cd0580022a82">Icon by riajulislam</a>
+tree hug: Image by <a href="https://www.freepik.com/free-vector/flat-arbor-day-illustration_23871247.htm#from_view=detail_serie">Freepik</a>
 
 Problems:
 1. pages/browse/iconData : NEED TO REFACTOR THIS-- CODE SMELLS WHEN HARDCODING THE COLOR IN TWO PLACES< BUT I AM HAVING TROUBLE ACCESSING THE COLOR FROM WITHIN THE OBJECT

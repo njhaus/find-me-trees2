@@ -43,7 +43,7 @@ const MobileDrawer = ({auth, onLogout}: iNav) => {
 
 
   return (
-    <Box className="mobile-drawer" me={"1rem"}>
+    <Box className="mobile-drawer" me={"1rem"} zIndex={10}>
       <Button
         as={IconButton}
         aria-label="Options"
@@ -62,18 +62,27 @@ const MobileDrawer = ({auth, onLogout}: iNav) => {
         <DrawerContent>
           <Box
             className="drawer-decoration"
-            height={"100%"}
             width={"100%"}
+            aspectRatio={"2/1"}
             position={"absolute"}
             top={"0"}
             left={"0"}
             backgroundColor={"secondary.800"}
-            marginTop={"11rem"}
+            marginTop={"12rem"}
+          ></Box>
+          <Box
+            position={"absolute"}
+            top={"0"}
+            left={"0"}
+            backgroundColor={"secondary.800"}
+            width={"100%"}
+            height={'100%'}
+            marginTop={"21.9rem"}
           ></Box>
           <DrawerCloseButton />
           <DrawerHeader>
             <MainLogo />
-            <Boundary color={'main.100'} width={ '90%'} />
+            <Boundary color={"main.100"} width={"90%"} />
           </DrawerHeader>
 
           <DrawerBody>

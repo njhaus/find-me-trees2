@@ -5,7 +5,8 @@
 }
 
 .drawer-decoration {
-    mask-image: url('../../../../public/forest_trees_glyphLarge.png');
+    mask-image: url('../../../../public/trees-mask.png');
     mask-size: cover;
+    mask-position: 90%;
     mask-repeat: no-repeat;
 }
