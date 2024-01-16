@@ -13,11 +13,13 @@ const ArticleImage = ({ imgUrl }: ArticleImageProps) => {
       alignItems={"center"}
       justifyContent={"center"}
       overflowX={'hidden'}
+      position={'relative'}
+      height={'50%'}
     >
       <Image
         display={{ base: "block", md: "none" }}
         maxWidth={"30rem"}
-        maxHeight={'50vh'}
+        maxHeight={'100%'}
         src={imgUrl}
       ></Image>
     </Flex>

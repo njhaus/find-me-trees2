@@ -31,3 +31,11 @@
         opacity: 0;
     }
 }
+
+
+/* Learn more */
+
+.learn-more-img {
+    object-fit: cover;
+
+}

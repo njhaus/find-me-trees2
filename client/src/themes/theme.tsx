@@ -25,19 +25,27 @@ const Button = defineStyleConfig({
     outline: {
       border: "2px solid",
     },
-    solid: {
+    solidDark: {
+      fontSize: "1rem",
+      backgroundColor: "secondary.200",
+      color: "white",
+    },
+    solidLight: {
+      fontSize: "1rem",
+      backgroundColor: "neutral.500",
+      color: "secondary.100",
     },
     login: {
       textTransform: "uppercase",
       fontSize: "0.9rem",
       backgroundColor: "secondary.200",
       color: "white",
-    }
+    },
   },
   // The default size and variant values
   defaultProps: {
     size: "md",
-    variant: "solid",
+    variant: "solidLight",
   },
 });
 
@@ -90,7 +98,7 @@ const theme = extendTheme({
       200: "rgb(0,0,0)",
       300: "rgb(0,0,0)",
       400: "rgb(0,0,0)",
-      500: "rgb(244, 247, 210)",
+      500: "rgb(236, 242, 248)",
       600: "rgb(0,0,0)",
       700: "rgb(0,0,0)",
       800: "rgb(0,0,0)",

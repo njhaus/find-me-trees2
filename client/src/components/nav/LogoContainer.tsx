@@ -5,7 +5,11 @@ import MainLogo from "../logo/MainLogo";
 const LogoContainer = () => {
   return (
     <HStack h={"100%"} gap={0}>
-      <Box className="header-logo" backgroundColor={"white"}>
+      <Box
+        className="header-logo"
+        backgroundColor={"white"}
+        minWidth={{base: 'fit-content', lg: '22rem'}}
+      >
         <MainLogo />
       </Box>
       <Box

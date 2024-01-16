@@ -23,6 +23,7 @@ tree searchers: <a href="https://www.freepik.com/free-vector/flat-tourists-illus
 map: <a href="https://www.freepik.com/free-vector/backpackers-concept-illustration_26233866.htm#query=map%20hike&position=3&from_view=search&track=ais&uuid=dec3a4cf-e48a-4053-a938-d40ccc0819f9">Image by storyset</a> on Freepik
 Pine icon: <a href="https://www.freepik.com/icon/tree_6102200#fromView=search&term=pine+tree&track=ais&page=1&position=8&uuid=2fdbb211-5327-4c23-8b7d-cd0580022a82">Icon by riajulislam</a>
 tree hug: Image by <a href="https://www.freepik.com/free-vector/flat-arbor-day-illustration_23871247.htm#from_view=detail_serie">Freepik</a>
+tree with heart hands: <a href="https://www.freepik.com/free-photo/womens-hands-hug-tree-forest-love-nature_28219018.htm#query=tree%20hand&position=12&from_view=search&track=ais&uuid=cc359240-8b34-4485-981c-949c5fc1c73c">Image by pvproductions</a> on Freepik
 
 Problems:
 1. pages/browse/iconData : NEED TO REFACTOR THIS-- CODE SMELLS WHEN HARDCODING THE COLOR IN TWO PLACES< BUT I AM HAVING TROUBLE ACCESSING THE COLOR FROM WITHIN THE OBJECT
