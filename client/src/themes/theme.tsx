@@ -22,8 +22,15 @@ const Button = defineStyleConfig({
   },
   // Two variants: outline and solid
   variants: {
-    outline: {
-      border: "2px solid",
+    outlineLight: {
+      border: "2px solid rgb(236, 242, 248)",
+      color: "rgb(236, 242, 248)",
+      backgroundColor: "transparent",
+    },
+    outlineDark: {
+      border: "2px solid rgb(23,48,26)",
+      color: "rgb(23,48,26)",
+      backgroundColor: "transparent",
     },
     solidDark: {
       fontSize: "1rem",

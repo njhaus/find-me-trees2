@@ -9,6 +9,7 @@ export interface LandingArticleProps {
   description: string;
   imgUrl: string;
   cta: string;
+  link: string;
   children?: JSX.Element[];
 }
 
@@ -17,13 +18,14 @@ const LandingArticle = ({
   description,
   imgUrl,
   cta,
+  link,
   children,
 }: LandingArticleProps) => {
   return (
     <Flex
       as="article"
       width={"100%"}
-      height={"95vh"}
+      minHeight={"95vh"}
       justifyContent={"space-around"}
       flexWrap={"wrap"}
       
@@ -32,6 +34,7 @@ const LandingArticle = ({
         title={title}
         description={description}
         cta={cta}
+        link={link}
         children={children}
       />
       <ArticleImage imgUrl={imgUrl} />

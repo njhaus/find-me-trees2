@@ -8,6 +8,7 @@ export class Article {
   description: string;
   imgUrl: string;
   cta: string;
+  link: string;
   children?: JSX.Element[];
   constructor(
     id: string,
@@ -15,6 +16,7 @@ export class Article {
     description: string,
     imgUrl: string,
     cta: string,
+    link: string,
     children?: JSX.Element[]
   ) {
     this.id = id;
@@ -22,6 +24,7 @@ export class Article {
     this.description = description;
     this.imgUrl = imgUrl;
     this.cta = cta;
+    this.link = link;
     this.children = children;
   }
 }
@@ -36,6 +39,7 @@ const findTreesArticle = new Article(
   "Search for trees by their physical traits, location, or both.",
   "../../../public/find-trees.png",
   "Find Trees!",
+  '/browse',
   findTreesChildren
 );
 const mapArticle = new Article(
@@ -43,14 +47,16 @@ const mapArticle = new Article(
   "Map Your Finds",
   "Plot your finds on a map to keep track of the trees you find.",
   "../../../public/tree-map.png",
-  "Log in to begin"
+  "Log in to begin",
+  '/login'
 );
 const favoriteArticle = new Article(
   uuidv4(),
   "Save Your Favorite Trees",
   "Remember your favorite trees and visit them again!",
   "../../../public/tree-hug.png",
-  "Log in to begin"
+  "Log in to begin",
+  "/login"
 );
 
 export const articles: Article[] = [

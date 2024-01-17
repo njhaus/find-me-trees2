@@ -4,12 +4,10 @@ import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-  PopoverHeader,
   PopoverBody,
   PopoverFooter,
   PopoverArrow,
-  PopoverCloseButton,
-  PopoverAnchor,
+  PopoverCloseButton,  
   Button,
   useDisclosure,
   Text,
@@ -17,7 +15,6 @@ import {
 } from "@chakra-ui/react";
 
 import RadioInput from "../../../../../components/inputs/BrowseRadioInput";
-import { iTreeData } from "../../../../../data/tree_data";
 import useUpdateUser from "../../../../../hooks/useUpdateUser";
 
 interface iAddToColBtn {

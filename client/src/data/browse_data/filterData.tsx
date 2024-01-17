@@ -15,6 +15,7 @@ const iconStyles = {
 // I would prefer to define the styles in one object, and then stick the object into the component, but I don't know how with chakra
 
 interface Filter {
+  title: string;
   color: string;
   dropDown: ReactNode;
   icon?: ReactNode;
@@ -22,6 +23,7 @@ interface Filter {
 
 export const filters: Filter[] = [
   {
+    title: 'Leaves',
     color: "green",
     icon: (
       <GiOakLeaf size={iconStyles.size} color={"green"} cursor={"pointer"} />
@@ -29,6 +31,7 @@ export const filters: Filter[] = [
     dropDown: <LeafFilter />,
   },
   {
+    title: 'Bark & Branches',
     icon: (
       <GiTreeBranch size={iconStyles.size} color={"brown"} cursor={"pointer"} />
     ),
@@ -36,6 +39,7 @@ export const filters: Filter[] = [
     dropDown: <BarkFilter />,
   },
   {
+    title: 'Fruit & Seeds',
     icon: (
       <GiShinyApple size={iconStyles.size} color={"red"} cursor={"pointer"} />
     ),
@@ -43,6 +47,7 @@ export const filters: Filter[] = [
     dropDown: <FruitFilter />,
   },
   {
+    title: 'Flowers',
     icon: (
       <BsFlower1 size={iconStyles.size} color={"pink"} cursor={"pointer"} />
     ),

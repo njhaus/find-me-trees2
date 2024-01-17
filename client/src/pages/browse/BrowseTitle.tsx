@@ -2,16 +2,34 @@ import { Heading, Text, VStack, Flex, Image } from "@chakra-ui/react"
 
 const BrowseTitle = () => {
   return (
-    <Flex justifyContent={"space-between"} bg={"purple.400"} padding={'0.5rem'}>
-      <VStack align={"start"} flexGrow={"1"}>
-        <Heading>Tree Guide</Heading>
-        <Text>Search for trees by name, physical features, or location.</Text>
-      </VStack>
+    <Flex
+      position={"relative"}
+      justifyContent={"space-between"}
+      background={"secondary.100"}
+      padding={"0.5rem"}
+      width={"100%"}
+      height={"10rem"}
+      overflow={"hidden"}
+    >
       <Image
-        src={"../../../src/assets/placeholder-1.jpeg"}
-        width={"200px"}
-        display={{base: "none", sm: "block"} }
+        src={"redwood-bkg.jpeg"}
+        position={"absolute"}
+        top={0}
+        left={0}
+        width={"100%"}
+        height={"100%"}
+        objectFit={"cover"}
+        objectPosition={"top"}
+        filter={"brightness(50%)"}
       ></Image>
+      <VStack align={"start"} zIndex={1} padding={"2rem"}>
+        <Heading as="h2" color={"white"} textShadow={"0px 0px 2px black"}>
+          Tree Guide
+        </Heading>
+        <Text color={"white"} textShadow={"0px 0px 2px black"}>
+          Search for trees by name, physical features, or location.
+        </Text>
+      </VStack>
     </Flex>
   );
 }

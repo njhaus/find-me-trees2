@@ -40,6 +40,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       htmlFor={formName}
       >{label}</FormLabel>
       <Input
+        borderColor={'main.700'}
         ref={ref}
         id={formName}
         value={text}

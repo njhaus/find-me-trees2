@@ -1,9 +1,8 @@
 import { useContext } from "react";
 
-import { Text, Flex, Grid, GridItem } from "@chakra-ui/react";
+import { Text, Flex, Grid, Button } from "@chakra-ui/react";
 
 import TreeCard from "./tree_list/TreeCard";
-import { FormDataContext, iFormDataContext } from "./Browse";
 import { iTreeData } from "../../data/tree_data";
 import { iFormData } from "../../data/browse_data/filterFormData";
 import { filtersTextMap } from "../../data/browse_data/filterData";
@@ -28,7 +27,7 @@ const TreeList = ({ filteredTrees, searchTerms }: iTreeList) => {
   const searchText = getSearchText();
   
   return (
-    <Flex direction={"column"} padding={{ base: 3, md: 6 }}>
+    <Flex direction={"column"} padding={{ base: 3, md: 6 }} bg={'main.900'} flexGrow={1}>
       {filteredTrees.length < 1 ? (
         <Text>
           No trees matching search terms were found with search terms: {searchText}.
@@ -48,6 +47,7 @@ const TreeList = ({ filteredTrees, searchTerms }: iTreeList) => {
           xl: "repeat(4, 1fr)",
         }}
         gap={6}
+        my={'1rem'}
       >
         {filteredTrees.map((tree) => (
           <TreeCard
@@ -60,6 +60,7 @@ const TreeList = ({ filteredTrees, searchTerms }: iTreeList) => {
           />
         ))}
       </Grid>
+      <Button variant='outlineDark' mx={'auto'} my={'1rem'}>Load More</Button>
     </Flex>
   );
 };

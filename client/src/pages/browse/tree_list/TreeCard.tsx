@@ -57,7 +57,7 @@ const TreeCard = ({
           <Text as={"h2"} fontSize="1.5rem">
             {title}
           </Text>
-          <Text color="blue.600" fontSize="1.25rem">
+          <Text color="secondary.500" fontSize="1.25rem">
             {sciName}
           </Text>
           {searchTermValues.every(
@@ -80,7 +80,7 @@ const TreeCard = ({
       <Divider />
       <CardFooter>
         <ButtonGroup spacing="2">
-          <Button variant="solid" colorScheme="blue">
+          <Button variant="solidDark">
             <Link to={`/tree/${id}`}>View {title}</Link>
           </Button>
         </ButtonGroup>

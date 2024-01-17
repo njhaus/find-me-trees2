@@ -8,6 +8,8 @@ import BrowseTitle from "./BrowseTitle";
 import { iFormData } from "../../data/browse_data/filterFormData";
 import initialFormData from "../../data/browse_data/filterFormData";
 
+import './styles/browse.css'
+
 // Set form context (Form found in SearchFilters and inputs are in many children within SearchFilters)
 export interface iFormDataContext {
   formData: iFormData;
@@ -67,14 +69,11 @@ const Browse = () => {
   };
 
   return (
-    <Flex direction={"column"}>
+    <Flex direction={"column"} minHeight={"calc(100vh - 10rem)"}>
       <BrowseTitle />
       <FormDataContext.Provider value={{ formData, setFormData }}>
         <SearchFilters onSubmit={handleSubmit} />
-        <TreeList
-          filteredTrees={filteredTrees}
-          searchTerms={searchTerms}
-        />
+        <TreeList filteredTrees={filteredTrees} searchTerms={searchTerms} />
       </FormDataContext.Provider>
     </Flex>
   );

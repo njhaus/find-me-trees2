@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 
 import {
-  Flex,
   FormControl,
   FormLabel,
   RadioGroup,
   HStack,
   Radio,
-  FormHelperText,
+  Box
 } from "@chakra-ui/react";
 import { BsQuestionCircle } from "react-icons/bs";
+import HelperText from "../../pages/browse/helper_text/HelperText";
+import { Helper } from "../../data/browse_data/filterFormData";
 
 interface RadioInputProps {
   formVal: string | undefined;
@@ -17,13 +18,12 @@ interface RadioInputProps {
   values: string[];
   formName: string;
   onChange?: (...args: any[]) => void;
-  helperText?: string;
+  helperText?: Helper[];
+  helperLink?: string;
 }
 
-const RadioInput = ({ formVal, label, values, formName, helperText, onChange }: RadioInputProps) => {
+const RadioInput = ({ formVal, label, values, formName, helperText, helperLink, onChange }: RadioInputProps) => {
   const [value, setValue] = useState<string | undefined>(formVal);
-
-  const [showHelpertext, setShowHelperText] = useState(false);
 
   useEffect(() => {
     onChange?.(formName, value);
@@ -35,7 +35,7 @@ const RadioInput = ({ formVal, label, values, formName, helperText, onChange }: 
         {label}
       </FormLabel>
       <RadioGroup defaultValue={value} id={formName}>
-        <HStack spacing="24px">
+        <HStack spacing="24px" flexWrap={"wrap"}>
           {values.map((val, i) => (
             <Radio
               key={i}
@@ -49,10 +49,12 @@ const RadioInput = ({ formVal, label, values, formName, helperText, onChange }: 
           ))}
         </HStack>
       </RadioGroup>
-      {helperText && (
-        <BsQuestionCircle onClick={() => setShowHelperText(!showHelpertext)} />
-      )}
-      {showHelpertext === true && <FormHelperText>{helperText}</FormHelperText>}
+      <Box width={"fit-content"} className="filter-icon">
+        <Box className="filter-text" maxWidth={"80vw"} overflowX={"scroll"}>
+          <HelperText helper={helperText ? helperText : []} helperLink={ helperLink ? helperLink : ''} />
+        </Box>
+        <BsQuestionCircle />
+      </Box>
     </FormControl>
   );
 };

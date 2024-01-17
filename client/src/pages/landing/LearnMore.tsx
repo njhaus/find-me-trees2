@@ -24,7 +24,7 @@ const LearnMore = () => {
       ></Image>
       <VStack mx={"2rem"} align={"start"}>
         <Heading as={"h4"} color={"main.100"} mb={"1rem"}>
-          Spread love for our forests
+          Love our forests
         </Heading>
         <Text color={"main.100"} mb={"1rem"}>
           The first step to protecting our forests is getting to know them! Find

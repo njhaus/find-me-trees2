@@ -1,4 +1,4 @@
-import { Box, Image } from '@chakra-ui/react'
+import { Box, Image, Text } from '@chakra-ui/react'
 
 interface MapIcon {
   id: number;
@@ -8,11 +8,13 @@ interface MapIcon {
 const MapIcon = ({id, onClick}: MapIcon) => {
   return (
     <Box
+      className="filter-icon"
       width={"4rem"}
       height={"4rem"}
       onClick={() => onClick(id)}
-      cursor={'pointer'}
+      cursor={"pointer"}
     >
+      <Text className={"filter-text"}>Open map</Text>
       <Image src={"../../../src/assets/map_icon.png"} />
     </Box>
   );

@@ -6,16 +6,20 @@ import {
     Button,
     Box
 } from "@chakra-ui/react";
+
+import { Link } from "react-router-dom";
+
 import Boundary from "../../../components/ui-components/Boundary";
 
 interface ArticleContentProps {
     title: string;
     description: string;
-    cta: string;
+  cta: string;
+  link: string;
     children?: JSX.Element[];
 }
 
-const ArticleContent = ({title, description, cta}: ArticleContentProps) => {
+const ArticleContent = ({title, description, link, cta}: ArticleContentProps) => {
   return (
     <Flex
       direction={"column"}
@@ -56,9 +60,11 @@ const ArticleContent = ({title, description, cta}: ArticleContentProps) => {
           </Text>
         </Box>
       </Flex>
-      <Button whiteSpace={"normal"} w={"12rem"}>
-        {cta}
-      </Button>
+      <Link to={link}>
+        <Button whiteSpace={"normal"} w={"12rem"}>
+          {cta}
+        </Button>
+      </Link>
     </Flex>
   );
 }

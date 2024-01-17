@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import { Flex } from "@chakra-ui/react";
+import { Flex, Box } from "@chakra-ui/react";
 
 import RadioInput from "../../../components/inputs/BrowseRadioInput";
 import { fruitFilters } from "../../../data/browse_data/filterFormData";
@@ -15,17 +15,19 @@ const FruitFilter = () => {
   };
 
   return (
-    <Flex>
+    <Flex direction={"column"} width={"100%"}>
       {fruitFilters.map((filter, i) => (
-        <RadioInput
-          key={i}
-          formVal={formData[filter.formName]}
-          label={filter.label}
-          values={filter.values}
-          helperText={filter.helperText}
-          formName={filter.formName}
-          onChange={handleChange}
-        />
+        <Box key={i} width={"100%"} p={"0.5rem"} className="filter-group">
+          <RadioInput
+            formVal={formData[filter.formName]}
+            label={filter.label}
+            values={filter.values}
+            helperText={filter.helperText}
+            helperLink={filter.helperLink}
+            formName={filter.formName}
+            onChange={handleChange}
+          />
+        </Box>
       ))}
     </Flex>
   );

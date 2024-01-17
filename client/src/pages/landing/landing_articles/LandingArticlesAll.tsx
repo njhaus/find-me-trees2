@@ -55,6 +55,7 @@ const LandingArticlesAll = () => {
           description={a.description}
           imgUrl={a.imgUrl}
           cta={a.cta}
+          link={a.link}
         >
           {a.children &&
             a.children.map((child, i) => <Box key={i}>{child}</Box>)}
