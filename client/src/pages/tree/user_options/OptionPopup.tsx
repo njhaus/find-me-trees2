@@ -11,6 +11,7 @@ import {
   PopoverArrow,
   PopoverCloseButton,
   Button,
+  VStack,
   useDisclosure
 } from "@chakra-ui/react";
 
@@ -24,9 +25,10 @@ interface iOptionPopup {
   userData: iUserData;
   dataFormat: DataFormat;
   id: string;
+  icon: JSX.Element;
 }
 
-const OptionPopup = ({ text, handleUpdate, hoverMsg, userDataKey, userData, dataFormat, id }: iOptionPopup) => {
+const OptionPopup = ({ text, handleUpdate, hoverMsg, userDataKey, icon, dataFormat, id }: iOptionPopup) => {
     
     const { onOpen, onClose, isOpen } = useDisclosure();
 
@@ -93,7 +95,34 @@ const OptionPopup = ({ text, handleUpdate, hoverMsg, userDataKey, userData, data
       placement="right"
     >
       <PopoverTrigger>
-        <Button width={"100%"} onClick={onOpen}>{text}</Button>
+        <VStack justifyContent={"start"} onClick={onOpen}>
+          {text === "Found it" ? (
+            <>
+              <Button
+                variant={"icon"}
+                fontSize={"1.5rem"}
+                bg="white"
+                color="accent.500"
+              >
+                {icon}
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                variant={"icon"}
+                fontSize={"1.5rem"}
+                bg="accent.500"
+                color="white"
+              >
+                {icon}
+              </Button>
+            </>
+          )}
+          <Text color="accent.500" textAlign={"center"}>
+            {text}
+          </Text>
+        </VStack>
       </PopoverTrigger>
       <PopoverContent>
         <PopoverArrow />

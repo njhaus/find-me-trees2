@@ -48,6 +48,13 @@ const Button = defineStyleConfig({
       backgroundColor: "secondary.200",
       color: "white",
     },
+    icon: {
+      padding: '0.5rem',
+      aspectRatio: '1/1',
+      fontWeight: 'bold',
+      border: '1px solid',
+      borderRadius: '50%',
+    }
   },
   // The default size and variant values
   defaultProps: {

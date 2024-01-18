@@ -13,14 +13,15 @@ const TreeUserOptions = ({ id }: iTreeUserOptions) => {
 
   return (
     <Flex
-      direction={"row"}
-      alignItems={"center"}
+      direction={{ base: "column", lg: "row" }}
+      alignItems={"start"}
       gap={"2rem"}
-      height={"3.5rem"}
+      height={"5rem"}
       paddingX={"1rem"}
+      
     >
       {options.map((op, i) => (
-        <Box key={i} width={"10rem"}>
+        <Box key={i} width={"10rem"} minWidth={"5rem"} position={"relative"}>
           <UserOption
             text={op.text}
             successText={op.successText}

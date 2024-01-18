@@ -72,14 +72,14 @@ export const options: {
     userDataKey: "found" as keyof iUserData,
     dataFormat: {
       _id: "",
-        location: {
-            type: 'point',
-            coordinates: [-74.360846, 40.45940210000001]
-        },
+      location: {
+        type: "point",
+        coordinates: [-74.360846, 40.45940210000001],
+      },
     },
     color: "red.100",
     icon: <BsSearch />,
-    hoverMsg: 'Enable location services or use the map to save your find!'
+    hoverMsg: "Enable location services or use the map to save your find!",
   },
 ];
 

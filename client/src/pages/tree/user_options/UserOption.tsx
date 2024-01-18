@@ -6,6 +6,8 @@ import {
   Box,
   Text,
   CloseButton,
+  VStack,
+  HStack
 } from "@chakra-ui/react";
 import { CheckIcon } from '@chakra-ui/icons';
 import { iUserData } from '../../../data/user_data/userData';
@@ -31,10 +33,8 @@ const UserOption = ({ text, successText, icon, id, userDataKey, dataFormat, hove
   // Object to hold data that will be put into userData if updated
   const optionData = { ...dataFormat, _id: id };
 
-  // button slides to success message after clicked (Useslide hook does this)
-  const [btnSlide, setBtnSlide] = useState(false);
-  const sliderRef = useRef<HTMLDivElement | null>(null);
-  useSlide(btnSlide, sliderRef);
+  const [btnClicked, setBtnClicked] = useState(false);
+  
 
   // Show 'log in! message when button clicked if not logged in.
   const [noUserMsg, setNoUserMsg] = useState(false);
@@ -54,9 +54,9 @@ const UserOption = ({ text, successText, icon, id, userDataKey, dataFormat, hove
 
   const handleUpdate = (key: keyof iUserData, newData: DataFormat) => {
     if (userExists) {
-      if (btnSlide !== true) {
+      if (btnClicked !== true) {
         if (text !== 'Found it') {
-          setBtnSlide(true);
+          setBtnClicked(true);
         } 
         console.log([...userData[key]]);
         const updatedKey = [...userData[key], newData];
@@ -80,50 +80,81 @@ const UserOption = ({ text, successText, icon, id, userDataKey, dataFormat, hove
       ) {
         setFoundIt("Found it again");
       } else {
-        setBtnSlide(userKeyData.some((item) => item._id._id === id));
+        setBtnClicked(userKeyData.some((item) => item._id._id === id));
       }
     } else {
       // console.log(text);
-      setBtnSlide(false);
+      setBtnClicked(false);
     }
   }, [userData, text]);
 
   return (
     <>
-      <Flex width={"100%"} overflowX={"hidden"} ref={sliderRef}>
-        <Flex minWidth={"100%"}>
-          {hoverMsg ? (
-            <Box width={"100%"}>
-              <OptionPopup
-                text={foundIt}
-                handleUpdate={handleUpdate}
-                hoverMsg={hoverMsg}
-                userDataKey={userDataKey}
-                userData={userData}
-                dataFormat={dataFormat}
-                id={id}
-              />
-            </Box>
-          ) : (
-            <Button
-              width={"100%"}
-              onClick={() => handleUpdate(userDataKey, optionData)}
-            >
-                {text}
-            </Button>
-          )}
-        </Flex>
-        <Flex minWidth={"100%"}>
-          <Flex width={"100%"}>
-            <CheckIcon />
-            <Box>
-              <Text>{successText}</Text>
-            </Box>
-          </Flex>
-        </Flex>
-      </Flex>
+      <Box>
+        {hoverMsg && userExists ? (
+          <Box>
+            <OptionPopup
+              text={foundIt}
+              handleUpdate={handleUpdate}
+              hoverMsg={hoverMsg}
+              userDataKey={userDataKey}
+              userData={userData}
+              dataFormat={dataFormat}
+              id={id}
+              icon={icon}
+            />
+          </Box>
+        ) : (
+          <VStack
+            justifyContent={"start"}
+            onClick={() => handleUpdate(userDataKey, optionData)}
+          >
+            {!btnClicked ? (
+              <>
+                <Button
+                  variant={"icon"}
+                  fontSize={"1.5rem"}
+                  bg="white"
+                  color="accent.500"
+                  textAlign={"center"}
+                >
+                  {icon}
+                </Button>
+                <Text color="accent.500" textAlign={"center"}>
+                  {text}
+                </Text>
+              </>
+            ) : (
+              <>
+                <Button
+                  variant={"icon"}
+                  fontSize={"1.5rem"}
+                  bg="accent.500"
+                  color="white"
+                >
+                  {icon}
+                </Button>
+                <HStack>
+                  <CheckIcon color="accent.500" />
+                  <Text color="accent.500" textAlign={"center"}>
+                    {successText}
+                  </Text>
+                </HStack>
+              </>
+            )}
+          </VStack>
+        )}
+      </Box>
       {noUserMsg && (
-        <Flex position={"absolute"}>
+        <Flex
+          position={"absolute"}
+          top={"-1rem"}
+          left={"-4rem"}
+          fontSize={"0.8rem"}
+          bg={"white"}
+          border={"1px solid black"}
+          width={"10rem"}
+        >
           <Text>
             Log in to add this tree to your{" "}
             {userDataKey.replace(/\b(\w+?)s\b/g, "$1")} trees!

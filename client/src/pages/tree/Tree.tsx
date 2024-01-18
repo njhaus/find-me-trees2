@@ -78,75 +78,76 @@ const Tree = () => {
   }
 
   return (
-    <Flex
-      as={"section"}
-      direction={"column"}
-      bg={"main.900"}
-      borderTop={"5px solid white"}
-    >
+    <Flex as={"section"} direction={"column"} bg={"white"}>
       <TreeHeading
         title={treeData.title}
         sciName={treeData.sciName}
         id={treeData._id}
       />
-      <Flex direction={"row"} flexWrap={"wrap"} gap={"1rem"}>
-        <Box
-          as={"article"}
-          width={{ base: "100%", md: "40%" }}
-          maxHeight={{ base: "100vh", md: "80vh" }}
-        >
-          <Image src={treeData.imgSrc[0]}></Image>
-          {/* <Carousel imgs={imgs} /> */}
-        </Box>
-        <Box
-          as={"article"}
-          maxWidth={{ base: "100%", md: "calc(60% - 1rem)" }}
-          flexGrow={"1"}
-          maxHeight={{ base: "100vh", md: "80vh" }}
-          overflowX={"scroll"}
-          bg={"red.200"}
-        >
-          <TreeIntro text={treeData.intro} />
-        </Box>
-      </Flex>
-      <Flex direction={"row"} flexWrap={"wrap"} gap={"1rem"}>
-        <Flex
-          as={"article"}
-          maxWidth={{ base: "100%", md: "calc(50% - 1rem)" }}
-          flexGrow={"1"}
-          maxHeight={{ base: "100vh", md: "80vh" }}
-          direction={"column"}
-        >
-          <Heading>{treeData.title} Traits</Heading>
-          {allFilters.map(
-            (f, i) =>
-              treeData.traits[f.formName as keyof iTreeTraitsData] && (
-                <TreeTraits
-                  key={i}
-                  trait={treeData.traits[f.formName as keyof iTreeTraitsData]}
-                  label={f.label}
-                  // helperText={f.helperText}
-                />
-              )
-          )}
+      <Box
+        bg={'secondary.100'}
+        color={'white'}
+        padding={'1rem'}
+      >
+        <Flex direction={"row"} flexWrap={"wrap"} gap={"1rem"}>
+          <Box
+            as={"article"}
+            width={{ base: "100%", md: "40%" }}
+            maxHeight={{ base: "100vh", md: "80vh" }}
+          >
+            <Image src={treeData.imgSrc[0]}></Image>
+            {/* <Carousel imgs={imgs} /> */}
+          </Box>
+          <Box
+            as={"article"}
+            maxWidth={{ base: "100%", md: "calc(60% - 1rem)" }}
+            flexGrow={"1"}
+            maxHeight={{ base: "100vh", md: "80vh" }}
+            overflowX={"scroll"}
+            bg={"red.200"}
+          >
+            <TreeIntro text={treeData.intro} />
+          </Box>
         </Flex>
-        <Box
-          as={"article"}
-          width={{ base: "100%", md: "50%" }}
-          maxHeight={{ base: "100vh", md: "80vh" }}
-          overflowX={"scroll"}
-          bg={"yellow.200"}
-        >
-          {location ? (
-            <TreeLocation
-              location={treeData.traits.location}
-              title={treeData.title}
-            />
-          ) : (
-            `No states listed where ${treeData.title} is found`
-          )}
-        </Box>
-      </Flex>
+        <Flex direction={"row"} flexWrap={"wrap"} gap={"1rem"}>
+          <Flex
+            as={"article"}
+            maxWidth={{ base: "100%", md: "calc(50% - 1rem)" }}
+            flexGrow={"1"}
+            maxHeight={{ base: "100vh", md: "80vh" }}
+            direction={"column"}
+          >
+            <Heading>{treeData.title} Traits</Heading>
+            {allFilters.map(
+              (f, i) =>
+                treeData.traits[f.formName as keyof iTreeTraitsData] && (
+                  <TreeTraits
+                    key={i}
+                    trait={treeData.traits[f.formName as keyof iTreeTraitsData]}
+                    label={f.label}
+                    // helperText={f.helperText}
+                  />
+                )
+            )}
+          </Flex>
+          <Box
+            as={"article"}
+            width={{ base: "100%", md: "50%" }}
+            maxHeight={{ base: "100vh", md: "80vh" }}
+            overflowX={"scroll"}
+            bg={"yellow.200"}
+          >
+            {location ? (
+              <TreeLocation
+                location={treeData.traits.location}
+                title={treeData.title}
+              />
+            ) : (
+              `No states listed where ${treeData.title} is found`
+            )}
+          </Box>
+        </Flex>
+      </Box>
     </Flex>
   );
 };
