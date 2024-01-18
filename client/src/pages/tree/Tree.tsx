@@ -1,9 +1,22 @@
-import { Flex, Heading, Image, Box, Spinner, Skeleton, Stack } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+
+import {
+  Flex,
+  Heading,
+  Image,
+  Box,
+  Spinner,
+  Skeleton,
+  Stack,
+  HStack,
+  VStack,
+  Button,
+} from "@chakra-ui/react";
 
 import { useParams } from "react-router-dom";
 
+import TreeHeading from "./TreeHeading";
 import TreeIntro from "./TreeIntro";
-import TreeUserOptions from "./TreeUserOptions";
 import TreeTraits from "./TreeTraits";
 import TreeLocation from "./TreeLocation";
 import { allFilters } from "../../data/browse_data/filterFormData";
@@ -11,22 +24,18 @@ import { allFilters } from "../../data/browse_data/filterFormData";
 // tempTreeData -- REPLACE
 import { iTreeData, iTreeTraitsData, tempTreeData } from "../../data/tree_data";
 import Carousel from "../../components/ui-components/Carousel";
-import { useEffect, useState } from "react";
-import { apiGet } from "../../services/api_client";
-import useUpdateUser from "../../hooks/useUpdateUser";
-import useAuth from "../../hooks/useAuth";
 
+import { apiGet } from "../../services/api_client";
 
 const Tree = () => {
-
   const [treeData, setTreeData] = useState(tempTreeData);
   // Loading indicator while trees are being fetched
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
   // Id for tree is sent by params
   const { id } = useParams();
   // Need to extract images so I can get them from user Data when loaded (it loads after page) -- see useEffect below
-  let imgs = [...treeData.imgSrc]
-  
+  let imgs = [...treeData.imgSrc];
+
   useEffect(() => {
     const abortController = new AbortController();
 
@@ -43,14 +52,13 @@ const Tree = () => {
           }
         })
         .catch((err) => console.log("error fetching tree data"));
-    }
+    };
     fetchData();
 
     return () => {
       abortController.abort(); // Abort the request if the component unmounts
     };
-
-  }, [id])
+  }, [id]);
 
   if (loading) {
     return (
@@ -70,8 +78,17 @@ const Tree = () => {
   }
 
   return (
-    <Flex as={"section"} direction={"column"}>
-      <Heading textAlign={"center"}>{treeData.title}</Heading>
+    <Flex
+      as={"section"}
+      direction={"column"}
+      bg={"main.900"}
+      borderTop={"5px solid white"}
+    >
+      <TreeHeading
+        title={treeData.title}
+        sciName={treeData.sciName}
+        id={treeData._id}
+      />
       <Flex direction={"row"} flexWrap={"wrap"} gap={"1rem"}>
         <Box
           as={"article"}
@@ -92,9 +109,6 @@ const Tree = () => {
           <TreeIntro text={treeData.intro} />
         </Box>
       </Flex>
-      <Box as={"article"} width={"100%"} bg={"purple.200"}>
-        <TreeUserOptions id={treeData._id} />
-      </Box>
       <Flex direction={"row"} flexWrap={"wrap"} gap={"1rem"}>
         <Flex
           as={"article"}
@@ -111,7 +125,7 @@ const Tree = () => {
                   key={i}
                   trait={treeData.traits[f.formName as keyof iTreeTraitsData]}
                   label={f.label}
-                  helperText={f.helperText}
+                  // helperText={f.helperText}
                 />
               )
           )}
@@ -124,7 +138,10 @@ const Tree = () => {
           bg={"yellow.200"}
         >
           {location ? (
-            <TreeLocation location={treeData.traits.location} title={treeData.title} />
+            <TreeLocation
+              location={treeData.traits.location}
+              title={treeData.title}
+            />
           ) : (
             `No states listed where ${treeData.title} is found`
           )}

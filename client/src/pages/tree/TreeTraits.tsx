@@ -9,10 +9,10 @@ import { allFilters } from "../../data/browse_data/filterFormData";
 interface iTreeTraits {
   trait: any;
   label: string;
-  helperText: string;
+  // helperText: string;
 }
 
-const TreeTraits = ({ trait, label, helperText }: iTreeTraits) => {
+const TreeTraits = ({ trait, label }: iTreeTraits) => {
   const [showHelper, setShowHelper] = useState(false);
 
   return (
@@ -21,7 +21,7 @@ const TreeTraits = ({ trait, label, helperText }: iTreeTraits) => {
       <Text>{label}:</Text>
       <Text>{trait}</Text>
       <BsQuestionCircle onClick={() => setShowHelper(!showHelper)} />
-      {showHelper && <Text>{helperText}</Text>}
+      {/* {showHelper && <Text>{helperText}</Text>} */}
     </Flex>
   );
 };
