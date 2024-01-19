@@ -26,11 +26,13 @@ const Button = defineStyleConfig({
       border: "2px solid rgb(236, 242, 248)",
       color: "rgb(236, 242, 248)",
       backgroundColor: "transparent",
+      padding: "0rem 1rem 0rem 1rem",
     },
     outlineDark: {
       border: "2px solid rgb(23,48,26)",
       color: "rgb(23,48,26)",
       backgroundColor: "transparent",
+      padding: "0rem 1rem 0rem 1rem",
     },
     solidDark: {
       fontSize: "1rem",
@@ -49,12 +51,12 @@ const Button = defineStyleConfig({
       color: "white",
     },
     icon: {
-      padding: '0.5rem',
-      aspectRatio: '1/1',
-      fontWeight: 'bold',
-      border: '1px solid',
-      borderRadius: '50%',
-    }
+      padding: "0rem",
+      aspectRatio: "1/1",
+      fontWeight: "bold",
+      border: "1px solid",
+      borderRadius: "50%",
+    },
   },
   // The default size and variant values
   defaultProps: {

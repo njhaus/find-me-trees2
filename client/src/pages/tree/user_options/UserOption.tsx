@@ -39,9 +39,6 @@ const UserOption = ({ text, successText, icon, id, userDataKey, dataFormat, hove
   // Show 'log in! message when button clicked if not logged in.
   const [noUserMsg, setNoUserMsg] = useState(false);
 
-  // Hacky way to make found it button behave differntly (text changes instead of button slides), but I didn't want to refactor the whole thing right now.
-  const [foundIt, setFoundIt] = useState(text);
-
   const userExists =
     userData &&
     userData.username &&
@@ -73,15 +70,7 @@ const UserOption = ({ text, successText, icon, id, userDataKey, dataFormat, hove
   useEffect(() => {
     const userKeyData = userData[userDataKey];
     if (Array.isArray(userKeyData)) {
-      if (
-        text === "Found it"
-        &&
-        userKeyData.some((item) => item._id._id === id)
-      ) {
-        setFoundIt("Found it again");
-      } else {
-        setBtnClicked(userKeyData.some((item) => item._id._id === id));
-      }
+      setBtnClicked(userKeyData.some((item) => item._id._id === id));
     } else {
       // console.log(text);
       setBtnClicked(false);
@@ -90,61 +79,73 @@ const UserOption = ({ text, successText, icon, id, userDataKey, dataFormat, hove
 
   return (
     <>
-      <Box>
-        {hoverMsg && userExists ? (
-          <Box>
-            <OptionPopup
-              text={foundIt}
-              handleUpdate={handleUpdate}
-              hoverMsg={hoverMsg}
-              userDataKey={userDataKey}
-              userData={userData}
-              dataFormat={dataFormat}
-              id={id}
-              icon={icon}
-            />
-          </Box>
-        ) : (
-          <VStack
-            justifyContent={"start"}
-            onClick={() => handleUpdate(userDataKey, optionData)}
-          >
-            {!btnClicked ? (
-              <>
-                <Button
-                  variant={"icon"}
-                  fontSize={"1.5rem"}
-                  bg="white"
+      {hoverMsg && userExists ? (
+        <Box>
+          <OptionPopup
+            btnClicked={btnClicked}
+            handleUpdate={handleUpdate}
+            hoverMsg={hoverMsg}
+            userDataKey={userDataKey}
+            userData={userData}
+            dataFormat={dataFormat}
+            id={id}
+            icon={icon}
+          />
+        </Box>
+      ) : (
+        <Flex
+          direction={{ base:"column", md: "row", lg: "column" }}
+          justifyContent={"start"}
+          alignItems={"center"}
+          onClick={() => handleUpdate(userDataKey, optionData)}
+        >
+          {!btnClicked ? (
+            <>
+              <Button
+                variant={"icon"}
+                fontSize={"1.5rem"}
+                bg="white"
+                color="accent.500"
+                mx={"0.5rem"}
+              >
+                {icon}
+              </Button>
+              <Text
+                color="accent.500"
+                textAlign={"center"}
+                fontSize={"0.9rem"}
+                
+              >
+                {text}
+              </Text>
+            </>
+          ) : (
+            <>
+              <Button
+                mx={"0.5rem"}
+                variant={"icon"}
+                fontSize={"1.5rem"}
+                bg="accent.500"
+                    color="white"
+              >
+                {icon}
+              </Button>
+              <HStack gap={"0.5rem"} flexGrow={1}>
+                <CheckIcon color="accent.500" />
+                <Text
                   color="accent.500"
                   textAlign={"center"}
+                  fontSize={"0.9rem"}
+                  flexGrow={1}
                 >
-                  {icon}
-                </Button>
-                <Text color="accent.500" textAlign={"center"}>
-                  {text}
+                  {successText}
                 </Text>
-              </>
-            ) : (
-              <>
-                <Button
-                  variant={"icon"}
-                  fontSize={"1.5rem"}
-                  bg="accent.500"
-                  color="white"
-                >
-                  {icon}
-                </Button>
-                <HStack>
-                  <CheckIcon color="accent.500" />
-                  <Text color="accent.500" textAlign={"center"}>
-                    {successText}
-                  </Text>
-                </HStack>
-              </>
-            )}
-          </VStack>
-        )}
-      </Box>
+              </HStack>
+            </>
+          )}
+        </Flex>
+      )}
+
       {noUserMsg && (
         <Flex
           position={"absolute"}

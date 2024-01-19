@@ -11,14 +11,18 @@ import {
   PopoverArrow,
   PopoverCloseButton,
   Button,
-  VStack,
+  Flex,
+  HStack,
+  Box,
   useDisclosure
 } from "@chakra-ui/react";
+
+import { CheckIcon } from "@chakra-ui/icons";
 
 import FoundOptionMap from "./foundOptionMap";
 
 interface iOptionPopup {
-  text: string;
+  btnClicked: boolean,
   handleUpdate: (key: keyof iUserData, newData: DataFormat) => void;
   hoverMsg: string;
   userDataKey: userOptionsKey;
@@ -28,7 +32,7 @@ interface iOptionPopup {
   icon: JSX.Element;
 }
 
-const OptionPopup = ({ text, handleUpdate, hoverMsg, userDataKey, icon, dataFormat, id }: iOptionPopup) => {
+const OptionPopup = ({ btnClicked, handleUpdate, hoverMsg, userDataKey, icon, dataFormat, id }: iOptionPopup) => {
     
     const { onOpen, onClose, isOpen } = useDisclosure();
 
@@ -95,10 +99,16 @@ const OptionPopup = ({ text, handleUpdate, hoverMsg, userDataKey, icon, dataForm
       placement="right"
     >
       <PopoverTrigger>
-        <VStack justifyContent={"start"} onClick={onOpen}>
-          {text === "Found it" ? (
+        <Flex
+          direction={{ base: "column", md: "row", lg: "column" }}
+          justifyContent={"start"}
+          alignItems={"center"}
+          onClick={onOpen}
+        >
+          {!btnClicked ? (
             <>
               <Button
+                mx={"0.5rem"}
                 variant={"icon"}
                 fontSize={"1.5rem"}
                 bg="white"
@@ -108,8 +118,12 @@ const OptionPopup = ({ text, handleUpdate, hoverMsg, userDataKey, icon, dataForm
               </Button>
             </>
           ) : (
-            <>
+            <Box className="found-btn">
+              {btnClicked && (
+                <Box className="found-hover">Click to record another find.</Box>
+              )}
               <Button
+                mx={"0.5rem"}
                 variant={"icon"}
                 fontSize={"1.5rem"}
                 bg="accent.500"
@@ -117,12 +131,21 @@ const OptionPopup = ({ text, handleUpdate, hoverMsg, userDataKey, icon, dataForm
               >
                 {icon}
               </Button>
-            </>
+            </Box>
           )}
-          <Text color="accent.500" textAlign={"center"}>
-            {text}
-          </Text>
-        </VStack>
+          <HStack gap={"0.5rem"} flexGrow={1}>
+            <CheckIcon color="accent.500" />
+            <Text
+              color="accent.500"
+              textAlign={"center"}
+              fontSize={"0.9rem"}
+              flexGrow={1}
+            >
+              Found it
+              {btnClicked && "!"}
+            </Text>
+          </HStack>
+        </Flex>
       </PopoverTrigger>
       <PopoverContent>
         <PopoverArrow />

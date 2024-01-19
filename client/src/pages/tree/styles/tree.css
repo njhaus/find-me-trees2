@@ -1,0 +1,19 @@
+.found-btn {
+
+}
+
+.found-hover {
+    display: none;
+    background-color: white;
+    position: absolute;
+    top: -3rem;
+    left: -1rem;
+    border: 1px solid black;
+    font-size: 0.8rem;
+    z-index: 1;
+    padding: 0.5rem;
+}
+
+.found-btn:hover > .found-hover {
+    display: block;
+}

@@ -21,6 +21,8 @@ import TreeTraits from "./TreeTraits";
 import TreeLocation from "./TreeLocation";
 import { allFilters } from "../../data/browse_data/filterFormData";
 
+import './styles/tree.css'
+
 // tempTreeData -- REPLACE
 import { iTreeData, iTreeTraitsData, tempTreeData } from "../../data/tree_data";
 import Carousel from "../../components/ui-components/Carousel";

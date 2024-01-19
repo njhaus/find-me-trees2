@@ -57,7 +57,7 @@ export const options: {
   },
   {
     text: "Favorite",
-    successText: "Added!",
+    successText: "Added to favorites!",
     userDataKey: "favorites" as keyof iUserData,
     dataFormat: {
       _id: "",
