@@ -26,18 +26,27 @@ interface iTreeHeading {
 const TreeHeading = ({ title, sciName, id }: iTreeHeading) => {
   return (
     <Flex
+      as={"header"}
       direction={{ base: "column", md: "row" }}
-      py={"2rem"}
+      h={"fit-content"}
+      pt={"2rem"}
+      pb={"4rem"}
       px={"1rem"}
       alignItems={"start"}
-      position={ 'relative'}
+      position={"relative"}
     >
       <Box width={{ base: "100%", md: "40%" }}>
         <Link to={"/browse"}>
           <Button variant="outlineDark" display={{ base: "none", md: "block" }}>
-            Back to guide
+            <ArrowBackIcon /> Back to guide
           </Button>
-          <Button variant="icon" display={{ base: "block", md: "none" }} position={'absolute'} top={'1rem'} left={ '1rem'}>
+          <Button
+            variant="icon"
+            display={{ base: "block", md: "none" }}
+            position={"absolute"}
+            top={"1rem"}
+            left={"1rem"}
+          >
             <ArrowBackIcon />
           </Button>
         </Link>

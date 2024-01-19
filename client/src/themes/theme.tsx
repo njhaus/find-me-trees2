@@ -20,7 +20,6 @@ const Button = defineStyleConfig({
       py: 4, // <-- these values are tokens from the design system
     },
   },
-  // Two variants: outline and solid
   variants: {
     outlineLight: {
       border: "2px solid rgb(236, 242, 248)",
@@ -65,10 +64,21 @@ const Button = defineStyleConfig({
   },
 });
 
+const Text = defineStyleConfig({
+  variants: {
+    smallCaps: {
+      fontSize: '0.9rem',
+      textTransform: 'uppercase',
+      fontWeight: '600',
+    }
+  }
+})
+
 
 const theme = extendTheme({
   components: {
     Button,
+    Text
   },
   colors: {
     main: {
@@ -114,7 +124,7 @@ const theme = extendTheme({
       200: "rgb(0,0,0)",
       300: "rgb(0,0,0)",
       400: "rgb(0,0,0)",
-      500: "rgb(236, 242, 248)",
+      500: "#fffdd0",
       600: "rgb(0,0,0)",
       700: "rgb(0,0,0)",
       800: "rgb(0,0,0)",

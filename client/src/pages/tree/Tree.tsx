@@ -20,14 +20,19 @@ import TreeIntro from "./TreeIntro";
 import TreeTraits from "./TreeTraits";
 import TreeLocation from "./TreeLocation";
 import { allFilters } from "../../data/browse_data/filterFormData";
+import { apiGet } from "../../services/api_client";
+import TreeImgs from "./TreeImgs";
+import TreeSciInfo from "./TreeSciInfo";
+import TreeTraitsSection from "./TreeTraitsSection";
+import TreeSimilar from "./TreeSimilar";
 
 import './styles/tree.css'
 
 // tempTreeData -- REPLACE
 import { iTreeData, iTreeTraitsData, tempTreeData } from "../../data/tree_data";
 import Carousel from "../../components/ui-components/Carousel";
-
-import { apiGet } from "../../services/api_client";
+import TreeUses from "./TreeUses";
+import TreeAdaptation from "./TreeAdaptation";
 
 const Tree = () => {
   const [treeData, setTreeData] = useState(tempTreeData);
@@ -80,75 +85,34 @@ const Tree = () => {
   }
 
   return (
-    <Flex as={"section"} direction={"column"} bg={"white"}>
+    <Flex as={"main"} direction={"column"} bg={"white"} width={"100%"}>
       <TreeHeading
         title={treeData.title}
         sciName={treeData.sciName}
         id={treeData._id}
       />
-      <Box
-        bg={'secondary.100'}
-        color={'white'}
-        padding={'1rem'}
-      >
-        <Flex direction={"row"} flexWrap={"wrap"} gap={"1rem"}>
-          <Box
-            as={"article"}
-            width={{ base: "100%", md: "40%" }}
-            maxHeight={{ base: "100vh", md: "80vh" }}
-          >
-            <Image src={treeData.imgSrc[0]}></Image>
-            {/* <Carousel imgs={imgs} /> */}
-          </Box>
-          <Box
-            as={"article"}
-            maxWidth={{ base: "100%", md: "calc(60% - 1rem)" }}
-            flexGrow={"1"}
-            maxHeight={{ base: "100vh", md: "80vh" }}
-            overflowX={"scroll"}
-            bg={"red.200"}
-          >
-            <TreeIntro text={treeData.intro} />
-          </Box>
+      <Box as={"main"} bg={"secondary.100"} color={"white"} width={"100%"}>
+        <Box className="tree-border-mask" bg={"secondary.100"}></Box>
+        <Flex
+          as={"section"}
+          direction={"row"}
+          alignItems={"stretch"}
+          gap={"1rem"}
+          p={"1rem"}
+        >
+          <TreeImgs imgSrc={treeData.imgSrc} />
+          <TreeIntro text={treeData.intro} title={treeData.title} />
+          <TreeSciInfo sciInfo={treeData.sciInfo} />
         </Flex>
-        <Flex direction={"row"} flexWrap={"wrap"} gap={"1rem"}>
-          <Flex
-            as={"article"}
-            maxWidth={{ base: "100%", md: "calc(50% - 1rem)" }}
-            flexGrow={"1"}
-            maxHeight={{ base: "100vh", md: "80vh" }}
-            direction={"column"}
-          >
-            <Heading>{treeData.title} Traits</Heading>
-            {allFilters.map(
-              (f, i) =>
-                treeData.traits[f.formName as keyof iTreeTraitsData] && (
-                  <TreeTraits
-                    key={i}
-                    trait={treeData.traits[f.formName as keyof iTreeTraitsData]}
-                    label={f.label}
-                    // helperText={f.helperText}
-                  />
-                )
-            )}
-          </Flex>
-          <Box
-            as={"article"}
-            width={{ base: "100%", md: "50%" }}
-            maxHeight={{ base: "100vh", md: "80vh" }}
-            overflowX={"scroll"}
-            bg={"yellow.200"}
-          >
-            {location ? (
-              <TreeLocation
-                location={treeData.traits.location}
-                title={treeData.title}
-              />
-            ) : (
-              `No states listed where ${treeData.title} is found`
-            )}
-          </Box>
+        <Flex as={"section"} direction={"row"} flexWrap={"wrap"}>
+          <TreeTraitsSection title={ treeData.title} traits={treeData.traits} />
+          <TreeLocation title={ treeData.title} location={treeData.traits.location} />
         </Flex>
+        <Flex as={'section'}>
+          <TreeUses uses={treeData.sciInfo.uses} />
+          <TreeAdaptation/>
+        </Flex>
+        <TreeSimilar id={ treeData._id} />
       </Box>
     </Flex>
   );

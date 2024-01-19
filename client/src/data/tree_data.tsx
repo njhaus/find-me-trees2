@@ -74,8 +74,14 @@ export type UsState =
   | "WY";
 
 // Need to complete
-interface iSciInfo {
-  info: string;
+export interface iSciInfo {
+  scientificName: string;
+  commonNames: string;
+  family: string;
+  hardinessZone: string;
+  origin: string;
+  uses: string;
+  availability: string;
 }
 
 interface iLeaf {
@@ -105,6 +111,7 @@ export interface iTreeData {
   traits: iTreeTraitsData;
 }
 
+
 export const tempTreeData = {
   _id: "testID123",
   title: "Big Tree",
@@ -113,7 +120,13 @@ export const tempTreeData = {
   intro:
     "TREE INTRO: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore laborum, voluptas fugiat quo quas sint iusto debitis optio dolorum ipsa mollitia ex. Voluptas perspiciatis pariatur, magni eius tempore veniam illum animi quisquam fugiat assumenda rem! Velit ipsam ut iusto? Incidunt totam voluptatem libero molestias inventore ipsam rem est vero quas rerum odit enim, nisi nihil laboriosam cupiditate repellendus amet? Nihil quas sed consequuntur deserunt mollitia illum voluptatum minus temporibus, error quam vero delectus magni quisquam vitae labore veniam aliquid dolore sunt architecto id molestias praesentium ipsum ea. Sint consequuntur, magnam harum dolorum, odio quae maxime recusandae facere eum eligendi asperiores provident reprehenderit unde assumenda quo non aspernatur accusantium magni blanditiis dolor?",
   sciInfo: {
-    info: "scientific info",
+    scientificName: 'tempinfo',
+    commonNames: 'tempinfo',
+    family: 'tempinfo',
+    hardinessZone: 'tempinfo',
+    origin: 'tempinfo',
+    uses: 'tempinfo',
+    availability: 'tempinfo',
   },
   traits: {
     leafType: "simple" as LeafType,

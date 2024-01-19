@@ -35,3 +35,13 @@
 }
 
 
+
+/* utility classes */
+
+/* borders */
+
+.blur-border {
+    box-shadow:
+        inset -1px -1px 2px black,
+        inset 1px 1px 2px black;
+}

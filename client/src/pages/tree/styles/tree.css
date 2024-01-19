@@ -1,6 +1,3 @@
-.found-btn {
-
-}
 
 .found-hover {
     display: none;
@@ -16,4 +13,16 @@
 
 .found-btn:hover > .found-hover {
     display: block;
+}
+
+.tree-border-mask {
+    position: absoute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4rem;
+    margin-top: -4rem;
+    background-color: aqua;
+    mask-image: url('../../../../public/curve-border.png');
+    mask-size: cover;
 }

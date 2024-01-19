@@ -7,9 +7,15 @@ export const tempTreeData = [
     ],
     sciName: "treeus maximus",
     intro:
-      "TREE INTRO: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore laborum, volup'",
+      "Red Maple has an oval shape and is a fast growe with strong wood, reaching a height of 75 feet (Fig.   1). Unless irrigated or on a wet site, Red Maple is best used north of USDA hardiness zone 9. Trees are often much shorter in the southern part of its range unless growing next to a stream or on a wet site. This tree is preferred over Silver Maple or Boxelder when a fast growing Maple is needed. When planting the species Acer rubrum, select only those which have been grown from seed sources in your area. The newly emerging leaves and red flowers and fruits signal that spring has come. They appear in December and January in Florida, later in the northern part of its range. The seeds of red maple are quite popular with squirrels and birds. This tree if sometimes confused with red-leaved cultivars of Norway Maple.",
     sciInfo: {
-      info: "scientific info",
+      scientificName: 'tempinfo',
+    commonNames: 'tempinfo',
+    family: 'tempinfo',
+    hardinessZone: 'tempinfo',
+    origin: 'tempinfo',
+    uses: 'tempinfo',
+    availability: 'tempinfo',
     },
     traits: {
       leafType: "simple",
@@ -31,9 +37,15 @@ export const tempTreeData = [
     ],
     sciName: "treeus minimus",
     intro:
-      "TREE INTRO: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore laborum, vsdvsdvaasvasvasvdasvas adsvdsavdvvasdvasdvad d ds vdvdolup'",
+       "Red Maple has an oval shape and is a fast growe with strong wood, reaching a height of 75 feet (Fig.   1). Unless irrigated or on a wet site, Red Maple is best used north of USDA hardiness zone 9. Trees are often much shorter in the southern part of its range unless growing next to a stream or on a wet site. This tree is preferred over Silver Maple or Boxelder when a fast growing Maple is needed. When planting the species Acer rubrum, select only those which have been grown from seed sources in your area. The newly emerging leaves and red flowers and fruits signal that spring has come. They appear in December and January in Florida, later in the northern part of its range. The seeds of red maple are quite popular with squirrels and birds. This tree if sometimes confused with red-leaved cultivars of Norway Maple.",
     sciInfo: {
-      info: "scientific info about tree",
+      scientificName: 'tempinfo',
+    commonNames: 'tempinfo',
+    family: 'tempinfo',
+    hardinessZone: 'tempinfo',
+    origin: 'tempinfo',
+    uses: 'tempinfo',
+    availability: 'tempinfo',
     },
     traits: {
       leafType: "compound",
@@ -55,9 +67,15 @@ export const tempTreeData = [
     ],
     sciName: "treeus awesomus",
     intro:
-      "TREE INTRO: Lorem ipsumsdvdsvdsvdsdsvdsv dolor sit amet consectetur, adipisicing elit. Tempore laborum, vsdvsdvaasvasvasvdasvas adsvdsavdvvasdvasdvad d ds vdvdolup'",
+       "Red Maple has an oval shape and is a fast growe with strong wood, reaching a height of 75 feet (Fig.   1). Unless irrigated or on a wet site, Red Maple is best used north of USDA hardiness zone 9. Trees are often much shorter in the southern part of its range unless growing next to a stream or on a wet site. This tree is preferred over Silver Maple or Boxelder when a fast growing Maple is needed. When planting the species Acer rubrum, select only those which have been grown from seed sources in your area. The newly emerging leaves and red flowers and fruits signal that spring has come. They appear in December and January in Florida, later in the northern part of its range. The seeds of red maple are quite popular with squirrels and birds. This tree if sometimes confused with red-leaved cultivars of Norway Maple.",
     sciInfo: {
-      info: "scientific info about tree",
+      scientificName: 'tempinfo',
+    commonNames: 'tempinfo',
+    family: 'tempinfo',
+    hardinessZone: 'tempinfo',
+    origin: 'tempinfo',
+    uses: 'tempinfo',
+    availability: 'tempinfo',
     },
     traits: {
       leafType: "simple",
@@ -79,9 +97,15 @@ export const tempTreeData = [
     ],
     sciName: "Pinus Pinaceae",
     intro:
-      "TREE INTRO: Lorem ipsumsdvdsvdsvdsdsvdsv dolor sit amet consectetur, adipisicing elit. Tempore laborum, vsdvsdvaasvasvasvdasvas adsvdsavdvvasdvasdvad d ds vdvdolup'",
+       "Red Maple has an oval shape and is a fast growe with strong wood, reaching a height of 75 feet (Fig.   1). Unless irrigated or on a wet site, Red Maple is best used north of USDA hardiness zone 9. Trees are often much shorter in the southern part of its range unless growing next to a stream or on a wet site. This tree is preferred over Silver Maple or Boxelder when a fast growing Maple is needed. When planting the species Acer rubrum, select only those which have been grown from seed sources in your area. The newly emerging leaves and red flowers and fruits signal that spring has come. They appear in December and January in Florida, later in the northern part of its range. The seeds of red maple are quite popular with squirrels and birds. This tree if sometimes confused with red-leaved cultivars of Norway Maple.",
     sciInfo: {
-      info: "scientific info about pine tree",
+      scientificName: 'tempinfo',
+    commonNames: 'tempinfo',
+    family: 'tempinfo',
+    hardinessZone: 'tempinfo',
+    origin: 'tempinfo',
+    uses: 'tempinfo',
+    availability: 'tempinfo',
     },
     traits: {
       leafType: "simple",
@@ -103,9 +127,15 @@ export const tempTreeData = [
     ],
     sciName: "treeus smilimus",
     intro:
-      "TREE INTRO: Lorem ipsumsdvdsvdsvdsdsvdsv dolor sit amet consectetur, adipisicing elit. Tempore laborum, vsdvsdvaasvasvasvdasvas adsvdsavdvvasdvasdvad d ds vdvdolup'",
+       "Red Maple has an oval shape and is a fast growe with strong wood, reaching a height of 75 feet (Fig.   1). Unless irrigated or on a wet site, Red Maple is best used north of USDA hardiness zone 9. Trees are often much shorter in the southern part of its range unless growing next to a stream or on a wet site. This tree is preferred over Silver Maple or Boxelder when a fast growing Maple is needed. When planting the species Acer rubrum, select only those which have been grown from seed sources in your area. The newly emerging leaves and red flowers and fruits signal that spring has come. They appear in December and January in Florida, later in the northern part of its range. The seeds of red maple are quite popular with squirrels and birds. This tree if sometimes confused with red-leaved cultivars of Norway Maple.",
     sciInfo: {
-      info: "scientific info about tree",
+      scientificName: 'tempinfo',
+    commonNames: 'tempinfo',
+    family: 'tempinfo',
+    hardinessZone: 'tempinfo',
+    origin: 'tempinfo',
+    uses: 'tempinfo',
+    availability: 'tempinfo',
     },
     traits: {
       leafType: "simple",
@@ -127,9 +157,15 @@ export const tempTreeData = [
     ],
     sciName: "treeus goofus",
     intro:
-      "TREE INTRO: Lorem ipsumsdvdsvdsvdsdsvdsv dolor sit amet consectetur, adipisicing elit. Tempore laborum, vsdvsdvaasvasvasvdasvas adsvdsavdvvasdvasdvad d ds vdvdolup'",
+       "Red Maple has an oval shape and is a fast growe with strong wood, reaching a height of 75 feet (Fig.   1). Unless irrigated or on a wet site, Red Maple is best used north of USDA hardiness zone 9. Trees are often much shorter in the southern part of its range unless growing next to a stream or on a wet site. This tree is preferred over Silver Maple or Boxelder when a fast growing Maple is needed. When planting the species Acer rubrum, select only those which have been grown from seed sources in your area. The newly emerging leaves and red flowers and fruits signal that spring has come. They appear in December and January in Florida, later in the northern part of its range. The seeds of red maple are quite popular with squirrels and birds. This tree if sometimes confused with red-leaved cultivars of Norway Maple.",
     sciInfo: {
-      info: "scientific info about tree",
+      scientificName: 'tempinfo',
+    commonNames: 'tempinfo',
+    family: 'tempinfo',
+    hardinessZone: 'tempinfo',
+    origin: 'tempinfo',
+    uses: 'tempinfo',
+    availability: 'tempinfo',
     },
     traits: {
       leafType: "compound",

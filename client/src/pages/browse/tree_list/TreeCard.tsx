@@ -41,20 +41,18 @@ const TreeCard = ({
   return (
     <Card maxW="sm" w="100%" align={"center"}>
       <CardBody>
-        <Heading size="md">{title}</Heading>
         <Box>
           <Image
             src={imgSrc}
             alt={`Photo of ${title}`}
             maxHeight={"15rem"}
             aspectRatio={"1/1"}
-
             objectFit={"cover"}
             borderRadius="lg"
           />
         </Box>
         <Stack mt="6" spacing="0">
-          <Text as={"h2"} fontSize="1.5rem">
+          <Text as={"h2"} color="main.300" fontSize="1.5rem">
             {title}
           </Text>
           <Text color="secondary.500" fontSize="1.25rem">
@@ -71,7 +69,9 @@ const TreeCard = ({
             searchTermText.map((term, i: number) => (
               <Text key={i}>
                 {searchTermValues[i] && searchTermValues[i]?.length > 0
-                  ? `${filtersTextMap[term as keyof typeof filtersTextMap]}: ${searchTermValues[i]} `
+                  ? `${filtersTextMap[term as keyof typeof filtersTextMap]}: ${
+                      searchTermValues[i]
+                    } `
                   : ""}
               </Text>
             ))}

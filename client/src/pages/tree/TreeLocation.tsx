@@ -1,6 +1,7 @@
 import { Flex, Box, Text, Heading } from "@chakra-ui/react";
 
 import { UsState } from "../../data/tree_data";
+import { BsFill0SquareFill } from "react-icons/bs";
 
 interface iTreeLocation {
   title: string;
@@ -9,17 +10,52 @@ interface iTreeLocation {
 
 const TreeLocation = ({ title, location }: iTreeLocation) => {
   return (
-    <Flex direction={"column"} alignItems={"center"}>
-      <Heading as={"h2"}>{title} is found in: </Heading>
-      <Box>
+    <Flex
+      className="blur-border"
+      direction={"column"}
+      alignItems={"center"}
+      as={"article"}
+      width={{ base: "100%", md: "60%" }}
+      maxHeight={{ base: "100vh", md: "80vh" }}
+      bg={"white"}
+      mx={"3rem"}
+      my={"2rem"}
+      p={"1rem"}
+      borderRadius={"10px"}
+    >
+      <Heading as={"h2"} color={"main.300"}>
+        Distribution
+      </Heading>
+      <Box>Map goes here</Box>
+      <Flex gap={"2rem"}>
+        <Flex gap={"0.5rem"}>
+          <BsFill0SquareFill color={"blue"} />
+          <Text color={"main.300"} variant={"smallCaps"}>
+            Native
+          </Text>
+        </Flex>
+        <Flex gap={"0.5rem"}>
+          <BsFill0SquareFill color={"red"} />
+          <Text color={"main.300"} variant={"smallCaps"}>
+            Invasive
+          </Text>
+        </Flex>
+      </Flex>
+      <Flex gap={"0.5rem"}>
+        <Text variant={"smallCaps"} color={"main.300"}>
+          Found in:
+        </Text>
         {location.map((loc, i) => (
-          <Text key={i} display={"inline"}>
+          <Text
+            key={i}
+            display={"inline"}
+            color={"main.300"}
+            fontSize={"0.9rem"}
+          >
             {loc} {i < location.length - 1 && ","}{" "}
           </Text>
         ))}
-      </Box>
-      <Box>Map goes here</Box>
-      <Flex>Map key goes here</Flex>
+      </Flex>
     </Flex>
   );
 };
