@@ -45,10 +45,10 @@ const MobileDrawer = ({auth, onLogout}: iNav) => {
   return (
     <Box className="mobile-drawer" me={"1rem"} zIndex={10}>
       <Button
+        variant={"outlineDark"}
         as={IconButton}
         aria-label="Options"
         icon={<HamburgerIcon />}
-        variant="outline"
         ref={btnRef}
         onClick={onOpenDrawer}
       />
@@ -76,7 +76,7 @@ const MobileDrawer = ({auth, onLogout}: iNav) => {
             left={"0"}
             backgroundColor={"secondary.800"}
             width={"100%"}
-            height={'100%'}
+            height={"100%"}
             marginTop={"21.9rem"}
           ></Box>
           <DrawerCloseButton />
@@ -118,7 +118,8 @@ const MobileDrawer = ({auth, onLogout}: iNav) => {
                 onClick={() => {
                   onLogout();
                   onCloseDrawer();
-                }}
+                  }}
+                  variant={'login'}
               >
                 Logout
               </Button>

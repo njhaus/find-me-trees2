@@ -134,7 +134,7 @@ const OptionPopup = ({ btnClicked, handleUpdate, hoverMsg, userDataKey, icon, da
             </Box>
           )}
           <HStack gap={"0.5rem"} flexGrow={1}>
-            <CheckIcon color="accent.500" />
+            {btnClicked && <CheckIcon color="accent.500" />}
             <Text
               color="accent.500"
               textAlign={"center"}
@@ -147,16 +147,20 @@ const OptionPopup = ({ btnClicked, handleUpdate, hoverMsg, userDataKey, icon, da
           </HStack>
         </Flex>
       </PopoverTrigger>
-      <PopoverContent>
+      <PopoverContent p={"0.5rem"}>
         <PopoverArrow />
         <PopoverCloseButton />
-        <PopoverHeader>{hoverMsg}</PopoverHeader>
-        <Button onClick={() => onUpdate()}>Use My Location</Button>
+        <PopoverHeader mt={"0.5rem"}>{hoverMsg}</PopoverHeader>
+        <Button mb={"0.5rem"} onClick={() => onUpdate()}>
+          Use My Location
+        </Button>
         {!showMap ? (
-          <Button onClick={() => setShowMap(true)}>Find location on Map</Button>
+          <Button mb={"0.5rem"} onClick={() => setShowMap(true)}>
+            Find location on Map
+          </Button>
         ) : (
           <>
-            <Button onClick={() => onUpdate()}>
+            <Button mb={"0.5rem"} onClick={() => onUpdate()}>
               Save Location (
               {coordinates
                 .map((coord) => coord.toFixed(3))

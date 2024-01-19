@@ -149,7 +149,7 @@ const UserOption = ({ text, successText, icon, id, userDataKey, dataFormat, hove
       {noUserMsg && (
         <Flex
           position={"absolute"}
-          top={"-1rem"}
+          top={"-3rem"}
           left={"-4rem"}
           fontSize={"0.8rem"}
           bg={"white"}

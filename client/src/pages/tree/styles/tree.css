@@ -25,4 +25,8 @@
     background-color: aqua;
     mask-image: url('../../../../public/curve-border.png');
     mask-size: cover;
+    mask-repeat: no-repeat;
+    mask-position: 50%;
+
+    
 }

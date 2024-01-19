@@ -40,7 +40,7 @@ const Button = defineStyleConfig({
     },
     solidLight: {
       fontSize: "1rem",
-      backgroundColor: "neutral.500",
+      backgroundColor: "main.900",
       color: "secondary.100",
     },
     login: {
@@ -56,6 +56,10 @@ const Button = defineStyleConfig({
       border: "1px solid",
       borderRadius: "50%",
     },
+    transparent: {
+      backgroundColor: 'transparent',
+      color: 'secondary.100'
+    }
   },
   // The default size and variant values
   defaultProps: {

@@ -18,7 +18,7 @@ const TreeLocation = ({ title, location }: iTreeLocation) => {
       width={{ base: "100%", md: "60%" }}
       maxHeight={{ base: "100vh", md: "80vh" }}
       bg={"white"}
-      mx={"3rem"}
+      mx={"2rem"}
       my={"2rem"}
       p={"1rem"}
       borderRadius={"10px"}

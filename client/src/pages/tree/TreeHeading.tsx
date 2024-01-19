@@ -30,7 +30,7 @@ const TreeHeading = ({ title, sciName, id }: iTreeHeading) => {
       direction={{ base: "column", md: "row" }}
       h={"fit-content"}
       pt={"2rem"}
-      pb={"4rem"}
+      pb={"5rem"}
       px={"1rem"}
       alignItems={"start"}
       position={"relative"}

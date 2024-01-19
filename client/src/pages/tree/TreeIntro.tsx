@@ -9,9 +9,7 @@ const TreeIntro = ({text, title, }: iTreeIntro) => {
   return (
     <Box
       as={"article"}
-      width={{ base: "80%", md: "40%" }}
-      maxWidth={{ base: "100%", md: "calc(60% - 1rem)" }}
-      maxHeight={{ base: "100vh", md: "80vh" }}
+      width={{ base: "100%", md:'70%', lg: "40%" }}
       padding={"1rem"}
       gap={"5rem"}
       marginLeft={"1rem"}

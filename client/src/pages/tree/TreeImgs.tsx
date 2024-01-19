@@ -8,10 +8,12 @@ const TreeImgs = ({imgSrc}: iTreeImgs) => {
   return (
     <Box
       as={"article"}
-      width={{ base: "100%", md: "40%" }}
-      maxWidth={{ base: "100%", md: "25rem" }}
-      maxHeight={{ base: "100vh", md: "80vh" }}
+      position={{base: 'absolute', lg:'relative'}}
+      width={{ base: "25%", md:'20%', lg: "40%" }}
+      maxWidth={{ base: "100%", lg: "25rem" }}
       zIndex={5}
+      top={{ base: '0', md: '-8rem', lg: '0' }}
+      display={{base: 'none', md: 'block'}}
     >
       <Image src={imgSrc[0]} aspectRatio={"1/1"} borderRadius={"50%"} objectFit={'cover'}></Image>
       {/* <Carousel imgs={imgs} /> */}

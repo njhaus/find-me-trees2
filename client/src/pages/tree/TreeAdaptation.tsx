@@ -2,7 +2,7 @@ import { Flex, Heading, Text } from "@chakra-ui/react";
 
 const TreeAdaptation = () => {
   return (
-    <Flex as={"article"} direction={"column"} width={"50%"} padding={"2rem"}>
+    <Flex as={"article"} direction={"column"} width={"50%"} my={"2rem"} px={'3rem'} borderLeft={'1px solid white'}>
       <Heading
         as={"h3"}
         color={"neutral.500"}

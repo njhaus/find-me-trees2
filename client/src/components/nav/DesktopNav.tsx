@@ -65,7 +65,8 @@ const DesktopNav = ({ auth, onLogout, redirect }: iNav) => {
               Login
             </Button>
           ) : (
-            <Button
+              <Button
+                variant={'solidDark'}
               onClick={() => {
                 onLogout();
               }}

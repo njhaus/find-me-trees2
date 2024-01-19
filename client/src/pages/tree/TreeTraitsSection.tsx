@@ -27,11 +27,11 @@ const TreeTraitsSection = ({title, traits }: iTreeTraitsSection) => {
       as={"article"}
       className='blur-border'
       maxWidth={{ base: "100%", md: "40%" }}
-      flexGrow={"1"}
       maxHeight={{ base: "100vh", md: "80vh" }}
+      minWidth={'15rem'}
       direction={"column"}
       bg={"white"}
-      mx={"3rem"}
+      mx={"2rem"}
       my={"2rem"}
       p={'1rem'}
       borderRadius={"10px"}
