@@ -4,7 +4,10 @@
   "description": "For the Trees server",
   "main": "index.mjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.mjs",
+    "seed": "node seedDb.js",
+    "get": "node getDbData.cjs"
   },
   "author": "nick haus",
   "license": "MIT",
