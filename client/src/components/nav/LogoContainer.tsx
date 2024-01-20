@@ -4,7 +4,7 @@ import MainLogo from "../logo/MainLogo";
 
 const LogoContainer = () => {
   return (
-    <HStack h={"100%"} gap={0}>
+    <HStack h={"100%"} gap={0} >
       <Box
         className="header-logo"
         backgroundColor={"white"}
@@ -16,8 +16,9 @@ const LogoContainer = () => {
         className="forest-mask"
         backgroundColor={"white"}
         h={"100%"}
-        aspectRatio={"2.7/1"}
+        aspectRatio={"2.8/1"}
         zIndex={"5"}
+        ms={'-2px'}
       ></Box>
     </HStack>
   );

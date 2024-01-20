@@ -64,7 +64,7 @@ const User = () => {
       !userExists
     ) {
       console.log('Valid user does not exist')
-      navigate("/login", { state: { from: location, redirect: true } });
+      // navigate("/login", { state: { from: location, redirect: true } });
     }
   }, [auth, userExists, userData]);
 

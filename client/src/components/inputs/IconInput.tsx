@@ -24,7 +24,9 @@ const IconInput = forwardRef<HTMLInputElement, iIconInput>(({ icon, labelText, l
 
   return (
     <Stack>
-      <FormLabel htmlFor={labelFor}>{labelText}</FormLabel>
+      <FormLabel htmlFor={labelFor} mt={"0.5rem"} mb={"0"}>
+        {labelText}
+      </FormLabel>
       <InputGroup>
         <InputLeftElement pointerEvents="none">{icon}</InputLeftElement>
         <Input
@@ -36,17 +38,30 @@ const IconInput = forwardRef<HTMLInputElement, iIconInput>(({ icon, labelText, l
           placeholder={inputPlaceholder}
           onChange={(e) => {
             if (validateTextInput({ data: e.target.value })) {
-              setValue(e.target.value)
-              onChange(e, labelFor)
+              setValue(e.target.value);
+              onChange(e, labelFor);
             }
           }}
           onBlur={onBlur}
           autoComplete="off"
-          aria-invalid={error ? 'true' : 'false'}
+          aria-invalid={error ? "true" : "false"}
           aria-describedby={error}
         />
       </InputGroup>
-      {(error && val) && <Text className="errText" color={'red'} aria-live="assertive" display={'flex'} flexDirection={'row'} tabIndex={0}><BsExclamationTriangleFill /><span className='sr-only'>{ labelText} error</span>{error}</Text>}
+      {error && val && (
+        <Text
+          className="errText"
+          color={"red"}
+          aria-live="assertive"
+          display={"flex"}
+          flexDirection={"row"}
+          tabIndex={0}
+        >
+          <BsExclamationTriangleFill />
+          <span className="sr-only">{labelText} error</span>
+          {error}
+        </Text>
+      )}
     </Stack>
   );
 });

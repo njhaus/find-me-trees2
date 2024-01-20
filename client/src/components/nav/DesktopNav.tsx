@@ -39,7 +39,13 @@ const DesktopNav = ({ auth, onLogout, redirect }: iNav) => {
       zIndex={"5"}
       backgroundColor={"main.900"}
     >
-      <Flex w="100%" align="center" justify="space-between" h={"100%"}>
+      <Flex
+        w="100%"
+        align="center"
+        justify="space-between"
+        h={"100%"}
+        overflowX={"hidden"}
+      >
         {/* // Logo */}
         <LogoContainer />
         {/* // Nav Items */}
@@ -60,13 +66,13 @@ const DesktopNav = ({ auth, onLogout, redirect }: iNav) => {
               onClick={() => {
                 onOpenLogin();
               }}
-              variant={'login'}
+              variant={"login"}
             >
               Login
             </Button>
           ) : (
-              <Button
-                variant={'solidDark'}
+            <Button
+              variant={"solidDark"}
               onClick={() => {
                 onLogout();
               }}

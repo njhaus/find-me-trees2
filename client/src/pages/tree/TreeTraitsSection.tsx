@@ -25,18 +25,23 @@ const TreeTraitsSection = ({title, traits }: iTreeTraitsSection) => {
   return (
     <Flex
       as={"article"}
-      className='blur-border'
-      maxWidth={{ base: "100%", md: "40%" }}
-      maxHeight={{ base: "100vh", md: "80vh" }}
-      minWidth={'15rem'}
+      className="blur-border"
+      width={{ base: "100%", md: "calc(40% - 4rem)" }}
+      minWidth={"15rem"}
       direction={"column"}
       bg={"white"}
       mx={"2rem"}
       my={"2rem"}
-      p={'1rem'}
+      p={"1rem"}
       borderRadius={"10px"}
     >
-      <Heading as={"h3"} fontSize={"2rem"} color={'main.300'} mb={'1rem'} mx={'auto'}>
+      <Heading
+        as={"h3"}
+        fontSize={"2rem"}
+        color={"main.300"}
+        mb={"1rem"}
+        mx={"auto"}
+      >
         Physical Traits
       </Heading>
       {allFilters.map(

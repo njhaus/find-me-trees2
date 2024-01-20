@@ -1,9 +1,15 @@
+import { Route, Routes } from "react-router-dom";
+
+import About from "../pages/about/About";
+
 const AboutRoutes = () => {
   return (
-    <div>
-      About
-    </div>
-  )
-}
+    <>
+      <Routes>
+        <Route index element={<About />} />
+      </Routes>
+    </>
+  );
+};
 
-export default AboutRoutes
+export default AboutRoutes;

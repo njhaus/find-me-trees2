@@ -8,14 +8,20 @@ const TreeImgs = ({imgSrc}: iTreeImgs) => {
   return (
     <Box
       as={"article"}
-      position={{base: 'absolute', lg:'relative'}}
-      width={{ base: "25%", md:'20%', lg: "40%" }}
+      position={{ base: "absolute", lg: "relative" }}
+      width={{ base: "25%", md: "20%", lg: "40%" }}
       maxWidth={{ base: "100%", lg: "25rem" }}
       zIndex={5}
-      top={{ base: '0', md: '-8rem', lg: '0' }}
-      display={{base: 'none', md: 'block'}}
+      top={{ base: "0", md: "-8rem", lg: "0" }}
+      left={{ base: "0", md: "1rem", lg: "0" }}
+      display={{ base: "none", md: "block" }}
     >
-      <Image src={imgSrc[0]} aspectRatio={"1/1"} borderRadius={"50%"} objectFit={'cover'}></Image>
+      <Image
+        src={imgSrc[0]}
+        aspectRatio={"1/1"}
+        borderRadius={"50%"}
+        objectFit={"cover"}
+      ></Image>
       {/* <Carousel imgs={imgs} /> */}
     </Box>
   );

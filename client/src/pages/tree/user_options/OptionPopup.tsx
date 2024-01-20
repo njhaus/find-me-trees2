@@ -96,7 +96,7 @@ const OptionPopup = ({ btnClicked, handleUpdate, hoverMsg, userDataKey, icon, da
       returnFocusOnClose={false}
       isOpen={isOpen}
       onClose={onClose}
-      placement="right"
+      placement="top-end"
     >
       <PopoverTrigger>
         <Flex

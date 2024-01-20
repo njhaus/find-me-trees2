@@ -16,6 +16,7 @@ import { Link } from "react-router-dom";
 
 import TreeUserOptions from "./TreeUserOptions";
 import { ArrowBackIcon } from "@chakra-ui/icons";
+import BackButton from "../../components/buttons/BackButton";
 
 interface iTreeHeading {
     title: string;
@@ -36,20 +37,7 @@ const TreeHeading = ({ title, sciName, id }: iTreeHeading) => {
       position={"relative"}
     >
       <Box width={{ base: "100%", md: "40%" }}>
-        <Link to={"/browse"}>
-          <Button variant="outlineDark" display={{ base: "none", md: "block" }}>
-            <ArrowBackIcon /> Back to guide
-          </Button>
-          <Button
-            variant="icon"
-            display={{ base: "block", md: "none" }}
-            position={"absolute"}
-            top={"1rem"}
-            left={"1rem"}
-          >
-            <ArrowBackIcon />
-          </Button>
-        </Link>
+        <BackButton to={'/browse'} />
       </Box>
       <VStack width={{ base: "100%", md: "30%" }}>
         <HStack>

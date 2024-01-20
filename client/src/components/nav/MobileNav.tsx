@@ -12,10 +12,19 @@ import LogoContainer from "./LogoContainer";
 const MobileNav = ({ auth, onLogout }: iNav) => {
   return (
     <>
-      <chakra.header id="header" display={{ base: "flex", md: "none" }} bg={'main.900'}>
-        <Flex w="100%" align="center" justify="space-between">
+      <chakra.header
+        id="header"
+        display={{ base: "flex", md: "none" }}
+        bg={"main.900"}
+      >
+        <Flex
+          w="100%"
+          align="center"
+          justify="space-between"
+          overflowX={"hidden"}
+        >
           {/* // Logo */}
-          <LogoContainer/>
+          <LogoContainer />
           {/* // Dropdown Menu */}
           <MobileDrawer auth={auth} onLogout={onLogout} />
         </Flex>

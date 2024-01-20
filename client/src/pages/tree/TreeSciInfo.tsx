@@ -49,7 +49,7 @@ const TreeSciInfo = ({ sciInfo}: iTreeSciInfo) => {
               {key.split(/(N)/).slice(1).join("")}:
             </Text>
           </Flex>
-          <Text fontSize={"0.9rem"} px={"0.5rem"}>
+          <Text fontSize={"0.9rem"} px={"0.5rem"} mb={'0.5rem'}>
             {sciInfo[key as keyof iSciInfo]}
           </Text>
         </Box>

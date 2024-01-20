@@ -1,4 +1,5 @@
 import { Heading, Text, VStack, Flex, Image } from "@chakra-ui/react"
+import RedwoodBg from "../../components/backgrounds/RedwoodBg";
 
 const BrowseTitle = () => {
   return (
@@ -11,17 +12,7 @@ const BrowseTitle = () => {
       height={"10rem"}
       overflow={"hidden"}
     >
-      <Image
-        src={"redwood-bkg.jpeg"}
-        position={"absolute"}
-        top={0}
-        left={0}
-        width={"100%"}
-        height={"100%"}
-        objectFit={"cover"}
-        objectPosition={"top"}
-        filter={"brightness(50%)"}
-      ></Image>
+      <RedwoodBg/>
       <VStack align={"start"} zIndex={1} padding={"2rem"}>
         <Heading as="h2" color={"white"} textShadow={"0px 0px 2px black"}>
           Tree Guide

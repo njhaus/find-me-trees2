@@ -1,6 +1,7 @@
-import { Flex, Text } from "@chakra-ui/react"
+import { Flex, Heading, Text, HStack, Box } from "@chakra-ui/react"
 
 import UserProfile from "./UserProfile";
+import BackButton from "../../components/buttons/BackButton";
 import { iUserData } from "../../data/user_data/userData";
 
 interface iUserHeading {
@@ -15,7 +16,26 @@ const UserHeading = ({userData}: iUserHeading) => {
       padding={"1rem"}
       justify={"space-between"}
     >
-      <Text>{userData.username}'s Trees</Text>
+      <Box>
+        <BackButton to={"/browse"} />
+      </Box>
+      <HStack>
+        <Text fontWeight={"200"} fontSize={"3rem"}>
+          ~
+        </Text>
+        <Heading
+          as="h1"
+          textAlign={"center"}
+          fontWeight={"200"}
+          fontSize={"3rem"}
+          color={"main.200"}
+        >
+          {userData.username}'s Trees
+        </Heading>
+        <Text fontWeight={"200"} fontSize={"3rem"}>
+          ~
+        </Text>
+      </HStack>
       <Flex
         justify={"center"}
         align={"center"}
@@ -25,7 +45,7 @@ const UserHeading = ({userData}: iUserHeading) => {
         borderRadius={"50%"}
         fontSize={"2rem"}
       >
-        <UserProfile userData = {userData} />
+        <UserProfile userData={userData} />
       </Flex>
     </Flex>
   );

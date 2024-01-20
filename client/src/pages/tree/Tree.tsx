@@ -33,7 +33,8 @@ import { iTreeData, iTreeTraitsData, tempTreeData } from "../../data/tree_data";
 import Carousel from "../../components/ui-components/Carousel";
 import TreeUses from "./TreeUses";
 import TreeAdaptation from "./TreeAdaptation";
-import TreeImgMobile from "./treeImgMobile";
+import TreeImgMobile from "./TreeImgMobile";
+import CurveBorder from "../../components/borders/CurveBorder";
 
 const Tree = () => {
   const [treeData, setTreeData] = useState(tempTreeData);
@@ -93,11 +94,12 @@ const Tree = () => {
         id={treeData._id}
       />
       <Box as={"main"} bg={"secondary.100"} color={"white"} width={"100%"}>
-        <Box className="tree-border-mask" bg={"secondary.100"}></Box>
+        <CurveBorder color={'secondary.100'}/>
         <Flex
           as={"section"}
           position={"relative"}
           direction={"row"}
+          justifyContent={'space-evenly'}
           alignItems={"stretch"}
           p={"1rem"}
           flexWrap={{ base: "wrap", md: "nowrap" }}
@@ -107,14 +109,12 @@ const Tree = () => {
           <TreeImgMobile imgSrc={treeData.imgSrc} />
           <TreeSciInfo sciInfo={treeData.sciInfo} />
         </Flex>
-        <Flex as={"section"} direction={"row"} justifyContent={"space-around"}>
+        <Flex as={"section"} direction={"row"} justifyContent={"space-around"} flexWrap={'wrap'} pb={'3rem'}>
           <TreeTraitsSection title={treeData.title} traits={treeData.traits} />
           <TreeLocation
             title={treeData.title}
             location={treeData.traits.location}
           />
-        </Flex>
-        <Flex as={"section"}>
           <TreeUses uses={treeData.sciInfo.uses} />
           <TreeAdaptation />
         </Flex>

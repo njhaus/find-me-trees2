@@ -15,8 +15,7 @@ const TreeLocation = ({ title, location }: iTreeLocation) => {
       direction={"column"}
       alignItems={"center"}
       as={"article"}
-      width={{ base: "100%", md: "60%" }}
-      maxHeight={{ base: "100vh", md: "80vh" }}
+      width={{ base: "100%", md: "calc(60% - 4rem)" }}
       bg={"white"}
       mx={"2rem"}
       my={"2rem"}
