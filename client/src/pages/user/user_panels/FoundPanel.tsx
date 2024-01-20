@@ -44,28 +44,19 @@ const FoundPanel = ({ found }: iFoundPanel) => {
   return (
     <TabPanel
       as={"article"}
-      bg={"yellow.200"}
-      maxHeight={"100vh"}
+      bg={"neutral.500"}
+      h={{ base: "fit-content", lg: "100vh" }}
       overflow={"hidden"}
-      padding={0}
+      py={"2rem"}
+      px={"1rem"}
     >
-      <Text textAlign={"center"}>
-        Select a location or click a location on the map to explore trees you've
-        found in that area.
-      </Text>
       <Flex
-        direction={"row-reverse"}
-        align={"center"}
-        flexWrap={"wrap"}
+        direction={{ base: "column", lg: "row-reverse" }}
+        alignItems={"stretch"}
         justifyContent={"center"}
+        gap={"2rem"}
+        h={'100%'}
       >
-        <Flex
-          direction={"column"}
-          bg={"yellow.100"}
-          flexGrow={"1"}
-          minWidth={"32rem"}
-          align={"center"}
-        >
           {/* // NEED TO REDO THIS COMPONENT */}
           {/* <FoundSelect onSelect={handleSelect} /> */}
           <FoundMap
@@ -73,18 +64,7 @@ const FoundPanel = ({ found }: iFoundPanel) => {
             onClick={handleSelect}
             location={locationFilter}
           />
-        </Flex>
-        <Flex
-          bg={"yellow.300"}
-          width={{ base: "100%", lg: "30rem" }}
-          padding={"1rem"}
-          direction={"column"}
-          maxHeight={"100vh"}
-          overflowY={"scroll"}
-        >
-          <Text>Trees I've found (Change to match search queries)</Text>
-          <FoundList data={found} location={locationFilter} />
-        </Flex>
+        <FoundList data={found} location={locationFilter} />
       </Flex>
     </TabPanel>
   );

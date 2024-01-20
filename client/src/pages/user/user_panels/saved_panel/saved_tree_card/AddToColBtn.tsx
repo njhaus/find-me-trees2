@@ -11,7 +11,9 @@ import {
   Button,
   useDisclosure,
   Text,
-  Box
+  Box,
+  List,
+  ListItem
 } from "@chakra-ui/react";
 
 import RadioInput from "../../../../../components/inputs/BrowseRadioInput";
@@ -66,21 +68,29 @@ const AddToColBtn = ({
       closeOnBlur={false}
     >
       <PopoverTrigger>
-        <Button>Add to a collection</Button>
+        <Button variant={"outlineDark"} size={"teeny"} w={'45%'}>
+          Add to a collection
+        </Button>
       </PopoverTrigger>
       <PopoverContent>
         <PopoverArrow />
         <PopoverCloseButton />
         <PopoverBody>
           <Box>
-            <Text>{currentTree?._id.title} is in the collections:</Text>
-            <ul>
+            {collections.filter(
+                  (col) => collectionsTreeIsIn?.includes(col)
+          ).length > 0 && <Text>{currentTree?._id.title} is in the collections:</Text>}
+            <List>
               {collections.map(
-                (col) => collectionsTreeIsIn?.includes(col) && <li key={col }>{col}</li>
+                (col) =>
+                  collectionsTreeIsIn?.includes(col) && <ListItem key={col}>-{col}</ListItem>
               )}
-            </ul>
+            </List>
           </Box>
-          <Box>
+         {collections.filter(
+                  (col) => !collectionsTreeIsIn?.includes(col)
+          ).length > 0 &&
+            <Box>
             <Text>Add {currentTree?._id.title} to collection:</Text>
             <form>
               <RadioInput
@@ -93,10 +103,12 @@ const AddToColBtn = ({
                 onChange={handleSelectCol}
               />
             </form>
-          </Box>
+          </Box>}
         </PopoverBody>
         <PopoverFooter>
-          <Button
+          {collections.filter(
+                  (col) => !collectionsTreeIsIn?.includes(col)
+          ).length > 0 && <Button
             ref={addRef}
             onClick={() => {
               handleAddToCol(selectedCol);
@@ -104,7 +116,7 @@ const AddToColBtn = ({
             }}
           >
             Add
-          </Button>
+          </Button>}
         </PopoverFooter>
       </PopoverContent>
     </Popover>

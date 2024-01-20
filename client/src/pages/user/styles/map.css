@@ -1,9 +1,9 @@
 .map-wrap {
     position: relative;
-    width: 80%;
-    height: calc(100vh - 77px);
-    max-height: 400px;
-    /* max-width: 500px; */
+    width: 90%;
+    height: 90%;
+    min-height: 300px;
+    max-width: 1000px;
     /* calculate height of the screen minus the heading */
 }
 
@@ -12,3 +12,100 @@
     width: 100%;
     height: 100%;
 }
+
+
+.maplibregl-popup-content {
+    border-radius: 5px;
+    background-color: rgb(23,48,26);
+    color: white;
+
+}
+
+.maplibregl-popup-close-button {
+    top: 5px;
+    right: 5px;
+    font-size: 24px;
+}
+
+.maplibregl-popup-content h4 {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.maplibregl-popup-content img {
+    max-width: 8rem;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+}
+
+.maplibregl-popup-content a {
+    color: #ffffe0;
+    font-weight: 500;
+}
+
+.maplibregl-popup-content a:hover {
+    color: rgb(228, 187, 205);
+    font-weight: 600;
+}
+
+.maplibregl-popup-anchor-top-left .maplibregl-popup-tip {
+    align-self: flex-start;
+    border-bottom-color: rgb(23,48,26);
+    border-left: none;
+    border-top: none;
+}
+
+.maplibregl-popup-anchor-top .maplibregl-popup-tip {
+    align-self: center;
+    border-bottom-color: rgb(23,48,26);
+    border-top: none;
+}
+
+.maplibregl-popup-anchor-bottom .maplibregl-popup-tip {
+    align-self: center;
+    border-bottom: none;
+    border-top-color: rgb(23,48,26);
+}
+
+.maplibregl-popup-anchor-bottom-right .maplibregl-popup-tip {
+    align-self: flex-end;
+    border-bottom: none;
+    border-right: none;
+    border-top-color: rgb(23,48,26);
+}
+
+.maplibregl-popup-anchor-top-right .maplibregl-popup-tip {
+    align-self: flex-end;
+    border-bottom-color: rgb(23,48,26);
+    border-right: none;
+    border-top: none;
+}
+
+.maplibregl-popup-anchor-bottom-left .maplibregl-popup-tip {
+    align-self: flex-start;
+    border-bottom: none;
+    border-left: none;
+    border-top-color: rgb(23,48,26);
+}
+
+/* 
+const popupContainer=document.createElement("div");
+const popupTitle=document.createElement("h4");
+popupTitle.textContent=title;
+const popupImg=document.createElement("img");
+popupImg.setAttribute("src", imgSrc);
+const popupLink=document.createElement("a");
+
+popupLink.textContent=`View $ {
+    title
+}
+
+`;
+
+popupLink.setAttribute("href", `/tree/$ {
+        id
+    }
+
+    `); */

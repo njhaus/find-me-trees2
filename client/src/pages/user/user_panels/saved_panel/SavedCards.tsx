@@ -22,8 +22,12 @@ const SavedCards = ({ data, collections, currentCollection }: iSavedCards) => {
         lg: "repeat(3, 1fr)",
         xl: "repeat(4, 1fr)",
       }}
-      gap={"1rem"}
+      gap={"2rem"}
       margin={"1rem"}
+      minHeight={"calc(100vh - 25rem)"}
+      color={"white"}
+      fontWeight={'500'}
+      py={'2rem'}
     >
       {displayCardsByCollection?.length > 0 ? (
         displayCardsByCollection.map((tree, i) => (
@@ -43,7 +47,7 @@ const SavedCards = ({ data, collections, currentCollection }: iSavedCards) => {
         <Text>
           {currentCollection === "all"
             ? "You have not saved any trees"
-            : `There are currently no trees in ${currentCollection}`}
+            : `There are currently no trees in the collection ${currentCollection}`}
         </Text>
       )}
     </Grid>

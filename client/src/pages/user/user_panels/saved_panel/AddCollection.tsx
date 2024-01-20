@@ -19,11 +19,13 @@ import {
   FormLabel,
   Input,
   HStack,
+  Text,
 } from "@chakra-ui/react";
 import { iUserData } from "../../../../data/user_data/userData";
 import GenTextInput from "../../../../components/inputs/GenTextInput";
 import useUpdateUser from "../../../../hooks/useUpdateUser";
 import useAuth from "../../../../hooks/useAuth";
+import { BsQuestionCircle } from "react-icons/bs";
 
 interface iAddCollection {
   collections: string[];
@@ -106,47 +108,54 @@ const AddCollection = ({ collections }: iAddCollection) => {
         closeOnBlur={true}
       >
         <PopoverTrigger>
-          <Button>Manage Collections</Button>
+          <Button>
+            <Text pe={"0.5rem"}>Manage Collections</Text>
+            <BsQuestionCircle className={"help-icon"}/>
+            <Text className={"help-hover"} maxWidth={'10rem'} top={'-4rem'}>Organize your trees by adding collections</Text>
+          </Button>
         </PopoverTrigger>
         <PopoverContent>
           <PopoverArrow />
           <PopoverCloseButton
             onClick={() => {
-              handleClose()
+              handleClose();
             }}
           />
           <PopoverBody>
-            <PopoverHeader>Add Collection</PopoverHeader>
+            <PopoverHeader mb={"0.5rem"}>Add Collection</PopoverHeader>
             <form>
               <GenTextInput
                 formVal={editCollections.addCollection}
                 label="New Collection:"
                 formName="new-collection"
                 onSubmit={handleAddCollection}
-                
                 ref={initialFocusRef}
               />
-              <PopoverHeader>Edit Collections</PopoverHeader>
-              <FormControl as="fieldset">
-                <FormLabel as="legend">
-                  Delete Collections: 
-                </FormLabel>
-                <CheckboxGroup>
-                  <HStack spacing="24px">
-                    {collections.map((col, i) => (
-                      <Checkbox
-                        key={i}
-                        value={col}
-                        isChecked={true}
-                        onChange={() => {handleDeleteCollections(col)
-                        }}
-                      >
-                        {col}
-                      </Checkbox>
-                    ))}
-                  </HStack>
-                </CheckboxGroup>
-              </FormControl>
+              {collections.length > 0 && (
+                <>
+                  <PopoverHeader mb={"0.5rem"}>
+                    Delete Collections
+                  </PopoverHeader>
+                  <FormControl as="fieldset" mb={"1rem"}>
+                    <CheckboxGroup>
+                      <HStack spacing="24px">
+                        {collections.map((col, i) => (
+                          <Checkbox
+                            key={i}
+                            value={col}
+                            isChecked={true}
+                            onChange={() => {
+                              handleDeleteCollections(col);
+                            }}
+                          >
+                            {col}
+                          </Checkbox>
+                        ))}
+                      </HStack>
+                    </CheckboxGroup>
+                  </FormControl>
+                </>
+              )}
               <Button
                 onClick={(e) => {
                   handleSubmit(e);

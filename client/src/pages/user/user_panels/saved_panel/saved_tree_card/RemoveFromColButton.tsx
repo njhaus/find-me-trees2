@@ -36,8 +36,15 @@ const RemoveFromColButton = ({collection, id }: iRemoveFromColButton) => {
   };
 
   return (
-      <Button onClick={() => handleAddToCol(collection)}>Remove from {collection}</Button>
-  )
+    <Button
+      variant={"outlineAccent"}
+      size={"teeny"}
+      w={"45%"}
+      onClick={() => handleAddToCol(collection)}
+    >
+      Remove from {collection}
+    </Button>
+  );
 }
 
 export default RemoveFromColButton

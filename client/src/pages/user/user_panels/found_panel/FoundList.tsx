@@ -1,4 +1,4 @@
-import { Grid, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 
 import { iUserFound } from "../../../../data/user_data/userData";
 import FoundCard from "./FoundCard";
@@ -12,29 +12,32 @@ interface iFoundList {
 const FoundList = ({ data, location }: iFoundList) => {
     
   return (
-    <Grid
-      templateColumns={{
-        base: "1fr",
-        sm: "repeat(2, 1fr)",
-        md: "repeat(3, 1fr)",
-        lg: "1fr",
-      }}
+    <Flex
+      width={{ base: "100%", lg: "40rem" }}
+      padding={"1rem"}
+      direction={"row"}
+      maxHeight={"100vh"}
+      overflowY={"scroll"}
+      gap={"1rem"}
+      flexWrap={'wrap'}
+      justifyContent={'center'}
+      pb={'3rem'}
     >
-      {data?.length > 0 ?
+      {data?.length > 0 ? (
         data.map((tree, i) => (
-        <FoundCard
-          key={i}
-          id={tree._id._id}
-          title={tree._id.title}
-          imgSrc={tree._id.imgSrc}
+          <FoundCard
+            key={i}
+            id={tree._id._id}
+            title={tree._id.title}
+            imgSrc={tree._id.imgSrc}
             sciName={tree._id.sciName}
             locationFound={tree.location}
-        />
+          />
         ))
-        :
+      ) : (
         <Text>You have not found any trees yet.</Text>
-      }
-    </Grid>
+      )}
+    </Flex>
   );
 }
 

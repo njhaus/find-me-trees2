@@ -63,11 +63,13 @@ const TreeCard = ({
           ) ? (
             ""
           ) : (
-            <Text>Matches search terms:</Text>
+            <Text color={"accent.500"} mt={"0.5rem"}>
+              Matches search terms
+            </Text>
           )}
           {searchTerms &&
             searchTermText.map((term, i: number) => (
-              <Text key={i}>
+              <Text key={i} color={"accent.500"}>
                 {searchTermValues[i] && searchTermValues[i]?.length > 0
                   ? `${filtersTextMap[term as keyof typeof filtersTextMap]}: ${
                       searchTermValues[i]

@@ -44,12 +44,22 @@ const SavedTreeCard = ({
     const imageSource = imgSrc[0];
   
   return (
-    <Card maxW="sm" w="100%" align={"center"}>
+    <Card size={'sm'} w="16rem" align={"center"}>
       <CardBody>
         <Heading size="md">{title}</Heading>
-        <Image src={imageSource} alt={`Photo of ${title}`} borderRadius="lg" />
-        <Stack mt="6" spacing="3">
-          <Text color="blue.600" fontSize="2xl">
+        <Image
+          src={imageSource}
+          alt={`Photo of ${title}`}
+          borderRadius="lg"
+          maxHeight={"12rem"}
+          aspectRatio={"1/1"}
+          objectFit={"cover"}
+        />
+        <Stack mt="1" spacing="0">
+          <Text as={"h2"} color="main.300" fontSize="1.5rem">
+            {title}
+          </Text>
+          <Text color="secondary.500" fontSize="1.25rem">
             {sciName}
           </Text>
         </Stack>
@@ -58,7 +68,7 @@ const SavedTreeCard = ({
       <CardFooter>
         <Flex direction={"column"} align={"center"}>
           <Flex margin={"0.5rem"}>
-            <Button variant="solid" colorScheme="blue">
+            <Button variant="solidDark" size={'sm'}>
               <Link to={`/tree/${id}`}>View {title}</Link>
             </Button>
           </Flex>
@@ -74,7 +84,7 @@ const SavedTreeCard = ({
             ) : (
               <RemoveFromColButton collection={currentCollection} id={id} />
             )}
-            <RemoveBtn title={title} id={id} dataKey={'saved'} />
+            <RemoveBtn title={title} id={id} dataKey={"saved"} />
           </Flex>
         </Flex>
       </CardFooter>

@@ -16,7 +16,12 @@ const FavoritesPanel = ({ favorites }: iFavoritesPanel) => {
   const imgs = favorites.map((tree, i) => tree._id.imgSrc[0]);
 
   return (
-    <TabPanel as={"article"} bg={"blue.200"} overflow={"hidden"} padding={0}>
+    <TabPanel
+      as={"article"}
+      bg={"accent.400"}
+      overflow={"hidden"}
+      padding={0}
+    >
       <Flex direction={"column"} padding={"1rem"}>
         <Button
           width={"10rem"}

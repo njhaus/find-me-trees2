@@ -30,8 +30,8 @@ const SavedPanel = ({ data, collections}: iSavedPanel) => {
     }, [collections])
 
     return (
-      <TabPanel as={"article"} bg={"teal.200"}>
-        <Flex direction={"column"}>
+      <TabPanel as={"article"} bg={"secondary.200"}>
+        <Flex direction={"column"} pt={'1rem'}>
           <Flex direction={"row"} justify={"space-between"}>
             <CollectionMenu
               currentCol={currentCollection}

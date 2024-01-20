@@ -49,12 +49,12 @@ const RadioInput = ({ formVal, label, values, formName, helperText, helperLink, 
           ))}
         </HStack>
       </RadioGroup>
-      <Box width={"fit-content"} className="filter-icon">
+      {helperText && <Box width={"fit-content"} className="filter-icon">
         <Box className="filter-text" maxWidth={"80vw"} overflowX={"scroll"}>
           <HelperText helper={helperText ? helperText : []} helperLink={ helperLink ? helperLink : ''} />
         </Box>
         <BsQuestionCircle />
-      </Box>
+      </Box>}
     </FormControl>
   );
 };

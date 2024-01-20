@@ -48,3 +48,36 @@ body {
         inset -1px -1px 2px black,
         inset 1px 1px 2px black;
 }
+
+.blur-border-light {
+    box-shadow:
+        inset -1px -1px 2px #cccccc,
+        inset 1px 1px 2px #cccccc;
+}
+
+/* Hover */
+
+.help-icon {
+
+}
+
+.help-hover {
+    display: none;
+    position: absolute;
+    font-size: 0.9rem;
+    font-weight: 400;
+    padding: 0.5rem;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    white-space: wrap;
+    z-index: 10;
+}
+
+.help-icon:hover + .help-hover {
+    display: block;
+}
+
+.help-icon:hover > .help-hover {
+    display: block;
+}

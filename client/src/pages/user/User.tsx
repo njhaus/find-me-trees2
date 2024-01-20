@@ -22,6 +22,7 @@ import useUpdateUser from "../../hooks/useUpdateUser"
     interface iUserToggleData {
       text: string;
       icon: JSX.Element;
+      bg: string;
     }
 
 
@@ -29,14 +30,17 @@ import useUpdateUser from "../../hooks/useUpdateUser"
       {
         text: "Trees I've saved",
         icon: <BsJournal />,
+        bg: "secondary.200",
       },
       {
         text: "Trees I've found",
         icon: <BsSearch />,
+        bg: "neutral.500",
       },
       {
         text: "My favorite Trees",
         icon: <BsHeart />,
+        bg: "accent.400",
       },
     ];
 
@@ -76,16 +80,18 @@ const User = () => {
             userData={userData}
           />
         </Flex>
-        <Tabs isFitted variant="enclosed">
-          <TabList mb="1em">
+        <Tabs isFitted variant="enclosed" > 
+          <TabList >
             {userToggleData.map((data, i) => (
               <UserTab
                 key={i}
                 text={data.text}
-                icon={data.icon} />
+                icon={data.icon}
+                bg={data.bg}
+              />
             ))}
           </TabList>
-          <TabPanels>
+          <TabPanels >
             <SavedPanel
               data={userData.saved}
               collections={userData.collections}

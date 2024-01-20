@@ -1,13 +1,5 @@
-import { Box, VStack, Text, Heading } from "@chakra-ui/react"
 
-import React, { useRef, useEffect, useState } from "react";
-import maplibregl, { Map, Source, MapMouseEvent, MapGeoJSONFeature } from "maplibre-gl";
-import "maplibre-gl/dist/maplibre-gl.css";
-import "../../styles/map.css";
 
-import { iUserFound } from "../../../../data/user_data/userData";
-import { current } from "immer";
-import { GiConsoleController } from "react-icons/gi";
 
 interface iFoundMap {
   data: iUserFound[];
@@ -67,8 +59,7 @@ const FoundMap = ({ data, onClick, location }: iFoundMap) => {
     }
 
     // Create elements for popup
-    const popupContainer = document.createElement("div");
-    popupContainer.classList.add('map-popup')
+    const popupContainer = document.createElement("Box");
     const popupTitle = document.createElement("h4");
     popupTitle.textContent = title;
     const popupImg = document.createElement("img");
@@ -187,9 +178,9 @@ const FoundMap = ({ data, onClick, location }: iFoundMap) => {
         source: "trees",
         filter: ["!", ["has", "point_count"]],
         paint: {
-          "circle-color": "green",
-          "circle-radius": 6,
-          "circle-stroke-width": 2,
+          "circle-color": "#11b4da",
+          "circle-radius": 4,
+          "circle-stroke-width": 1,
           "circle-stroke-color": "#fff",
         },
       });
@@ -207,56 +198,3 @@ const FoundMap = ({ data, onClick, location }: iFoundMap) => {
       map.current.on("mouseleave", "clusters", popoverCursor);
     }
   };
-
-  useEffect(() => {
-    if (mapContainer.current && location) {
-      map.current = new maplibregl.Map({
-        container: mapContainer.current,
-        style: `https://api.maptiler.com/maps/streets-v2/style.json?key=${API_KEY}`,
-        center: [currentLocation[0], currentLocation[1]],
-        zoom: zoom,
-      });
-      map.current.addControl(new maplibregl.NavigationControl(), "top-right");
-      map.current.on("load", createClusters);
-    }
-    // CLEANUP FUNCTION NEEDED -- the one below gives errors
-    return () => {
-      if (map.current) {
-        map.current.off("load", createClusters);
-        map.current.off("click", "clusters", clusterZoom);
-        map.current.off("click", "unclustered-point", showPopover);
-        map.current.off("mouseenter", "clusters", popoverCursor);
-        map.current.off("mouseleave", "clusters", popoverCursor);
-      }
-    };
-  }, [API_KEY, zoom, location[1], location[0], data]);
-
-  return (
-    <VStack
-      className={"blur-border-light"}
-      borderRadius={"10px"}
-      w={"100%"}
-      bg={"white"}
-      mt={"1rem"}
-      p={"2rem"}
-      flexGrow={"1"}
-      minWidth={"32rem"}
-      maxHeight={"100%"}
-    >
-      <Heading
-        as={"h4"}
-        textAlign={"center"}
-        color={"main.200"}
-        fontWeight={"500"}
-        fontSize={"1.5rem"}
-      >
-        Use the map to explore trees you've found
-      </Heading>
-      <Box className="map-wrap" m={0}>
-        <Box ref={mapContainer} className="map" />
-      </Box>
-    </VStack>
-  );
-}
-
-export default FoundMap

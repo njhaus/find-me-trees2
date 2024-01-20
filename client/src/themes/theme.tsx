@@ -15,11 +15,29 @@ const Button = defineStyleConfig({
     md: {
       fontSize: "md",
     },
+    teeny: {
+      fontSize: "0.8rem",
+      fontWeight: 400,
+      whiteSpace: "wrap",
+      padding: "0.25rem",
+    },
   },
   variants: {
-    outlineLight: {
+    outlineLightGray: {
       border: "2px solid rgb(236, 242, 248)",
       color: "rgb(236, 242, 248)",
+      backgroundColor: "transparent",
+      padding: "0rem 1rem 0rem 1rem",
+    },
+    outlineLightGreen: {
+      border: "2px solid rgb(182,195,181)",
+      color: "main.800",
+      backgroundColor: "transparent",
+      padding: "0rem 1rem 0rem 1rem",
+    },
+    outlineAccent: {
+      border: "2px solid rgb(144,108,126)",
+      color: "accent.500",
       backgroundColor: "transparent",
       padding: "0rem 1rem 0rem 1rem",
     },
@@ -53,9 +71,9 @@ const Button = defineStyleConfig({
       borderRadius: "50%",
     },
     transparent: {
-      backgroundColor: 'transparent',
-      color: 'secondary.100'
-    }
+      backgroundColor: "transparent",
+      color: "secondary.100",
+    },
   },
   // The default size and variant values
   defaultProps: {
@@ -124,7 +142,7 @@ const theme = extendTheme({
       200: "rgb(0,0,0)",
       300: "rgb(0,0,0)",
       400: "rgb(0,0,0)",
-      500: "#fffdd0",
+      500: "#ffffe0",
       600: "rgb(0,0,0)",
       700: "rgb(0,0,0)",
       800: "rgb(0,0,0)",

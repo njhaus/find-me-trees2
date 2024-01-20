@@ -29,10 +29,9 @@ const TreeSciInfo = ({ sciInfo}: iTreeSciInfo) => {
       px={"2rem"}
     >
       {Object.keys(sciInfo).map((key) => (
-        <Box>
+        <Box key={key}>
           <Divider color={"white"} mb={"1rem"} />
           <Flex
-            key={key}
             direction={"row"}
             alignItems={"start"}
             gap={"0.5rem"}
@@ -49,7 +48,7 @@ const TreeSciInfo = ({ sciInfo}: iTreeSciInfo) => {
               {key.split(/(N)/).slice(1).join("")}:
             </Text>
           </Flex>
-          <Text fontSize={"0.9rem"} px={"0.5rem"} mb={'0.5rem'}>
+          <Text fontSize={"0.9rem"} px={"0.5rem"} mb={"0.5rem"}>
             {sciInfo[key as keyof iSciInfo]}
           </Text>
         </Box>

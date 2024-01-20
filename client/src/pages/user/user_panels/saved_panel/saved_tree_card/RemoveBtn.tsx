@@ -53,9 +53,11 @@ const RemoveBtn = ({title, id, dataKey}: iRemoveBtn) => {
       closeOnBlur={false}
     >
       <PopoverTrigger>
-        <Button>Remove from {dataKey}</Button>
+        <Button variant={"outlineAccent"} size={"teeny"} w={"45%"}>
+          Remove from {dataKey}
+        </Button>
       </PopoverTrigger>
-      <PopoverContent zIndex={4} maxWidth={'15rem'}>
+      <PopoverContent zIndex={4} maxWidth={"15rem"}>
         <PopoverArrow />
         <PopoverCloseButton />
         <PopoverBody>Are you sure you want to remove {title}?</PopoverBody>

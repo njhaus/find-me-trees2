@@ -60,7 +60,9 @@ const RemoveFoundBtn = ({ title, id, locationFound }: iRemoveFoundBtn) => {
       closeOnBlur={false}
     >
       <PopoverTrigger>
-        <Button>Remove from found</Button>
+        <Button variant="outlineAccent" size="sm">
+          Remove from found
+        </Button>
       </PopoverTrigger>
       <PopoverContent zIndex={4} maxWidth={"15rem"}>
         <PopoverArrow />
@@ -69,6 +71,8 @@ const RemoveFoundBtn = ({ title, id, locationFound }: iRemoveFoundBtn) => {
         <PopoverFooter>
           <Button
             ref={removeRef}
+            variant="solidLight"
+            size="sm"
             onClick={() => {
               handleRemoveTree();
               onClose();
