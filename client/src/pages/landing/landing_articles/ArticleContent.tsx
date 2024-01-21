@@ -1,25 +1,23 @@
-
-import {
-    Flex,
-    Heading,
-    Text,
-    Button,
-    Box
-} from "@chakra-ui/react";
+import { Flex, Heading, Text, Button, Box } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
 
-import Boundary from "../../../components/ui-components/Boundary";
+import Boundary from "../../../components/borders/Boundary";
 
 interface ArticleContentProps {
-    title: string;
-    description: string;
+  title: string;
+  description: string;
   cta: string;
   link: string;
-    children?: JSX.Element[];
+  children?: JSX.Element[];
 }
 
-const ArticleContent = ({title, description, link, cta}: ArticleContentProps) => {
+const ArticleContent = ({
+  title,
+  description,
+  link,
+  cta,
+}: ArticleContentProps) => {
   return (
     <Flex
       direction={"column"}
@@ -67,6 +65,6 @@ const ArticleContent = ({title, description, link, cta}: ArticleContentProps) =>
       </Link>
     </Flex>
   );
-}
+};
 
-export default ArticleContent
+export default ArticleContent;

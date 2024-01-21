@@ -22,11 +22,11 @@ import { Link } from "react-router-dom";
 import links from "../../data/nav_data";
 import Login from "../login_auth/Login";
 import MainLogo from "../logo/MainLogo";
-import Boundary from "../ui-components/Boundary";
+import Boundary from "../borders/Boundary";
 
 import { iNav } from "./Nav";
 
-const MobileDrawer = ({auth, onLogout}: iNav) => {
+const MobileDrawer = ({ auth, onLogout }: iNav) => {
   const {
     isOpen: isOpenDrawer,
     onOpen: onOpenDrawer,
@@ -40,7 +40,6 @@ const MobileDrawer = ({auth, onLogout}: iNav) => {
   } = useLoginDisclosure();
 
   const btnRef = useRef(null);
-
 
   return (
     <Box className="mobile-drawer" me={"1rem"} zIndex={10}>
@@ -118,8 +117,8 @@ const MobileDrawer = ({auth, onLogout}: iNav) => {
                 onClick={() => {
                   onLogout();
                   onCloseDrawer();
-                  }}
-                  variant={'login'}
+                }}
+                variant={"login"}
               >
                 Logout
               </Button>

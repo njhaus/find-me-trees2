@@ -1,12 +1,19 @@
 import { FormEvent, useState, useEffect, useRef } from "react";
 
-import { Flex, Button, Heading, CloseButton, Text, Box } from "@chakra-ui/react";
+import {
+  Flex,
+  Button,
+  Heading,
+  CloseButton,
+  Text,
+  Box,
+} from "@chakra-ui/react";
 
 import FilterInfo from "./search_filters/FilterInfo";
 import PhysicalIcon from "./search_filters/PhysicalIcon";
 import MapIcon from "./search_filters/MapIcon";
 import NameFilter from "./search_filters/NameFilter";
-import Boundary from "../../components/ui-components/Boundary";
+import Boundary from "../../components/borders/Boundary";
 
 // data
 import { filters, mapFilter } from "../../data/browse_data/filterData";
@@ -57,7 +64,7 @@ const SearchFilters = ({ onSubmit }: SearchFiltersProps) => {
               as={ihp.as}
               size={ihp.size}
               marginBottom={ihp.marginBottom}
-              textAlign={ihp.textAlign}  
+              textAlign={ihp.textAlign}
             >
               Search by Name
             </Heading>
@@ -65,8 +72,8 @@ const SearchFilters = ({ onSubmit }: SearchFiltersProps) => {
             <Flex
               direction={"row"}
               justify={"space-around"}
-                padding={"0.5rem 1rem"}
-                mt={'2rem'}
+              padding={"0.5rem 1rem"}
+              mt={"2rem"}
             >
               <Flex direction={"column"} flexGrow={"1"}>
                 {/* Physical Features Icons */}
@@ -125,7 +132,7 @@ const SearchFilters = ({ onSubmit }: SearchFiltersProps) => {
                 )}
               </FilterInfo>
             </Box>
-            <Box mx={'auto'} w={'90%'} mt={'1rem'}>
+            <Box mx={"auto"} w={"90%"} mt={"1rem"}>
               <Boundary width={"100%"} color={"main.900"}></Boundary>
             </Box>
             <Box mt={"1rem"} mx={"auto"}>

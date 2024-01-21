@@ -20,8 +20,10 @@ const About = () => {
           fontSize={"3rem"}
           color="white"
           zIndex={1}
+          textAlign={'center'}
+          mx={'2rem'}
         >
-          For the Arborist in all of Us
+          For the arborist in all of us
         </Heading>
       </Flex>
       <CurveBorder color={"main.900"}  direction="reverse"/>

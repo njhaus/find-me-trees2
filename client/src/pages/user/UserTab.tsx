@@ -13,7 +13,7 @@ const UserTab = ({ text, icon, bg }: iUserToggle) => {
   return (
     <Tab _selected={{ color: fontColor, bg: bg, fontWeight: 500 }}>
       {icon}
-      <Text>{text}</Text>
+      <Text ms={'0.5rem'}>{text}</Text>
     </Tab>
   );
 }

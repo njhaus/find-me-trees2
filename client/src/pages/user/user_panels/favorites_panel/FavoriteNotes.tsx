@@ -61,7 +61,7 @@ const FavoriteNotes = ({ data, id }: iFavoriteNotes) => {
       onOpen={onOpen}
     >
       <PopoverTrigger>
-        <Button variant="solidDark">
+        <Button variant="outlineDark">
           <GiNotebook />
           Notes
         </Button>

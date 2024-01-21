@@ -27,7 +27,7 @@ const Carousel = ({ imgs }: iCarousel) => {
       const timeoutId = setTimeout(() => {
         setInfiniteImgs([...infiniteImgs, infiniteImgs[showImg]])
       setShowImg((prevShowImg) => prevShowImg + 1);
-    }, 30000);
+    }, 4500);
 
     return () => clearTimeout(timeoutId);
   }, [showImg]);
@@ -36,7 +36,13 @@ const Carousel = ({ imgs }: iCarousel) => {
     <Flex width={"100%"} overflowX={"hidden"} ref={imgSliderRef}>
       {infiniteImgs.map((img, i) => (
         <Flex key={i} minWidth={"100%"}>
-          <Image src={img} width={"100%"} />
+          <Image
+            src={img}
+            width={"100%"}
+            objectFit={"cover"}
+            aspectRatio={"1/1"}
+            borderRadius={"5px"}
+          />
         </Flex>
       ))}
     </Flex>
