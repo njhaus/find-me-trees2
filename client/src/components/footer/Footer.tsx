@@ -42,7 +42,7 @@ const Footer = () =>  {
           </SocialButton>
         </Stack>
       </Container>
-      <RouteTest />
+      {/* <RouteTest /> */}
     </Box>
   );
 }
