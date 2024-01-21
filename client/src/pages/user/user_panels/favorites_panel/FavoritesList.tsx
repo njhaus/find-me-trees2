@@ -1,4 +1,4 @@
-import { Grid, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 
 import FavoritesCard from "./FavoritesCard";
 import { iUserFavorites } from "../../../../data/user_data/userData";
@@ -9,13 +9,13 @@ interface iFavoritesList {
 
 const FavoritesList = ({ data }: iFavoritesList) => {
   return (
-    <Grid
-      templateColumns={{
-        base: "1fr",
-        md: "repeat(2, 1fr)",
-        xl: "repeat(3, 1fr)",
-      }}
-      gap={"1rem"}
+    <Flex
+      w={'100%'}
+      p={'2rem'}
+      direction={'row'}
+      flexWrap={'wrap'}
+      gap={"1.5rem"}
+      justifyContent={'center'}
     >
       {data?.length > 0 ?
         data.map((tree, i) => (
@@ -29,9 +29,9 @@ const FavoritesList = ({ data }: iFavoritesList) => {
         />
         ))
         :
-        <Text>You have not saved any favorites yet.</Text>
+        <Text color={'white'} fontWeight={'500'}>You have not saved any favorites yet.</Text>
       }
-    </Grid>
+    </Flex>
   );
 };
 

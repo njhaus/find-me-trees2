@@ -1,6 +1,6 @@
 import React from 'react'
 import { iUserSaved } from '../../../../data/user_data/userData';
-import { Grid, Text } from '@chakra-ui/react';
+import { Flex, Text } from '@chakra-ui/react';
 import SavedTreeCard from './SavedTreeCard';
 
 interface iSavedCards {
@@ -15,19 +15,18 @@ const SavedCards = ({ data, collections, currentCollection }: iSavedCards) => {
   const displayCardsByCollection = currentCollection === 'all' ? data : data.filter(tree => tree.collections.includes(currentCollection));
 
   return (
-    <Grid
-      templateColumns={{
-        base: "1fr",
-        sm: "repeat(2, 1fr)",
-        lg: "repeat(3, 1fr)",
-        xl: "repeat(4, 1fr)",
-      }}
-      gap={"2rem"}
+    <Flex
+      w={"100%"}
+      p={"2rem"}
+      direction={"row"}
+      flexWrap={"wrap"}
+      gap={"1.5rem"}
+      justifyContent={"center"}
       margin={"1rem"}
       minHeight={"calc(100vh - 25rem)"}
       color={"white"}
-      fontWeight={'500'}
-      py={'2rem'}
+      fontWeight={"500"}
+      py={"2rem"}
     >
       {displayCardsByCollection?.length > 0 ? (
         displayCardsByCollection.map((tree, i) => (
@@ -50,7 +49,7 @@ const SavedCards = ({ data, collections, currentCollection }: iSavedCards) => {
             : `There are currently no trees in the collection ${currentCollection}`}
         </Text>
       )}
-    </Grid>
+    </Flex>
   );
 }
 

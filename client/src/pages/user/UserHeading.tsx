@@ -1,4 +1,4 @@
-import { Flex, Heading, Text, HStack, Box } from "@chakra-ui/react"
+import { Flex, Heading, Image, HStack, Box } from "@chakra-ui/react"
 
 import UserProfile from "./UserProfile";
 import BackButton from "../../components/buttons/BackButton";
@@ -8,33 +8,40 @@ interface iUserHeading {
   userData: iUserData
 }
 
-const UserHeading = ({userData}: iUserHeading) => {
+const UserHeading = ({ userData }: iUserHeading) => {
+  
+  // Need dynamic style based on length of username for heading fontsize
+
   return (
     <Flex
+      position={'relative'}
       direction={"row"}
       width={"100%"}
       padding={"1rem"}
       justify={"space-between"}
+      h={'10rem'}
     >
       <Box>
         <BackButton to={"/browse"} />
       </Box>
       <HStack>
-        <Text fontWeight={"200"} fontSize={"3rem"}>
-          ~
-        </Text>
         <Heading
           as="h1"
           textAlign={"center"}
-          fontWeight={"200"}
-          fontSize={"3rem"}
-          color={"main.200"}
+          fontWeight={"500"}
+          fontSize={{base: '2.75rem', md: '3.5rem'}}
+          fontFamily={'display'}
+          color={"secondary.100"}
+          pb={'2rem'}
+          position={'relative'}
+          me={{base: '0rem', md: '4rem'}}
+          whiteSpace={'nowrap'}
         >
-          {userData.username}'s Trees
+          {userData.username.slice(0, 1)[0].toUpperCase() +
+            userData.username.slice(1)}
+          's Trees
+          <Image src={'/user/curved-line-leaf.png'} position={'absolute'} right={{base: '-3rem', md: '-4rem'}} bottom={'0rem'} ></Image>
         </Heading>
-        <Text fontWeight={"200"} fontSize={"3rem"}>
-          ~
-        </Text>
       </HStack>
       <Flex
         justify={"center"}

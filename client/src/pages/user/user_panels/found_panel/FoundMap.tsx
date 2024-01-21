@@ -151,21 +151,13 @@ const FoundMap = ({ data, onClick, location }: iFoundMap) => {
           "circle-color": [
             "step",
             ["get", "point_count"],
-            "#51bbd6",
-            100,
-            "#f1f075",
-            750,
-            "#f28cb1",
-          ],
-          "circle-radius": [
-            "step",
-            ["get", "point_count"],
+            "#008000",
+            10,
+            "#ffd700",
             20,
-            100,
-            30,
-            750,
-            40,
+            "#fffff0",
           ],
+          "circle-radius": ["step", ["get", "point_count"], 20, 10, 25, 20, 30],
         },
       });
 
@@ -187,7 +179,7 @@ const FoundMap = ({ data, onClick, location }: iFoundMap) => {
         source: "trees",
         filter: ["!", ["has", "point_count"]],
         paint: {
-          "circle-color": "green",
+          "circle-color": "rgb(60,91,60)",
           "circle-radius": 6,
           "circle-stroke-width": 2,
           "circle-stroke-color": "#fff",
@@ -240,7 +232,7 @@ const FoundMap = ({ data, onClick, location }: iFoundMap) => {
       mt={"1rem"}
       p={"2rem"}
       flexGrow={"1"}
-      minWidth={"32rem"}
+      // minWidth={"32rem"}
       maxHeight={"100%"}
     >
       <Heading

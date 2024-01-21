@@ -161,8 +161,13 @@ const [isEditing, setIsEditing] = useState(false)
                   />
                   {/* <Text> Incorrect password</Text> */}
                 </FormControl>
+                <Flex>
+                  
+                </Flex>
                 <Button
+                  variant={'solidDark'}
                   marginY={"1rem"}
+                  me={'1rem'}
                   onClick={() => {
                     setIsEditing(!isEditing);
                     setCurrPassword("");
@@ -173,6 +178,7 @@ const [isEditing, setIsEditing] = useState(false)
                   Cancel
                 </Button>
                 <Button
+                  variant={'solidDark'}
                   isDisabled={
                     updatedData.password !== updatedData.checkPassword ||
                     !currPassword
@@ -193,6 +199,7 @@ const [isEditing, setIsEditing] = useState(false)
               </>
             ) : (
               <Button
+                variant={'solidDark'}
                 marginY={"1rem"}
                 onClick={() => {
                   setIsEditing(!isEditing);
@@ -205,7 +212,8 @@ const [isEditing, setIsEditing] = useState(false)
 
           <DrawerFooter>
             {!isEditing && (
-              <Button variant="outline" mr={3} onClick={onClose}>
+              <Button
+                variant="outlineDark" mr={3} onClick={onClose}>
                 Done
               </Button>
             )}

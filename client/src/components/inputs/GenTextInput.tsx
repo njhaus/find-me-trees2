@@ -26,7 +26,7 @@ const GenTextInput = forwardRef<HTMLInputElement, TextInputProps>(
 
   return (
     <FormControl display={"flex"}>
-      <FormLabel htmlFor={formName}>{label}</FormLabel>
+      <FormLabel whiteSpace={'nowrap'} htmlFor={formName}>{label}</FormLabel>
       <Input
         ref={ref}
         id={formName}

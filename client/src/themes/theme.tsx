@@ -31,7 +31,7 @@ const Button = defineStyleConfig({
     },
     outlineLightGreen: {
       border: "2px solid rgb(182,195,181)",
-      color: "main.800",
+      color: "main.200",
       backgroundColor: "transparent",
       padding: "0rem 1rem 0rem 1rem",
     },

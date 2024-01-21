@@ -24,7 +24,7 @@ export const verifyAccessToken = async (req, res, next) => {
         if (err || foundUser.username !== decoded.username) {
             const errMsg = err ? err : 'Unverified Credentials'
             console.log(errMsg);
-            return res.send("error: incorrect token")
+            next(err)
       }
     });
     console.log("accesstoken middleware no errors\n\n");

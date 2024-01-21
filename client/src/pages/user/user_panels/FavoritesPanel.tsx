@@ -18,7 +18,7 @@ const FavoritesPanel = ({ favorites }: iFavoritesPanel) => {
   return (
     <TabPanel
       as={"article"}
-      bg={"accent.400"}
+      bg={"secondary.200"}
       overflow={"hidden"}
       padding={0}
     >
@@ -38,11 +38,7 @@ const FavoritesPanel = ({ favorites }: iFavoritesPanel) => {
         )}
 
         {!playSlideshow && (
-          <Flex width={"100%"} justify={"center"} marginY={"1rem"}>
-            <Flex bg={"yellow.300"} padding={"1rem"} direction={"column"}>
-              <FavoritesList data={favorites} />
-            </Flex>
-          </Flex>
+          <FavoritesList data={favorites} />
         )}
       </Flex>
     </TabPanel>

@@ -35,12 +35,12 @@ import useUpdateUser from "../../hooks/useUpdateUser"
       {
         text: "Trees I've found",
         icon: <BsSearch />,
-        bg: "neutral.500",
+        bg: "main.900",
       },
       {
         text: "My favorite Trees",
         icon: <BsHeart />,
-        bg: "accent.400",
+        bg: "secondary.200",
       },
     ];
 
@@ -74,12 +74,10 @@ const User = () => {
 
   return (
     (userExists) && (
-      <Flex as={"section"} direction={"column"}>
-        <Flex>
+      <Flex as={"section"} direction={"column"} bg={'white'}>
           <UserHeading
             userData={userData}
           />
-        </Flex>
         <Tabs isFitted variant="enclosed" > 
           <TabList >
             {userToggleData.map((data, i) => (

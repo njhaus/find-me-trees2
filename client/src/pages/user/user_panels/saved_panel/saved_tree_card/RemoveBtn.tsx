@@ -23,10 +23,11 @@ interface iRemoveBtn {
   title: string;
   id: string;
   dataKey: userOptionsKey;
-
+  width?: string;
+  size?: string
 }
 
-const RemoveBtn = ({title, id, dataKey}: iRemoveBtn) => {
+const RemoveBtn = ({title, id, dataKey, width , size}: iRemoveBtn) => {
 
   const { userData, handleUpdateUser } = useUpdateUser();
   const currentTree = userData[dataKey].find((tree) => tree._id._id === id);
@@ -34,6 +35,8 @@ const RemoveBtn = ({title, id, dataKey}: iRemoveBtn) => {
   const { onOpen, onClose, isOpen } = useDisclosure();
   const removeRef = useRef(null);
 
+  const w = width ? width : '100%'
+  const sz = size ? size : 'teeny'
 
   const handleRemoveTree = () => {
     if (currentTree) {
@@ -53,7 +56,7 @@ const RemoveBtn = ({title, id, dataKey}: iRemoveBtn) => {
       closeOnBlur={false}
     >
       <PopoverTrigger>
-        <Button variant={"outlineAccent"} size={"teeny"} w={"45%"}>
+        <Button variant={"outlineAccent"} size={sz} w={w}>
           Remove from {dataKey}
         </Button>
       </PopoverTrigger>

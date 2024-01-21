@@ -25,7 +25,8 @@ Pine icon: <a href="https://www.freepik.com/icon/tree_6102200#fromView=search&te
 tree hug: Image by <a href="https://www.freepik.com/free-vector/flat-arbor-day-illustration_23871247.htm#from_view=detail_serie">Freepik</a>
 tree with heart hands: <a href="https://www.freepik.com/free-photo/womens-hands-hug-tree-forest-love-nature_28219018.htm#query=tree%20hand&position=12&from_view=search&track=ais&uuid=cc359240-8b34-4485-981c-949c5fc1c73c">Image by pvproductions</a> on Freepik
 redwood background: Photo by <a href="https://unsplash.com/@andrewjdutton?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Andy Dutton</a> on <a href="https://unsplash.com/photos/green-fern-plant-and-brown-bark-5lGMYhy9b78?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
-  
+user name decoration <a href="https://www.freepik.com/free-vector/pine-tree-different-shapes_35822287.htm#query=pine%20tree&position=1&from_view=search&track=ais&uuid=f67b205a-cafc-4405-b0db-7472ade2edcc">Image by brgfx</a> on Freepik
+leaf curved line swoosh <a href="https://www.freepik.com/free-vector/curly-line-leaves-doodles_44471968.htm#query=curved%20line%20decoration&position=0&from_view=search&track=ais&uuid=b6a133a2-0987-4e4e-8ba4-36fa02176bac">Image by juicy_fish</a> on Freepik
 
 Problems:
 1. pages/browse/iconData : NEED TO REFACTOR THIS-- CODE SMELLS WHEN HARDCODING THE COLOR IN TWO PLACES< BUT I AM HAVING TROUBLE ACCESSING THE COLOR FROM WITHIN THE OBJECT

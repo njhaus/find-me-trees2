@@ -12,7 +12,9 @@ import {
   PopoverAnchor,
   Button,
   Text,
-  useDisclosure
+  useDisclosure,
+  VStack,
+  HStack
 } from "@chakra-ui/react";
 
 import { GiNotebook } from "react-icons/gi";
@@ -59,12 +61,12 @@ const FavoriteNotes = ({ data, id }: iFavoriteNotes) => {
       onOpen={onOpen}
     >
       <PopoverTrigger>
-        <Button>
+        <Button variant="solidDark">
           <GiNotebook />
           Notes
         </Button>
       </PopoverTrigger>
-      <PopoverContent>
+      <PopoverContent p={"0.5rem"}>
         <PopoverArrow />
         <PopoverCloseButton />
         {!isEditing && (
@@ -79,24 +81,32 @@ const FavoriteNotes = ({ data, id }: iFavoriteNotes) => {
           </PopoverBody>
         )}
         {isEditing ? (
-          <>
+          <VStack mt={"1.5rem"} gap="0.5rem" alignItems={"center"}>
             <GenTextInput
               formName="notes"
               formVal={thisTree?.notes}
-              label="Notes"
+              label="New Note:"
               onSubmit={handleEditedNote}
             />
-            <Button onClick={() => saveEditedNote()}>Save</Button>
-            <Button onClick={() => {
-              setFavorites(data);
-              setIsEditing(false)
-            }
-            }>Cancel</Button>
-          </>
+            <HStack w={'100%'}>
+              <Button w={"50%"} onClick={() => saveEditedNote()}>
+                Save
+              </Button>
+              <Button
+                w={"50%"}
+                onClick={() => {
+                  setFavorites(data);
+                  setIsEditing(false);
+                }}
+              >
+                Cancel
+              </Button>
+            </HStack>
+          </VStack>
         ) : (
-            <Button onClick={() => setIsEditing(true)}>
-              {thisTree?.notes ? "Edit" : "Add"} Note
-            </Button>
+          <Button onClick={() => setIsEditing(true)}>
+            {thisTree?.notes ? "Edit" : "Add"} Note
+          </Button>
         )}
       </PopoverContent>
     </Popover>

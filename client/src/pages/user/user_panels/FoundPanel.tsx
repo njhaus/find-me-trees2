@@ -44,7 +44,7 @@ const FoundPanel = ({ found }: iFoundPanel) => {
   return (
     <TabPanel
       as={"article"}
-      bg={"neutral.500"}
+      bg={"main.900"}
       h={{ base: "fit-content", lg: "100vh" }}
       overflow={"hidden"}
       py={"2rem"}
