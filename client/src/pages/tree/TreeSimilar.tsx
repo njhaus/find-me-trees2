@@ -20,7 +20,7 @@ const TreeSimilar = ({id }: iTreeSimilar) => {
           mx={"auto"}
           mb={"2rem"}
         >
-          Similar Trees
+          Similar Trees (Feature coming soon)
         </Heading>
         {/* Get trees from same family and map mini-cards... */}
         <Flex
@@ -43,75 +43,7 @@ const TreeSimilar = ({id }: iTreeSimilar) => {
               src={"/filter-form/upright-branches.jpeg"}
             />
             <Text textAlign={"center"} color={"main.400"}>
-              A tree
-            </Text>
-          </Flex>
-          <Flex
-            direction={"column"}
-            bg={"white"}
-            padding={"0.5rem"}
-            borderRadius={"5px"}
-            minWidth={"8rem"}
-          >
-            <Image
-              width={"8rem"}
-              aspectRatio={"1/1"}
-              objectFit={"cover"}
-              src={"/filter-form/upright-branches.jpeg"}
-            />
-            <Text textAlign={"center"} color={"main.400"}>
-              A tree
-            </Text>
-          </Flex>
-          <Flex
-            direction={"column"}
-            bg={"white"}
-            padding={"0.5rem"}
-            borderRadius={"5px"}
-            minWidth={"8rem"}
-          >
-            <Image
-              width={"8rem"}
-              aspectRatio={"1/1"}
-              objectFit={"cover"}
-              src={"/filter-form/upright-branches.jpeg"}
-            />
-            <Text textAlign={"center"} color={"main.400"}>
-              A tree
-            </Text>
-          </Flex>
-          <Flex
-            direction={"column"}
-            bg={"white"}
-            padding={"0.5rem"}
-            borderRadius={"5px"}
-            minWidth={"8rem"}
-          >
-            <Image
-              width={"8rem"}
-              aspectRatio={"1/1"}
-              objectFit={"cover"}
-              src={"/filter-form/upright-branches.jpeg"}
-            />
-            <Text textAlign={"center"} color={"main.400"}>
-              A tree
-            </Text>
-          </Flex>
-          <Flex
-            direction={"column"}
-            bg={"white"}
-            padding={"0.5rem"}
-            borderRadius={"5px"}
-            minWidth={"8rem"}
-          >
-            <Image
-              width={"8rem"}
-              aspectRatio={"1/1"}
-              objectFit={"cover"}
-              src={"/filter-form/upright-branches.jpeg"}
-            />
-            <Text textAlign={"center"} color={"main.400"}>
-              A tree
+              Placeholder Tree
             </Text>
           </Flex>
         </Flex>

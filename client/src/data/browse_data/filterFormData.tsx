@@ -74,19 +74,19 @@ export const leafFilters: filterObj[] = [
 export const barkFilters: filterObj[] = [
   {
     label: "Bark",
-    values: ["Smooth", "Rough", "Peeling"],
+    values: ["Rough", "Smooth", "Peeling"],
     helperText: [
       {
         img: "/filter-form/rough-bark.jpeg",
         text: "Most trees have rough bark, which is bumpy, or furrowed to the touch.",
       },
       {
-        img: "/filter-form/peeling-bark.jpeg",
-        text: "Some trees have peeling bark that naturally separates itself from the trunk.",
-      },
-      {
         img: "/filter-form/smooth-bark.jpeg",
         text: "Trees with smooth bark can still have bumps or cracks in the bark, but overall the bark is not bumpy or furrowed. (Note: Most trees have smooth bark when young.)",
+      },
+      {
+        img: "/filter-form/peeling-bark.jpeg",
+        text: "Some trees have peeling bark that naturally separates itself from the trunk.",
       },
     ],
     helperLink: "",

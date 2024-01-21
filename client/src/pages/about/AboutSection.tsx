@@ -1,4 +1,4 @@
-import { Flex, Heading, VStack, Text, Image, Divider, Link } from "@chakra-ui/react";
+import { Flex, Heading, VStack, Text, Image, Link } from "@chakra-ui/react";
 import Boundary from "../../components/borders/Boundary";
 
 interface iAboutSection {
