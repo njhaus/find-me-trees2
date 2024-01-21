@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useState } from "react";
 
 import { Text, Flex, Grid, Button } from "@chakra-ui/react";
 
@@ -13,7 +13,11 @@ interface iTreeList {
 }
 
 const TreeList = ({ filteredTrees, searchTerms }: iTreeList) => {
+
+  // Load number
+  const [loadNum, setLoadnum] = useState(12);
   
+  // List the search terms
   const getSearchText = () => {
     let text = '';
     for (let term in searchTerms) {
@@ -21,7 +25,7 @@ const TreeList = ({ filteredTrees, searchTerms }: iTreeList) => {
         text = text.concat('', `${filtersTextMap[term as keyof typeof filtersTextMap]}: ${searchTerms[term]}, `)
       }
     }
-    return text.slice(0, -2);;
+    return text.slice(0, -2);
   }
 
   const searchText = getSearchText();
@@ -49,7 +53,7 @@ const TreeList = ({ filteredTrees, searchTerms }: iTreeList) => {
         gap={6}
         my={'1rem'}
       >
-        {filteredTrees.map((tree) => (
+        {filteredTrees.slice(0, loadNum).map((tree) => (
           <TreeCard
             key={tree._id}
             id={tree._id}
@@ -60,7 +64,7 @@ const TreeList = ({ filteredTrees, searchTerms }: iTreeList) => {
           />
         ))}
       </Grid>
-      <Button variant='outlineDark' mx={'auto'} my={'1rem'}>Load More</Button>
+     {loadNum < filteredTrees.length && <Button variant='outlineDark' mx={'auto'} my={'1rem'} onClick={() => setLoadnum(loadNum + 12)}>Load More</Button>}
     </Flex>
   );
 };
