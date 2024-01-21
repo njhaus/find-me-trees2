@@ -32,7 +32,7 @@ const LearnMore = () => {
           at a time.
         </Text>
         <Link to={"/about"}>
-          <Button>Learn more!</Button>
+          <Button variant={'outlineDark'}>Learn more!</Button>
         </Link>
       </VStack>
     </Box>

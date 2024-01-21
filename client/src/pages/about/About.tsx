@@ -3,9 +3,11 @@ import AboutSection from "./AboutSection"
 import RedwoodBg from "../../components/backgrounds/RedwoodBg";
 import CurveBorder from "../../components/borders/CurveBorder";
 
+import { aboutInfo } from "./data/aboutData";
+
 const About = () => {
   return (
-    <VStack as={"main"} minHeight={"calc(100vh - 10rem)"} bg={"main.900"} pb={'3rem'}>
+    <VStack as={"main"} minHeight={"calc(100vh - 10rem)"} bg={"main.950"} pb={'3rem'}>
       <Flex
         height={"15rem"}
         width={"100%"}
@@ -26,12 +28,19 @@ const About = () => {
           For the arborist in all of us
         </Heading>
       </Flex>
-      <CurveBorder color={"main.900"}  direction="reverse"/>
+      <CurveBorder color={"main.950"}  direction="reverse"/>
       <VStack px={"4rem"} mt={'-1rem'}>
-        <AboutSection direction="row" />
-        <AboutSection direction="row-reverse" />
-        <AboutSection direction="row" />
-        <AboutSection direction="row-reverse" />
+        {aboutInfo.map((sec, i) => (
+          <AboutSection
+            key={i}
+            title={sec.title}
+            text={sec.text}
+            imgSrc={sec.imgSrc}
+            direction={i % 2 === 0 ? 'row' : 'row-reverse'}
+            link={sec?.link}
+            
+          />
+        ))}
       </VStack>
     </VStack>
   );
