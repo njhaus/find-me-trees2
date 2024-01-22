@@ -8,6 +8,12 @@ async function main() {
   try {
     await mongoose.connect("mongodb://127.0.0.1:27017/treesDB");
     console.log("Mongoose Connection successful");
+
+    await seedTreeDb(tempTreeData);
+
+    process.exit();
+      
+
   } catch (err) {
     console.err(err);
   }
@@ -30,4 +36,4 @@ async function seedTreeDb(data) {
         console.log(err);
     }
 } 
-seedTreeDb(tempTreeData);
+

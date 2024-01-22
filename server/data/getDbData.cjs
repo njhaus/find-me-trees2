@@ -105,7 +105,6 @@ const getFileData = async (file) => {
         family: capitalize(family),
         hardinessZone: capitalize(hardinessZone),
         origin: capitalize(origin),
-        uses: capitalize(uses),
         availability: capitalize(availability),
       },
       traits: {
@@ -123,6 +122,7 @@ const getFileData = async (file) => {
         flower: capitalize(flower),
         location: [],
       },
+      uses: capitalize(uses),
     };
     // console.log(dataArray);
 
@@ -188,7 +188,7 @@ const capitalize = (str) => {
   }
 }
 
-// Step 2: add locations (I for invasive, U for unknown)
+// Step 2: add locations (I for invasive, U for unknown), images, and ???
 [
   {
     title: "White Fir",

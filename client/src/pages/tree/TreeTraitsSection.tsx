@@ -1,27 +1,28 @@
 import { Flex, Heading } from "@chakra-ui/react";
 
 import TreeTraits from "./TreeTraits";
-import { iTreeTraitsData } from "../../data/tree_data";
+import { iTreeTraitsData } from "./data/tree_data";
 import { allFilters } from "../../data/browse_data/filterFormData";
-import { BsDeviceHdd } from "react-icons/bs";
+import { BsApple, BsDeviceHdd, BsFlower1, BsPinMap, BsRulers } from "react-icons/bs";
+import { GiLeafSkeleton, GiOakLeaf, GiResize, GiShinyApple, GiTreeBranch, GiTreeFace } from "react-icons/gi";
 
 interface iTreeTraitsSection {
   title: string;
-  traits: iTreeTraitsData
+  traits: iTreeTraitsData;
 }
 
 const traitIconMap: Record<keyof iTreeTraitsData, JSX.Element> = {
-  leafType: <BsDeviceHdd color={"green"}/>,
-  leafShape: <BsDeviceHdd color={"green"}/>,
-  leafSize: <BsDeviceHdd color={"green"}/>,
-  bark: <BsDeviceHdd color={"green"}/>,
-  branches: <BsDeviceHdd color={"green"}/>,
-  fruit: <BsDeviceHdd color={"green"}/>,
-  flower: <BsDeviceHdd color={"green"}/>,
-  location: <BsDeviceHdd color={"green"}/>,
+  leafType: <GiLeafSkeleton color={"green"} />,
+  leafShape: <GiOakLeaf color={"green"} />,
+  leafSize: <BsRulers color={"green"} />,
+  bark: <GiTreeFace color={"green"} />,
+  branches: <GiTreeBranch color={"green"} />,
+  fruit: <GiShinyApple color={"green"} />,
+  flower: <BsFlower1 color={"green"} />,
+  location: <BsPinMap color={"green"} />,
 };
 
-const TreeTraitsSection = ({title, traits }: iTreeTraitsSection) => {
+const TreeTraitsSection = ({ title, traits }: iTreeTraitsSection) => {
   return (
     <Flex
       as={"article"}
@@ -58,6 +59,6 @@ const TreeTraitsSection = ({title, traits }: iTreeTraitsSection) => {
       )}
     </Flex>
   );
-}
+};
 
-export default TreeTraitsSection
+export default TreeTraitsSection;

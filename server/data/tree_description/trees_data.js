@@ -10,11 +10,10 @@ trees = [
       "TREE INTRO: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore laborum, volup'",
     sciInfo: {
       commonNames: "scientific info",
-      scientificName: 'name',
-      family: 'family',
-      hardinessZones: '2 through 7',
-      origin: 'native',
-      uses: 'many'
+      scientificName: "name",
+      family: "family",
+      hardinessZones: "2 through 7",
+      origin: "native",
     },
     traits: {
       leafType: "simple",
@@ -26,5 +25,7 @@ trees = [
       flower: "green",
       location: ["AK, WA, OR, CA, BC"],
     },
+    uses: "many",
+    // link: "https://plants.usda.gov/DocumentLibrary/plantguide/pdf/pg_abco.pdf",
   },
 ];

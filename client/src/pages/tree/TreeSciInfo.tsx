@@ -1,23 +1,23 @@
-import { Flex, Text , Box, Divider} from "@chakra-ui/react";
+import { Flex, Text, Box, Divider } from "@chakra-ui/react";
 
-import { iSciInfo, iTreeData } from "../../data/tree_data";
-import { BsChatRightFill } from "react-icons/bs";
+import { iSciInfo, iTreeData } from "./data/tree_data";
+import { BsChatLeftTextFill, BsChatQuoteFill, BsChatRightFill, BsGeoFill, BsMapFill } from "react-icons/bs";
+import { GiGrowth, GiTreeBranch, GiTreeFace, GiTreeRoots } from "react-icons/gi";
 
 interface iTreeSciInfo {
   sciInfo: iSciInfo;
 }
 
 const keyIconMap: Record<keyof iSciInfo, JSX.Element> = {
-  scientificName: <BsChatRightFill color={"rgb(255,213,234)"} />,
-  commonNames: <BsChatRightFill color={"rgb(255,213,234)"} />,
-  family: <BsChatRightFill color={"rgb(255,213,234)"} />,
-  hardinessZone: <BsChatRightFill color={"rgb(255,213,234)"} />,
-  origin: <BsChatRightFill color={"rgb(255,213,234)"} />,
-  uses: <BsChatRightFill color={"rgb(255,213,234)"} />,
+  scientificName: <BsChatLeftTextFill color={"rgb(255,213,234)"} />,
+  commonNames: <BsChatQuoteFill color={"rgb(255,213,234)"} />,
+  family: <GiTreeBranch color={"rgb(255,213,234)"} />,
+  hardinessZone: <BsMapFill color={"rgb(255,213,234)"} />,
+  origin: <BsGeoFill color={"rgb(255,213,234)"} />,
   availability: <BsChatRightFill color={"rgb(255,213,234)"} />,
 };
 
-const TreeSciInfo = ({ sciInfo}: iTreeSciInfo) => {
+const TreeSciInfo = ({ sciInfo }: iTreeSciInfo) => {
   return (
     <Flex
       as={"article"}
@@ -56,6 +56,6 @@ const TreeSciInfo = ({ sciInfo}: iTreeSciInfo) => {
       <Divider color={"white"} />
     </Flex>
   );
-}
+};
 
-export default TreeSciInfo
+export default TreeSciInfo;

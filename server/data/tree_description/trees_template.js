@@ -13,7 +13,6 @@ const template = {
     family: "family",
     hardinessZones: "2 through 7",
     origin: "native",
-    uses: "many",
   },
   traits: {
     leafType: "simple",
@@ -26,7 +25,8 @@ const template = {
     flower: "green",
     // location: ["OR", "ID", "NV", "UT", "WY", "CO", "AZ", "NM"],
   },
-  link: "https://plants.usda.gov/DocumentLibrary/plantguide/pdf/pg_abco.pdf",
+  uses: "many",
+  // link: "https://plants.usda.gov/DocumentLibrary/plantguide/pdf/pg_abco.pdf",
 };
  
 

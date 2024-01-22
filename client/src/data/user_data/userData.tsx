@@ -1,4 +1,4 @@
-import { iTreeData, tempTreeData } from "../tree_data";
+import { iTreeData, tempTreeData } from "../../pages/tree/data/tree_data";
 
 export interface iUserData {
   username: string;
@@ -11,20 +11,19 @@ export interface iUserData {
 }
 
 export const initialUserData: iUserData = {
-  username: '',
-  email: '',
+  username: "",
+  email: "",
   collections: [],
   saved: [],
   found: [],
   favorites: [],
-  accessToken: ''
+  accessToken: "",
+};
+
+export interface iLocationData {
+  type: string;
+  coordinates: Number[];
 }
-
- export interface iLocationData{
-   type: string,
-   coordinates: Number[],
- }
-
 
 export interface iUserSaved {
   _id: iTreeData;
@@ -38,12 +37,12 @@ export interface iUserFound {
 
 export interface iUserFavorites {
   _id: iTreeData;
-  notes: string
+  notes: string;
 }
 
 export const tempUserData = {
   userName: "bobby",
-  email: 'bobby@fake.com',
+  email: "bobby@fake.com",
   collections: ["maples", "oaks", "other"],
   saved: [
     {
@@ -74,77 +73,77 @@ export const tempUserData = {
   found: [
     {
       _id: tempTreeData,
-      location: { type: 'point', coordinates: [ -73.360846, 41.45940210000001 ]},
+      location: { type: "point", coordinates: [-73.360846, 41.45940210000001] },
     },
     {
       _id: tempTreeData,
-      location: { type: 'point', coordinates: [ -72.360846, 41.45940210000001 ]},
+      location: { type: "point", coordinates: [-72.360846, 41.45940210000001] },
     },
     {
       _id: tempTreeData,
-      location: { type: 'point', coordinates: [ -74.360846, 41.45940210000001 ]},
+      location: { type: "point", coordinates: [-74.360846, 41.45940210000001] },
     },
     {
       _id: tempTreeData,
-      location: { type: 'point', coordinates: [ -75.360846, 41.45940210000001 ]},
+      location: { type: "point", coordinates: [-75.360846, 41.45940210000001] },
     },
     {
       _id: tempTreeData,
-      location: { type: 'point', coordinates: [ -76.360846, 41.45940210000001 ]},
+      location: { type: "point", coordinates: [-76.360846, 41.45940210000001] },
     },
     {
       _id: tempTreeData,
-      location: { type: 'point', coordinates: [ -72.360846, 40.45940210000001 ]},
+      location: { type: "point", coordinates: [-72.360846, 40.45940210000001] },
     },
     {
       _id: tempTreeData,
-      location: { type: 'point', coordinates: [ -72.360846, 39.45940210000001 ]},
+      location: { type: "point", coordinates: [-72.360846, 39.45940210000001] },
     },
     {
       _id: tempTreeData,
-      location: { type: 'point', coordinates: [ -72.360846, 38.45940210000001 ]},
+      location: { type: "point", coordinates: [-72.360846, 38.45940210000001] },
     },
     {
       _id: tempTreeData,
-      location: { type: 'point', coordinates: [ -72.360846, 37.45940210000001 ]},
+      location: { type: "point", coordinates: [-72.360846, 37.45940210000001] },
     },
   ],
   favorites: [
     {
       _id: tempTreeData,
-      notes: 'temp note'
+      notes: "temp note",
     },
     {
       _id: tempTreeData,
-      notes: 'temp note'
+      notes: "temp note",
     },
     {
       _id: tempTreeData,
-      notes: 'temp note'
+      notes: "temp note",
     },
     {
       _id: tempTreeData,
-      notes: 'temp note'
+      notes: "temp note",
     },
     {
       _id: tempTreeData,
-      notes: 'temp note'
+      notes: "temp note",
     },
     {
       _id: tempTreeData,
-      notes: 'temp note'
+      notes: "temp note",
     },
     {
       _id: tempTreeData,
-      notes: 'temp note'
+      notes: "temp note",
     },
     {
       _id: tempTreeData,
-      notes: 'temp note'
+      notes: "temp note",
     },
     {
       _id: tempTreeData,
-      notes: 'temp note'
+      notes: "temp note",
     },
   ],
 };

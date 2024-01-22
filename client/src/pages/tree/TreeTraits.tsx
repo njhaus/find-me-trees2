@@ -26,8 +26,10 @@ const TreeTraits = ({ trait, label, icon }: iTreeTraits) => {
   return (
     // Uses the filters array -- which has all descriptions already included in it and a property 'formName' that matches the key for the Traits variable passed in. This way, we can access the explanation for each trait from the filters
     <Flex direction={"row"} alignItems={"center"} mb={"1rem"} flexWrap={"wrap"}>
-      <Flex minWidth={"fit-content"}>
-        {icon}
+      <Flex minWidth={"fit-content"} gap={'0.5rem'}>
+        <Text color={"main.400"} variant={"smallCaps"} whiteSpace={"nowrap"}>
+          {icon}
+        </Text>
         <Text color={"main.400"} variant={"smallCaps"} whiteSpace={"nowrap"}>
           {label}:
         </Text>

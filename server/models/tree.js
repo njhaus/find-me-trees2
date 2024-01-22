@@ -13,7 +13,6 @@ const TreeSchema = new mongoose.Schema({
     family: String,
     hardinessZones: String,
     origin: String,
-    uses: String,
   },
   intro: String,
   traits: {
@@ -61,6 +60,8 @@ const TreeSchema = new mongoose.Schema({
       enum: states,
     },
   },
+  uses: String,
+  // adaptation: String,
 });
 
 const Tree = mongoose.model('Tree', TreeSchema);

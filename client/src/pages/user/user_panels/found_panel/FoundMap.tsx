@@ -23,6 +23,7 @@ const FoundMap = ({ data, onClick, location }: iFoundMap) => {
   const [zoom] = useState(3);
   const [API_KEY] = useState("2XZKg54dnt7JS7AZhe7J");
   const currentLocation = location;
+  
   const mapData = {
     type: "FeatureCollection",
     features: data.map((found) => ({

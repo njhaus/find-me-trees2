@@ -1,17 +1,20 @@
-import { useImg } from "../hooks/useImg";
+import { useImg } from "../../../hooks/useImg";
 
 type LeafType = "simple" | "compound";
 type LeafShape = "needle" | "smooth" | "toothed" | "lobed";
 type Bark = "smooth" | "rough" | "peeling" | undefined;
 type Branches = "drooping" | "spiral" | undefined;
-type Fruit = "fleshy"
+type Fruit =
+  | "fleshy"
   | "berry"
   | "nut"
   | "acorn"
   | "ball"
   | "key"
   | "cone"
-  | "catkin" | "other" | undefined;
+  | "catkin"
+  | "other"
+  | undefined;
 type Flower =
   | "red"
   | "pink"
@@ -80,7 +83,6 @@ export interface iSciInfo {
   family: string;
   hardinessZone: string;
   origin: string;
-  uses: string;
   availability: string;
 }
 
@@ -109,10 +111,10 @@ export interface iTreeData {
   intro: string;
   sciInfo: iSciInfo;
   traits: iTreeTraitsData;
+  uses: string;
 }
 
-
-export const tempTreeData = {
+export const tempTreeData: iTreeData = {
   _id: "testID123",
   title: "Big Tree",
   imgSrc: [],
@@ -120,13 +122,12 @@ export const tempTreeData = {
   intro:
     "TREE INTRO: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore laborum, voluptas fugiat quo quas sint iusto debitis optio dolorum ipsa mollitia ex. Voluptas perspiciatis pariatur, magni eius tempore veniam illum animi quisquam fugiat assumenda rem! Velit ipsam ut iusto? Incidunt totam voluptatem libero molestias inventore ipsam rem est vero quas rerum odit enim, nisi nihil laboriosam cupiditate repellendus amet? Nihil quas sed consequuntur deserunt mollitia illum voluptatum minus temporibus, error quam vero delectus magni quisquam vitae labore veniam aliquid dolore sunt architecto id molestias praesentium ipsum ea. Sint consequuntur, magnam harum dolorum, odio quae maxime recusandae facere eum eligendi asperiores provident reprehenderit unde assumenda quo non aspernatur accusantium magni blanditiis dolor?",
   sciInfo: {
-    scientificName: 'tempinfo',
-    commonNames: 'tempinfo',
-    family: 'tempinfo',
-    hardinessZone: 'tempinfo',
-    origin: 'tempinfo',
-    uses: 'tempinfo',
-    availability: 'tempinfo',
+    scientificName: "tempinfo",
+    commonNames: "tempinfo",
+    family: "tempinfo",
+    hardinessZone: "tempinfo",
+    origin: "tempinfo",
+    availability: "tempinfo",
   },
   traits: {
     leafType: "simple" as LeafType,
@@ -138,4 +139,6 @@ export const tempTreeData = {
     flower: "green" as Flower,
     location: ["CA" as UsState, "WA" as UsState, "OR" as UsState],
   },
+  uses: "tempinfo",
 };
+

@@ -2,7 +2,7 @@ import { Flex, Text } from "@chakra-ui/react";
 
 import { iUserFound } from "../../../../data/user_data/userData";
 import FoundCard from "./FoundCard";
-import { iTreeData } from "../../../../data/tree_data";
+import { iTreeData } from "../../../tree/data/tree_data";
 
 interface iFoundList {
   data: iUserFound[];
@@ -10,7 +10,6 @@ interface iFoundList {
 }
 
 const FoundList = ({ data, location }: iFoundList) => {
-    
   return (
     <Flex
       width={{ base: "100%", lg: "40rem" }}
@@ -19,9 +18,9 @@ const FoundList = ({ data, location }: iFoundList) => {
       maxHeight={"100vh"}
       overflowY={"scroll"}
       gap={"1rem"}
-      flexWrap={'wrap'}
-      justifyContent={'center'}
-      pb={'3rem'}
+      flexWrap={"wrap"}
+      justifyContent={"center"}
+      pb={"3rem"}
     >
       {data?.length > 0 ? (
         data.map((tree, i) => (
@@ -39,6 +38,6 @@ const FoundList = ({ data, location }: iFoundList) => {
       )}
     </Flex>
   );
-}
+};
 
-export default FoundList
+export default FoundList;
