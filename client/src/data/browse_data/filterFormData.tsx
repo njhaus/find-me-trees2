@@ -55,7 +55,7 @@ export const leafFilters: filterObj[] = [
   },
   {
     label: "Leaf Size",
-    values: ["Under 2 inches", "2-6 inches", "Over 6 inches"],
+    values: ["Under 2 inches", "2-6 inches", "6 - 10 inches, over 10 inches"],
     helperText: [
       {
         img: "/filter-form/simple-leaf.jpeg",
@@ -63,7 +63,7 @@ export const leafFilters: filterObj[] = [
       },
       {
         img: "/filter-form/compound-leaf.jpeg",
-        text: "If the leaf is compound, measure the length of the group of leaves.",
+        text: "If the leaf is compound, measure one leaflet in the group of leaves.",
       },
     ],
     helperLink: "",

@@ -83,19 +83,18 @@ export interface iSciInfo {
   family: string;
   hardinessZone: string;
   origin: string;
-  availability: string;
 }
 
 interface iLeaf {
   leafType: LeafType;
   leafShape: LeafShape;
-  leafSize: number;
+  leafSize: number[];
 }
 
 export interface iTreeTraitsData {
   leafType: LeafType;
   leafShape: LeafShape;
-  leafSize: number;
+  leafSize: number[];
   bark: Bark;
   branches: Branches;
   fruit: Fruit;
@@ -127,12 +126,11 @@ export const tempTreeData: iTreeData = {
     family: "tempinfo",
     hardinessZone: "tempinfo",
     origin: "tempinfo",
-    availability: "tempinfo",
   },
   traits: {
     leafType: "simple" as LeafType,
     leafShape: "compound" as LeafShape,
-    leafSize: 3,
+    leafSize: [3, 5],
     bark: "smooth" as Bark,
     branches: "spiral" as Branches,
     fruit: "fleshy" as Fruit,

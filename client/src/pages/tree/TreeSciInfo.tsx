@@ -14,7 +14,6 @@ const keyIconMap: Record<keyof iSciInfo, JSX.Element> = {
   family: <GiTreeBranch color={"rgb(255,213,234)"} />,
   hardinessZone: <BsMapFill color={"rgb(255,213,234)"} />,
   origin: <BsGeoFill color={"rgb(255,213,234)"} />,
-  availability: <BsChatRightFill color={"rgb(255,213,234)"} />,
 };
 
 const TreeSciInfo = ({ sciInfo }: iTreeSciInfo) => {

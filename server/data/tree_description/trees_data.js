@@ -18,7 +18,7 @@ trees = [
     traits: {
       leafType: "simple",
       leafShape: "smooth",
-      leafSize: 3,
+      leafSize: [3, 5],
       bark: "smooth",
       branches: "spiral",
       fruit: "fleshy",

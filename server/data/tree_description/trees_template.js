@@ -17,7 +17,7 @@ const template = {
   traits: {
     leafType: "simple",
     leafShape: "needle",
-    leafSize: 2, //any number
+    leafSize: [2, 4], //any number array
     leafArrangement: "spiral",
     // bark: "smooth",
     // branches: "spiral",

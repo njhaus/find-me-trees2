@@ -6,9 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.mjs",
-    "seed": "node seedDb.js",
-    "test-seed": "cd models/seed && node treeSeed.js",
-    "get": "node getDbData.cjs"
+    "seed": "cd models/seed && node treeSeed.js",
+    "get-db": "cd data && node getDbData.cjs"
   },
   "author": "nick haus",
   "license": "MIT",
