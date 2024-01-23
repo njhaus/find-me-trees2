@@ -10,7 +10,10 @@ import {
   FaTree,
     FaEnvelope,
     FaSadCry,
-  FaLaughWink
+  FaLaughWink,
+  FaUserSecret,
+  FaUserShield,
+  FaPencilAlt
 } from "react-icons/fa";
 
 // Validation in login/utils files -- includes ZOD validators and validateNewUser function
@@ -76,9 +79,9 @@ const RegisterForm =
 
     return (
       <>
-        <form>
+        <form autoComplete="off">
           <IconInput
-            icon={<FaSadCry />}
+            icon={<FaPencilAlt />}
             labelText="Username:"
             labelFor="username"
             inputPlaceholder="username"
@@ -101,7 +104,7 @@ const RegisterForm =
             onBlur={() => handleBlur(formData.email, setEmailFC)}
           ></IconInput>
           <IconInput
-            icon={<FaLaughWink />}
+            icon={<FaUserShield />}
             labelText="Password:"
             labelFor="password"
             inputPlaceholder="password"
@@ -112,7 +115,7 @@ const RegisterForm =
             onBlur={() => handleBlur(formData.password, setPasswordFC)}
           ></IconInput>
           <IconInput
-            icon={<FaLaughWink />}
+            icon={<FaUserShield />}
             labelText="Re-Enter Password:"
             labelFor="reenter-password"
             inputPlaceholder="Re-enter Password"
@@ -128,7 +131,8 @@ const RegisterForm =
             error={reenterFirstCheck ? reenterError : ""}
           ></IconInput>
           <Button
-            isDisabled={ false
+            isDisabled={
+              false
               // validateNewUser(formData) && reenterPassword === formData.password
               //   ? false
               //   : true

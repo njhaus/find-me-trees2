@@ -30,24 +30,26 @@ const SavedPanel = ({ data, collections}: iSavedPanel) => {
     }, [collections])
 
     return (
-      <TabPanel as={"article"} bg={"secondary.200"}>
-        <Flex direction={"column"} pt={'1rem'}>
+      <TabPanel
+        as={"article"}
+        bg={"secondary.200"}
+        minHeight={"calc(100vh - 20rem)"}
+      >
+        <Flex direction={"column"} pt={"1rem"}>
           <Flex direction={"row"} justify={"space-between"}>
             <CollectionMenu
               currentCol={currentCollection}
               collections={collections}
               onClick={handleCollection}
             />
-            <AddCollection
-              collections={collections}
-            />
+            <AddCollection collections={collections} />
           </Flex>
         </Flex>
         <Flex>
           <SavedCards
             data={data}
             collections={collections}
-            currentCollection = {currentCollection}
+            currentCollection={currentCollection}
           />
         </Flex>
       </TabPanel>

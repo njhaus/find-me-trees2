@@ -4,11 +4,7 @@ import Joi from 'joi'
 const userSchema = Joi.object({
   username: Joi.string().alphanum().min(4).max(20).required(),
   email: Joi.string().email().min(4).max(30),
-  password: Joi.string()
-    .pattern(
-      new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9!@#$%^&*])(?!.*s)(?=.{8,})")
-    )
-    .min(8),
+  password: Joi.string().min(8),
   accessToken: Joi.string(),
   collections: Joi.array(),
   saved: Joi.array(),
@@ -20,17 +16,12 @@ const userSchema = Joi.object({
 const newUserSchema = Joi.object({
   username: Joi.string().alphanum().min(4).max(20).required(),
   email: Joi.string().email().min(4).max(30).required(),
-  password: Joi.string()
-    .pattern(
-      new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9!@#$%^&*])(?!.*s)(?=.{8,})")
-    )
-    .min(8)
+  password: Joi.string().min(8)
     .required(),
   newUsername: Joi.string().alphanum().min(4).max(20),
   newEmail: Joi.string().email().min(4).max(30),
   newPassword: Joi.string()
-    .empty("")
-    .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9!@#$%^&*])(?!.*\s)(?=.{8,})/),
+    .empty(""),
   accessToken: Joi.string(),
 });
 
@@ -65,13 +56,13 @@ export const validateNewUser = async function (req, res, next) {
     const { error, value } = await newUserSchema.validate(userData);
     if (error) {
       console.log(error);
-      res.send({ error: error });
+      return res.send({ error: error });
     } else {
       console.log("middleware successful .. moving to next \n\n");
       next();
     }
   } catch (err) {
     console.log(err);
-    res.send({ error: error });
+    return res.send({ error: error });
   }
 };

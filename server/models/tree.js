@@ -11,7 +11,7 @@ const TreeSchema = new mongoose.Schema({
     commonNames: String,
     scientificName: String,
     family: String,
-    hardinessZones: String,
+    hardinessZone: String,
     origin: String,
   },
   intro: String,

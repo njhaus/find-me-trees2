@@ -23,7 +23,6 @@ const SavedCards = ({ data, collections, currentCollection }: iSavedCards) => {
       gap={"1.5rem"}
       justifyContent={"center"}
       margin={"1rem"}
-      minHeight={"calc(100vh - 25rem)"}
       color={"white"}
       fontWeight={"500"}
       py={"2rem"}

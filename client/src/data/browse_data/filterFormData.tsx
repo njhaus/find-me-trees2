@@ -31,19 +31,31 @@ export const leafFilters: filterObj[] = [
   },
   {
     label: "Leaf Shape",
-    values: ["Needle", "Smooth", "Toothed", "Lobed"],
+    values: ["Needle", "Oval", "Round", "Thin", "Heart", "Fan", "Lobed"],
     helperText: [
       {
         img: "/filter-form/needles.jpeg",
         text: "Needles can be long, thin, and pointy, but some needle-like leaves can be shorter and scaled.",
       },
       {
-        img: "/filter-form/smooth-leaf.jpeg",
-        text: "Smooth leaves have no bumps along their edges.",
+        img: "/filter-form/leaf-oval.jpeg",
+        text: "Oval leaves may not be a perfect ellipse, but they will have mostly rounded edges.",
       },
       {
-        img: "/filter-form/toothed-leaf.jpeg",
-        text: "Toothed leaves have small bumps, teeth, or serrations along their edges.",
+        img: "/filter-form/leaf-round.jpeg",
+        text: "Round leaves are circular in shape.",
+      },
+      {
+        img: "/filter-form/leaf-thin.jpeg",
+        text: "Thin leaves, often called lance-like, are much longer than they are wide, but they are not needles.",
+      },
+      {
+        img: "/filter-form/leaf-heart.jpeg",
+        text: "Heart-shaped leaves may have an indentation where the stem meets the leaf, or they may be somewhat triangular in shape.",
+      },
+      {
+        img: "/filter-form/leaf-fan.jpeg",
+        text: "Fan-shaped leaves are thin on one end and become wide and flat on the other end.",
       },
       {
         img: "/filter-form/lobed-leaf.jpeg",
@@ -55,7 +67,7 @@ export const leafFilters: filterObj[] = [
   },
   {
     label: "Leaf Size",
-    values: ["Under 2 inches", "2-6 inches", "6 - 10 inches, over 10 inches"],
+    values: ["Under 2 inches", "2-6 inches", "6 - 10 inches", "over 10 inches"],
     helperText: [
       {
         img: "/filter-form/simple-leaf.jpeg",
@@ -165,6 +177,7 @@ export const flowerFilters: filterObj[] = [
       "Yellow",
       "White",
       "Green",
+      "Brown",
     ],
     helperText: [
       {

@@ -25,10 +25,7 @@ const TreeUses = ({uses }: iTreeUses) => {
         Uses
       </Heading>
       <Text>
-        {uses} Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-        nostrum soluta possimus ea illum error expedita deleniti numquam
-        voluptatibus, ad excepturi modi, omnis officiis doloribus pariatur
-        asperiores debitis, repudiandae provident.
+        {uses.slice(0, 1).toUpperCase()}{uses.slice(1)}.
       </Text>
     </Flex>
   );

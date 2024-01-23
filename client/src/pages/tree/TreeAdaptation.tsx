@@ -1,4 +1,5 @@
 import { Flex, Heading, Text } from "@chakra-ui/react";
+import { BsExclamationDiamondFill } from "react-icons/bs";
 
 const TreeAdaptation = () => {
   return (
@@ -22,12 +23,9 @@ const TreeAdaptation = () => {
       >
         Adaptation
       </Heading>
-      <Text>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem
-        ratione dolor nobis esse? Molestiae laboriosam voluptates quibusdam
-        obcaecati nesciunt modi libero quidem id eos dolores enim tempore, a
-        omnis recusandae.
-      </Text>
+      <Flex>
+        <BsExclamationDiamondFill/> <Text ps={'0.5rem'}>Database under construction -- information coming soon!</Text>
+      </Flex>
     </Flex>
   );
 }

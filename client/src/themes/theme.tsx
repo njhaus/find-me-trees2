@@ -85,12 +85,16 @@ const Button = defineStyleConfig({
 const Text = defineStyleConfig({
   variants: {
     smallCaps: {
-      fontSize: '0.9rem',
-      textTransform: 'uppercase',
-      fontWeight: '600',
-    }
-  }
-})
+      fontSize: "0.9rem",
+      textTransform: "uppercase",
+      fontWeight: "600",
+    },
+    error: {
+      fontSize: "0.9rem",
+      color: 'red'
+    },
+  },
+});
 
 
 const theme = extendTheme({

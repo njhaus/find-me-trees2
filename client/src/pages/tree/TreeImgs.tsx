@@ -18,6 +18,7 @@ const TreeImgs = ({imgSrc}: iTreeImgs) => {
     >
       <Image
         src={imgSrc[0]}
+        width={'100%'}
         aspectRatio={"1/1"}
         borderRadius={"50%"}
         objectFit={"cover"}

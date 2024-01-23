@@ -49,21 +49,22 @@ const FoundPanel = ({ found }: iFoundPanel) => {
       overflow={"hidden"}
       py={"2rem"}
       px={"1rem"}
+      minHeight={"calc(100vh - 20rem)"}
     >
       <Flex
         direction={{ base: "column", lg: "row-reverse" }}
         alignItems={"stretch"}
         justifyContent={"center"}
         gap={"2rem"}
-        h={'100%'}
+        h={"100%"}
       >
-          {/* // NEED TO REDO THIS COMPONENT */}
-          {/* <FoundSelect onSelect={handleSelect} /> */}
-          <FoundMap
-            data={found}
-            onClick={handleSelect}
-            location={locationFilter}
-          />
+        {/* // NEED TO REDO THIS COMPONENT */}
+        {/* <FoundSelect onSelect={handleSelect} /> */}
+        <FoundMap
+          data={found}
+          onClick={handleSelect}
+          location={locationFilter}
+        />
         <FoundList data={found} location={locationFilter} />
       </Flex>
     </TabPanel>

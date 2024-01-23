@@ -110,11 +110,13 @@ import userRoute from './routes/user_routes.js';
 import browseRoute from "./routes/browse_routes.js";
 import loginRoute from "./routes/login_routes.js";
 import treeRoute from "./routes/tree_routes.js"
+import dataRoute from './routes/data_routes.js'
 
 app.use('/user', userRoute);
 app.use('/browse', browseRoute);
 app.use('/login', loginRoute);
 app.use('/tree', treeRoute);
+app.use('/data', dataRoute);
 
 
 // Generic route -- for dev purposes only

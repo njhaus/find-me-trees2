@@ -47,9 +47,22 @@ const AddCollection = ({ collections }: iAddCollection) => {
 
   const { userData, handleUpdateUser } = useUpdateUser();
 
+  const newCollectionValidation = (val: string): boolean => {
+    if (!collections.includes(val) && val !== "" && val.length < 30) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
   const handleAddCollection = (val: string) => {
-    if (!collections.includes(val) && val !== '') {
+    if (newCollectionValidation(val)) {
       setEditCollections({ ...editCollections, addCollection: val })
+    }
+    else {
+      // Need to display an error message
+      console.log('Collection needs to be a unique name with between 1-30 characters.')
     }
   }
 
@@ -130,6 +143,8 @@ const AddCollection = ({ collections }: iAddCollection) => {
                 formName="new-collection"
                 onSubmit={handleAddCollection}
                 ref={initialFocusRef}
+                validation={newCollectionValidation}
+                errMsg={'Must be a unique name between 1 and 30 characters'}
               />
               {collections.length > 0 && (
                 <>

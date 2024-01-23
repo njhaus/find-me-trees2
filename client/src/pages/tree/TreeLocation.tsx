@@ -9,6 +9,7 @@ import { UsState } from "./data/tree_data";
 import { abbreviationMap } from "../../data/browse_data/statesData";
 import { BsFill0SquareFill, BsSquareFill } from "react-icons/bs";
 import { geojson } from "./data/tree-location";
+import { apiGet } from "../../services/api_client";
 
 
 interface iTreeLocation {
@@ -19,69 +20,82 @@ interface iTreeLocation {
 const TreeLocation = ({ title, location }: iTreeLocation) => {
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const map = useRef<Map | null>(null);
-  const [API_KEY] = useState("2XZKg54dnt7JS7AZhe7J");
+
+   function addStats(geojson: any) {
+     geojson.features.forEach((feature: any) => {
+       const statsForFeature = location.find(
+         (l) => abbreviationMap[l] === feature.properties.name
+       );
+       if (statsForFeature) {
+         // add stats to the feature's properties
+         feature.properties = { ...feature.properties, color: "#0000ff" };
+       } else {
+         feature.properties = { ...feature.properties, color: "transparent" };
+       }
+     });
+
+     return geojson;
+   }
 
   useEffect(() => {
     // Set color based on invasive or native
-    // const mapColor = 
+    // const mapColor =
 
-    function addStats(geojson: any) {
-      geojson.features.forEach((feature: any) => {
-        const statsForFeature = location.find(l => abbreviationMap[l] === feature.properties.name);
-        if (statsForFeature) {
-          // add stats to the feature's properties
-          feature.properties = { ...feature.properties, color: '#0000ff' };
-        }
-        else {
-          feature.properties = { ...feature.properties, color: "transparent" };
-        }
-      });
+    // Refactor -- move map set up function into another file.
+    const setUpMap = async() => {
+      const abortController = new AbortController();
+      
+      try {
+        // get key
+        const API_KEY = await apiGet('data/maptilerkey', abortController)
 
-      return geojson;
-    }
+        // Make map
+        if (mapContainer.current) {
+          map.current = new maplibregl.Map({
+            container: mapContainer.current,
+            style: `https://api.maptiler.com/maps/hybrid/style.json?key=${API_KEY}`,
+            center: [-100.486052, 37.830348],
+            zoom: 2,
+            interactive: false,
+          });
 
-    if (mapContainer.current) {
-      map.current = new maplibregl.Map({
-        container: mapContainer.current,
-        style: `https://api.maptiler.com/maps/hybrid/style.json?key=${API_KEY}`,
-        center: [-100.486052, 37.830348],
-        zoom: 2,
-        interactive: false,
-      });
+          map.current?.on("load", () => {
+            if (map.current) {
+              map.current.addSource("states", {
+                type: "geojson",
+                data: addStats(geojson),
+              });
+            }
 
-      map.current?.on("load", () => {
-        if (map.current) {
-          map.current.addSource("states", {
-            type: "geojson",
-            data: addStats(geojson),
+            // The feature-state dependent fill-opacity expression will render the hover effect
+            // when a feature's hover state is set to true.
+            map.current?.addLayer({
+              id: "state-fills",
+              type: "fill",
+              source: "states",
+              layout: {},
+              paint: {
+                "fill-color": ["get", "color"],
+              },
+            });
+
+            map.current?.addLayer({
+              id: "state-borders",
+              type: "line",
+              source: "states",
+              layout: {},
+              paint: {
+                "line-color": "#aaaaaa",
+                "line-width": 1,
+              },
+            });
           });
         }
-
-        // The feature-state dependent fill-opacity expression will render the hover effect
-        // when a feature's hover state is set to true.
-        map.current?.addLayer({
-          id: "state-fills",
-          type: "fill",
-          source: "states",
-          layout: {},
-          paint: {
-            "fill-color": ['get', 'color'],
-          },
-        });
-
-        map.current?.addLayer({
-          id: "state-borders",
-          type: "line",
-          source: "states",
-          layout: {},
-          paint: {
-            "line-color": "#aaaaaa",
-            "line-width": 1,
-          },
-        });
-
-      });
+      } catch (err) {
+        console.error(err)
+      }
     }
+    setUpMap();
   }, []);
 
   return (

@@ -20,6 +20,7 @@ const FoundCard = ({id, title, imgSrc, sciName, locationFound}: iFoundCard) => {
       overflow="hidden"
       w={"18rem"}
       borderRadius={"10px"}
+      maxHeight={'17rem'}
     >
       <Stack className="blur-border-light" borderRadius={"10px"}>
         <CardBody py={"0.5rem"}>

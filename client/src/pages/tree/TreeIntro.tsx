@@ -20,6 +20,9 @@ const TreeIntro = ({text, title, }: iTreeIntro) => {
         textAlign={"center"}
         mb={"2rem"}
         color={"neutral.500"}
+        maxWidth={'25rem'}
+        mx='auto'
+
       >
         {title} Introduction
       </Heading>

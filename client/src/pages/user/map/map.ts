@@ -1,4 +1,5 @@
-
+// This component is meant for refactoring the map component out of all of the components that use it.
+// It is incomplete andneeds to be refactored
 
 
 interface iFoundMap {

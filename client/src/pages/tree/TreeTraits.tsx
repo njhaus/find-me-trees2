@@ -23,10 +23,11 @@ const TreeTraits = ({ trait, label, icon }: iTreeTraits) => {
       ? filter.helperText[helperIdx]
       : filter.helperText[0];
 
+
   return (
     // Uses the filters array -- which has all descriptions already included in it and a property 'formName' that matches the key for the Traits variable passed in. This way, we can access the explanation for each trait from the filters
     <Flex direction={"row"} alignItems={"center"} mb={"1rem"} flexWrap={"wrap"}>
-      <Flex minWidth={"fit-content"} gap={'0.5rem'}>
+      <Flex minWidth={"fit-content"} gap={"0.5rem"}>
         <Text color={"main.400"} variant={"smallCaps"} whiteSpace={"nowrap"}>
           {icon}
         </Text>
@@ -35,7 +36,13 @@ const TreeTraits = ({ trait, label, icon }: iTreeTraits) => {
         </Text>
       </Flex>
       <Flex ms={"0.5rem"} gap={"0.5rem"}>
-        <Text color={"main.400"}>{trait}</Text>
+        <Text color={"main.400"}>
+          {label === "Leaf Size"
+            ? trait.length > 1
+              ? `${trait[0]} - ${trait[1]} inches`
+              : `${trait[0]} inches`
+            : trait}
+        </Text>
         {label !== "Flower Color" && label !== "Leaf Size" && (
           <Box width={"fit-content"} className="filter-icon">
             <Box className="filter-text" maxWidth={"80vw"} overflowX={"scroll"}>

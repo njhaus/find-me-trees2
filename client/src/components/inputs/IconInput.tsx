@@ -1,6 +1,6 @@
 import { forwardRef, ReactNode, useRef, useEffect, ChangeEvent, useState } from "react";
 
-import { InputGroup, InputLeftElement, Input, FormLabel, Stack, Text } from "@chakra-ui/react";
+import { InputGroup, InputLeftElement, Input, FormLabel, Stack, Text, Flex } from "@chakra-ui/react";
 
 import { BsExclamationTriangleFill } from "react-icons/bs";
 import { validateTextInput } from "../../utils/input_utils";
@@ -49,18 +49,19 @@ const IconInput = forwardRef<HTMLInputElement, iIconInput>(({ icon, labelText, l
         />
       </InputGroup>
       {error && val && (
-        <Text
-          className="errText"
-          color={"red"}
-          aria-live="assertive"
-          display={"flex"}
-          flexDirection={"row"}
-          tabIndex={0}
-        >
-          <BsExclamationTriangleFill />
-          <span className="sr-only">{labelText} error</span>
-          {error}
-        </Text>
+        <Flex gap={"0.5rem"}>
+          <BsExclamationTriangleFill color={'red'} />
+          <Text
+            className="errText"
+            variant={"error"}
+            aria-live="assertive"
+            display={"flex"}
+            flexDirection={"row"}
+            tabIndex={0}
+          >
+            {error}
+          </Text>
+        </Flex>
       )}
     </Stack>
   );

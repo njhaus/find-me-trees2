@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import maplibregl, { Map } from "maplibre-gl";
 import '../styles/options-map.css'
+import { apiGet } from "../../../services/api_client";
 
 interface iFoundOptionMap {
     handleCoordinates: (coords: [number, number]) => void;
@@ -12,9 +13,15 @@ const foundOptionMap = ({handleCoordinates}: iFoundOptionMap) => {
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const map = useRef<Map | null>(null);
   const [zoom] = useState(1);
-    const [API_KEY] = useState("2XZKg54dnt7JS7AZhe7J");
 
-    useEffect(() => {
+  useEffect(() => {
+    const abortController = new AbortController();
+
+    const setUpMap = async () => {
+        
+      try {
+        const API_KEY = await apiGet('data/maptilerkey', abortController);
+        
         if (mapContainer.current) {
           map.current = new maplibregl.Map({
             container: mapContainer.current,
@@ -27,11 +34,18 @@ const foundOptionMap = ({handleCoordinates}: iFoundOptionMap) => {
           map.current.on("click", function (e) {
             // The event object (e) contains information like the
             // coordinates of the point on the map that was clicked.
-              console.log("A click event has occurred at " + e.lngLat);
-              handleCoordinates([e.lngLat.lng, e.lngLat.lat])
+            console.log("A click event has occurred at " + e.lngLat);
+            handleCoordinates([e.lngLat.lng, e.lngLat.lat]);
           });
         }
-    }, [])
+
+      } catch (err) {
+        console.error(err);
+      }
+ 
+    }
+    setUpMap();
+  }, [])
     
 
   return (

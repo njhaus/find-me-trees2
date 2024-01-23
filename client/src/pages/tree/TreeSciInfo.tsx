@@ -43,8 +43,9 @@ const TreeSciInfo = ({ sciInfo }: iTreeSciInfo) => {
               fontSize={"0.9rem"}
               color={"accent.900"}
             >
-              {key.split(/(N)/).slice(0, 1)}{" "}
-              {key.split(/(N)/).slice(1).join("")}:
+              {/* Split at capital letter (to split a camelCase string) */}
+              {key.split(/([A-Z])/).slice(0, 1)}{" "}
+              {key.split(/([A-Z])/).slice(1).join("")}:
             </Text>
           </Flex>
           <Text fontSize={"0.9rem"} px={"0.5rem"} mb={"0.5rem"}>

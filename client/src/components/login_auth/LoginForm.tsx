@@ -11,6 +11,8 @@ import {
   FaSmile,
   FaTree,
   FaLaughWink,
+  FaUserShield,
+  FaPencilAlt,
 } from "react-icons/fa";
 
 // Validation in login/utils files -- includes ZOD validators and validateTextInput function
@@ -30,7 +32,7 @@ interface iLoginForm {
     serverError: string;
 }
 
-const LoginForm = forwardRef<HTMLInputElement, iLoginForm>(({handleForm, handleIsRegistering, submitLogin, formData, errors, serverError}, ref) => {
+const LoginForm = forwardRef<HTMLInputElement, iLoginForm>(({handleForm, handleIsRegistering, submitLogin, formData, serverError}, ref) => {
   const [error, setError] = useState("");
 
   // Ref to focus on error for screenreaders -- this error is ONLY for form validation (no html in this case)
@@ -58,13 +60,13 @@ const LoginForm = forwardRef<HTMLInputElement, iLoginForm>(({handleForm, handleI
 
   return (
     <>
-      <form>
+      <form autoComplete="off">
         <Text ref={errorRef} tabIndex={0}>
-                  {error && error}
-                  {serverError && serverError}
+          {error && error}
+          {serverError && serverError}
         </Text>
         <IconInput
-          icon={<FaSadCry />}
+          icon={<FaPencilAlt />}
           labelText="Username:"
           labelFor="username"
           inputPlaceholder="username"
@@ -76,7 +78,7 @@ const LoginForm = forwardRef<HTMLInputElement, iLoginForm>(({handleForm, handleI
         ></IconInput>
 
         <IconInput
-          icon={<FaLaughWink />}
+          icon={<FaUserShield />}
           labelText="Password:"
           labelFor="password"
           inputPlaceholder="password"

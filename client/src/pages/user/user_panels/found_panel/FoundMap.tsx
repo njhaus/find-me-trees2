@@ -6,6 +6,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import "../../styles/map.css";
 
 import { iUserFound } from "../../../../data/user_data/userData";
+import { apiGet } from "../../../../services/api_client";
 import { current } from "immer";
 import { GiConsoleController } from "react-icons/gi";
 
@@ -21,7 +22,6 @@ const FoundMap = ({ data, onClick, location }: iFoundMap) => {
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const map = useRef<Map | null>(null);
   const [zoom] = useState(3);
-  const [API_KEY] = useState("2XZKg54dnt7JS7AZhe7J");
   const currentLocation = location;
   
   const mapData = {
@@ -202,27 +202,40 @@ const FoundMap = ({ data, onClick, location }: iFoundMap) => {
   };
 
   useEffect(() => {
-    if (mapContainer.current && location) {
-      map.current = new maplibregl.Map({
-        container: mapContainer.current,
-        style: `https://api.maptiler.com/maps/streets-v2/style.json?key=${API_KEY}`,
-        center: [currentLocation[0], currentLocation[1]],
-        zoom: zoom,
-      });
-      map.current.addControl(new maplibregl.NavigationControl(), "top-right");
-      map.current.on("load", createClusters);
-    }
-    // CLEANUP FUNCTION NEEDED -- the one below gives errors
-    return () => {
-      if (map.current) {
-        map.current.off("load", createClusters);
-        map.current.off("click", "clusters", clusterZoom);
-        map.current.off("click", "unclustered-point", showPopover);
-        map.current.off("mouseenter", "clusters", popoverCursor);
-        map.current.off("mouseleave", "clusters", popoverCursor);
+    const abortController = new AbortController()
+
+    const setUpMap = async () => {
+      try {
+        const API_KEY = await apiGet("data/maptilerkey", abortController);
+        if (mapContainer.current && location) {
+          map.current = new maplibregl.Map({
+            container: mapContainer.current,
+            style: `https://api.maptiler.com/maps/streets-v2/style.json?key=${API_KEY}`,
+            center: [currentLocation[0], currentLocation[1]],
+            zoom: zoom,
+          });
+          map.current.addControl(
+            new maplibregl.NavigationControl(),
+            "top-right"
+          );
+          map.current.on("load", createClusters);
+        }
+      } catch (err) {
+        console.error(err);
       }
-    };
-  }, [API_KEY, zoom, location[1], location[0], data]);
+    }
+      setUpMap();
+      // CLEANUP FUNCTION NEEDED -- the one below gives errors
+      return () => {
+        if (map.current) {
+          map.current.off("load", createClusters);
+          map.current.off("click", "clusters", clusterZoom);
+          map.current.off("click", "unclustered-point", showPopover);
+          map.current.off("mouseenter", "clusters", popoverCursor);
+          map.current.off("mouseleave", "clusters", popoverCursor);
+        }
+      };
+  }, [zoom, location[1], location[0], data]);
 
   return (
     <VStack

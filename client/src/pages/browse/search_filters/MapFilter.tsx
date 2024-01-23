@@ -11,12 +11,12 @@ import { FormDataContext, iFormDataContext } from "../Browse";
 import { GeocodeData } from "../../../data/browse_data/filterFormData";
 import { statesMap } from "../../../data/browse_data/statesData";
 import '../styles/browseMap.css'
+import { apiGet } from "../../../services/api_client";
 
 const MapFilter = () => {
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const map = useRef<Map | null>(null);
   const [zoom] = useState(3);
-  const [API_KEY] = useState("2XZKg54dnt7JS7AZhe7J");
 
   const [state, setState] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
@@ -35,13 +35,16 @@ const MapFilter = () => {
   console.log(formData);
 
   const handleCoordinates = async (coords: [number, number]) => {
+    const abortController = new AbortController();
+
     try {
+      const radarKey = await apiGet('data/radarkey', abortController);
       const response = await fetch(
         `https://api.radar.io/v1/geocode/reverse?coordinates=${coords[1]},${coords[0]}`,
         {
           headers: {
             Authorization:
-              "prj_test_pk_9755543cb702cecadcdd869bc9045909d187e28e",
+              `${radarKey}`,
           },
         }
       );
@@ -62,22 +65,32 @@ const MapFilter = () => {
   };
 
   useEffect(() => {
-    if (mapContainer.current) {
-      map.current = new maplibregl.Map({
-        container: mapContainer.current,
-        style: `https://api.maptiler.com/maps/streets-v2/style.json?key=${API_KEY}`,
-        center: [-95, 39],
-        zoom: zoom,
-      });
-      // The `click` event is an example of a `MapMouseEvent`.
-      // Set up an event listener on the map.
-      map.current.on("click", function (e) {
-        // The event object (e) contains information like the
-        // coordinates of the point on the map that was clicked.
-        console.log("A click event has occurred at " + e.lngLat);
-        handleCoordinates([e.lngLat.lng, e.lngLat.lat]);
-      });
+    const setUpMap = async () => {
+      try {
+        const abortController = new AbortController();
+        const API_KEY = await apiGet('data/maptilerkey', abortController);
+
+       if (mapContainer.current) {
+         map.current = new maplibregl.Map({
+           container: mapContainer.current,
+           style: `https://api.maptiler.com/maps/streets-v2/style.json?key=${API_KEY}`,
+           center: [-95, 39],
+           zoom: zoom,
+         });
+         // The `click` event is an example of a `MapMouseEvent`.
+         // Set up an event listener on the map.
+         map.current.on("click", function (e) {
+           // The event object (e) contains information like the
+           // coordinates of the point on the map that was clicked.
+           console.log("A click event has occurred at " + e.lngLat);
+           handleCoordinates([e.lngLat.lng, e.lngLat.lat]);
+         });
+       }
+      } catch (err) {
+        console.error(err)
     }
+    }
+    setUpMap();
   }, []);
 
   return (
