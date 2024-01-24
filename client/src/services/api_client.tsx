@@ -6,12 +6,12 @@ export const apiPost = async (url: string, body: unknown) => {
   try {
     console.log("Api post client running");
     const response = await fetch(`${baseUrl}${url}`, {
-      method: "POST",
-      credentials: "include",
-      mode: "cors",
       headers: {
         "Content-Type": "application/json",
       },
+      method: "POST",
+      credentials: "include",
+      mode: "cors",
       body: JSON.stringify(body),
     });
 
@@ -27,12 +27,12 @@ export const apiPatch = async (url: string, body: unknown) => {
   try {
     console.log("Api patch client running");
     const response = await fetch(`${baseUrl}${url}`, {
-      method: "PATCH",
-      credentials: "include",
-      mode: "cors",
       headers: {
         "Content-Type": "application/json",
       },
+      method: "PATCH",
+      credentials: "include",
+      mode: "cors",
       body: JSON.stringify(body),
     });
 
@@ -47,12 +47,12 @@ export const apiPatch = async (url: string, body: unknown) => {
 export const apiGet = async (url: string, abortController: AbortController) => {
   try {
     const response = await fetch(`${baseUrl}${url}`, {
-      method: "GET",
-      credentials: "include",
       headers: {
         "Content-Type": "application/json",
         //  "Access-Control-Allow-Origin": baseUrl
       },
+      method: "GET",
+      credentials: "include",
       signal: abortController.signal,
     });
     const data = await response.json();

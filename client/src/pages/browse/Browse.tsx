@@ -28,17 +28,24 @@ const Browse = () => {
   // Need to store search terms to be sent to treelist, but not reset when form is reset
   const [searchTerms, setSearchTerms] = useState(initialFormData);
 
+
+  // Need to refactor into apiPost
   useEffect(() => {
     let isMounted = true;
     const fetchData = async () => {
         try {
-          const response = await fetch("http://localhost:3008/browse", {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData),
-          });
+          const response = await fetch(
+            "https://find-me-trees-server-production.up.railway.app/browse",
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+              method: "POST",
+              mode: "cors",
+              credentials: "include",
+              body: JSON.stringify(formData),
+            }
+          );
           if (!isMounted) return;
           if (!response.ok) throw new Error('error retrieving data!')
           const responseJson = await response.json();

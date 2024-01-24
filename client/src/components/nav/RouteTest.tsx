@@ -5,13 +5,16 @@ const RouteTest = () => {
   const testApi = async () => {
     try {
       console.log("click");
-      const response = await fetch("http://localhost:3008/login/test", {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        "https://find-me-trees-server-production.up.railway.app/login/test",
+        {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (!response.ok) throw new Error("error retrieving data!");
       const responseText = await response.text();
