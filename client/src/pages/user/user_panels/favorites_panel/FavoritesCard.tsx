@@ -25,7 +25,7 @@ interface iFavoritesCard {
 
 const FavoritesCard = ({id, title, imgSrc, sciName, data}: iFavoritesCard) => {
   return (
-    <Card direction={{ base: "row" }} w={"16rem"} borderRadius={"10px"}>
+    <Card direction={{ base: "row" }} w={"18rem"} borderRadius={"10px"}>
       <Stack className="blur-border-light" borderRadius={"10px"}>
         <CardBody py={"0.5rem"}>
           <Flex direction={"row-reverse"}>

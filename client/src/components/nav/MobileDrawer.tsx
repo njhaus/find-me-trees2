@@ -87,7 +87,12 @@ const MobileDrawer = ({ auth, onLogout }: iNav) => {
           <DrawerBody>
             <VStack>
               {links.map((item, i) => (
-                <Link key={i} to={item.to}>
+                <Link
+                  key={i}
+                  to={
+                    item.to === "/user" && !auth?.username ? "/login" : item.to
+                  }
+                >
                   <Button
                     variant="nav"
                     textTransform={"uppercase"}

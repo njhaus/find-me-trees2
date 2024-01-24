@@ -73,7 +73,9 @@ export type UsState =
   | "WA"
   | "WV"
   | "WI"
-  | "WY";
+  | "WY"
+  //Refactor -- this is a Hacky way to make sure real states are loaded before loading map...The map was loading the temp data and not reloading the real data. I have to make a cleanup function on the map.
+  | 'TE';
 
 // Need to complete
 export interface iSciInfo {
@@ -107,18 +109,18 @@ export interface iTreeData {
 }
 
 export const tempTreeData: iTreeData = {
-  _id: "testID123",
-  title: "Big Tree",
+  _id: "",
+  title: "",
   imgSrc: [],
-  sciName: "treeus maximus",
+  sciName: "",
   intro:
-    "TREE INTRO: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore laborum, voluptas fugiat quo quas sint iusto debitis optio dolorum ipsa mollitia ex. Voluptas perspiciatis pariatur, magni eius tempore veniam illum animi quisquam fugiat assumenda rem! Velit ipsam ut iusto? Incidunt totam voluptatem libero molestias inventore ipsam rem est vero quas rerum odit enim, nisi nihil laboriosam cupiditate repellendus amet? Nihil quas sed consequuntur deserunt mollitia illum voluptatum minus temporibus, error quam vero delectus magni quisquam vitae labore veniam aliquid dolore sunt architecto id molestias praesentium ipsum ea. Sint consequuntur, magnam harum dolorum, odio quae maxime recusandae facere eum eligendi asperiores provident reprehenderit unde assumenda quo non aspernatur accusantium magni blanditiis dolor?",
+    "",
   sciInfo: {
-    scientificName: "tempinfo",
-    commonNames: "tempinfo",
-    family: "tempinfo",
-    hardinessZone: "tempinfo",
-    origin: "tempinfo",
+    scientificName: "",
+    commonNames: "",
+    family: "",
+    hardinessZone: "",
+    origin: "",
   },
   traits: {
     leafType: "simple" as LeafType,
@@ -128,8 +130,8 @@ export const tempTreeData: iTreeData = {
     branches: "spiral" as Branches,
     fruit: "fleshy" as Fruit,
     flower: "green" as Flower,
-    location: ["CA" as UsState, "WA" as UsState, "OR" as UsState],
+    location: ["TE" as UsState],
   },
-  uses: "tempinfo",
+  uses: "",
 };
 

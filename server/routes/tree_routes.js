@@ -12,11 +12,11 @@ router.get('/:id', async(req, res) => {
             return res.send(tree);
         }
         else {
-            return res.send({error: 'error finding tree'})
+            return res.send({code: '404', error: 'error finding tree'})
         }
     } catch (err) {
         console.log(err)
-        return res.send({ error: "error finding tree" });
+        return res.send({code: '404', error: "error finding tree" });
     }
 })
 

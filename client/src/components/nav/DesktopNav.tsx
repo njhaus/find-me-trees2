@@ -50,7 +50,7 @@ const DesktopNav = ({ auth, onLogout, redirect }: iNav) => {
         {/* // Nav Items */}
         <HStack as="nav" spacing="1" px={"1.5rem"}>
           {links.map((item, i) => (
-            <Link key={i} to={item.to}>
+            <Link key={i} to={(item.to === '/user' && !auth?.username) ? '/login' : item.to}>
               <Button
                 variant="nav"
                 textTransform={"uppercase"}

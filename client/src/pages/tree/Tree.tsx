@@ -8,7 +8,7 @@ import {
   Stack
 } from "@chakra-ui/react";
 
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
 import { apiGet } from "../../services/api_client";
 import TreeHeading from "./TreeHeading";
@@ -27,37 +27,52 @@ import TreeAdaptation from "./TreeAdaptation";
 import TreeImgMobile from "./TreeImgMobile";
 import TreeUses from "./TreeUses";
 import { tempTreeData } from "./data/tree_data";
+import BrowseRedirect from "./BrowseRedirect";
+import { CanceledError } from "axios";
 
 const Tree = () => {
   const [treeData, setTreeData] = useState(tempTreeData);
   // Loading indicator while trees are being fetched
   const [loading, setLoading] = useState(true);
+  // Error finding trees if no tree found with id
+  const [notFound, setNotFound] = useState(false);
+
   // Id for tree is sent by params
   const { id } = useParams();
   // Need to extract images so I can get them from user Data when loaded (it loads after page) -- see useEffect below
   // let imgs = [...treeData.imgSrc];
 
+
   useEffect(() => {
     const abortController = new AbortController();
 
     const fetchData = async () => {
-      apiGet(`tree/${id}`, abortController)
-        .then((res) => {
-          if (res.code) {
-            console.log(res.code);
-          } else {
+      try {
+        const data: any = await apiGet(`tree/${id}`, abortController);
+        if (data.error) {
+            console.log(data.code);
+            setNotFound(true);
+        } else if (data instanceof CanceledError) {
+          console.log('canceled')
+        }
+          else {
             console.log("good response");
-            console.log(res);
-            setTreeData(res);
-            setLoading(false);
+            console.log(data);
+            setTreeData(data);
           }
-        })
-        .catch((err) => console.log(err));
+
+      } catch (err) {
+        console.log(err);
+        setNotFound(true);
+      } 
     };
     fetchData();
+    setLoading(false);
 
     return () => {
       abortController.abort(); // Abort the request if the component unmounts
+      setNotFound(false)
+      setLoading(true)
     };
   }, [id]);
 
@@ -76,6 +91,10 @@ const Tree = () => {
         <Skeleton height="20px" />
       </Stack>
     );
+  }
+
+  if (notFound) {
+    return <BrowseRedirect/>
   }
 
   return (
@@ -108,10 +127,8 @@ const Tree = () => {
           flexWrap={"wrap"}
           pb={"3rem"}
         >
-          <TreeTraitsSection  traits={treeData.traits} />
-          <TreeLocation
-            location={treeData.traits.location}
-          />
+          <TreeTraitsSection traits={treeData.traits} />
+          {!treeData.traits.location.includes('TE') && <TreeLocation location={treeData.traits.location} />}
           <TreeUses uses={treeData.uses} />
           <TreeAdaptation />
         </Flex>

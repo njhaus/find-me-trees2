@@ -1,3 +1,5 @@
+// Refactor -- need to remove 'test' option from states. Need to create cleanup function for maps. Issue is that maps do not reload correct location data after loading placeholder data.
+
 export const states = [
   "Alabama",
   "Alaska",
@@ -48,7 +50,8 @@ export const states = [
   "Washington",
   "West Virginia",
   "Wisconsin",
-  "Wyoming"
+  "Wyoming",
+  'Test'
 ];
 
 export const statesMap = {
@@ -101,7 +104,8 @@ export const statesMap = {
   'Washington': 'WA',
   'West Virginia': 'WV',
   'Wisconsin': 'WI',
-  'Wyoming': 'WY'
+  'Wyoming': 'WY',
+  'Test': 'TE'
 };
 
 export const abbreviationMap = {
@@ -154,7 +158,8 @@ export const abbreviationMap = {
   'WA': 'Washington',
   'WV': 'West Virginia',
   'WI': 'Wisconsin',
-  'WY': 'Wyoming'
+  'WY': 'Wyoming',
+  'TE': 'test'
 };
 
 
