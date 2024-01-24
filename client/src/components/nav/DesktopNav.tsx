@@ -1,12 +1,11 @@
 import { useEffect } from "react";
 
 import {
-  Box,
-  Flex,
   Button,
+  Flex,
   HStack,
   chakra,
-  useDisclosure as useLoginDisclosure,
+  useDisclosure as useLoginDisclosure
 } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
@@ -14,8 +13,8 @@ import { Link } from "react-router-dom";
 import links from "../../data/nav_data";
 import Login from "../login_auth/Login";
 
-import { iNav } from "./Nav";
 import LogoContainer from "./LogoContainer";
+import { iNav } from "./Nav";
 
 const DesktopNav = ({ auth, onLogout, redirect }: iNav) => {
   const {

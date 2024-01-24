@@ -1,4 +1,4 @@
-import { Flex, Heading, Text, Box } from "@chakra-ui/react";
+import { Box, Heading, Text } from "@chakra-ui/react";
 
 interface iTreeIntro {
   text: string;

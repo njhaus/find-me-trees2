@@ -1,4 +1,3 @@
-import { useImg } from "../../../hooks/useImg";
 
 type LeafType = "simple" | "compound";
 type LeafShape = "needle" | "smooth" | "toothed" | "lobed";
@@ -83,12 +82,6 @@ export interface iSciInfo {
   family: string;
   hardinessZone: string;
   origin: string;
-}
-
-interface iLeaf {
-  leafType: LeafType;
-  leafShape: LeafShape;
-  leafSize: number[];
 }
 
 export interface iTreeTraitsData {

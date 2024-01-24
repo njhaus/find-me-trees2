@@ -4,7 +4,10 @@ interface iTreeSimilar {
     id: string
 }
 
-const TreeSimilar = ({id }: iTreeSimilar) => {
+const TreeSimilar = ({ id }: iTreeSimilar) => {
+  
+  console.log(id)
+
     return (
       <Flex
         as="section"

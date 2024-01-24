@@ -1,40 +1,32 @@
 import { useEffect, useState } from "react";
 
 import {
-  Flex,
-  Heading,
-  Image,
   Box,
-  Spinner,
+  Flex,
   Skeleton,
-  Stack,
-  HStack,
-  VStack,
-  Button,
+  Spinner,
+  Stack
 } from "@chakra-ui/react";
 
 import { useParams } from "react-router-dom";
 
-import TreeHeading from "./TreeHeading";
-import TreeIntro from "./TreeIntro";
-import TreeTraits from "./TreeTraits";
-import TreeLocation from "./TreeLocation";
-import { allFilters } from "../../data/browse_data/filterFormData";
 import { apiGet } from "../../services/api_client";
+import TreeHeading from "./TreeHeading";
 import TreeImgs from "./TreeImgs";
+import TreeIntro from "./TreeIntro";
+import TreeLocation from "./TreeLocation";
 import TreeSciInfo from "./TreeSciInfo";
-import TreeTraitsSection from "./TreeTraitsSection";
 import TreeSimilar from "./TreeSimilar";
+import TreeTraitsSection from "./TreeTraitsSection";
 
 import "./styles/tree.css";
 
 // tempTreeData -- REPLACE
-import { iTreeData, iTreeTraitsData, tempTreeData } from "./data/tree_data";
-import Carousel from "../../components/ui-components/Carousel";
-import TreeUses from "./TreeUses";
+import CurveBorder from "../../components/borders/CurveBorder";
 import TreeAdaptation from "./TreeAdaptation";
 import TreeImgMobile from "./TreeImgMobile";
-import CurveBorder from "../../components/borders/CurveBorder";
+import TreeUses from "./TreeUses";
+import { tempTreeData } from "./data/tree_data";
 
 const Tree = () => {
   const [treeData, setTreeData] = useState(tempTreeData);
@@ -43,7 +35,7 @@ const Tree = () => {
   // Id for tree is sent by params
   const { id } = useParams();
   // Need to extract images so I can get them from user Data when loaded (it loads after page) -- see useEffect below
-  let imgs = [...treeData.imgSrc];
+  // let imgs = [...treeData.imgSrc];
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -60,7 +52,7 @@ const Tree = () => {
             setLoading(false);
           }
         })
-        .catch((err) => console.log("error fetching tree data"));
+        .catch((err) => console.log(err));
     };
     fetchData();
 
@@ -116,9 +108,8 @@ const Tree = () => {
           flexWrap={"wrap"}
           pb={"3rem"}
         >
-          <TreeTraitsSection title={treeData.title} traits={treeData.traits} />
+          <TreeTraitsSection  traits={treeData.traits} />
           <TreeLocation
-            title={treeData.title}
             location={treeData.traits.location}
           />
           <TreeUses uses={treeData.uses} />

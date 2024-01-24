@@ -1,7 +1,6 @@
 import  { forwardRef, useState, useEffect } from 'react'
 import { FormControl, FormLabel, Input, Text, Box } from '@chakra-ui/react';
 import { validateTextInput } from '../../utils/input_utils';
-import { boolean } from 'zod';
 
 
 interface TextInputProps {

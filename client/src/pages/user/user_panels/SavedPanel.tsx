@@ -1,15 +1,14 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import {
-    TabPanel,
-    Flex,
-  Button
+  Flex,
+  TabPanel
 } from "@chakra-ui/react";
 
+import { iUserSaved } from "../../../data/user_data/userData";
+import AddCollection from "./saved_panel/AddCollection";
 import CollectionMenu from "./saved_panel/CollectionMenu";
 import SavedCards from "./saved_panel/SavedCards";
-import AddCollection from "./saved_panel/AddCollection";
-import { iUserSaved, iUserData } from "../../../data/user_data/userData";
 
 
 interface iSavedPanel {

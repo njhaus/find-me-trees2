@@ -1,27 +1,26 @@
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 import {
   Button,
-  Modal,
-  ModalHeader,
-  ModalContent,
-  ModalCloseButton,
-  ModalOverlay,
-  ModalBody,
-  ModalFooter,
   Flex,
   Heading,
-  Text
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
 } from "@chakra-ui/react";
 
 import LogoImgOnly from "../logo/LogoImgOnly";
 
 // Validation in login/utils files -- includes ZOD validators and validate function
-import { validateNewUser, iFormData, iFormErrors, initialErrors, initialFormData } from "../../utils/login_utils";
+import { iFormData, iFormErrors, initialErrors, initialFormData, validateNewUser } from "../../utils/login_utils";
 
-import { apiPost } from "../../services/api_client";
+import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-import { useNavigate, useLocation } from "react-router-dom";
+import { apiPost } from "../../services/api_client";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 

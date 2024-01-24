@@ -1,7 +1,6 @@
-import { Button, Text, Image, Box, VStack, Heading } from "@chakra-ui/react";
+import { Box, Button, Heading, Image, Text, VStack } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
-import Boundary from "../../components/borders/Boundary";
 
 const LearnMore = () => {
   return (

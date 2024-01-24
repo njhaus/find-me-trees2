@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, MutableRefObject, forwardRef } from "react";
+import { useState, useEffect, useRef, forwardRef } from "react";
 import { validateTextInput } from "../../utils/input_utils";
 
 import { FormControl, FormLabel, Input } from "@chakra-ui/react";

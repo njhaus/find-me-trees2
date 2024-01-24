@@ -1,32 +1,29 @@
-import { useRef, useState, ChangeEvent } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 
 import {
+  Button,
   Drawer,
   DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
   DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  useDisclosure,
-  Button,
-  Input,
   Flex,
   FormControl,
   FormLabel,
-  Text,
-  FormErrorMessage,
-  FormHelperText,
+  Input,
+  useDisclosure
 } from "@chakra-ui/react";
 
 import { BsPerson } from "react-icons/bs";
 
-import EditProfile from "./EditProfile";
 import CurrentProfile from "./CurrentProfile";
+import EditProfile from "./EditProfile";
 
 import { iUserData } from "../../data/user_data/userData";
 import useUpdateProfile from "../../hooks/useUpdateProfile";
-import { validateNewUser, iFormErrors, initialErrors } from "../../utils/login_utils";
+import { iFormErrors, initialErrors, validateNewUser } from "../../utils/login_utils";
 
 
 interface iUserProfile {

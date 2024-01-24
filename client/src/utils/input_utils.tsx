@@ -1,4 +1,4 @@
-import { ZodError, z } from "zod";
+import { z } from "zod";
 
 export const noHtmlRegex = /^[^<>?'&"`]+$/g;
 
@@ -10,7 +10,6 @@ export const validateTextInput = (
     data: { [key: string]: string },
     setError?: React.Dispatch<React.SetStateAction<string>>
 ): boolean => {
-    let error = '';
   for (let k in data) {
     if(!data[k]) return true
         const val = data[k];

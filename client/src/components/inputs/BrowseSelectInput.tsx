@@ -7,7 +7,6 @@ import {
   FormHelperText,
 } from "@chakra-ui/react";
 import { BsQuestionCircle } from "react-icons/bs";
-import { GiConsoleController } from "react-icons/gi";
 
 interface SelectInputProps {
   formVal: string | undefined;

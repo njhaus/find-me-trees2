@@ -1,13 +1,12 @@
 import { Flex, Heading } from "@chakra-ui/react";
 
+import { BsFlower1, BsPinMap, BsRulers } from "react-icons/bs";
+import { GiLeafSkeleton, GiOakLeaf, GiShinyApple, GiTreeBranch, GiTreeFace } from "react-icons/gi";
+import { allFilters } from "../../data/browse_data/filterFormData";
 import TreeTraits from "./TreeTraits";
 import { iTreeTraitsData } from "./data/tree_data";
-import { allFilters } from "../../data/browse_data/filterFormData";
-import { BsApple, BsDeviceHdd, BsFlower1, BsPinMap, BsRulers } from "react-icons/bs";
-import { GiLeafSkeleton, GiOakLeaf, GiResize, GiShinyApple, GiTreeBranch, GiTreeFace } from "react-icons/gi";
 
 interface iTreeTraitsSection {
-  title: string;
   traits: iTreeTraitsData;
 }
 
@@ -22,7 +21,7 @@ const traitIconMap: Record<keyof iTreeTraitsData, JSX.Element> = {
   location: <BsPinMap color={"green"} />,
 };
 
-const TreeTraitsSection = ({ title, traits }: iTreeTraitsSection) => {
+const TreeTraitsSection = ({ traits }: iTreeTraitsSection) => {
   return (
     <Flex
       as={"article"}

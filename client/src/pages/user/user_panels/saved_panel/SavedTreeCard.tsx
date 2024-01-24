@@ -1,24 +1,19 @@
-import { useRef } from "react";
 
 import {
+  Button,
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
+  Divider,
+  Flex,
+  Heading,
   Image,
   Stack,
-  Text,
-  Divider,
-  ButtonGroup,
-  Button,
-    Heading,
-  Flex,
-  Box
+  Text
 } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
 
-import { useImg } from "../../../../hooks/useImg";
 import AddToColBtn from "./saved_tree_card/AddToColBtn";
 import RemoveBtn from "./saved_tree_card/RemoveBtn";
 import RemoveFromColButton from "./saved_tree_card/RemoveFromColButton";

@@ -1,21 +1,19 @@
 import { useRef } from "react";
 
 import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverHeader,
-  PopoverBody,
-  PopoverFooter,
-  PopoverArrow,
-  PopoverCloseButton,
-  PopoverAnchor,
   Button,
-  useDisclosure,
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverFooter,
+  PopoverTrigger,
+  useDisclosure
 } from "@chakra-ui/react";
 
-import useUpdateUser from "../../../../hooks/useUpdateUser";
 import { iLocationData } from "../../../../data/user_data/userData";
+import useUpdateUser from "../../../../hooks/useUpdateUser";
 
 interface iRemoveFoundBtn {
   title: string;

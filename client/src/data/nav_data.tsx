@@ -1,5 +1,3 @@
-import About from "../pages/about/About";
-import Browse from "../pages/browse/Browse";
 
 interface Link {
   text: string;

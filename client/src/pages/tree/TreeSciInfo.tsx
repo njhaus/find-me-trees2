@@ -1,8 +1,8 @@
-import { Flex, Text, Box, Divider } from "@chakra-ui/react";
+import { Box, Divider, Flex, Text } from "@chakra-ui/react";
 
-import { iSciInfo, iTreeData } from "./data/tree_data";
-import { BsChatLeftTextFill, BsChatQuoteFill, BsChatRightFill, BsGeoFill, BsMapFill } from "react-icons/bs";
-import { GiGrowth, GiTreeBranch, GiTreeFace, GiTreeRoots } from "react-icons/gi";
+import { BsChatLeftTextFill, BsChatQuoteFill, BsGeoFill, BsMapFill } from "react-icons/bs";
+import { GiTreeBranch } from "react-icons/gi";
+import { iSciInfo } from "./data/tree_data";
 
 interface iTreeSciInfo {
   sciInfo: iSciInfo;

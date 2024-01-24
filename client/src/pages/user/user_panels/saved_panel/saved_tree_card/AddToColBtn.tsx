@@ -39,6 +39,8 @@ const AddToColBtn = ({
   const addRef = useRef(null);
 
   const handleSelectCol = (form: null, col: string) => {
+    // Refactor -- make form optional on BrowseRadioButtton
+    console.log(form);
     setSelectedCol(col);
   };
 

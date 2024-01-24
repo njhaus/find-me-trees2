@@ -1,23 +1,20 @@
 import {
-  Card,
   Box,
+  Button,
+  ButtonGroup,
+  Card,
   CardBody,
   CardFooter,
+  Divider,
   Image,
   Stack,
-  Text,
-  Divider,
-  ButtonGroup,
-  Button,
-  Heading,
-  filter,
+  Text
 } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
 
-import { useImg } from "../../../hooks/useImg";
-import { iFormData } from "../../../data/browse_data/filterFormData";
 import { filtersTextMap } from "../../../data/browse_data/filterData";
+import { iFormData } from "../../../data/browse_data/filterFormData";
 
 interface TreeCardProps {
   id: string;

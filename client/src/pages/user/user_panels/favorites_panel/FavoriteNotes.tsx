@@ -1,26 +1,23 @@
 import { useState } from "react";
 
 import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverHeader,
-  PopoverBody,
-  PopoverFooter,
-  PopoverArrow,
-  PopoverCloseButton,
-  PopoverAnchor,
   Button,
+  HStack,
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverTrigger,
   Text,
-  useDisclosure,
   VStack,
-  HStack
+  useDisclosure
 } from "@chakra-ui/react";
 
 import { GiNotebook } from "react-icons/gi";
 import GenTextInput from "../../../../components/inputs/GenTextInput";
-import useUpdateUser from "../../../../hooks/useUpdateUser";
 import { iUserFavorites } from "../../../../data/user_data/userData";
+import useUpdateUser from "../../../../hooks/useUpdateUser";
 
 interface iFavoriteNotes {
   data: iUserFavorites[];

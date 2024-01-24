@@ -1,23 +1,22 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
-import { Flex, Box, Text, Heading } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 
-import maplibregl, { Map, MapMouseEvent, MapGeoJSONFeature } from "maplibre-gl";
+import maplibregl, { Map } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 
-import { UsState } from "./data/tree_data";
+import { BsSquareFill } from "react-icons/bs";
 import { abbreviationMap } from "../../data/browse_data/statesData";
-import { BsFill0SquareFill, BsSquareFill } from "react-icons/bs";
-import { geojson } from "./data/tree-location";
 import { apiGet } from "../../services/api_client";
+import { geojson } from "./data/tree-location";
+import { UsState } from "./data/tree_data";
 
 
 interface iTreeLocation {
-  title: string;
   location: UsState[];
 }
 
-const TreeLocation = ({ title, location }: iTreeLocation) => {
+const TreeLocation = ({ location }: iTreeLocation) => {
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const map = useRef<Map | null>(null);
 

@@ -1,10 +1,9 @@
-import React, { useState, createContext, ReactNode, useEffect } from "react";
+import React, { ReactNode, createContext, useEffect, useState } from "react";
 
-import { iUserSaved, iUserFound, iUserFavorites, initialUserData } from "../data/user_data/userData";
-import useApiIntercept from "../hooks/useApiIntercept";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { useLocation } from "react-router-dom";
-import { iUserData } from "../data/user_data/userData";
+import { iUserData, initialUserData } from "../data/user_data/userData";
+import useApiIntercept from "../hooks/useApiIntercept";
 
 interface AuthContextProps {
   auth: iUserData;

@@ -23,7 +23,7 @@ export interface iNav {
 
 export function Nav() {
 
-  const { auth, setAuth } = useAuth();
+  const { auth} = useAuth();
   const location = useLocation();
   const redirectData = location.state;
 

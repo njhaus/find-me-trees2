@@ -1,11 +1,6 @@
 import { Button } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
-import useRefreshToken from '../../hooks/useRefreshToken'
-import useAuth from "../../hooks/useAuth";
 
 const RouteTest = () => {
-  // const refresh = useRefreshToken();
-  const { auth } = useAuth();
 
   const testApi = async () => {
     try {

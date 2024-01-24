@@ -4,10 +4,9 @@ import {
 } from "@chakra-ui/react";
 
 import MobileDrawer from "./MobileDrawer";
-import MainLogo from "../logo/MainLogo";
 
-import { iNav } from "./Nav";
 import LogoContainer from "./LogoContainer";
+import { iNav } from "./Nav";
 
 const MobileNav = ({ auth, onLogout }: iNav) => {
   return (

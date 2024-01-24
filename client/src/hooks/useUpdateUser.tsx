@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import useLogout from "./useLogout";
+// import useLogout from "./useLogout";
 import { apiPatch } from "../services/api_client";
 import { iUserData } from "../data/user_data/userData";
 import useAuth from "./useAuth";
@@ -7,7 +7,7 @@ import { initialUserData } from "../data/user_data/userData";
 import useServerError from "./useServerError";
 
 const useUpdateUser = () => {
-  const logout = useLogout("You have been logged out due to an error.");
+  // const logout = useLogout("You have been logged out due to an error.");
   const {auth, setAuth} = useAuth()
 
   const [userData, setUserData] = useState<iUserData>(auth || initialUserData);

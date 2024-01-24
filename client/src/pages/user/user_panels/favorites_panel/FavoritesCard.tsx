@@ -1,21 +1,19 @@
 import {
-  Image,
+  Button,
   Card,
-  Stack,
   CardBody,
   CardFooter,
-  Text,
-  Heading,
-  Button,
   Flex,
-  VStack
+  Heading,
+  Image,
+  Stack,
+  VStack, Text
 } from "@chakra-ui/react";
-import { BsHeartFill } from "react-icons/bs";
 
 import { Link } from "react-router-dom";
+import { iUserFavorites } from "../../../../data/user_data/userData";
 import RemoveBtn from "../saved_panel/saved_tree_card/RemoveBtn";
 import FavoriteNotes from "./FavoriteNotes";
-import { iUserFavorites } from "../../../../data/user_data/userData";
 
 interface iFavoritesCard {
   id: string;
@@ -35,6 +33,7 @@ const FavoritesCard = ({id, title, imgSrc, sciName, data}: iFavoritesCard) => {
               <Heading size="md" color={"main.200"}>
                 {title}
               </Heading>
+              <Text variant={'teeny'} color={'main.500'}>{sciName}</Text>
               <FavoriteNotes data={data} id={id} />
             </VStack>
             <Image

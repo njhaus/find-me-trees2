@@ -1,7 +1,5 @@
-import { useState } from "react";
 
-import { Flex, Text, Box } from "@chakra-ui/react";
-import HelperText from "../browse/helper_text/HelperText";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import { BsQuestionCircle } from "react-icons/bs";
 
 import { allFilters } from "../../data/browse_data/filterFormData";

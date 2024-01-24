@@ -1,27 +1,22 @@
-import { ChangeEvent, forwardRef, useState, useRef, useEffect} from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 
 import {
   Button,
-  
 } from "@chakra-ui/react";
 
-import IconInput from "../inputs/IconInput";
 import {
+  FaEnvelope,
+  FaPencilAlt,
   FaTree,
-    FaEnvelope,
-    FaSadCry,
-  FaLaughWink,
-  FaUserSecret,
-  FaUserShield,
-  FaPencilAlt
+  FaUserShield
 } from "react-icons/fa";
+import IconInput from "../inputs/IconInput";
 
 // Validation in login/utils files -- includes ZOD validators and validateNewUser function
 import {
-  validateNewUser,
   iFormData,
   iFormErrors,
-    initialErrors
+  validateNewUser
 } from "../../utils/login_utils";
 
 interface iRegisterForm {

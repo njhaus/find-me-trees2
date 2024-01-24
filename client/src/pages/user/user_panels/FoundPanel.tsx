@@ -1,11 +1,10 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
-import { TabPanel, Flex, Text } from "@chakra-ui/react";
+import { Flex, TabPanel } from "@chakra-ui/react";
 import { iUserFound } from "../../../data/user_data/userData";
 
-import FoundSelect from "./found_panel/FoundSelect";
-import FoundMap from "./found_panel/FoundMap";
 import FoundList from "./found_panel/FoundList";
+import FoundMap from "./found_panel/FoundMap";
 
 
 interface iFoundPanel {
@@ -16,11 +15,6 @@ const FoundPanel = ({ found }: iFoundPanel) => {
     
     const [locationFilter, setLocationFilter] = useState<[number, number]>([-75, 40])
 
-    const handleSelect = (form: null, location: [number, number]) => {
-      setLocationFilter(location);
-    };
-  
-    
   useEffect(() => {
     const options = {
       enableHighAccuracy: true,
@@ -62,10 +56,11 @@ const FoundPanel = ({ found }: iFoundPanel) => {
         {/* <FoundSelect onSelect={handleSelect} /> */}
         <FoundMap
           data={found}
-          onClick={handleSelect}
           location={locationFilter}
         />
-        <FoundList data={found} location={locationFilter} />
+        <FoundList
+          data={found}
+        />
       </Flex>
     </TabPanel>
   );

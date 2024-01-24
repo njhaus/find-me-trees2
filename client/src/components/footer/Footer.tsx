@@ -11,7 +11,6 @@ import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 
 import MainLogo from "../logo/MainLogo";
 import SocialButton from "../buttons/SocialButton";
-import RouteTest from "../nav/RouteTest";
 
 const Footer = () =>  {
   return (

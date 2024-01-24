@@ -1,31 +1,25 @@
 
-import { FormEvent, useState, useRef, useEffect } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 
 import {
-  useDisclosure,
+  Button,
+  Checkbox,
+  CheckboxGroup,
+  FormControl,
+  HStack,
   Popover,
-  PopoverTrigger,
+  PopoverArrow,
+  PopoverBody,
+  PopoverCloseButton,
   PopoverContent,
   PopoverHeader,
-  PopoverBody,
-  PopoverFooter,
-  PopoverArrow,
-  PopoverCloseButton,
-  PopoverAnchor,
-  Button,
-  CheckboxGroup,
-  Checkbox,
-  FormControl,
-  FormLabel,
-  Input,
-  HStack,
+  PopoverTrigger,
   Text,
+  useDisclosure
 } from "@chakra-ui/react";
-import { iUserData } from "../../../../data/user_data/userData";
+import { BsQuestionCircle } from "react-icons/bs";
 import GenTextInput from "../../../../components/inputs/GenTextInput";
 import useUpdateUser from "../../../../hooks/useUpdateUser";
-import useAuth from "../../../../hooks/useAuth";
-import { BsQuestionCircle } from "react-icons/bs";
 
 interface iAddCollection {
   collections: string[];

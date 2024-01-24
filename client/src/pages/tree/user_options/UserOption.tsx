@@ -1,19 +1,17 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
-import {
-  Flex,
-  Button,
-  Box,
-  Text,
-  CloseButton,
-  VStack,
-  HStack
-} from "@chakra-ui/react";
 import { CheckIcon } from '@chakra-ui/icons';
+import {
+  Box,
+  Button,
+  CloseButton,
+  Flex,
+  HStack,
+  Text
+} from "@chakra-ui/react";
 import { iUserData } from '../../../data/user_data/userData';
-import useUpdateUser from '../../../hooks/useUpdateUser';
 import { DataFormat, userOptionsKey } from '../../../data/user_options_data';
-import useSlide from '../../../hooks/ui_hooks/useSlide';
+import useUpdateUser from '../../../hooks/useUpdateUser';
 import OptionPopup from './OptionPopup';
 
 

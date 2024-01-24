@@ -1,24 +1,22 @@
-import { ChangeEvent, useRef, useState, useEffect, forwardRef} from "react";
+import { ChangeEvent, forwardRef, useEffect, useRef, useState } from "react";
 
 import {
-  Button, Text, TextProps
+  Button, Text
 } from "@chakra-ui/react";
 
-import IconInput from "../inputs/IconInput";
 import {
-  FaSadCry,
   FaGoogle,
+  FaPencilAlt,
   FaSmile,
   FaTree,
-  FaLaughWink,
-  FaUserShield,
-  FaPencilAlt,
+  FaUserShield
 } from "react-icons/fa";
+import IconInput from "../inputs/IconInput";
 
 // Validation in login/utils files -- includes ZOD validators and validateTextInput function
 import {
   iFormData,
-    iFormErrors,
+  iFormErrors,
 } from "../../utils/login_utils";
 
 import { validateTextInput } from "../../utils/input_utils";
@@ -38,9 +36,9 @@ const LoginForm = forwardRef<HTMLInputElement, iLoginForm>(({handleForm, handleI
   // Ref to focus on error for screenreaders -- this error is ONLY for form validation (no html in this case)
   const errorRef = useRef<HTMLParagraphElement>(null);
   // Ref to set up initial focus on form when login modal is opened
-  const initialRef = useRef<HTMLInputElement>(null);
+  // const initialRef = useRef<HTMLInputElement>(null);
   // Error ref for screenreaders -- this will focus on all server errors
-  const serverErrorRef = useRef<HTMLDivElement>(null);
+  // const serverErrorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (errorRef && errorRef.current && errorRef.current?.innerText !== "")

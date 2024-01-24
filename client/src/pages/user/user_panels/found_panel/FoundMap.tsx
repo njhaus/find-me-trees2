@@ -1,23 +1,20 @@
-import { Box, VStack, Text, Heading } from "@chakra-ui/react"
+import { Box, Heading, VStack } from "@chakra-ui/react";
 
-import React, { useRef, useEffect, useState } from "react";
-import maplibregl, { Map, Source, MapMouseEvent, MapGeoJSONFeature } from "maplibre-gl";
+import maplibregl, { Map, MapGeoJSONFeature, MapMouseEvent } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
+import { useEffect, useRef, useState } from "react";
 import "../../styles/map.css";
 
 import { iUserFound } from "../../../../data/user_data/userData";
 import { apiGet } from "../../../../services/api_client";
-import { current } from "immer";
-import { GiConsoleController } from "react-icons/gi";
 
 interface iFoundMap {
   data: iUserFound[];
-  onClick: (form: null, location: [number, number]) => void;
   location: [number, number];
 }
 
 
-const FoundMap = ({ data, onClick, location }: iFoundMap) => {
+const FoundMap = ({ data, location }: iFoundMap) => {
   
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const map = useRef<Map | null>(null);

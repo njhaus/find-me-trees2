@@ -2,14 +2,12 @@ import { Flex, Text } from "@chakra-ui/react";
 
 import { iUserFound } from "../../../../data/user_data/userData";
 import FoundCard from "./FoundCard";
-import { iTreeData } from "../../../tree/data/tree_data";
 
 interface iFoundList {
   data: iUserFound[];
-  location: [number, number];
 }
 
-const FoundList = ({ data, location }: iFoundList) => {
+const FoundList = ({ data }: iFoundList) => {
   return (
     <Flex
       width={{ base: "100%", lg: "40rem" }}

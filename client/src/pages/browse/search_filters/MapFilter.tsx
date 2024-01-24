@@ -1,17 +1,15 @@
-import { useContext, useRef, useState, useEffect } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 import maplibregl, { Map } from "maplibre-gl";
 
-import { Flex, Image, Box } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 
-import { useImg } from "../../../hooks/useImg";
 import SelectInput from "../../../components/inputs/BrowseSelectInput";
-import { states } from "../../../data/browse_data/statesData";
-import { FormDataContext, iFormDataContext } from "../Browse";
 import { GeocodeData } from "../../../data/browse_data/filterFormData";
-import { statesMap } from "../../../data/browse_data/statesData";
-import '../styles/browseMap.css'
+import { states, statesMap } from "../../../data/browse_data/statesData";
 import { apiGet } from "../../../services/api_client";
+import { FormDataContext, iFormDataContext } from "../Browse";
+import '../styles/browseMap.css';
 
 const MapFilter = () => {
   const mapContainer = useRef<HTMLDivElement | null>(null);
@@ -32,7 +30,8 @@ const MapFilter = () => {
     });
   };
 
-  console.log(formData);
+  // Display error
+  if(errorMsg) console.log(errorMsg)
 
   const handleCoordinates = async (coords: [number, number]) => {
     const abortController = new AbortController();

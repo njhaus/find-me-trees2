@@ -1,11 +1,10 @@
 import { useContext } from "react";
 
-import { Flex, Box } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 
-import CheckboxInput from "../../../components/inputs/BrowseCheckboxInput";
+import RadioInput from "../../../components/inputs/BrowseRadioInput";
 import { barkFilters } from "../../../data/browse_data/filterFormData";
 import { FormDataContext, iFormDataContext } from "../Browse";
-import RadioInput from "../../../components/inputs/BrowseRadioInput";
 
 const BarkFilter = () => {
   const { formData, setFormData }: iFormDataContext =

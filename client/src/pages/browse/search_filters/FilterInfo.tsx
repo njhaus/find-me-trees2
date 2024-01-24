@@ -1,6 +1,6 @@
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react';
 
-import { CloseButton, Flex, Box } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 
 interface FilterInfoProps {
   children: ReactNode[];

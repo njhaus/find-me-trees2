@@ -1,15 +1,13 @@
-import { useRef, useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 import {
   AlertDialog,
   AlertDialogBody,
-  AlertDialogFooter,
-  AlertDialogHeader,
   AlertDialogContent,
+  AlertDialogFooter,
   AlertDialogOverlay,
-    AlertDialogCloseButton,
-    useDisclosure,
-    Button,
+  Button,
+  useDisclosure
 } from "@chakra-ui/react";
 
 interface iNavDialog {

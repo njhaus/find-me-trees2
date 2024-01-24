@@ -1,22 +1,15 @@
 import {
-  Flex,
-  Heading,
-  Image,
   Box,
-  Spinner,
-  Skeleton,
-  Stack,
+  Flex,
   HStack,
-  VStack,
-  Button,
-  Text
+  Heading,
+  Text,
+  VStack
 } from "@chakra-ui/react";
 
-import { Link } from "react-router-dom";
 
-import TreeUserOptions from "./TreeUserOptions";
-import { ArrowBackIcon } from "@chakra-ui/icons";
 import BackButton from "../../components/buttons/BackButton";
+import TreeUserOptions from "./TreeUserOptions";
 
 interface iTreeHeading {
     title: string;

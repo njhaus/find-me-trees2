@@ -45,8 +45,6 @@ export const newUser = z.object({
     }),
 });
 
-type NewUser = z.infer<typeof newUser>;
-
 export const validateNewUser = (
   data: iFormData,
     setErrors?: React.Dispatch<React.SetStateAction<iFormErrors>>,

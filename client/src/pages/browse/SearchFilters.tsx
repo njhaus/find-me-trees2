@@ -1,19 +1,19 @@
-import { FormEvent, useState, useEffect, useRef } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 import {
-  Flex,
-  Button,
-  Heading,
-  CloseButton,
-  Text,
   Box,
+  Button,
+  CloseButton,
+  Flex,
+  Heading,
+  Text,
 } from "@chakra-ui/react";
 
+import Boundary from "../../components/borders/Boundary";
 import FilterInfo from "./search_filters/FilterInfo";
-import PhysicalIcon from "./search_filters/PhysicalIcon";
 import MapIcon from "./search_filters/MapIcon";
 import NameFilter from "./search_filters/NameFilter";
-import Boundary from "../../components/borders/Boundary";
+import PhysicalIcon from "./search_filters/PhysicalIcon";
 
 // data
 import { filters, mapFilter } from "../../data/browse_data/filterData";

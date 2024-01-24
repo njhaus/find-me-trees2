@@ -1,4 +1,4 @@
-import { Heading, Text, VStack, Flex, Image } from "@chakra-ui/react"
+import { Flex, Heading, Text, VStack } from "@chakra-ui/react";
 import RedwoodBg from "../../components/backgrounds/RedwoodBg";
 
 const BrowseTitle = () => {

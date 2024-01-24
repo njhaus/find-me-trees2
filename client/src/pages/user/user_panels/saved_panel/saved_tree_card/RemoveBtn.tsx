@@ -1,22 +1,19 @@
 import { useRef } from "react";
 
 import {
-    Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverHeader,
-  PopoverBody,
-  PopoverFooter,
+  Button,
+  Popover,
   PopoverArrow,
+  PopoverBody,
   PopoverCloseButton,
-    PopoverAnchor,
-    Button,
+  PopoverContent,
+  PopoverFooter,
+  PopoverTrigger,
   useDisclosure
 } from "@chakra-ui/react";
   
-import useUpdateUser from "../../../../../hooks/useUpdateUser";
-import { iUserData } from "../../../../../data/user_data/userData";
 import { userOptionsKey } from "../../../../../data/user_options_data";
+import useUpdateUser from "../../../../../hooks/useUpdateUser";
 
 
 interface iRemoveBtn {

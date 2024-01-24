@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-import { TabPanel, Flex, Button, Box, CloseButton } from "@chakra-ui/react";
+import { Box, Button, Flex, TabPanel } from "@chakra-ui/react";
 import { iUserFavorites } from "../../../data/user_data/userData";
 
+import { BsX } from "react-icons/bs";
 import Carousel from "../../../components/ui-components/Carousel";
 import FavoritesList from "./favorites_panel/FavoritesList";
-import { BsX } from "react-icons/bs";
 
 interface iFavoritesPanel {
   favorites: iUserFavorites[];
@@ -14,7 +14,7 @@ interface iFavoritesPanel {
 const FavoritesPanel = ({ favorites }: iFavoritesPanel) => {
   const [playSlideshow, setPlaySlideshow] = useState(false);
 
-  const imgs = favorites.map((tree, i) => tree._id.imgSrc[0]);
+  const imgs = favorites.map((tree) => tree._id.imgSrc[0]);
 
   return (
     <TabPanel

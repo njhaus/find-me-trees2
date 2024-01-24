@@ -1,8 +1,8 @@
-import { Image, Card, Stack, CardBody, CardFooter, Text, Heading, Button, Flex, VStack, Box } from "@chakra-ui/react";
+import { Button, Card, CardBody, CardFooter, Flex, Heading, Image, Stack, Text, VStack } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
-import RemoveFoundBtn from "./RemoveFoundBtn";
 import { iLocationData } from "../../../../data/user_data/userData";
+import RemoveFoundBtn from "./RemoveFoundBtn";
 
 interface iFoundCard {
   id: string;
@@ -20,7 +20,7 @@ const FoundCard = ({id, title, imgSrc, sciName, locationFound}: iFoundCard) => {
       overflow="hidden"
       w={"18rem"}
       borderRadius={"10px"}
-      maxHeight={'17rem'}
+      maxHeight={"17rem"}
     >
       <Stack className="blur-border-light" borderRadius={"10px"}>
         <CardBody py={"0.5rem"}>
@@ -29,6 +29,9 @@ const FoundCard = ({id, title, imgSrc, sciName, locationFound}: iFoundCard) => {
               <Heading size="md" color={"main.200"}>
                 {title}
               </Heading>
+              <Text variant={"teeny"} color={"main.500"}>
+                {sciName}
+              </Text>
               <Text color={"accent.500"}>
                 Found at{" "}
                 {locationFound.coordinates[1].toFixed(2).toString() +
