@@ -10,7 +10,7 @@ export const apiPost = async (url: string, body: unknown) => {
       withCredentials: true, 
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "true"
+        "Access-Control-Allow-Origin": "https://find-me-trees-server-production.up.railway.app"
       },
     });
     return response.data;
@@ -27,7 +27,7 @@ export const apiPatch = async (url: string, body: unknown) => {
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "true",
+        "Access-Control-Allow-Origin": "https://find-me-trees-server-production.up.railway.app",
       },
     });
     return response.data;
@@ -43,7 +43,7 @@ export const apiGet = async (url: string, abortController: AbortController) => {
       withCredentials: true,
       signal: abortController.signal,
       headers: {
-        "Access-Control-Allow-Origin": "true",
+        "Access-Control-Allow-Origin": "https://find-me-trees-server-production.up.railway.app",
       },
     });
     return response.data;
@@ -57,7 +57,7 @@ export const apiIntercept = axios.create({
   baseURL: baseUrl,
   headers: {
     "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "true",
+    "Access-Control-Allow-Origin": "https://find-me-trees-server-production.up.railway.app",
   },
   withCredentials: true,
 });
