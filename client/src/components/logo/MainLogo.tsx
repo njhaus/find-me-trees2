@@ -5,7 +5,7 @@ const MainLogo = () => {
   return (
     <Link to={"/"}>
       <HStack h={"100%"} bg={"transparent"} px={"1.5rem"} py={"0.5rem"}>
-        <Image src={"../../../public/findmetreeslogo2.png"} h="50px" />
+        <Image src={"/findmetreeslogo2.png"} h="50px" />
         <Heading
           as={"h2"}
           size={{ base: 'lg', md: 'md', lg: 'xl'}}

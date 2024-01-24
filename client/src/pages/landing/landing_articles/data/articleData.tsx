@@ -37,7 +37,7 @@ const findTreesArticle = new Article(
   uuidv4(),
   "Find Trees Anywhere",
   "Search for trees by their physical traits, location, or both.",
-  "../../../public/find-trees.png",
+  "/find-trees.png",
   "Find Trees!",
   '/browse',
   findTreesChildren
@@ -46,7 +46,7 @@ const mapArticle = new Article(
   uuidv4(),
   "Map Your Finds",
   "Plot your finds on a map to keep track of the trees you find.",
-  "../../../public/tree-map.png",
+  "/tree-map.png",
   "Log in to begin",
   '/login'
 );
@@ -54,7 +54,7 @@ const favoriteArticle = new Article(
   uuidv4(),
   "Save Your Favorite Trees",
   "Remember your favorite trees and visit them again!",
-  "../../../public/tree-hug.png",
+  "/tree-hug.png",
   "Log in to begin",
   "/login"
 );

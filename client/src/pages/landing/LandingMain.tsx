@@ -65,7 +65,7 @@ const LandingMain = () => {
       <Box position={"absolute"} w={"100%"} h={"100%"} bg={"white"}>
         <video
           className="video"
-          src="../../../public/find-me-trees-vid.mp4"
+          src="/find-me-trees-vid.mp4"
           autoPlay
           loop
           muted

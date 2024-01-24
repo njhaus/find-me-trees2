@@ -1,11 +1,11 @@
 .forest-mask {
-    mask-image: url('../../../../public/trees-mask.png');
+    mask-image: url('/trees-mask.png');
     mask-size: cover;
     mask-repeat: no-repeat;
 }
 
 .drawer-decoration {
-    mask-image: url('../../../../public/trees-mask.png');
+    mask-image: url('/trees-mask.png');
     mask-size: cover;
     mask-position: 90%;
     mask-repeat: no-repeat;

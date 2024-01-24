@@ -14,7 +14,7 @@ const LearnMore = () => {
     >
       <Image
         className="learn-more-img"
-        src="../../../public/tree-hands.jpeg"
+        src="/tree-hands.jpeg"
         w={"15rem"}
         h={"15rem"}
         borderRadius={"50%"}
