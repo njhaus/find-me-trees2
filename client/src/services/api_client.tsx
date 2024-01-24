@@ -1,5 +1,6 @@
 import axios from "axios";
-const baseUrl = "http://localhost:3008/";
+// const baseUrl = "http://localhost:3008/";
+const baseUrl = "https://find-me-trees-server-production.up.railway.app";
 
 
 export const apiPost = async (url: string, body: unknown) => {
