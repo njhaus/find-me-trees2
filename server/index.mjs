@@ -28,12 +28,12 @@ app.listen(port, () => {
 });
 
 // Mongoose Setup/connection
-// const mongoLocal = "mongodb://127.0.0.1:27017/treesDB";
-const mongoAtlas = `mongodb+srv://njhaus:${process.env.MONGO_ATLAS}@cluster0.qt7sgci.mongodb.net/?retryWrites=true&w=majority`;
+
+const mongoConnect = process.env.ENVIRONMENT === 'production' ? `mongodb+srv://njhaus:${process.env.MONGO_ATLAS}@cluster0.qt7sgci.mongodb.net/?retryWrites=true&w=majority` : "mongodb://127.0.0.1:27017/treesDB";
 
 async function main() {
   try {
-    await mongoose.connect(mongoAtlas), {
+    await mongoose.connect(mongoConnect), {
       useNewUrlParser: true,
       useCreateIndex: true,
       useUnifiedToplology: true,
@@ -49,14 +49,19 @@ main();
 
 
 // middleware for allowing react to fetch() from server
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-    methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD", "PATCH"],
-    credentials: true,
-    preflightContinue: false,
-  })
-);
+const corsOrigin =
+  process.env.ENVIRONMENT === "production"
+    ? "https://find-me-trees-client-production.up.railway.app/"
+    : "http://localhost:5173";
+
+  app.use(
+    cors({
+      origin: corsOrigin,
+      methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD", "PATCH"],
+      credentials: true,
+      preflightContinue: false,
+    })
+  );
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true}))
