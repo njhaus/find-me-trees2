@@ -56,23 +56,27 @@ const corsOrigin =
 
     console.log(corsOrigin)
 
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", `${corsOrigin}`); 
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
+// app.use(function (req, res, next) {
+//   res.header(
+//     "Access-Control-Allow-Origin",
+//     `$https://find-me-trees-client-production.up.railway.app`
+//   ); 
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   next();
+// });
 
 
   app.use(
     cors({
-      origin: corsOrigin,
+      origin: "https://find-me-trees-client-production.up.railway.app",
       methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD", "PATCH"],
       credentials: true,
       preflightContinue: false,
-    }));
+    })
+  );
 
 
 // parse application/x-www-form-urlencoded
