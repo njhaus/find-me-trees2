@@ -1,9 +1,8 @@
 import React, { ReactNode, createContext, useEffect, useState } from "react";
 
-import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { iUserData, initialUserData } from "../data/user_data/userData";
-import useApiIntercept from "../hooks/useApiIntercept";
+import { apiGet } from "../services/api_client";
 
 interface AuthContextProps {
   auth: iUserData;
@@ -18,40 +17,39 @@ export const AuthContext = createContext<AuthContextProps>({
 
 const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [auth, setAuth] = useState(initialUserData);
-  const apiIntercept = useApiIntercept();
   const location = useLocation();
 
 
   useEffect(() => {
     console.log('checking auth in AuthProvider');
-    let isMounted = true;
+
     const controller = new AbortController();
+
     const getUser = async () => {
       console.log('updating token in AuthProvider')
       try {
-        const response = await apiIntercept.get('/login/getuser', {
-          signal: controller.signal
-        })
-        console.log(response.data);
-        isMounted && setAuth(response.data)
+        const response = await apiGet('login/getuser', controller)
+        console.log(response);
+        if (!response.error) {
+          setAuth(response)
+        }
+        else {
+          throw new Error('error updating user token')
+        }
       } catch (err) {
-        if (axios.isAxiosError(err)) {
-          if (err.message.includes('401')) console.log('Error in AuthProvider getting user -- no user is logged in.')
+          console.log(err)
           setAuth(initialUserData); 
         }
       }
-    }
     const intervalId = setInterval(() => {
       getUser();
     }, 10 * 60 * 1000);
     getUser();
 
     return () => {
-      isMounted = false;
-      controller.abort();
       clearInterval(intervalId);
     }
-  }, [location.pathname, apiIntercept])
+  }, [location.pathname])
 
   return (
     <AuthContext.Provider value={{ auth, setAuth }}>

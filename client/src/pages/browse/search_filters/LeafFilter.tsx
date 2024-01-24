@@ -14,8 +14,6 @@ const LeafFilter = () => {
     setFormData({ ...formData, [key]: val });
   };
 
-  console.log(formData);
-
   return (
     <Flex direction={"column"} width={"100%"}>
       {leafFilters.map((filter, i) => (

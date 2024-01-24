@@ -37,7 +37,9 @@ const MapFilter = () => {
     const abortController = new AbortController();
 
     try {
-      const radarKey = await apiGet('data/radarkey', abortController);
+      const getRadarKey = await apiGet('data/radarkey', abortController);
+      const radarKey = getRadarKey.key;
+
       const response = await fetch(
         `https://api.radar.io/v1/geocode/reverse?coordinates=${coords[1]},${coords[0]}`,
         {
@@ -67,7 +69,8 @@ const MapFilter = () => {
     const setUpMap = async () => {
       try {
         const abortController = new AbortController();
-        const API_KEY = await apiGet('data/maptilerkey', abortController);
+        const getKey = await apiGet('data/maptilerkey', abortController);
+        const API_KEY = getKey.key;
 
        if (mapContainer.current) {
          map.current = new maplibregl.Map({

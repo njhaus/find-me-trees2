@@ -15,6 +15,7 @@ export interface iFormDataContext {
   formData: iFormData;
   setFormData: React.Dispatch<React.SetStateAction<iFormData>>;
 }
+
 export const FormDataContext = createContext<iFormDataContext>({
   formData: initialFormData,
   setFormData: () => FormData,

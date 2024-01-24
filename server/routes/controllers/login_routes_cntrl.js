@@ -47,7 +47,7 @@ export const registerNewUser = async (req, res, next) => {
       await req.login(registeredUser, function (err) {
         if (err) {
           console.log("error logging in");
-          return res.send("error logging in.");
+          return res.send({code:'401', error: "error logging in."});
         } else {
           console.log("user registered and logged in!");
         }
@@ -68,13 +68,16 @@ export const registerNewUser = async (req, res, next) => {
     }
   } else if (existingUsername) {
     console.log("existing username");
-    res.send({ error: "A user with that username already exists" });
+    res.send({code: '401', error: "A user with that username already exists" });
   } else if (existingUserEmail) {
     console.log("existing email");
-    res.send({ error: "A user with that email already exists" });
+    res.send({ code: "401", error: "A user with that email already exists" });
   } else {
     console.log("unspecified error");
-    res.send({ error: "An error occurred while making your request." });
+    res.send({
+      code: "401",
+      error: "An error occurred while making your request.",
+    });
   }
 };
 
@@ -154,9 +157,9 @@ export const logout = async (req, res) => {
   // Logout user with passport
   req.logout(function (err) {
     if (err) {
-      res.send({ error: "error logging out" });
+      res.send({ code: "400", error: "error logging out" });
     }
-    res.send({ message: "Successfully logged out" });
+    res.send({ code: "200", message: "Successfully logged out" });
   });
 };
 
@@ -168,7 +171,10 @@ export const handleToken = async (req, res) => {
 
   if (!token) {
     console.log("NO TOKEN");
-    return res.sendStatus(401);
+    return res.send({
+      code: "401",
+      error: "No user logged in.",
+    });
   }
 
   const foundUser = await User.findOne({ refreshToken: token });
@@ -179,7 +185,7 @@ export const handleToken = async (req, res) => {
       sameSite: "None",
       maxAge: 12 * 60 * 60 * 1000,
     });
-    return res.sendStatus(403);
+    return res.send({code: '401', error: 'Unable to update token: user not found.'});
   }
 
   jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
@@ -190,7 +196,7 @@ export const handleToken = async (req, res) => {
         sameSite: "None",
         maxAge: 12 * 60 * 60 * 1000,
       });
-      return res.sendStatus(403);
+      return res.send({ code: "403", error: "Unable to update token. Incorrect credentials" });
     }
   });
 
@@ -216,7 +222,7 @@ export const handleToken = async (req, res) => {
       sameSite: "None",
       maxAge: 12 * 60 * 60 * 1000,
     });
-    return res.sendStatus(403);
+    return res.send({ code: "401", error: "Unable to update token: user not found" });
   }
 
   return res.json({

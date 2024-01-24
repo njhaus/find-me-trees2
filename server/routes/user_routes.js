@@ -8,7 +8,7 @@ const router = Router();
 
 // Test route
 router.get('/', (req, res, next) => {
-    res.send('user route works!')
+    res.send({code: '200', message: 'user route works!'})
 })
 
 // Update user trees

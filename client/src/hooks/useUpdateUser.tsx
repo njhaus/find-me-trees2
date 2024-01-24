@@ -29,7 +29,7 @@ const useUpdateUser = () => {
     try {
       const res = await apiPatch("user/update", updatedUserData);
 
-      if (res.code) {
+      if (res.error) {
         console.error("ERROR updating user in useUpdateUser");
         console.error(res.code);
         console.error(res.message);

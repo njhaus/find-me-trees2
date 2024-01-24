@@ -203,7 +203,9 @@ const FoundMap = ({ data, location }: iFoundMap) => {
 
     const setUpMap = async () => {
       try {
-        const API_KEY = await apiGet("data/maptilerkey", abortController);
+        const getKey = await apiGet("data/maptilerkey", abortController);
+        const API_KEY = getKey.key;
+        
         if (mapContainer.current && location) {
           map.current = new maplibregl.Map({
             container: mapContainer.current,

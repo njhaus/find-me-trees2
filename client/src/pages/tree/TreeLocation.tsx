@@ -46,7 +46,8 @@ const TreeLocation = ({ location }: iTreeLocation) => {
       
       try {
         // get key
-        const API_KEY = await apiGet('data/maptilerkey', abortController)
+        const getKey = await apiGet("data/maptilerkey", abortController);
+        const API_KEY = getKey.key;
 
         // Make map
         if (mapContainer.current) {

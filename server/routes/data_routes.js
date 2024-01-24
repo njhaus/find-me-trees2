@@ -9,12 +9,12 @@ const router = Router();
 // Get env variables
 router.get('/maptilerkey', async (req, res, next) => {
     const key = process.env.MAPTILER_KEY;
-    res.send(key);
+    res.send({key: key});
 })
 
 router.get("/radarKey", async (req, res, next) => {
   const key = process.env.RADAR_KEY;
-  res.send(key);
+  res.send({key: key});
 });
 
 

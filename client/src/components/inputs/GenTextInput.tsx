@@ -25,9 +25,7 @@ const GenTextInput = forwardRef<HTMLInputElement, TextInputProps>(
 
     useEffect(() => {
       setInputVal(formVal);
-    }, [formVal])
-
-    console.log(error)
+    }, [formVal]) 
 
   return (
     <FormControl>

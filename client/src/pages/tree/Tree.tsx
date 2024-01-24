@@ -28,7 +28,6 @@ import TreeImgMobile from "./TreeImgMobile";
 import TreeUses from "./TreeUses";
 import { tempTreeData } from "./data/tree_data";
 import BrowseRedirect from "./BrowseRedirect";
-import { CanceledError } from "axios";
 
 const Tree = () => {
   const [treeData, setTreeData] = useState(tempTreeData);
@@ -45,16 +44,15 @@ const Tree = () => {
 
   useEffect(() => {
     const abortController = new AbortController();
+    let isMounted = true;
 
     const fetchData = async () => {
       try {
         const data: any = await apiGet(`tree/${id}`, abortController);
-        if (data.error) {
+        if (data.error || data instanceof DOMException) {
             console.log(data.code);
-            setNotFound(true);
-        } else if (data instanceof CanceledError) {
-          console.log('canceled')
-        }
+            throw new Error('tree not found')
+        } 
           else {
             console.log("good response");
             console.log(data);
@@ -63,13 +61,15 @@ const Tree = () => {
 
       } catch (err) {
         console.log(err);
-        setNotFound(true);
-      } 
+        if (isMounted) setNotFound(true);
+      } finally {
+        if (isMounted) setLoading(false);
+      }
     };
     fetchData();
-    setLoading(false);
 
     return () => {
+      isMounted = false;
       abortController.abort(); // Abort the request if the component unmounts
       setNotFound(false)
       setLoading(true)
@@ -96,6 +96,7 @@ const Tree = () => {
   if (notFound) {
     return <BrowseRedirect/>
   }
+
 
   return (
     <Flex as={"main"} direction={"column"} bg={"white"} width={"100%"}>

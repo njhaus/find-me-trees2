@@ -20,7 +20,8 @@ const foundOptionMap = ({handleCoordinates}: iFoundOptionMap) => {
     const setUpMap = async () => {
         
       try {
-        const API_KEY = await apiGet('data/maptilerkey', abortController);
+        const getKey = await apiGet("data/maptilerkey", abortController);
+        const API_KEY = getKey.key;
         
         if (mapContainer.current) {
           map.current = new maplibregl.Map({
