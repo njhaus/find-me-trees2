@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import maplibregl, { Map } from "maplibre-gl";
 import '../styles/options-map.css'
 import { apiGet } from "../../../services/api_client";
@@ -12,7 +12,7 @@ const foundOptionMap = ({handleCoordinates}: iFoundOptionMap) => {
 
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const map = useRef<Map | null>(null);
-  const [zoom] = useState(1);
+  const zoom = 1;
 
   useEffect(() => {
     const abortController = new AbortController();

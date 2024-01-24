@@ -8,7 +8,7 @@ import {
   Stack
 } from "@chakra-ui/react";
 
-import { Navigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { apiGet } from "../../services/api_client";
 import TreeHeading from "./TreeHeading";

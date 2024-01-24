@@ -1,4 +1,4 @@
-import { Button, Text, Tab } from '@chakra-ui/react'
+import {Text, Tab } from '@chakra-ui/react'
 
 interface iUserToggle {
     text: string;
