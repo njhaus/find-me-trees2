@@ -66,15 +66,13 @@ app.use(function (req, res, next) {
 });
 
 
-  app.use( function (req, res, next) {
+  app.use(
     cors({
       origin: corsOrigin,
       methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD", "PATCH"],
       credentials: true,
       preflightContinue: false,
-    })
-    next();
-  });
+    }));
 
 
 // parse application/x-www-form-urlencoded
