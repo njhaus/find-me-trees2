@@ -1,12 +1,25 @@
 import mongoose from "mongoose";
 import { promises as fs } from "fs";
 import Tree from '../tree.js'
+import dotenv from "dotenv";
+dotenv.config({ silent: process.env.NODE_ENV === "production", path: '../../.env' });
 
 // Mongoose Setup
 
+
+// Mongoose Setup/connection
+// const mongoLocal = "mongodb://127.0.0.1:27017/treesDB";
+const mongoAtlas = `mongodb+srv://njhaus:${process.env.MONGO_ATLAS}@cluster0.qt7sgci.mongodb.net/?retryWrites=true&w=majority`;
+
 async function main() {
+  console.log(mongoAtlas + '\n')
   try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/treesDB");
+    await mongoose.connect(mongoAtlas), {
+      useNewUrlParser: true,
+      useCreateIndex: true,
+      useUnifiedToplology: true,
+      useFindAndModify: false
+    };
     console.log("Mongoose Connection successful");
 
     await seedTreeDb();
@@ -18,6 +31,21 @@ async function main() {
   // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
 }
 main();
+
+// async function main() {
+//   try {
+//     await mongoose.connect("mongodb://127.0.0.1:27017/treesDB");
+//     console.log("Mongoose Connection successful");
+
+//     await seedTreeDb();
+
+//     process.exit();
+//   } catch (err) {
+//     console.log(err);
+//   }
+//   // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
+// }
+// main();
 
 // Get all words from all data
 // const leafShapeWords = [];

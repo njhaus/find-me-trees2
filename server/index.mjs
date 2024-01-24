@@ -28,9 +28,12 @@ app.listen(port, () => {
 });
 
 // Mongoose Setup/connection
+// const mongoLocal = "mongodb://127.0.0.1:27017/treesDB";
+const mongoAtlas = `mongodb+srv://njhaus:${process.env.MONGO_ATLAS}@cluster0.qt7sgci.mongodb.net/?retryWrites=true&w=majority`;
+
 async function main() {
   try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/treesDB"), {
+    await mongoose.connect(mongoAtlas), {
       useNewUrlParser: true,
       useCreateIndex: true,
       useUnifiedToplology: true,
