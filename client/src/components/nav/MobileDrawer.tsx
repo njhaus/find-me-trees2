@@ -1,28 +1,28 @@
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 
+import { HamburgerIcon } from "@chakra-ui/icons";
 import {
+  Box,
+  Button,
   Drawer,
   DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
   DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  Button,
+  IconButton,
+  VStack,
   useDisclosure as useDrawerDisclosure,
   useDisclosure as useLoginDisclosure,
-  IconButton,
-  Box,
-  VStack,
 } from "@chakra-ui/react";
-import { HamburgerIcon } from "@chakra-ui/icons";
 
 import { Link } from "react-router-dom";
 
 import links from "../../data/nav_data";
+import Boundary from "../borders/Boundary";
 import Login from "../login_auth/Login";
 import MainLogo from "../logo/MainLogo";
-import Boundary from "../borders/Boundary";
 
 import { iNav } from "./Nav";
 

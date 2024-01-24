@@ -1,23 +1,17 @@
-import { useState, ChangeEvent } from "react";
+import { ChangeEvent } from "react";
 
 import {
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-    FormHelperText,
-    Input,
   Flex,
+  FormControl,
   Text
 } from "@chakra-ui/react";
 
+import { FaEnvelope, FaUser, FaUserShield } from "react-icons/fa";
 import IconInput from "../../components/inputs/IconInput";
-import { updatedDataT } from "./UserProfile";
 import { iFormErrors } from "../../utils/login_utils";
-import { FaSadCry } from "react-icons/fa";
+import { updatedDataT } from "./UserProfile";
 
 interface iEditProfile {
-  username: string;
-  email: string;
   updatedData: updatedDataT;
   handleProfileChange: (
     e: ChangeEvent<HTMLInputElement>,
@@ -26,7 +20,7 @@ interface iEditProfile {
   errors: iFormErrors;
 }
     
-const EditProfile = ({username, email, updatedData, handleProfileChange, errors}: iEditProfile) => {
+const EditProfile = ({updatedData, handleProfileChange, errors}: iEditProfile) => {
 
   
 
@@ -43,7 +37,7 @@ const EditProfile = ({username, email, updatedData, handleProfileChange, errors}
             onChange={(e) => handleProfileChange("username", e.target.value)}
           /> */}
           <IconInput
-            icon={<FaSadCry />}
+            icon={<FaUser/>}
             labelText="Update Username:"
             labelFor="username"
             inputPlaceholder={updatedData.username}
@@ -63,7 +57,7 @@ const EditProfile = ({username, email, updatedData, handleProfileChange, errors}
             onChange={(e) => handleProfileChange("email", e.target.value)}
           /> */}
           <IconInput
-            icon={<FaSadCry />}
+            icon={<FaEnvelope />}
             labelText="Update Email:"
             labelFor="email"
             inputPlaceholder={updatedData.email}
@@ -82,7 +76,7 @@ const EditProfile = ({username, email, updatedData, handleProfileChange, errors}
             onChange={(e) => handleProfileChange("password", e.target.value)}
           /> */}
           <IconInput
-            icon={<FaSadCry />}
+            icon={<FaUserShield/>}
             labelText="Update Password:"
             labelFor="password"
             inputPlaceholder={updatedData.password}
@@ -103,7 +97,7 @@ const EditProfile = ({username, email, updatedData, handleProfileChange, errors}
             }
           /> */}
           <IconInput
-            icon={<FaSadCry />}
+            icon={<FaUserShield />}
             labelText="Retype New Password:"
             labelFor="checkPassword"
             inputPlaceholder={updatedData.checkPassword}

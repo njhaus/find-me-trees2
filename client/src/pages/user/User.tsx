@@ -1,22 +1,19 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
-import { Flex, TabList, TabPanels, Tabs } from "@chakra-ui/react"
+import { Flex, TabList, TabPanels, Tabs } from "@chakra-ui/react";
 import { BsHeart, BsJournal, BsSearch } from "react-icons/bs";
 
-import { Navigate, Location, useNavigate, redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-import UserTab from "./UserTab";
 import UserHeading from "./UserHeading";
+import UserTab from "./UserTab";
 
 import useAuth from "../../hooks/useAuth";
 
-import SavedPanel from "./user_panels/SavedPanel";
-import FoundPanel from "./user_panels/FoundPanel";
+import useUpdateUser from "../../hooks/useUpdateUser";
 import FavoritesPanel from "./user_panels/FavoritesPanel";
-import { apiPatch } from "../../services/api_client";
-import { iUserData } from "../../data/user_data/userData";
-import useLogout from "../../hooks/useLogout";
-import useUpdateUser from "../../hooks/useUpdateUser"
+import FoundPanel from "./user_panels/FoundPanel";
+import SavedPanel from "./user_panels/SavedPanel";
 
 
     interface iUserToggleData {
@@ -46,10 +43,8 @@ import useUpdateUser from "../../hooks/useUpdateUser"
 
 const User = () => {
 
-  const { auth, setAuth } = useAuth();
-  const { userData, handleUpdateUser } = useUpdateUser();
-
-  const logout = useLogout();
+  const { auth } = useAuth();
+  const { userData} = useUpdateUser();
   
   const navigate = useNavigate();
   const userExists =
@@ -68,7 +63,7 @@ const User = () => {
       !userExists
     ) {
       console.log('Valid user does not exist')
-      // navigate("/login", { state: { from: location, redirect: true } });
+      navigate("/login", { state: { from: location, redirect: true } });
     }
   }, [auth, userExists, userData]);
 

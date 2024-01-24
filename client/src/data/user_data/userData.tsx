@@ -22,7 +22,7 @@ export const initialUserData: iUserData = {
 
 export interface iLocationData {
   type: string;
-  coordinates: Number[];
+  coordinates: number[];
 }
 
 export interface iUserSaved {

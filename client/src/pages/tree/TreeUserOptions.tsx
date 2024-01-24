@@ -1,9 +1,8 @@
-import { Box, Flex, Text } from "@chakra-ui/react"
+import { Box, Flex } from "@chakra-ui/react";
 
 
+import { options, userOptionsKey } from "../../data/user_options_data";
 import UserOption from "./user_options/UserOption";
-import { userOptionsKey } from "../../data/user_options_data";
-import { options } from "../../data/user_options_data";
 
 interface iTreeUserOptions {
   id: string;

@@ -138,8 +138,6 @@ const [isEditing, setIsEditing] = useState(false)
             )}
             {isEditing && (
               <EditProfile
-                username={userData.username}
-                email={userData.email}
                 updatedData={updatedData}
                 handleProfileChange={handleProfileChange}
                 errors={errors}
