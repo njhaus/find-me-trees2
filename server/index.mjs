@@ -51,7 +51,7 @@ main();
 // middleware for allowing react to fetch() from server
 const corsOrigin =
   process.env.ENVIRONMENT === "production"
-    ? "https://find-me-trees-client-production.up.railway.app/"
+    ? "https://find-me-trees-client-production.up.railway.app"
     : "http://localhost:5173";
 
   app.use(
