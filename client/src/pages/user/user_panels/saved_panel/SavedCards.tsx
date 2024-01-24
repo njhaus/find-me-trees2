@@ -1,4 +1,3 @@
-import React from 'react'
 import { iUserSaved } from '../../../../data/user_data/userData';
 import { Flex, Text } from '@chakra-ui/react';
 import SavedTreeCard from './SavedTreeCard';
