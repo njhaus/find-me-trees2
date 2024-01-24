@@ -7,9 +7,10 @@ export const apiPost = async (url: string, body: unknown) => {
   try {
     console.log("Api post client running");
     const response = await axios.post(`${baseUrl}${url}`, body, {
-      withCredentials: true, 
+      withCredentials: true,
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": `${baseUrl}`,
       },
     });
     return response.data;
@@ -26,6 +27,7 @@ export const apiPatch = async (url: string, body: unknown) => {
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": `${baseUrl}`,
       },
     });
     return response.data;
@@ -39,6 +41,9 @@ export const apiGet = async (url: string, abortController: AbortController) => {
   try {
     const response = await axios.get(`${baseUrl}${url}`, {
       withCredentials: true,
+      headers: {
+        "Access-Control-Allow-Origin": `${baseUrl}`,
+      },
       signal: abortController.signal,
     });
     return response.data;
@@ -52,6 +57,7 @@ export const apiIntercept = axios.create({
   baseURL: baseUrl,
   headers: {
     "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": `${baseUrl}`,
   },
   withCredentials: true,
 });
