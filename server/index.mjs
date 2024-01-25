@@ -51,7 +51,7 @@ main();
 // middleware for allowing react to fetch() from server
 const corsOrigin =
   process.env.ENVIRONMENT === "production"
-    ? "https://find-me-trees-client-production.up.railway.app"
+    ? "https://find-me-trees-client-production.up.railway.app/"
     : "http://localhost:5173";
 
     console.log(corsOrigin)
@@ -61,7 +61,7 @@ const corsOrigin =
 app.use(function (req, res, next) {
   res.header(
     "Access-Control-Allow-Origin",
-    `https://find-me-trees-client-production.up.railway.app`
+    "https://find-me-trees-client-production.up.railway.app/"
   );
   res.header(
     "Access-Control-Allow-Headers",
@@ -81,6 +81,11 @@ app.use(function (req, res, next) {
     })
   );
 
+
+app.get('/', (req, res, next) => {
+  console.log('Please god')
+  console.log(req);
+})
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true}))
