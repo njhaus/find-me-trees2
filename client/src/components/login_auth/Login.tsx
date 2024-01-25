@@ -71,7 +71,7 @@ function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
       console.log("Login success " + JSON.stringify(loggedInUser));
       handleClose();
       navigate(from, { replace: true });
-    } else if (loggedInUser.code === "401") {
+    } else if (loggedInUser.match('401')) {
       setServerError("Incorrect Username or Password");
     } else if (loggedInUser.error) {
       setServerError(loggedInUser.error);
