@@ -63,12 +63,6 @@ app.use(
 );
 
 
-// TEST ROUTE
-app.get("/", (req, res) => {
-  res.send('"message": "database connection working. / route accessed."' )
-});
-
-
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true}))
 
