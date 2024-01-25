@@ -44,8 +44,9 @@ const Browse = () => {
               mode: "cors",
               credentials: "include",
               body: JSON.stringify(formData),
-            }
-          );
+            });
+          console.log('response:')
+          console.log(response)
           if (!isMounted) return;
           if (!response.ok) throw new Error('error retrieving data!')
           const responseJson = await response.json();
