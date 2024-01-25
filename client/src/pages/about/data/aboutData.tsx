@@ -21,6 +21,6 @@ export const aboutInfo = [
     title: "A Creation by Nick Haus",
     text: "This website was created by Nick Haus as a full-stack application project using modern programming languages, tools, and frameworks such as React, MaterialUI, Typescript, Express, Node, and MongoDB. Nick can often be found meandering through the woods, paying more attention to the trees than the path in front of him. To see more of Nick's work, please visit",
     imgSrc: "/about/headshot.png",
-    link: "https://www.nickhauscode.com/",
+    link: "nickhauscode.com/",
   },
 ];

@@ -66,14 +66,18 @@ function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
   // Form submission -- handles login and register (need to move to client)
   const handleSubmit = async (slug: string, body: iFormData) => {
     const loggedInUser = await apiPost(slug, body);
+   console.log("here0");
+    console.log(loggedInUser)
     if (loggedInUser.username) {
+      console.log('here1')
       setAuth(loggedInUser);
-      console.log("Login success " + JSON.stringify(loggedInUser));
       handleClose();
       navigate(from, { replace: true });
     } else if (loggedInUser.match('401')) {
+      console.log("here2");
       setServerError("Incorrect Username or Password");
     } else if (loggedInUser.error) {
+      console.log("here3");
       setServerError(loggedInUser.error);
     } else setServerError("An error occured");
   };
