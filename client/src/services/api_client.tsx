@@ -13,7 +13,7 @@ export const apiPost = async (url: string, body: unknown) => {
       },
       method: "POST",
       credentials: "include",
-      mode: "cors",
+      // mode: "cors",
       body: JSON.stringify(body),
     });
     console.log(response);
