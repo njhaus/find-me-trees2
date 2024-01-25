@@ -17,7 +17,8 @@ export const apiPost = async (url: string, body: unknown) => {
       mode: "cors",
       body: JSON.stringify(body),
     });
-    if (isJson(response)) {
+    console.log(response);
+    if (!isJson(response)) {
       console.log("here-2");
       return response;
     } else {
