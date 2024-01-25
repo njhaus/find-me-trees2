@@ -59,7 +59,7 @@ const LoginForm = forwardRef<HTMLInputElement, iLoginForm>(({handleForm, handleI
   return (
     <>
       <form autoComplete="off">
-        <Text ref={errorRef} tabIndex={0}>
+        <Text ref={errorRef} variant={'error'} tabIndex={0}>
           {error && error}
           {serverError && serverError}
         </Text>

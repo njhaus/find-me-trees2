@@ -49,7 +49,7 @@ function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
   // Navigate user to /user page when logged in/registered
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/user/test";
+  const from = location.state?.from?.pathname || "/user";
 
   // Handles form values by listening for change events in child input components
   // AND NewUsers(if form has been initially validated.
@@ -71,7 +71,7 @@ function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
       console.log("Login success " + JSON.stringify(loggedInUser));
       handleClose();
       navigate(from, { replace: true });
-    } else if (loggedInUser.message === "Request failed with status code 401") {
+    } else if (loggedInUser.code === "401") {
       setServerError("Incorrect Username or Password");
     } else if (loggedInUser.error) {
       setServerError(loggedInUser.error);

@@ -127,10 +127,9 @@ const RegisterForm =
           ></IconInput>
           <Button
             isDisabled={
-              false
-              // validateNewUser(formData) && reenterPassword === formData.password
-              //   ? false
-              //   : true
+              validateNewUser(formData)
+                ? false
+                : true
             }
             leftIcon={<FaTree />}
             display={"block"}
