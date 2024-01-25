@@ -49,7 +49,6 @@ export const apiGet = async (url: string, abortController: AbortController) => {
     const response = await fetch(`${baseUrl}${url}`, {
       headers: {
         "Content-Type": "application/json",
-        //  "Access-Control-Allow-Origin": baseUrl
       },
       method: "GET",
       credentials: "include",
