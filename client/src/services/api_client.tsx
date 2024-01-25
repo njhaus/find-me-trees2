@@ -5,6 +5,7 @@ const baseUrl = "https://find-me-trees-server-production.up.railway.app/";
 
 
 export const apiPost = async (url: string, body: unknown) => {
+  console.log("here-3");
   try {
     console.log("Api post client running");
     const response = await fetch(`${baseUrl}${url}`, {
@@ -17,10 +18,13 @@ export const apiPost = async (url: string, body: unknown) => {
       body: JSON.stringify(body),
     });
     if (isJson(response)) {
+      console.log("here-2");
       return response;
+    } else {
+      console.log("here-1");
+      const data = await response.json();
+      return data;
     }
-    const data = await response.json();
-    return data;
   } catch (err) {
     console.log(err);
     return err;
