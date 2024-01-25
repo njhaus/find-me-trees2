@@ -20,7 +20,7 @@ import User from "./models/user.js";
 
 // Express Setup
 const app = express();
-const port = 3008;
+const port = process.env.PORT;
 
 
 // middleware for allowing react to fetch() from server
