@@ -1,3 +1,5 @@
+import { isJson } from "../utils/util_functions";
+
 // const baseUrl = "http://localhost:3008/";
 const baseUrl = "https://find-me-trees-server-production.up.railway.app/";
 
@@ -14,7 +16,9 @@ export const apiPost = async (url: string, body: unknown) => {
       mode: "cors",
       body: JSON.stringify(body),
     });
-
+    if (isJson(response)) {
+      return response;
+    }
     const data = await response.json();
     return data;
   } catch (err) {
