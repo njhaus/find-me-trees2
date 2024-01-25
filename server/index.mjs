@@ -58,7 +58,7 @@ app.use(
     methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD", "PATCH"],
     credentials: true,
     preflightContinue: false,
-    optionsSuccessStatus: 204,
+    // optionsSuccessStatus: 204,
   })
 );
 

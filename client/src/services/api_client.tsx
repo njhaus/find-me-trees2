@@ -13,12 +13,13 @@ export const apiPost = async (url: string, body: unknown) => {
       },
       method: "POST",
       credentials: "include",
-      // mode: "cors",
+      mode: "cors",
       body: JSON.stringify(body),
     });
     console.log(response);
     if (!isJson(response)) {
       console.log("is not json");
+      const jsonBody = response.body ? await response.body.json();
       console.log(response.body)
       return response.body;
     } else {
