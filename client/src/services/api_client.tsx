@@ -18,9 +18,12 @@ export const apiPost = async (url: string, body: unknown) => {
     });
     console.log(response);
     if (!isJson(response)) {
-      return response;
+      console.log("is not json");
+      console.log(response.body)
+      return response.body;
     } else {
       const data = await response.json();
+      console.log('is json')
       console.log(data);
       return data;
     }
