@@ -71,12 +71,11 @@ const corsOrigin =
 
   app.use(
     cors({
-      origin: "https://find-me-trees-client-production.up.railway.app",
+      origin: corsOrigin,
       methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD", "PATCH"],
       credentials: true,
       preflightContinue: false,
-    })
-  );
+    }));
 
 
 // parse application/x-www-form-urlencoded
