@@ -54,7 +54,7 @@ export const registerNewUser = async (req, res, next) => {
       });
 
       // Success -- return user data (sans password and refresh token)
-      return res.json({
+      return res.send({
         username: newUser.username,
         email: newUser.email,
         collections: newUser.collections,
@@ -119,7 +119,7 @@ export const loginLocal = async (req, res) => {
          maxAge: 12 * 60 * 60 * 1000,
        });
       
-      return res.json({
+      return res.send({
         username: user.username,
         email: user.email,
         collections: user.collections,
@@ -225,7 +225,7 @@ export const handleToken = async (req, res) => {
     return res.send({ code: "401", error: "Unable to update token: user not found" });
   }
 
-  return res.json({
+  return res.send({
     username: updatedUser.username,
     email: updatedUser.email,
     collections: updatedUser.collections,

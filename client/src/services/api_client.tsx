@@ -19,7 +19,6 @@ export const apiPost = async (url: string, body: unknown) => {
     console.log(response);
     if (!isJson(response)) {
       console.log("is not json");
-      const jsonBody = response.body ? await response.body.json();
       console.log(response.body)
       return response.body;
     } else {
@@ -46,7 +45,7 @@ export const apiPatch = async (url: string, body: unknown) => {
       mode: "cors",
       body: JSON.stringify(body),
     });
-
+    console.log(response)
     const data = await response.json();
     return data;
   } catch (err) {
