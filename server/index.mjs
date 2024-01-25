@@ -22,31 +22,6 @@ import User from "./models/user.js";
 const app = express();
 const port = 3008;
 
-// Express connection
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
-});
-
-// Mongoose Setup/connection
-
-const mongoConnect = process.env.ENVIRONMENT === 'prod' ? `mongodb+srv://njhaus:${process.env.MONGO_ATLAS}@cluster0.qt7sgci.mongodb.net/?retryWrites=true&w=majority` : "mongodb://127.0.0.1:27017/treesDB";
-
-async function main() {
-  try {
-    await mongoose.connect(mongoConnect), {
-      useNewUrlParser: true,
-      useCreateIndex: true,
-      useUnifiedToplology: true,
-      useFindAndModify: false
-    };
-    console.log("Mongoose Connection successful");
-  } catch (err) {
-    console.error(err);
-  }
-  // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
-}
-main();
-
 
 // middleware for allowing react to fetch() from server
 const corsOrigin =
@@ -88,10 +63,11 @@ app.use(
 );
 
 
-app.get('/', (req, res, next) => {
-  console.log('Please god')
-  console.log(req);
-})
+// TEST ROUTE
+app.get("/", (req, res) => {
+  res.send('"message": "database connection working. / route accessed."' )
+});
+
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true}))
@@ -173,6 +149,38 @@ app.use((err, req, res, next) => {
   console.error(err);
   res.status(403).send(err);
 });
+
+
+// Mongoose Setup/connection
+
+const mongoConnect = process.env.ENVIRONMENT === 'prod' ? `mongodb+srv://njhaus:${process.env.MONGO_ATLAS}@cluster0.qt7sgci.mongodb.net/?retryWrites=true&w=majority` : "mongodb://127.0.0.1:27017/treesDB";
+
+async function main() {
+  try {
+    await mongoose.connect(mongoConnect), {
+      useNewUrlParser: true,
+      useCreateIndex: true,
+      useUnifiedToplology: true,
+      useFindAndModify: false
+    };
+    console.log("Mongoose Connection successful");
+  } catch (err) {
+    console.error(err);
+  }
+  // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
+}
+main();
+
+
+
+// Express connection
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
+
+
+
+
 
 // app.use("*", (req, res, next) => {
 //   const error = new AppError("This route does not exist.", 404);
