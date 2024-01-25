@@ -21,6 +21,7 @@ export const apiPost = async (url: string, body: unknown) => {
       return response;
     } else {
       const data = await response.json();
+      console.log(data);
       return data;
     }
   } catch (err) {
