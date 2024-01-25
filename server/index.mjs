@@ -59,6 +59,8 @@ const corsOrigin =
 
 
 app.use(function (req, res, next) {
+  console.log('this function is doing something')
+  console.log(req);
   res.header(
     "Access-Control-Allow-Origin",
     "https://find-me-trees-client-production.up.railway.app/"
@@ -67,19 +69,23 @@ app.use(function (req, res, next) {
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
   );
+  res.header(
+    "Access-Control-Allow-Credentials",
+    true
+  );
   res.header("Access-Control-Allow-Methods", ["POST", "PUT", "GET", "OPTIONS", "HEAD", "PATCH"]);
   next();
 });
 
 
-  app.use(
-    cors({
-      origin: corsOrigin,
-      methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD", "PATCH"],
-      credentials: true,
-      preflightContinue: false,
-    })
-  );
+app.use(
+  cors({
+    origin: corsOrigin,
+    methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD", "PATCH"],
+    credentials: true,
+    preflightContinue: false,
+  })
+);
 
 
 app.get('/', (req, res, next) => {
