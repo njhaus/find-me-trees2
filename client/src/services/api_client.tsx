@@ -15,8 +15,7 @@ export const apiPost = async (url: string, body: unknown) => {
       mode: "cors",
       body: JSON.stringify(body),
     });
-    console.log("response:");
-    console.log(response);
+    if (!response.ok) throw new Error("error retrieving data!");
     const data = await response.json();
     return data;
   } catch (err) {

@@ -132,12 +132,17 @@ export const loginLocal = async (req, res) => {
     } catch (err) {
       console.log('error finding user')
       console.log(err)
+       res.send({
+         code: "401",
+         error: "An error occurred while making your request.",
+       });
     }
   }
 
 
 //   Log out
 export const logout = async (req, res) => {
+  console.log("the logout route is accessed");
   const { username } = req.body;
   // Log out user and reset tokens
   const logoutUser = await User.findOneAndUpdate(
