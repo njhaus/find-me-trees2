@@ -63,8 +63,11 @@ function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
     validateNewUser(formData, setErrors);
   };
 
+
+  console.log("WHAT ARE YOU EVEN ALIVE?????");
   // Form submission -- handles login and register (need to move to client)
   const handleSubmit = async (slug: string, body: iFormData) => {
+    console.log("here000");
     const loggedInUser = await apiPost(slug, body);
    console.log("here0");
     console.log(loggedInUser)
