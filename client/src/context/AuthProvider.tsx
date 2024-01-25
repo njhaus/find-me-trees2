@@ -28,6 +28,7 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const getUser = async () => {
       console.log('updating token in AuthProvider')
       try {
+        console.log("trying to make a request in AuthProvider");
         const response = await apiGet('login/getuser', controller)
         console.log(response);
         if (!response.error) {

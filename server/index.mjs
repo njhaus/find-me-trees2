@@ -29,7 +29,7 @@ app.listen(port, () => {
 
 // Mongoose Setup/connection
 
-const mongoConnect = process.env.ENVIRONMENT === 'production' ? `mongodb+srv://njhaus:${process.env.MONGO_ATLAS}@cluster0.qt7sgci.mongodb.net/?retryWrites=true&w=majority` : "mongodb://127.0.0.1:27017/treesDB";
+const mongoConnect = process.env.ENVIRONMENT === 'prod' ? `mongodb+srv://njhaus:${process.env.MONGO_ATLAS}@cluster0.qt7sgci.mongodb.net/?retryWrites=true&w=majority` : "mongodb://127.0.0.1:27017/treesDB";
 
 async function main() {
   try {
@@ -50,16 +50,12 @@ main();
 
 // middleware for allowing react to fetch() from server
 const corsOrigin =
-  process.env.ENVIRONMENT === "production"
+  process.env.ENVIRONMENT === "prod"
     ? "https://find-me-trees-client-production.up.railway.app"
     : "http://localhost:5173";
 
-console.log(corsOrigin)
-    
-setInterval(() => { 
-  console.log('server is running')
-}, 2000)
 
+app.options("*", cors());
 
 
 app.use(function (req, res, next) {
@@ -80,8 +76,6 @@ app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Methods", ["POST", "PUT", "GET", "OPTIONS", "HEAD", "PATCH"]);
   next();
 });
-
-app.options("*", cors());
 
 app.use(
   cors({

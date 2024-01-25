@@ -45,6 +45,7 @@ export const apiPatch = async (url: string, body: unknown) => {
 };
 
 export const apiGet = async (url: string, abortController: AbortController) => {
+  console.log("Api get client running");
   try {
     const response = await fetch(`${baseUrl}${url}`, {
       headers: {
