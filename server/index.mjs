@@ -81,6 +81,7 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.options("*", cors());
 
 app.use(
   cors({
@@ -88,6 +89,7 @@ app.use(
     methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD", "PATCH"],
     credentials: true,
     preflightContinue: false,
+    optionsSuccessStatus: 204,
   })
 );
 
