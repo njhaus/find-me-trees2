@@ -1,6 +1,6 @@
 import { Flex, Text } from "@chakra-ui/react";
 
-import { iUserFound } from "../../../../data/user_data/userData";
+import { iUserFound } from "../../user_data/userData";
 import FoundCard from "./FoundCard";
 
 interface iFoundList {

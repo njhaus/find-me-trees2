@@ -34,9 +34,9 @@ function App() {
             />
             <Route path="/browse" element={<Browse />} />
             <Route path="/tree/*" element={<TreeRoutes />} />
-            <Route element={<RequireAuth />}>
-              <Route path="/user" element={<UserRoutes />} />
-            </Route>
+            {/* <Route element={<RequireAuth />}> */}
+              <Route path="/user/*" element={<UserRoutes />} />
+            {/* </Route> */}
             <Route path="/about" element={<AboutRoutes />} />
             <Route path="*" element={<Error />} />
           </Route>

@@ -6,11 +6,11 @@ import maplibregl, { Map } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 
 import { BsSquareFill } from "react-icons/bs";
-import { abbreviationMap } from "../../data/browse_data/statesData";
+import { abbreviationMap } from "../browse/browse_data/statesData";
 import { apiGet } from "../../services/api_client";
 import { geojson } from "./data/tree-location";
 import { UsState } from "./data/tree_data";
-
+import { ApiErrorType, isApiErrorType } from "../../data/types";
 
 interface iTreeLocation {
   location: UsState[];
@@ -20,34 +20,43 @@ const TreeLocation = ({ location }: iTreeLocation) => {
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const map = useRef<Map | null>(null);
 
-   function addStats(geojson: any) {
-     geojson.features.forEach((feature: any) => {
-       const statsForFeature = location.find(
-         (l) => abbreviationMap[l] === feature.properties.name
-       );
-       if (statsForFeature) {
-         // add stats to the feature's properties
-         feature.properties = { ...feature.properties, color: "#0000ff" };
-       } else {
-         feature.properties = { ...feature.properties, color: "transparent" };
-       }
-     });
+  function addStats(geojson: any) {
+    geojson.features.forEach((feature: any) => {
+      const statsForFeature = location.find(
+        (l) => abbreviationMap[l] === feature.properties.name
+      );
+      if (statsForFeature) {
+        // add stats to the feature's properties
+        feature.properties = { ...feature.properties, color: "#0000ff" };
+      } else {
+        feature.properties = { ...feature.properties, color: "transparent" };
+      }
+    });
 
-     return geojson;
-   }
+    return geojson;
+  }
 
   useEffect(() => {
     // Set color based on invasive or native
     // const mapColor =
 
     // Refactor -- move map set up function into another file.
-    const setUpMap = async() => {
+    const setUpMap = async () => {
       const abortController = new AbortController();
-      
+
       try {
         // get key
-        const getKey = await apiGet("data/maptilerkey", abortController);
-        const API_KEY = getKey.key;
+        const getKey: Awaited<{key: string} | ApiErrorType> = await apiGet("data/maptilerkey", abortController);
+        if (getKey && (getKey as { key: string }).key) {
+          console.log("Success getting key");
+        } else {
+          if (isApiErrorType(getKey)) {
+            throw new Error((getKey as ApiErrorType).error);
+          } else {
+            throw new Error("Unknown Error: Unable to fetch map key.");
+          }
+        }
+        const API_KEY = (getKey as { key: string }).key;
 
         // Make map
         if (mapContainer.current) {
@@ -92,9 +101,9 @@ const TreeLocation = ({ location }: iTreeLocation) => {
           });
         }
       } catch (err) {
-        console.error(err)
+        console.error(err);
       }
-    }
+    };
     setUpMap();
   }, []);
 
@@ -114,7 +123,7 @@ const TreeLocation = ({ location }: iTreeLocation) => {
       <Heading as={"h2"} color={"main.300"}>
         Distribution
       </Heading>
-      <Box className={"map-wrap"} my={'0.5rem'}>
+      <Box className={"map-wrap"} my={"0.5rem"}>
         <Box id="map" ref={mapContainer} className="map"></Box>
       </Box>
       <Flex gap={"2rem"}>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { Box, Button, Flex, TabPanel } from "@chakra-ui/react";
-import { iUserFavorites } from "../../../data/user_data/userData";
+import { iUserFavorites } from "../user_data/userData";
 
 import { BsX } from "react-icons/bs";
 import Carousel from "../../../components/ui-components/Carousel";

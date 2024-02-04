@@ -1,4 +1,4 @@
-import { iTreeData, tempTreeData } from "../../pages/tree/data/tree_data";
+import { iTreeData, tempTreeData } from "../../tree/data/tree_data";
 
 export interface iUserData {
   username: string;
@@ -8,6 +8,22 @@ export interface iUserData {
   found: iUserFound[];
   favorites: iUserFavorites[];
   accessToken: string;
+}
+
+export function isUserData(obj: object): boolean {
+  if (
+    typeof (obj as iUserData).username === "string" &&
+    typeof (obj as iUserData).email === "string" &&
+    Array.isArray((obj as iUserData).collections) &&
+    Array.isArray((obj as iUserData).saved) &&
+    Array.isArray((obj as iUserData).found) &&
+    Array.isArray((obj as iUserData).favorites) &&
+    typeof (obj as iUserData).accessToken === "string"
+  ) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 export const initialUserData: iUserData = {

@@ -1,17 +1,18 @@
-import { iUserSaved } from '../../../../data/user_data/userData';
-import { Flex, Text } from '@chakra-ui/react';
-import SavedTreeCard from './SavedTreeCard';
+import { iUserSaved } from "../../user_data/userData";
+import { Flex, Text } from "@chakra-ui/react";
+import SavedTreeCard from "./SavedTreeCard";
 
 interface iSavedCards {
   data: iUserSaved[];
   collections: string[];
   currentCollection: string;
-
 }
 
 const SavedCards = ({ data, collections, currentCollection }: iSavedCards) => {
-
-  const displayCardsByCollection = currentCollection === 'all' ? data : data.filter(tree => tree.collections.includes(currentCollection));
+  const displayCardsByCollection =
+    currentCollection === "all"
+      ? data
+      : data.filter((tree) => tree.collections.includes(currentCollection));
 
   return (
     <Flex
@@ -49,6 +50,6 @@ const SavedCards = ({ data, collections, currentCollection }: iSavedCards) => {
       )}
     </Flex>
   );
-}
+};
 
-export default SavedCards
+export default SavedCards;

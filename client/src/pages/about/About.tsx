@@ -4,8 +4,14 @@ import RedwoodBg from "../../components/backgrounds/RedwoodBg";
 import CurveBorder from "../../components/borders/CurveBorder";
 
 import { aboutInfo } from "./data/aboutData";
+import { useEffect } from "react";
 
 const About = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <VStack as={"main"} minHeight={"calc(100vh - 10rem)"} bg={"main.950"} pb={'3rem'}>
       <Flex

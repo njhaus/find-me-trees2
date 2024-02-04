@@ -1,14 +1,11 @@
 import { useEffect } from "react";
-
 import { Flex, TabList, TabPanels, Tabs } from "@chakra-ui/react";
 import { BsHeart, BsJournal, BsSearch } from "react-icons/bs";
 
-import { useNavigate } from "react-router-dom";
 
 import UserHeading from "./UserHeading";
 import UserTab from "./UserTab";
 
-import useAuth from "../../hooks/useAuth";
 
 import useUpdateUser from "../../hooks/useUpdateUser";
 import FavoritesPanel from "./user_panels/FavoritesPanel";
@@ -43,10 +40,13 @@ import SavedPanel from "./user_panels/SavedPanel";
 
 const User = () => {
 
-  const { auth } = useAuth();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const { userData} = useUpdateUser();
   
-  const navigate = useNavigate();
   const userExists =
     userData &&
     userData.username &&
@@ -56,16 +56,6 @@ const User = () => {
     userData.found &&
     userData.saved && 
     userData.accessToken   
-
-  useEffect(() => {
-    // Checking if user is not loggedIn
-    if (
-      !userExists
-    ) {
-      console.log('Valid user does not exist')
-      navigate("/login", { state: { from: location, redirect: true } });
-    }
-  }, [auth, userExists, userData]);
 
   return (
     (userExists) && (

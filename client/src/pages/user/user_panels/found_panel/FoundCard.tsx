@@ -1,7 +1,18 @@
-import { Button, Card, CardBody, CardFooter, Flex, Heading, Image, Stack, Text, VStack } from "@chakra-ui/react";
+import {
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  Flex,
+  Heading,
+  Image,
+  Stack,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
-import { iLocationData } from "../../../../data/user_data/userData";
+import { iLocationData } from "../../user_data/userData";
 import RemoveFoundBtn from "./RemoveFoundBtn";
 
 interface iFoundCard {
@@ -9,11 +20,16 @@ interface iFoundCard {
   title: string;
   imgSrc: string[];
   sciName: string;
-  locationFound: iLocationData
+  locationFound: iLocationData;
 }
 
-const FoundCard = ({id, title, imgSrc, sciName, locationFound}: iFoundCard) => {
-  
+const FoundCard = ({
+  id,
+  title,
+  imgSrc,
+  sciName,
+  locationFound,
+}: iFoundCard) => {
   return (
     <Card
       direction={{ base: "row" }}
@@ -67,6 +83,6 @@ const FoundCard = ({id, title, imgSrc, sciName, locationFound}: iFoundCard) => {
       </Stack>
     </Card>
   );
-}
+};
 
-export default FoundCard
+export default FoundCard;

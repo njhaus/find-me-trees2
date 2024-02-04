@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 
-import { iUserData } from "../../../data/user_data/userData"
-import { DataFormat, userOptionsKey } from "../../../data/user_options_data";
+import { iUserData } from "../../user/user_data/userData";
+import {
+  DataFormat,
+  userOptionsKey,
+} from "../../user/user_data/user_options_data";
 import {
   Popover,
   PopoverTrigger,
@@ -14,7 +17,7 @@ import {
   Flex,
   HStack,
   Box,
-  useDisclosure
+  useDisclosure,
 } from "@chakra-ui/react";
 
 import { CheckIcon } from "@chakra-ui/icons";
@@ -22,7 +25,7 @@ import { CheckIcon } from "@chakra-ui/icons";
 import FoundOptionMap from "./foundOptionMap";
 
 interface iOptionPopup {
-  btnClicked: boolean,
+  btnClicked: boolean;
   handleUpdate: (key: keyof iUserData, newData: DataFormat) => void;
   hoverMsg: string;
   userDataKey: userOptionsKey;
@@ -32,17 +35,24 @@ interface iOptionPopup {
   icon: JSX.Element;
 }
 
-const OptionPopup = ({ btnClicked, handleUpdate, hoverMsg, userDataKey, icon, dataFormat, id }: iOptionPopup) => {
-    
-    const { onOpen, onClose, isOpen } = useDisclosure();
+const OptionPopup = ({
+  btnClicked,
+  handleUpdate,
+  hoverMsg,
+  userDataKey,
+  icon,
+  dataFormat,
+  id,
+}: iOptionPopup) => {
+  const { onOpen, onClose, isOpen } = useDisclosure();
 
-  const [newData, setNewData] = useState({ ...dataFormat, _id: id })
+  const [newData, setNewData] = useState({ ...dataFormat, _id: id });
   const [showMap, setShowMap] = useState(false);
   // Coordinates for setting location with map
-  const [coordinates, setCoordinates] = useState([-74, 39])
+  const [coordinates, setCoordinates] = useState([-74, 39]);
 
   const handleCoordinates = (coords: [number, number]) => {
-    setCoordinates(coords)
+    setCoordinates(coords);
     setNewData({
       location: {
         type: "point",
@@ -50,53 +60,53 @@ const OptionPopup = ({ btnClicked, handleUpdate, hoverMsg, userDataKey, icon, da
       },
       _id: id,
     });
-  }
+  };
 
   const onUpdate = () => {
-    console.log(coordinates)
+    console.log(coordinates);
     console.log(newData);
     handleUpdate(userDataKey, newData);
     setShowMap(false);
     onClose();
-  }
+  };
 
   console.log(newData);
-  
-    useEffect(() => {
-      // Id wasn't picked up by useState, so had to set it like this.
-      // setNewData({ ...dataFormat, _id: id });
-      // get location
-      console.log(newData);
-      const options = {
-        enableHighAccuracy: true,
-        timeout: 7000,
-        maximumAge: 0,
-      };
 
-      function success(pos: GeolocationPosition) {
-        const crd = pos.coords;
-        setNewData({
-          location: {
-            type: "point",
-            coordinates: [crd.longitude, crd.latitude],
-          },
-          _id: id,
-        });
-      }
+  useEffect(() => {
+    // Id wasn't picked up by useState, so had to set it like this.
+    // setNewData({ ...dataFormat, _id: id });
+    // get location
+    console.log(newData);
+    const options = {
+      enableHighAccuracy: true,
+      timeout: 7000,
+      maximumAge: 0,
+    };
 
-      function error(err: GeolocationPositionError) {
-        console.warn(`ERROR(${err.code}): ${err.message}`);
-      }
+    function success(pos: GeolocationPosition) {
+      const crd = pos.coords;
+      setNewData({
+        location: {
+          type: "point",
+          coordinates: [crd.longitude, crd.latitude],
+        },
+        _id: id,
+      });
+    }
 
-      navigator.geolocation.getCurrentPosition(success, error, options);
-    }, [onOpen, onClose, isOpen, id]);
+    function error(err: GeolocationPositionError) {
+      console.warn(`ERROR(${err.code}): ${err.message}`);
+    }
+
+    navigator.geolocation.getCurrentPosition(success, error, options);
+  }, [onOpen, onClose, isOpen, id]);
 
   return (
     <Popover
       returnFocusOnClose={false}
       isOpen={isOpen}
       onClose={onClose}
-      placement="top-end"
+      placement="bottom-start"
     >
       <PopoverTrigger>
         <Flex
@@ -174,6 +184,6 @@ const OptionPopup = ({ btnClicked, handleUpdate, hoverMsg, userDataKey, icon, da
       </PopoverContent>
     </Popover>
   );
-}
+};
 
-export default OptionPopup
+export default OptionPopup;

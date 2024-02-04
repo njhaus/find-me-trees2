@@ -108,6 +108,25 @@ export interface iTreeData {
   uses: string;
 }
 
+
+export function isTreeData(obj: object): boolean {
+  if (
+    typeof (obj as iTreeData)._id === "string" &&
+    typeof (obj as iTreeData).title === "string" &&
+    Array.isArray((obj as iTreeData).imgSrc) &&
+    typeof (obj as iTreeData).sciName === "string" &&
+    typeof (obj as iTreeData).intro === "string" &&
+    typeof (obj as iTreeData).sciInfo === "object" &&
+    typeof (obj as iTreeData).traits === "object" &&
+    typeof (obj as iTreeData).uses === "string") 
+    {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+
 export const tempTreeData: iTreeData = {
   _id: "",
   title: "",

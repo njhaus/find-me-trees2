@@ -5,10 +5,14 @@ import { Flex } from "@chakra-ui/react";
 import SearchFilters from "./SearchFilters";
 import TreeList from "./TreeList";
 import BrowseTitle from "./BrowseTitle";
-import { iFormData } from "../../data/browse_data/filterFormData";
-import initialFormData from "../../data/browse_data/filterFormData";
+import { iFormData } from "./browse_data/filterFormData";
+import initialFormData from "./browse_data/filterFormData";
 
-import './styles/browse.css'
+import "./styles/browse.css";
+import { apiPost } from "../../services/api_client";
+import { ApiErrorType, isApiErrorType } from "../../data/types";
+import { iTreeData, isTreeData } from "../tree/data/tree_data";
+import useServerError from "../../hooks/useServerError";
 
 // Set form context (Form found in SearchFilters and inputs are in many children within SearchFilters)
 export interface iFormDataContext {
@@ -24,53 +28,66 @@ export const FormDataContext = createContext<iFormDataContext>({
 const Browse = () => {
   const [formData, setFormData] = useState(initialFormData);
   const [submitting, setSubmitting] = useState(false);
-  const [filteredTrees, setFilteredTrees] = useState([]);
+  const [filteredTrees, setFilteredTrees] = useState<iTreeData[]>([]);
   // Need to store search terms to be sent to treelist, but not reset when form is reset
   const [searchTerms, setSearchTerms] = useState(initialFormData);
+  const { setServerError } = useServerError();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Need to refactor into apiPost
   useEffect(() => {
+    const abortController = new AbortController();
     let isMounted = true;
     const fetchData = async () => {
-        try {
-          const response = await fetch(
-            "https://find-me-trees-server-production.up.railway.app/browse",
-            {
-              headers: {
-                "Content-Type": "application/json",
-              },
-              method: "POST",
-              mode: "cors",
-              credentials: "include",
-              body: JSON.stringify(formData),
-            });
-          console.log('response:')
-          console.log(response)
-          if (!isMounted) return;
-          if (!response.ok) throw new Error('error retrieving data!')
-          const responseJson = await response.json();
-          setFilteredTrees(responseJson)
-          setSearchTerms(formData)
-        } catch (err) {
-          console.log(err);
-        } finally {
-          if (isMounted) {
-             setSubmitting(false);
-          }
+      try {
+        const response: Awaited<iTreeData[] | ApiErrorType> = await apiPost (
+          "browse",
+          (formData),
+          abortController
+        );
+        console.log(response)
+        if (!isMounted) return;
+        if (Array.isArray(response) && isTreeData(response[0])) {
+           setFilteredTrees(response as iTreeData[]);
+           setSearchTerms(formData);
+        } 
+         else {
+           if (isApiErrorType(response) || response instanceof DOMException) {
+             console.log((response as ApiErrorType).error);
+             throw new Error((response as ApiErrorType).error);
+           } else {
+             throw new Error("Unknown Error: Tree data not found");
+           }
         }
-    }
+      } catch (err) {
+        console.log(err);
+        setServerError(
+          typeof err === "string"
+            ? err
+            : ((err as Error).message
+              ? (err as Error).message
+              : "An unknown error occurred")
+        );
+      } finally {
+        if (isMounted) {
+          setSubmitting(false);
+        }
+      }
+    };
     fetchData();
 
     return () => {
       isMounted = false;
-    }
-  }, [submitting])
+    };
+  }, [submitting]);
 
   // Need to reset search terms so the form resets, but not everything else
   useEffect(() => {
-    setFormData(initialFormData)
-  }, [filteredTrees])
+    setFormData(initialFormData);
+  }, [filteredTrees]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();

@@ -1,6 +1,11 @@
 import { Box, Divider, Flex, Text } from "@chakra-ui/react";
 
-import { BsChatLeftTextFill, BsChatQuoteFill, BsGeoFill, BsMapFill } from "react-icons/bs";
+import {
+  BsChatLeftTextFill,
+  BsChatQuoteFill,
+  BsGeoFill,
+  BsMapFill,
+} from "react-icons/bs";
 import { GiTreeBranch } from "react-icons/gi";
 import { iSciInfo } from "./data/tree_data";
 
@@ -45,7 +50,11 @@ const TreeSciInfo = ({ sciInfo }: iTreeSciInfo) => {
             >
               {/* Split at capital letter (to split a camelCase string) */}
               {key.split(/([A-Z])/).slice(0, 1)}{" "}
-              {key.split(/([A-Z])/).slice(1).join("")}:
+              {key
+                .split(/([A-Z])/)
+                .slice(1)
+                .join("")}
+              :
             </Text>
           </Flex>
           <Text fontSize={"0.9rem"} px={"0.5rem"} mb={"0.5rem"}>

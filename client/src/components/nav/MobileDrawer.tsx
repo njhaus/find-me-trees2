@@ -19,7 +19,7 @@ import {
 
 import { Link } from "react-router-dom";
 
-import links from "../../data/nav_data";
+import links from "./nav_data";
 import Boundary from "../borders/Boundary";
 import Login from "../login_auth/Login";
 import MainLogo from "../logo/MainLogo";

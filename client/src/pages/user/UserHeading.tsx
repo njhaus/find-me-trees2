@@ -1,25 +1,24 @@
-import { Flex, Heading, Image, HStack, Box } from "@chakra-ui/react"
+import { Flex, Heading, Image, HStack, Box } from "@chakra-ui/react";
 
 import UserProfile from "./UserProfile";
 import BackButton from "../../components/buttons/BackButton";
-import { iUserData } from "../../data/user_data/userData";
+import { iUserData } from "./user_data/userData";
 
 interface iUserHeading {
-  userData: iUserData
+  userData: iUserData;
 }
 
 const UserHeading = ({ userData }: iUserHeading) => {
-  
   // Need dynamic style based on length of username for heading fontsize
 
   return (
     <Flex
-      position={'relative'}
+      position={"relative"}
       direction={"row"}
       width={"100%"}
       padding={"1rem"}
       justify={"space-between"}
-      h={'10rem'}
+      h={"10rem"}
     >
       <Box>
         <BackButton to={"/browse"} />
@@ -29,18 +28,39 @@ const UserHeading = ({ userData }: iUserHeading) => {
           as="h1"
           textAlign={"center"}
           fontWeight={"500"}
-          fontSize={{base: '2.75rem', md: '3.5rem'}}
-          fontFamily={'display'}
+          fontSize={{
+            base: `${
+              2.5 -
+              (userData.username.length > 10
+                ? userData.username.length * 0.04
+                : 0)
+            }rem`,
+            md: `${
+              3 -
+              (userData.username.length > 10
+                ? userData.username.length * 0.025
+                : 0)
+            }rem`,
+          }}
+          fontFamily={"display"}
           color={"secondary.100"}
-          pb={'2rem'}
-          position={'relative'}
-          me={{base: '0rem', md: '4rem'}}
-          whiteSpace={'nowrap'}
+          pb={"2rem"}
+          position={"relative"}
+          me={{ base: "0rem", md: "4rem" }}
+          whiteSpace={"nowrap"}
         >
           {userData.username.slice(0, 1)[0].toUpperCase() +
             userData.username.slice(1)}
           's Trees
-          <Image src={'/user/curved-line-leaf.png'} position={'absolute'} right={{base: '-3rem', md: '-4rem'}} bottom={'0rem'} ></Image>
+          <Image
+            src={"/user/curved-line-leaf.png"}
+            position={"absolute"}
+            right={{
+              base: `-${2.75 + userData.username.length * 0.05}rem`,
+              md: `-${3.75 + userData.username.length * 0.1}rem`,
+            }}
+            bottom={"-0.5rem"}
+          ></Image>
         </Heading>
       </HStack>
       <Flex
@@ -56,6 +76,6 @@ const UserHeading = ({ userData }: iUserHeading) => {
       </Flex>
     </Flex>
   );
-}
+};
 
-export default UserHeading
+export default UserHeading;

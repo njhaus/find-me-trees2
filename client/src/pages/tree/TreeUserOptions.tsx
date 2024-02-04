@@ -1,7 +1,6 @@
 import { Box, Flex } from "@chakra-ui/react";
 
-
-import { options, userOptionsKey } from "../../data/user_options_data";
+import { options, userOptionsKey } from "../user/user_data/user_options_data";
 import UserOption from "./user_options/UserOption";
 
 interface iTreeUserOptions {
@@ -9,7 +8,6 @@ interface iTreeUserOptions {
 }
 
 const TreeUserOptions = ({ id }: iTreeUserOptions) => {
-
   return (
     <Flex
       direction={{ base: "row", md: "column", lg: "row" }}
@@ -38,6 +36,6 @@ const TreeUserOptions = ({ id }: iTreeUserOptions) => {
       ))}
     </Flex>
   );
-}
+};
 
-export default TreeUserOptions
+export default TreeUserOptions;

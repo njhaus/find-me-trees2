@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 
 import { Flex, TabPanel } from "@chakra-ui/react";
-import { iUserFound } from "../../../data/user_data/userData";
+import { iUserFound } from "../user_data/userData";
 
 import FoundList from "./found_panel/FoundList";
 import FoundMap from "./found_panel/FoundMap";
 
-
 interface iFoundPanel {
-    found: iUserFound[];
+  found: iUserFound[];
 }
 
 const FoundPanel = ({ found }: iFoundPanel) => {
-    
-    const [locationFilter, setLocationFilter] = useState<[number, number]>([-75, 40])
+  const [locationFilter, setLocationFilter] = useState<[number, number]>([
+    -75, 40,
+  ]);
 
   useEffect(() => {
     const options = {
@@ -24,7 +24,7 @@ const FoundPanel = ({ found }: iFoundPanel) => {
 
     function success(pos: GeolocationPosition) {
       const crd = pos.coords;
-      setLocationFilter([crd.longitude, crd.latitude])
+      setLocationFilter([crd.longitude, crd.latitude]);
     }
 
     function error(err: GeolocationPositionError) {
@@ -32,8 +32,7 @@ const FoundPanel = ({ found }: iFoundPanel) => {
     }
 
     navigator.geolocation.getCurrentPosition(success, error, options);
-
-  }, [])
+  }, []);
 
   return (
     <TabPanel
@@ -54,16 +53,11 @@ const FoundPanel = ({ found }: iFoundPanel) => {
       >
         {/* // NEED TO REDO THIS COMPONENT */}
         {/* <FoundSelect onSelect={handleSelect} /> */}
-        <FoundMap
-          data={found}
-          location={locationFilter}
-        />
-        <FoundList
-          data={found}
-        />
+        <FoundMap data={found} location={locationFilter} />
+        <FoundList data={found} />
       </Flex>
     </TabPanel>
   );
-}
+};
 
-export default FoundPanel
+export default FoundPanel;

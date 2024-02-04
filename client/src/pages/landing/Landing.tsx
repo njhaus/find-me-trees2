@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import { Flex } from "@chakra-ui/react";
 
 import LandingMain from "./LandingMain";
@@ -7,6 +9,11 @@ import LandingArticlesAll from "./landing_articles/LandingArticlesAll";
 import './styles/landing.css'
 
 const Landing = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Flex as={"section"} direction={"column"} w={'100%'}>
       <LandingMain />

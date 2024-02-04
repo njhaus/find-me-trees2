@@ -11,12 +11,12 @@ import {
   PopoverTrigger,
   Text,
   VStack,
-  useDisclosure
+  useDisclosure,
 } from "@chakra-ui/react";
 
 import { GiNotebook } from "react-icons/gi";
 import GenTextInput from "../../../../components/inputs/GenTextInput";
-import { iUserFavorites } from "../../../../data/user_data/userData";
+import { iUserFavorites } from "../../user_data/userData";
 import useUpdateUser from "../../../../hooks/useUpdateUser";
 
 interface iFavoriteNotes {
@@ -25,7 +25,6 @@ interface iFavoriteNotes {
 }
 
 const FavoriteNotes = ({ data, id }: iFavoriteNotes) => {
-
   const { onOpen, onClose, isOpen } = useDisclosure();
 
   const [isEditing, setIsEditing] = useState(false);
@@ -36,19 +35,19 @@ const FavoriteNotes = ({ data, id }: iFavoriteNotes) => {
   const handleEditedNote = (val: string) => {
     if (thisTree) {
       const editedTree = { _id: thisTree._id, notes: val };
-    if (editedTree) {
-      const unEditedFavorites = favorites.filter(
-        (tree) => tree._id._id !== thisTree._id._id
-      );
-      setFavorites([...unEditedFavorites, editedTree]);
+      if (editedTree) {
+        const unEditedFavorites = favorites.filter(
+          (tree) => tree._id._id !== thisTree._id._id
+        );
+        setFavorites([...unEditedFavorites, editedTree]);
+      }
     }
-    }
-  }
+  };
 
   const saveEditedNote = () => {
     setIsEditing(false);
-    handleUpdateUser('favorites', favorites);
-  }
+    handleUpdateUser("favorites", favorites);
+  };
 
   return (
     <Popover
@@ -85,7 +84,7 @@ const FavoriteNotes = ({ data, id }: iFavoriteNotes) => {
               label="New Note:"
               onSubmit={handleEditedNote}
             />
-            <HStack w={'100%'}>
+            <HStack w={"100%"}>
               <Button w={"50%"} onClick={() => saveEditedNote()}>
                 Save
               </Button>

@@ -23,6 +23,8 @@ import useAuth from "../../hooks/useAuth";
 import { apiPost } from "../../services/api_client";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
+import { iUserData, isUserData } from "../../pages/user/user_data/userData";
+import { ApiErrorType, isApiErrorType } from "../../data/types";
 
 
 interface LoginProps {
@@ -63,42 +65,6 @@ function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
     validateNewUser(formData, setErrors);
   };
 
-
-  // Form submission -- handles login and register (need to move to client)
-  const handleSubmit = async (slug: string, body: iFormData) => {
-    const loggedInUser = await apiPost(slug, body);
-    console.log(loggedInUser)
-    if (loggedInUser.username) {
-      console.log('here1')
-      setAuth(loggedInUser);
-      handleClose();
-      navigate(from, { replace: true });
-    } else if (loggedInUser.status === 401) {
-      setServerError("Incorrect Username or Password");
-    } else if (loggedInUser.error) {
-      setServerError(loggedInUser.error);
-    } else setServerError("An error occured");
-  };
-
-  // --the 'valid' argument is achieved by running the validataion function (found in utils/loginutils -- see function call in register button below)
-  const submitValidForm = (valid: boolean, slug: string) => {
-    if (valid) {
-      handleSubmit(slug, {
-        username: formData.username,
-        email: formData.email,
-        password: formData.password,
-      });
-    } else {
-      console.log("invalid registration attempt");
-    }
-  };
-
-  // Handle whether register or login is showing
-  const handleIsRegistering = (set: boolean) => {
-    setIsRegistering(set);
-    setServerError("");
-  };
-
   // Need a handleClose function to reset form and errors when login modal is closed
   const handleClose = () => {
     setFormData(initialFormData);
@@ -109,66 +75,100 @@ function Login({ isOpenLogin, onCloseLogin }: LoginProps) {
     navigate("/", { state: { from: location, redirect: false } });
   };
 
-  // Open login if redirected from another page with 'you must log in to see this page' message
-  useEffect(() => {
-    if (location.state?.redirect) {
-      setServerError("You must log in to access this page.");
-    } else {
-      setServerError("");
-    }
-  }, [location.state?.redirect]);
 
-  return (
-    <>
-      <Modal isOpen={isOpenLogin} onClose={() => handleClose()}>
-        <ModalOverlay onClick={() => handleClose()} />
-        <ModalContent>
-          <ModalHeader marginTop={"1rem"}>
-            <Flex
-              direction={"row"}
-              justifyContent={"space-between"}
-              alignItems={"end"}
-              borderBottom={"2px"}
-              borderBottomColor={"gray"}
-              paddingBottom={"0.5rem"}
-              marginX={"0.5rem"}
-            >
-              <Heading as={"h4"}>
-                {isRegistering ? "Register" : "Login"}
-              </Heading>
-              <LogoImgOnly />
-            </Flex>
-          </ModalHeader>
-          <ModalCloseButton onClick={() => handleClose()} />
-          <ModalBody pb={6}>
-            {/* <p ref={errorRef} tabIndex={0}>{serverError && serverError}</p> */}
-            {isRegistering ? (
-              <RegisterForm
-                handleForm={handleForm}
-                handleIsRegistering={handleIsRegistering}
-                submitLocalRegistration={submitValidForm}
-                formData={formData}
-                errors={errors}
-                setErrors={setErrors}
-              />
-            ) : (
-              <LoginForm
-                handleForm={handleForm}
-                handleIsRegistering={handleIsRegistering}
-                submitLogin={submitValidForm}
-                formData={formData}
+  // Form submission -- handles login and register (need to move to client)
+  const handleSubmit = async (slug: string, body: iFormData) => {
+
+    const response: Awaited<iUserData | ApiErrorType> = await apiPost(slug, body);
+    console.log(response)
+
+    if (isUserData(response)) { 
+       setAuth(response as iUserData);
+      handleClose();
+      navigate(from, { replace: true });
+    }
+      else {
+      if (isApiErrorType(response)) {
+        setServerError((response as ApiErrorType).error);
+      } else setServerError("Error logging in: Server error 500");
+    }
+    
+  }
+    // --the 'valid' argument is achieved by running the validataion function (found in utils/loginutils -- see function call in register button below)
+    const submitValidForm = (valid: boolean, slug: string) => {
+      if (valid) {
+        handleSubmit(slug, {
+          username: formData.username,
+          email: formData.email,
+          password: formData.password,
+        });
+      } else {
+        console.log("invalid registration attempt");
+      }
+    };
+
+    // Handle whether register or login is showing
+    const handleIsRegistering = (set: boolean) => {
+      setIsRegistering(set);
+    };
+
+    // Open login if redirected from another page with 'you must log in to see this page' message
+    useEffect(() => {
+      if (location.state?.redirect) {
+        setServerError("You must log in to access this page.");
+      } 
+    }, [location.state?.redirect]);
+
+    return (
+      <>
+        <Modal isOpen={isOpenLogin} onClose={() => handleClose()}>
+          <ModalOverlay onClick={() => handleClose()} />
+          <ModalContent>
+            <ModalHeader marginTop={"1rem"}>
+              <Flex
+                direction={"row"}
+                justifyContent={"space-between"}
+                alignItems={"end"}
+                borderBottom={"2px"}
+                borderBottomColor={"gray"}
+                paddingBottom={"0.5rem"}
+                marginX={"0.5rem"}
+              >
+                <Heading as={"h4"}>
+                  {isRegistering ? "Register" : "Login"}
+                </Heading>
+                <LogoImgOnly />
+              </Flex>
+            </ModalHeader>
+            <ModalCloseButton onClick={() => handleClose()} />
+            <ModalBody pb={6}>
+              {/* <p ref={errorRef} tabIndex={0}>{serverError && serverError}</p> */}
+              {isRegistering ? (
+                <RegisterForm
+                  handleForm={handleForm}
+                  handleIsRegistering={handleIsRegistering}
+                  submitLocalRegistration={submitValidForm}
+                  formData={formData}
+                  errors={errors}
+                  setErrors={setErrors}
+                />
+              ) : (
+                <LoginForm
+                  handleForm={handleForm}
+                  handleIsRegistering={handleIsRegistering}
+                  submitLogin={submitValidForm}
+                  formData={formData}
                   errors={errors}
                   serverError={serverError}
-              />
-            )}
-          </ModalBody>
-          <ModalFooter>
-            <Button onClick={() => handleClose()}>Cancel</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </>
-  );
+                />
+              )}
+            </ModalBody>
+            <ModalFooter>
+              <Button onClick={() => handleClose()}>Cancel</Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      </>
+    );
 }
-
 export default Login;

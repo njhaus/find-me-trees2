@@ -1,9 +1,14 @@
+import { ApiErrorType } from "../data/types";
 
-// const baseUrl = "http://localhost:3008/";
+// const baseUrl = "http://localhost:3009/";
 const baseUrl = "https://find-me-trees-server-production.up.railway.app/";
 
 
-export const apiPost = async (url: string, body: unknown) => {
+export const apiPost = async <T>(
+  url: string,
+  body: unknown,
+  abortController?: AbortController
+): Promise<T | ApiErrorType> => {
   try {
     console.log("Api post client running");
     const response = await fetch(`${baseUrl}${url}`, {
@@ -14,17 +19,23 @@ export const apiPost = async (url: string, body: unknown) => {
       credentials: "include",
       mode: "cors",
       body: JSON.stringify(body),
+      signal: abortController?.signal,
     });
+    console.log(response)
     if (!response.ok) throw new Error("error retrieving data!");
-    const data = await response.json();
+    const data = await response.json() as T;
     return data;
   } catch (err) {
     console.log(err);
-    return err;
+    return {code: '500', error: err as string };
   }
 };
 
-export const apiPatch = async (url: string, body: unknown) => {
+export const apiPatch = async <T>(
+  url: string,
+  body: unknown,
+  abortController?: AbortController
+): Promise<T | ApiErrorType> => {
   try {
     console.log("Api patch client running");
     const response = await fetch(`${baseUrl}${url}`, {
@@ -35,18 +46,19 @@ export const apiPatch = async (url: string, body: unknown) => {
       credentials: "include",
       mode: "cors",
       body: JSON.stringify(body),
+      signal: abortController?.signal,
     });
     console.log("response:");
-    console.log(response)
+    console.log(response);
     const data = await response.json();
     return data;
   } catch (err) {
     console.log(err);
-    return err;
+    return {code: '500', error: err as string };
   }
 };
 
-export const apiGet = async (url: string, abortController: AbortController) => {
+export const apiGet = async <T>(url: string, abortController: AbortController): Promise<T | ApiErrorType> => {
   console.log("Api get client running");
   try {
     const response = await fetch(`${baseUrl}${url}`, {
@@ -62,7 +74,7 @@ export const apiGet = async (url: string, abortController: AbortController) => {
     return data;
   } catch (err) {
     console.error(err);
-    return err;
+    return {code: '500', error: err as string };
   }
 };
 

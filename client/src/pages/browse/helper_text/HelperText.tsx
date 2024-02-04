@@ -1,11 +1,11 @@
-import { HStack, Image, VStack, Text , Box, Link} from '@chakra-ui/react'
+import { HStack, Image, VStack, Text, Box, Link } from "@chakra-ui/react";
 
-import { Helper} from '../../../data/browse_data/filterFormData';
-import { FaLink } from 'react-icons/fa';
+import { Helper } from "../browse_data/filterFormData";
+import { FaLink } from "react-icons/fa";
 
 interface iHelper {
-  helper: Helper[],
-  helperLink: string
+  helper: Helper[];
+  helperLink: string;
 }
 
 const HelperText = ({ helper, helperLink }: iHelper) => {
@@ -31,9 +31,19 @@ const HelperText = ({ helper, helperLink }: iHelper) => {
           </VStack>
         ))}
       </HStack>
-      {helperLink && <Link href={helperLink} target='_blank' display={'flex'} alignItems={'center'} gap={'0.25rem'}>Learn More <FaLink /></Link>}
+      {helperLink && (
+        <Link
+          href={helperLink}
+          target="_blank"
+          display={"flex"}
+          alignItems={"center"}
+          gap={"0.25rem"}
+        >
+          Learn More <FaLink />
+        </Link>
+      )}
     </>
   );
-}
+};
 
-export default HelperText
+export default HelperText;

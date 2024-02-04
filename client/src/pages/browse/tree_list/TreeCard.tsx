@@ -8,13 +8,13 @@ import {
   Divider,
   Image,
   Stack,
-  Text
+  Text,
 } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
 
-import { filtersTextMap } from "../../../data/browse_data/filterData";
-import { iFormData } from "../../../data/browse_data/filterFormData";
+import { filtersTextMap } from "../browse_data/filterData";
+import { iFormData } from "../browse_data/filterFormData";
 
 interface TreeCardProps {
   id: string;
@@ -31,7 +31,6 @@ const TreeCard = ({
   sciName,
   searchTerms,
 }: TreeCardProps) => {
-
   const searchTermText = searchTerms ? Object.keys(searchTerms) : [];
   const searchTermValues = searchTerms ? Object.values(searchTerms) : [];
 

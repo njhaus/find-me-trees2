@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { Flex, Box } from "@chakra-ui/react";
 
 import RadioInput from "../../../components/inputs/BrowseRadioInput";
-import { leafFilters } from "../../../data/browse_data/filterFormData";
+import { leafFilters } from "../browse_data/filterFormData";
 import { FormDataContext, iFormDataContext } from "../Browse";
 
 const LeafFilter = () => {
@@ -17,7 +17,7 @@ const LeafFilter = () => {
   return (
     <Flex direction={"column"} width={"100%"}>
       {leafFilters.map((filter, i) => (
-        <Box key={i}  width={"100%"} p={"0.5rem"} className="filter-group">
+        <Box key={i} width={"100%"} p={"0.5rem"} className="filter-group">
           <RadioInput
             formVal={formData[filter.formName]}
             label={filter.label}

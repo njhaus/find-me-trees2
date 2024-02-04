@@ -4,8 +4,8 @@ import { Text, Flex, Grid, Button } from "@chakra-ui/react";
 
 import TreeCard from "./tree_list/TreeCard";
 import { iTreeData } from "../tree/data/tree_data";
-import { iFormData } from "../../data/browse_data/filterFormData";
-import { filtersTextMap } from "../../data/browse_data/filterData";
+import { iFormData } from "./browse_data/filterFormData";
+import { filtersTextMap } from "./browse_data/filterData";
 
 interface iTreeList {
   filteredTrees: iTreeData[];

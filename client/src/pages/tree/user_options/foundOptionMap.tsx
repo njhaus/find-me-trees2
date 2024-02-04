@@ -2,6 +2,7 @@ import { useRef, useEffect } from "react";
 import maplibregl, { Map } from "maplibre-gl";
 import '../styles/options-map.css'
 import { apiGet } from "../../../services/api_client";
+import { ApiErrorType, isApiErrorType } from "../../../data/types";
 
 interface iFoundOptionMap {
     handleCoordinates: (coords: [number, number]) => void;
@@ -20,8 +21,17 @@ const foundOptionMap = ({handleCoordinates}: iFoundOptionMap) => {
     const setUpMap = async () => {
         
       try {
-        const getKey = await apiGet("data/maptilerkey", abortController);
-        const API_KEY = getKey.key;
+        const getKey: Awaited<{key: string} | ApiErrorType> = await apiGet("data/maptilerkey", abortController);
+        if (getKey && (getKey as { key: string }).key) {
+          console.log("Success getting key");
+        } else {
+          if (isApiErrorType(getKey)) {
+            throw new Error((getKey as ApiErrorType).error);
+          } else {
+            throw new Error("Unknown Error: Unable to fetch map key.");
+          }
+        }
+        const API_KEY = (getKey as { key: string }).key;
         
         if (mapContainer.current) {
           map.current = new maplibregl.Map({

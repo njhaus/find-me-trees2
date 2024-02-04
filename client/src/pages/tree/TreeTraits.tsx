@@ -1,8 +1,7 @@
-
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { BsQuestionCircle } from "react-icons/bs";
 
-import { allFilters } from "../../data/browse_data/filterFormData";
+import { allFilters } from "../browse/browse_data/filterFormData";
 import TreeTraitsHelper from "./TreeTraitsHelper";
 
 interface iTreeTraits {
@@ -13,14 +12,10 @@ interface iTreeTraits {
 }
 
 const TreeTraits = ({ trait, label, icon }: iTreeTraits) => {
-
   const filter = allFilters.filter((h) => h.label === label)[0];
-  const helperIdx = filter.values.findIndex(f => f.toLowerCase() === trait)
+  const helperIdx = filter.values.findIndex((f) => f.toLowerCase() === trait);
   const helper =
-    helperIdx >= 0
-      ? filter.helperText[helperIdx]
-      : filter.helperText[0];
-
+    helperIdx >= 0 ? filter.helperText[helperIdx] : filter.helperText[0];
 
   return (
     // Uses the filters array -- which has all descriptions already included in it and a property 'formName' that matches the key for the Traits variable passed in. This way, we can access the explanation for each trait from the filters

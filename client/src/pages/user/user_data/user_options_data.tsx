@@ -1,13 +1,13 @@
 import { BsHeart, BsSave, BsSearch } from "react-icons/bs";
 
-import { iUserData } from "./user_data/userData";
+import { iUserData } from "./userData";
 
 type GeoCode = {
-    type: string;
-    coordinates: [number, number]
-}
+  type: string;
+  coordinates: [number, number];
+};
 
-export type userOptionsKey = 'saved' | 'found' | 'favorites';
+export type userOptionsKey = "saved" | "found" | "favorites";
 
 type DataFormatWithCollections = {
   _id: string;
@@ -83,4 +83,4 @@ export const options: {
   },
 ];
 
-// const getCoordinates = 
+// const getCoordinates =

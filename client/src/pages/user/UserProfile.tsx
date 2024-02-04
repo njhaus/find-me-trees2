@@ -13,7 +13,7 @@ import {
   FormControl,
   FormLabel,
   Input,
-  useDisclosure
+  useDisclosure,
 } from "@chakra-ui/react";
 
 import { BsPerson } from "react-icons/bs";
@@ -21,13 +21,16 @@ import { BsPerson } from "react-icons/bs";
 import CurrentProfile from "./CurrentProfile";
 import EditProfile from "./EditProfile";
 
-import { iUserData } from "../../data/user_data/userData";
+import { iUserData } from "./user_data/userData";
 import useUpdateProfile from "../../hooks/useUpdateProfile";
-import { iFormErrors, initialErrors, validateNewUser } from "../../utils/login_utils";
-
+import {
+  iFormErrors,
+  initialErrors,
+  validateNewUser,
+} from "../../utils/login_utils";
 
 interface iUserProfile {
-    userData: iUserData
+  userData: iUserData;
 }
 
 export type updatedDataT = {
@@ -37,17 +40,15 @@ export type updatedDataT = {
   checkPassword: string;
 };
 
-
 function UserProfile({ userData }: iUserProfile) {
+  const initialFormData = {
+    username: userData.username,
+    email: userData.email,
+    password: "",
+    checkPassword: "",
+  };
 
-const initialFormData = {
-  username: userData.username,
-  email: userData.email,
-  password: "",
-  checkPassword: "",
-};
-    
-const [isEditing, setIsEditing] = useState(false)
+  const [isEditing, setIsEditing] = useState(false);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<HTMLDivElement | null>(null);
@@ -68,7 +69,6 @@ const [isEditing, setIsEditing] = useState(false)
       setErrors
     );
   };
-
 
   const handleProfileChange = (
     e: ChangeEvent<HTMLInputElement>,
@@ -156,24 +156,22 @@ const [isEditing, setIsEditing] = useState(false)
                   />
                   {/* <Text> Incorrect password</Text> */}
                 </FormControl>
-                <Flex>
-                  
-                </Flex>
+                <Flex></Flex>
                 <Button
-                  variant={'solidDark'}
+                  variant={"solidDark"}
                   marginY={"1rem"}
-                  me={'1rem'}
+                  me={"1rem"}
                   onClick={() => {
                     setIsEditing(!isEditing);
                     setCurrPassword("");
-                    setUpdatedData(initialFormData)
-                    setErrors(initialErrors)
+                    setUpdatedData(initialFormData);
+                    setErrors(initialErrors);
                   }}
                 >
                   Cancel
                 </Button>
                 <Button
-                  variant={'solidDark'}
+                  variant={"solidDark"}
                   isDisabled={
                     updatedData.password !== updatedData.checkPassword ||
                     !currPassword
@@ -194,7 +192,7 @@ const [isEditing, setIsEditing] = useState(false)
               </>
             ) : (
               <Button
-                variant={'solidDark'}
+                variant={"solidDark"}
                 marginY={"1rem"}
                 onClick={() => {
                   setIsEditing(!isEditing);
@@ -207,8 +205,7 @@ const [isEditing, setIsEditing] = useState(false)
 
           <DrawerFooter>
             {!isEditing && (
-              <Button
-                variant="outlineDark" mr={3} onClick={onClose}>
+              <Button variant="outlineDark" mr={3} onClick={onClose}>
                 Done
               </Button>
             )}
@@ -219,4 +216,4 @@ const [isEditing, setIsEditing] = useState(false)
   );
 }
 
-export default UserProfile
+export default UserProfile;

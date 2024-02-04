@@ -16,7 +16,7 @@ import NameFilter from "./search_filters/NameFilter";
 import PhysicalIcon from "./search_filters/PhysicalIcon";
 
 // data
-import { filters, mapFilter } from "../../data/browse_data/filterData";
+import { filters, mapFilter } from "./browse_data/filterData";
 
 // styles
 import { iconHeadingProps as ihp } from "./styles/browseStyles";

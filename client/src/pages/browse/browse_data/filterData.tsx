@@ -1,11 +1,11 @@
 import { GiTreeBranch, GiOakLeaf, GiShinyApple } from "react-icons/gi";
 import { BsFlower1 } from "react-icons/bs";
 import { ReactNode } from "react";
-import LeafFilter from "../../pages/browse/search_filters/LeafFilter";
-import BarkFilter from "../../pages/browse/search_filters/BarkFilter";
-import FruitFilter from "../../pages/browse/search_filters/FruitFilter";
-import FlowerFilter from "../../pages/browse/search_filters/FlowerFilter";
-import MapFilter from "../../pages/browse/search_filters/MapFilter";
+import LeafFilter from "../search_filters/LeafFilter";
+import BarkFilter from "../search_filters/BarkFilter";
+import FruitFilter from "../search_filters/FruitFilter";
+import FlowerFilter from "../search_filters/FlowerFilter";
+import MapFilter from "../search_filters/MapFilter";
 
 const iconStyles = {
   size: "2rem",
@@ -23,7 +23,7 @@ interface Filter {
 
 export const filters: Filter[] = [
   {
-    title: 'Leaves',
+    title: "Leaves",
     color: "green",
     icon: (
       <GiOakLeaf size={iconStyles.size} color={"green"} cursor={"pointer"} />
@@ -31,7 +31,7 @@ export const filters: Filter[] = [
     dropDown: <LeafFilter />,
   },
   {
-    title: 'Bark & Branches',
+    title: "Bark & Branches",
     icon: (
       <GiTreeBranch size={iconStyles.size} color={"brown"} cursor={"pointer"} />
     ),
@@ -39,7 +39,7 @@ export const filters: Filter[] = [
     dropDown: <BarkFilter />,
   },
   {
-    title: 'Fruit & Seeds',
+    title: "Fruit & Seeds",
     icon: (
       <GiShinyApple size={iconStyles.size} color={"red"} cursor={"pointer"} />
     ),
@@ -47,7 +47,7 @@ export const filters: Filter[] = [
     dropDown: <FruitFilter />,
   },
   {
-    title: 'Flowers',
+    title: "Flowers",
     icon: (
       <BsFlower1 size={iconStyles.size} color={"pink"} cursor={"pointer"} />
     ),
@@ -61,12 +61,12 @@ export const mapFilter = {
 };
 
 export const filtersTextMap = {
-  bark: 'Bark',
-  branches: 'Branches',
-  flower: 'Flower',
-  fruit: 'Fruit',
-  leafShape: 'Leaf Shape',
-  leafType: 'Leaf Type',
-  location: 'Location',
-  title: 'Name'
-}
+  bark: "Bark",
+  branches: "Branches",
+  flower: "Flower",
+  fruit: "Fruit",
+  leafShape: "Leaf Shape",
+  leafType: "Leaf Type",
+  location: "Location",
+  title: "Name",
+};

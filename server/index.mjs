@@ -24,10 +24,10 @@ const port = process.env.PORT;
 
 
 // middleware for allowing react to fetch() from server
-// const corsOrigin =
-//   process.env.ENVIRONMENT === "prod"
-//     ? "https://find-me-trees-client-production.up.railway.app"
-//     : "http://localhost:5173";
+const corsOrigin =
+  process.env.ENVIRONMENT === "prod"
+    ? "https://find-me-trees-client-production.up.railway.app"
+    : "http://localhost:5173";
 
 
 // app.options("*", cors());
@@ -54,7 +54,7 @@ const port = process.env.PORT;
 
 app.use(
   cors({
-    origin: "https://find-me-trees-client-production.up.railway.app",
+    origin: corsOrigin,
     methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD", "PATCH"],
     credentials: true,
     preflightContinue: false,

@@ -1,25 +1,34 @@
+import { ApiErrorType, isApiErrorType } from '../data/types';
+import { iUserData, isUserData } from '../pages/user/user_data/userData';
 import { apiGet } from '../services/api_client'
 import useAuth from './useAuth'
+import useServerError from './useServerError';
 
 const useRefreshToken = () => {
 
-    const abortController = new AbortController();
+  const abortController = new AbortController();
+  const{ setServerError } = useServerError();
 
     const { setAuth } = useAuth();
     const refresh = async () => {
         console.log("refresh token running");
-        const response = await apiGet('login/refresh', abortController);
+        const response: Awaited<iUserData | ApiErrorType> = await apiGet('login/refresh', abortController);
         console.log(response);
-        if (response !== 'error') {
-            setAuth(prev => {
-                return {
-                    ...prev, accessToken: response.accessToken
-                }
-            })
-            return response.accessToken;
-        }
-        else {
-            console.log('error refreshing access token');
+        if (isUserData(response)) {
+            setAuth((prev) => {
+              return {
+                ...prev,
+                accessToken: (response as iUserData).accessToken,
+              };
+            });
+            return (response as iUserData).accessToken;
+        } else {
+          if (isApiErrorType(response)) {
+            setServerError((response as ApiErrorType).error)
+          }
+          else {
+            setServerError("Error updating access: Server error 500");
+          }
         }
     }
     return refresh;

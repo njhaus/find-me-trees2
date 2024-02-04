@@ -1,8 +1,14 @@
 import { Flex, Heading } from "@chakra-ui/react";
 
 import { BsFlower1, BsPinMap, BsRulers } from "react-icons/bs";
-import { GiLeafSkeleton, GiOakLeaf, GiShinyApple, GiTreeBranch, GiTreeFace } from "react-icons/gi";
-import { allFilters } from "../../data/browse_data/filterFormData";
+import {
+  GiLeafSkeleton,
+  GiOakLeaf,
+  GiShinyApple,
+  GiTreeBranch,
+  GiTreeFace,
+} from "react-icons/gi";
+import { allFilters } from "../browse/browse_data/filterFormData";
 import TreeTraits from "./TreeTraits";
 import { iTreeTraitsData } from "./data/tree_data";
 

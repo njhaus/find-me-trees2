@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 
 import RadioInput from "../../../components/inputs/BrowseRadioInput";
-import { barkFilters } from "../../../data/browse_data/filterFormData";
+import { barkFilters } from "../browse_data/filterFormData";
 import { FormDataContext, iFormDataContext } from "../Browse";
 
 const BarkFilter = () => {

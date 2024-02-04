@@ -5,12 +5,12 @@ import {
   Flex,
   HStack,
   chakra,
-  useDisclosure as useLoginDisclosure
+  useDisclosure as useLoginDisclosure,
 } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
 
-import links from "../../data/nav_data";
+import links from "./nav_data";
 import Login from "../login_auth/Login";
 
 import LogoContainer from "./LogoContainer";
@@ -26,9 +26,9 @@ const DesktopNav = ({ auth, onLogout, redirect }: iNav) => {
   // Open login if redirected from another page with 'you must log in to see this page' message
   useEffect(() => {
     if (redirect) {
-      onOpenLogin()
+      onOpenLogin();
     }
-  }, [redirect])
+  }, [redirect]);
 
   return (
     <chakra.header
@@ -50,7 +50,10 @@ const DesktopNav = ({ auth, onLogout, redirect }: iNav) => {
         {/* // Nav Items */}
         <HStack as="nav" spacing="1" px={"1.5rem"}>
           {links.map((item, i) => (
-            <Link key={i} to={(item.to === '/user' && !auth?.username) ? '/login' : item.to}>
+            <Link
+              key={i}
+              to={item.to === "/user" && !auth?.username ? "/login" : item.to}
+            >
               <Button
                 variant="nav"
                 textTransform={"uppercase"}

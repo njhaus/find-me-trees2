@@ -1,19 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import { CheckIcon } from '@chakra-ui/icons';
+import { CheckIcon } from "@chakra-ui/icons";
+import { Box, Button, CloseButton, Flex, HStack, Text } from "@chakra-ui/react";
+import { iUserData } from "../../user/user_data/userData";
 import {
-  Box,
-  Button,
-  CloseButton,
-  Flex,
-  HStack,
-  Text
-} from "@chakra-ui/react";
-import { iUserData } from '../../../data/user_data/userData';
-import { DataFormat, userOptionsKey } from '../../../data/user_options_data';
-import useUpdateUser from '../../../hooks/useUpdateUser';
-import OptionPopup from './OptionPopup';
-
+  DataFormat,
+  userOptionsKey,
+} from "../../user/user_data/user_options_data";
+import useUpdateUser from "../../../hooks/useUpdateUser";
+import OptionPopup from "./OptionPopup";
 
 interface iUserOption {
   text: string;
@@ -23,16 +18,23 @@ interface iUserOption {
   id: string;
   userDataKey: userOptionsKey;
   dataFormat: DataFormat;
-  hoverMsg?: string
+  hoverMsg?: string;
 }
 
-const UserOption = ({ text, successText, icon, id, userDataKey, dataFormat, hoverMsg }: iUserOption) => {
+const UserOption = ({
+  text,
+  successText,
+  icon,
+  id,
+  userDataKey,
+  dataFormat,
+  hoverMsg,
+}: iUserOption) => {
   const { userData, handleUpdateUser } = useUpdateUser();
   // Object to hold data that will be put into userData if updated
   const optionData = { ...dataFormat, _id: id };
 
   const [btnClicked, setBtnClicked] = useState(false);
-  
 
   // Show 'log in! message when button clicked if not logged in.
   const [noUserMsg, setNoUserMsg] = useState(false);
@@ -50,9 +52,9 @@ const UserOption = ({ text, successText, icon, id, userDataKey, dataFormat, hove
   const handleUpdate = (key: keyof iUserData, newData: DataFormat) => {
     if (userExists) {
       if (btnClicked !== true) {
-        if (text !== 'Found it') {
+        if (text !== "Found it") {
           setBtnClicked(true);
-        } 
+        }
         console.log([...userData[key]]);
         const updatedKey = [...userData[key], newData];
         console.log(updatedKey);
@@ -92,7 +94,7 @@ const UserOption = ({ text, successText, icon, id, userDataKey, dataFormat, hove
         </Box>
       ) : (
         <Flex
-          direction={{ base:"column", md: "row", lg: "column" }}
+          direction={{ base: "column", md: "row", lg: "column" }}
           justifyContent={"start"}
           alignItems={"center"}
           onClick={() => handleUpdate(userDataKey, optionData)}
@@ -108,12 +110,7 @@ const UserOption = ({ text, successText, icon, id, userDataKey, dataFormat, hove
               >
                 {icon}
               </Button>
-              <Text
-                color="accent.500"
-                textAlign={"center"}
-                fontSize={"0.9rem"}
-                
-              >
+              <Text color="accent.500" textAlign={"center"} fontSize={"0.9rem"}>
                 {text}
               </Text>
             </>
@@ -124,7 +121,7 @@ const UserOption = ({ text, successText, icon, id, userDataKey, dataFormat, hove
                 variant={"icon"}
                 fontSize={"1.5rem"}
                 bg="accent.500"
-                    color="white"
+                color="white"
               >
                 {icon}
               </Button>
@@ -163,6 +160,6 @@ const UserOption = ({ text, successText, icon, id, userDataKey, dataFormat, hove
       )}
     </>
   );
-}
+};
 
-export default UserOption
+export default UserOption;

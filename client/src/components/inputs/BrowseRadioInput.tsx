@@ -6,11 +6,11 @@ import {
   RadioGroup,
   HStack,
   Radio,
-  Box
+  Box,
 } from "@chakra-ui/react";
 import { BsQuestionCircle } from "react-icons/bs";
 import HelperText from "../../pages/browse/helper_text/HelperText";
-import { Helper } from "../../data/browse_data/filterFormData";
+import { Helper } from "../../pages/browse/browse_data/filterFormData";
 
 interface RadioInputProps {
   formVal: string | undefined;
@@ -22,7 +22,15 @@ interface RadioInputProps {
   helperLink?: string;
 }
 
-const RadioInput = ({ formVal, label, values, formName, helperText, helperLink, onChange }: RadioInputProps) => {
+const RadioInput = ({
+  formVal,
+  label,
+  values,
+  formName,
+  helperText,
+  helperLink,
+  onChange,
+}: RadioInputProps) => {
   const [value, setValue] = useState<string | undefined>(formVal);
 
   useEffect(() => {
@@ -49,12 +57,17 @@ const RadioInput = ({ formVal, label, values, formName, helperText, helperLink, 
           ))}
         </HStack>
       </RadioGroup>
-      {helperText && <Box width={"fit-content"} className="filter-icon">
-        <Box className="filter-text" maxWidth={"80vw"} overflowX={"scroll"}>
-          <HelperText helper={helperText ? helperText : []} helperLink={ helperLink ? helperLink : ''} />
+      {helperText && (
+        <Box width={"fit-content"} className="filter-icon">
+          <Box className="filter-text" maxWidth={"80vw"} overflowX={"scroll"}>
+            <HelperText
+              helper={helperText ? helperText : []}
+              helperLink={helperLink ? helperLink : ""}
+            />
+          </Box>
+          <BsQuestionCircle />
         </Box>
-        <BsQuestionCircle />
-      </Box>}
+      )}
     </FormControl>
   );
 };

@@ -26,8 +26,10 @@ import CurveBorder from "../../components/borders/CurveBorder";
 import TreeAdaptation from "./TreeAdaptation";
 import TreeImgMobile from "./TreeImgMobile";
 import TreeUses from "./TreeUses";
-import { tempTreeData } from "./data/tree_data";
+import { tempTreeData, iTreeData, isTreeData } from "./data/tree_data";
 import BrowseRedirect from "./BrowseRedirect";
+import { ApiErrorType, isApiErrorType } from "../../data/types";
+import useServerError from "../../hooks/useServerError";
 
 const Tree = () => {
   const [treeData, setTreeData] = useState(tempTreeData);
@@ -36,11 +38,16 @@ const Tree = () => {
   // Error finding trees if no tree found with id
   const [notFound, setNotFound] = useState(false);
 
+  const {setServerError} = useServerError();
+
   // Id for tree is sent by params
   const { id } = useParams();
   // Need to extract images so I can get them from user Data when loaded (it loads after page) -- see useEffect below
   // let imgs = [...treeData.imgSrc];
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -48,19 +55,34 @@ const Tree = () => {
 
     const fetchData = async () => {
       try {
-        const data: any = await apiGet(`tree/${id}`, abortController);
-        if (data.error || data instanceof DOMException) {
-            console.log(data.code);
-            throw new Error('tree not found')
+        const data: Awaited<iTreeData | ApiErrorType> = await apiGet(`tree/${id}`, abortController);
+        if (isTreeData(data)) {
+             console.log("good response");
+             console.log(data);
+             setTreeData(data as iTreeData);
         } 
-          else {
-            console.log("good response");
-            console.log(data);
-            setTreeData(data);
-          }
+        else {
+           if (abortController.signal.aborted) {
+             console.log("Request aborted");
+             return;
+           }
+          else if (isApiErrorType(data)) {
+            console.log((data as ApiErrorType).error);
+            throw new Error((data as ApiErrorType).error);
+          } else {
+            throw new Error("Unknown Error: Unable to find tree data.")
+          }   
+        }
 
       } catch (err) {
         console.log(err);
+        setServerError(
+          typeof err === "string"
+            ? err
+            : (err as Error).message
+            ? (err as Error).message
+            : "An unknown error occurred"
+        );
         if (isMounted) setNotFound(true);
       } finally {
         if (isMounted) setLoading(false);

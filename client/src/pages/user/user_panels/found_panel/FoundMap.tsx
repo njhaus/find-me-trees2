@@ -5,22 +5,21 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import { useEffect, useRef, useState } from "react";
 import "../../styles/map.css";
 
-import { iUserFound } from "../../../../data/user_data/userData";
+import { iUserFound } from "../../user_data/userData";
 import { apiGet } from "../../../../services/api_client";
+import { ApiErrorType, isApiErrorType } from "../../../../data/types";
 
 interface iFoundMap {
   data: iUserFound[];
   location: [number, number];
 }
 
-
 const FoundMap = ({ data, location }: iFoundMap) => {
-  
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const map = useRef<Map | null>(null);
   const [zoom] = useState(3);
   const currentLocation = location;
-  
+
   const mapData = {
     type: "FeatureCollection",
     features: data.map((found) => ({
@@ -66,7 +65,7 @@ const FoundMap = ({ data, location }: iFoundMap) => {
 
     // Create elements for popup
     const popupContainer = document.createElement("div");
-    popupContainer.classList.add('map-popup')
+    popupContainer.classList.add("map-popup");
     const popupTitle = document.createElement("h4");
     popupTitle.textContent = title;
     const popupImg = document.createElement("img");
@@ -199,13 +198,22 @@ const FoundMap = ({ data, location }: iFoundMap) => {
   };
 
   useEffect(() => {
-    const abortController = new AbortController()
+    const abortController = new AbortController();
 
     const setUpMap = async () => {
       try {
-        const getKey = await apiGet("data/maptilerkey", abortController);
-        const API_KEY = getKey.key;
-        
+        const getKey: Awaited<{key: string} | ApiErrorType> = await apiGet("data/maptilerkey", abortController);
+         if (getKey && (getKey as { key: string }).key) {
+           console.log("Success getting key");
+         } else {
+           if (isApiErrorType(getKey)) {
+             throw new Error((getKey as ApiErrorType).error);
+           } else {
+             throw new Error("Unknown Error: Unable to fetch map key.");
+           }
+         }
+         const API_KEY = (getKey as { key: string }).key;
+
         if (mapContainer.current && location) {
           map.current = new maplibregl.Map({
             container: mapContainer.current,
@@ -222,18 +230,18 @@ const FoundMap = ({ data, location }: iFoundMap) => {
       } catch (err) {
         console.error(err);
       }
-    }
-      setUpMap();
-      // CLEANUP FUNCTION NEEDED -- the one below gives errors
-      return () => {
-        if (map.current) {
-          map.current.off("load", createClusters);
-          map.current.off("click", "clusters", clusterZoom);
-          map.current.off("click", "unclustered-point", showPopover);
-          map.current.off("mouseenter", "clusters", popoverCursor);
-          map.current.off("mouseleave", "clusters", popoverCursor);
-        }
-      };
+    };
+    setUpMap();
+    // CLEANUP FUNCTION NEEDED -- the one below gives errors
+    return () => {
+      if (map.current) {
+        map.current.off("load", createClusters);
+        map.current.off("click", "clusters", clusterZoom);
+        map.current.off("click", "unclustered-point", showPopover);
+        map.current.off("mouseenter", "clusters", popoverCursor);
+        map.current.off("mouseleave", "clusters", popoverCursor);
+      }
+    };
   }, [zoom, location[1], location[0], data]);
 
   return (
@@ -262,6 +270,6 @@ const FoundMap = ({ data, location }: iFoundMap) => {
       </Box>
     </VStack>
   );
-}
+};
 
-export default FoundMap
+export default FoundMap;

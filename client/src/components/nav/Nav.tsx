@@ -1,7 +1,6 @@
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
-import './styles/header.css'
-
+import "./styles/header.css";
 
 export interface LinkProps {
   text: string;
@@ -10,7 +9,7 @@ export interface LinkProps {
 }
 
 import useAuth from "../../hooks/useAuth";
-import { iUserData } from "../../data/user_data/userData";
+import { iUserData } from "../../pages/user/user_data/userData";
 import useLogout from "../../hooks/useLogout";
 import { useLocation } from "react-router-dom";
 import NavDialog from "./NavDialog";
@@ -18,12 +17,11 @@ import NavDialog from "./NavDialog";
 export interface iNav {
   auth: iUserData;
   onLogout: () => void;
-  redirect?: boolean
+  redirect?: boolean;
 }
 
 export function Nav() {
-
-  const { auth} = useAuth();
+  const { auth } = useAuth();
   const location = useLocation();
   const redirectData = location.state;
 
@@ -33,9 +31,7 @@ export function Nav() {
     //   BROWSER Navbar
     <>
       {/* Dialog message -- for logged out,  */}
-      <NavDialog
-        message={redirectData?.message ? redirectData.message : ''}
-      />
+      <NavDialog message={redirectData?.message ? redirectData.message : ""} />
       {/* DESKTOP HEADER */}
       <DesktopNav
         auth={auth}

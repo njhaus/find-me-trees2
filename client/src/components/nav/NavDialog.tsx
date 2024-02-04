@@ -1,3 +1,5 @@
+// This is found in the navbar, since it needs to be available at all times
+
 import { useEffect, useRef } from "react";
 
 import {
@@ -46,10 +48,9 @@ const NavDialog = ({ message }: iNavDialog) => {
 
               <AlertDialogFooter>
                 <Button
-                  colorScheme="red"
                   ref={closeRef}
-                   onClick={onClose
-    }              ml={3
+                  onClick={onClose}
+                  ml={3
                 }>
                   Close
                 </Button>

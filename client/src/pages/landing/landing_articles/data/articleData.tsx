@@ -1,5 +1,4 @@
 import { v4 as uuidv4 } from "uuid";
-
 import FindTreesArticle from "../article_children/FindTreesArticle";
 
 export class Article {
@@ -48,7 +47,7 @@ const mapArticle = new Article(
   "Plot your finds on a map to keep track of the trees you find.",
   "/tree-map.png",
   "Log in to begin",
-  '/login'
+  `/login`
 );
 const favoriteArticle = new Article(
   uuidv4(),

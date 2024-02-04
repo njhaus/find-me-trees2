@@ -9,16 +9,16 @@ import {
   PopoverContent,
   PopoverFooter,
   PopoverTrigger,
-  useDisclosure
+  useDisclosure,
 } from "@chakra-ui/react";
 
-import { iLocationData } from "../../../../data/user_data/userData";
+import { iLocationData } from "../../user_data/userData";
 import useUpdateUser from "../../../../hooks/useUpdateUser";
 
 interface iRemoveFoundBtn {
   title: string;
   id: string;
-  locationFound: iLocationData
+  locationFound: iLocationData;
 }
 
 const RemoveFoundBtn = ({ title, id, locationFound }: iRemoveFoundBtn) => {
@@ -36,16 +36,17 @@ const RemoveFoundBtn = ({ title, id, locationFound }: iRemoveFoundBtn) => {
   const handleRemoveTree = () => {
     if (currentTree) {
       const updatedKey = userData.found.filter(
-        (tree) => !(
-          tree._id._id === id &&
-          tree.location.coordinates[0] === locationFound.coordinates[0] &&
-              tree.location.coordinates[1] === locationFound.coordinates[1]
-        ));
-      handleUpdateUser('found', updatedKey);
+        (tree) =>
+          !(
+            tree._id._id === id &&
+            tree.location.coordinates[0] === locationFound.coordinates[0] &&
+            tree.location.coordinates[1] === locationFound.coordinates[1]
+          )
+      );
+      handleUpdateUser("found", updatedKey);
+    } else {
+      console.log("could not find tree at that location.");
     }
-    else {
-        console.log('could not find tree at that location.')
-      }
   };
 
   return (

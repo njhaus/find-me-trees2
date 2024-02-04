@@ -9,39 +9,38 @@ import {
   PopoverContent,
   PopoverFooter,
   PopoverTrigger,
-  useDisclosure
+  useDisclosure,
 } from "@chakra-ui/react";
-  
-import { userOptionsKey } from "../../../../../data/user_options_data";
-import useUpdateUser from "../../../../../hooks/useUpdateUser";
 
+import { userOptionsKey } from "../../../user_data/user_options_data";
+import useUpdateUser from "../../../../../hooks/useUpdateUser";
 
 interface iRemoveBtn {
   title: string;
   id: string;
   dataKey: userOptionsKey;
   width?: string;
-  size?: string
+  size?: string;
 }
 
-const RemoveBtn = ({title, id, dataKey, width , size}: iRemoveBtn) => {
-
+const RemoveBtn = ({ title, id, dataKey, width, size }: iRemoveBtn) => {
   const { userData, handleUpdateUser } = useUpdateUser();
   const currentTree = userData[dataKey].find((tree) => tree._id._id === id);
 
   const { onOpen, onClose, isOpen } = useDisclosure();
   const removeRef = useRef(null);
 
-  const w = width ? width : '100%'
-  const sz = size ? size : 'teeny'
+  const w = width ? width : "100%";
+  const sz = size ? size : "teeny";
 
   const handleRemoveTree = () => {
     if (currentTree) {
-      const updatedKey = userData[dataKey].filter(tree => tree._id._id !== id);
+      const updatedKey = userData[dataKey].filter(
+        (tree) => tree._id._id !== id
+      );
       handleUpdateUser(dataKey, updatedKey);
     }
   };
-  
 
   return (
     <Popover
@@ -75,6 +74,6 @@ const RemoveBtn = ({title, id, dataKey, width , size}: iRemoveBtn) => {
       </PopoverContent>
     </Popover>
   );
-}
+};
 
-export default RemoveBtn
+export default RemoveBtn;
