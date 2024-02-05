@@ -1,10 +1,9 @@
 import React, { ReactNode, createContext, useEffect, useState } from "react";
 
 import { useLocation } from "react-router-dom";
+import { ApiErrorType, isApiErrorType } from "../data/types";
 import { iUserData, initialUserData, isUserData } from "../pages/user/user_data/userData";
 import { apiGet } from "../services/api_client";
-import { ApiErrorType, isApiErrorType } from "../data/types";
-import useServerError from "../hooks/useServerError";
 
 interface AuthContextProps {
   auth: iUserData;

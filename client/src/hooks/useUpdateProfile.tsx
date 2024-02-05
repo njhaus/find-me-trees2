@@ -16,6 +16,7 @@ const useUpdateProfile = () => {
   const [userData, setUserData] = useState<iUserData>(auth || initialUserData);
 
   const { setServerError } = useServerError();
+  const logout = useLogout();
 
   const handleUpdateProfile = async (
     oldData: iUserData,
@@ -56,7 +57,7 @@ const useUpdateProfile = () => {
             // On error, reset data to previous user data and log out
             setUserData(prevUserData);
             setAuth(prevUserData);
-            useLogout();
+            logout;
             throw new Error((res as ApiErrorType).error);
             // return prevUserData;
           } else {

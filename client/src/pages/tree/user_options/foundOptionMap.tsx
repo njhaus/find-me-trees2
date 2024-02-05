@@ -8,7 +8,7 @@ interface iFoundOptionMap {
     handleCoordinates: (coords: [number, number]) => void;
 }
 
-const foundOptionMap = ({handleCoordinates}: iFoundOptionMap) => {
+const FoundOptionMap = ({handleCoordinates}: iFoundOptionMap) => {
 
 
   const mapContainer = useRef<HTMLDivElement | null>(null);
@@ -66,4 +66,4 @@ const foundOptionMap = ({handleCoordinates}: iFoundOptionMap) => {
   );
 }
 
-export default foundOptionMap
+export default FoundOptionMap
