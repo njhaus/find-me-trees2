@@ -18,9 +18,10 @@ const ArticleImage = ({ imgUrl }: ArticleImageProps) => {
     >
       <Image
         display={{ base: "block", md: "none" }}
-        maxWidth={"30rem"}
+        maxWidth={"90%"}
         maxHeight={"25rem"}
         src={imgUrl}
+        pb={'1rem'}
       ></Image>
     </Flex>
   );

@@ -19,6 +19,7 @@ const TreeUserOptions = ({ id }: iTreeUserOptions) => {
       mx={{ base: "auto", md: 0 }}
       marginLeft={{ md: "auto" }}
       marginTop={{ base: "2rem", md: "-1rem", lg: 0 }}
+      overflowX={'hidden'}
     >
       {options.map((op, i) => (
         <Box key={i} width={"10rem"} position={"relative"}>

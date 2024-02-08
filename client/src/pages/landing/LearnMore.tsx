@@ -19,7 +19,7 @@ const LearnMore = () => {
         h={"15rem"}
         borderRadius={"50%"}
         ms={"2rem"}
-        mt={"-2rem"}
+        mt={{base: "1rem", md:"-2rem"}}
       ></Image>
       <VStack mx={"2rem"} align={"start"}>
         <Heading as={"h4"} color={"main.100"} mb={"1rem"}>

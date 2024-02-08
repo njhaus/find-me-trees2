@@ -1,7 +1,7 @@
 import { ApiErrorType } from "../data/types";
 
-// const baseUrl = "http://localhost:3009/";
-const baseUrl = "https://find-me-trees-server-production.up.railway.app/";
+const baseUrl = "http://localhost:3009/";
+// const baseUrl = "https://find-me-trees-server-production.up.railway.app/";
 
 
 export const apiPost = async <T>(

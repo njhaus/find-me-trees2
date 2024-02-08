@@ -56,6 +56,7 @@ const MobileDrawer = ({ auth, onLogout }: iNav) => {
         placement="right"
         onClose={onCloseDrawer}
         finalFocusRef={btnRef}
+        preserveScrollBarGap
       >
         <DrawerOverlay />
         <DrawerContent>
