@@ -50,12 +50,17 @@ const Browse = () => {
         );
         console.log(response)
         if (!isMounted) return;
-        if (Array.isArray(response) && isTreeData(response[0])) {
-           setFilteredTrees(response as iTreeData[]);
-           setSearchTerms(formData);
+        if (Array.isArray(response)) {
+          if (response.length > 0 && isTreeData(response[0])) {
+              setFilteredTrees(response as iTreeData[]);
+          }
+          else {
+            setFilteredTrees([]);
+          }
+          setSearchTerms(formData);
         } 
          else {
-           if (isApiErrorType(response) || response instanceof DOMException) {
+           if (isApiErrorType(response)) {
              console.log((response as ApiErrorType).error);
              throw new Error((response as ApiErrorType).error);
            } else {

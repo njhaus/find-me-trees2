@@ -121,7 +121,7 @@ const Tree = () => {
 
 
   return (
-    <Flex as={"main"} direction={"column"} bg={"white"} width={"100%"}>
+    <Flex as={"main"} direction={"column"} bg={"white"} width={"100%"} overflowX={'hidden'}>
       <TreeHeading
         title={treeData.title}
         sciName={treeData.sciName}
