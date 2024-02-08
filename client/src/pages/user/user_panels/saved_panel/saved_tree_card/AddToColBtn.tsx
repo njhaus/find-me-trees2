@@ -66,7 +66,7 @@ const AddToColBtn = ({
       initialFocusRef={addRef}
       onOpen={onOpen}
       onClose={onClose}
-      placement="right"
+      placement="bottom"
       closeOnBlur={false}
     >
       <PopoverTrigger>

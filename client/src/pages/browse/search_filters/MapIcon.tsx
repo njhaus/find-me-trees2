@@ -15,7 +15,7 @@ const MapIcon = ({id, onClick}: MapIcon) => {
       cursor={"pointer"}
     >
       <Text className={"filter-text"}>Open map</Text>
-      <Image src={"../../../src/assets/map_icon.png"} />
+      <Image src={"/filter-form/map_icon.png"} />
     </Box>
   );
 }

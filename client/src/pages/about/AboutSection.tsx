@@ -7,12 +7,14 @@ interface iAboutSection {
   text: string;
   imgSrc: string;
   link?: string;
+  linkText?: string;
 }
 
-const AboutSection = ({ direction, title, text, imgSrc, link}: iAboutSection) => {
+const AboutSection = ({ direction, title, text, imgSrc, link, linkText}: iAboutSection) => {
 
   const picRight = direction === 'row' ? { base: "-4rem", md: 0 } : '';
   const picLeft = direction === "row-reverse" ? { base: "-4rem", md: 0 } : '';
+  const marginLeft = direction === "row-reverse" ? '3rem' : '' ;
 
   return (
     <>
@@ -26,10 +28,10 @@ const AboutSection = ({ direction, title, text, imgSrc, link}: iAboutSection) =>
         position={"relative"}
       >
         <VStack as={"article"} className="about-text">
-          <Heading as={"h3"} py={'1rem'}>{title}</Heading>
+          <Heading as={"h3"} py={'1rem'} marginLeft={marginLeft} >{title}</Heading>
           <Text>
             {text}{' '}
-            {link && <Link href={link} target="_blank" color={'secondary.400'} _activeLink={{ color: 'accent.500' }} >{link?.split("/")[2]}</Link>}
+            {link && <Link href={link} target="_blank" color={'secondary.400'} _activeLink={{ color: 'accent.500' }} >{linkText}</Link>}
           </Text>
         </VStack>
         <Image

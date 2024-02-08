@@ -66,9 +66,11 @@ const LandingMain = () => {
         <video
           className="video"
           src="/find-me-trees-vid.mp4"
+          poster='/landing-vid-poster.png'
           autoPlay
           loop
           muted
+          playsInline
         ></video>
       </Box>
     </Flex>

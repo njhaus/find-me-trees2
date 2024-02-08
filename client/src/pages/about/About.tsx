@@ -44,7 +44,7 @@ const About = () => {
             imgSrc={sec.imgSrc}
             direction={i % 2 === 0 ? 'row' : 'row-reverse'}
             link={sec?.link}
-            
+            linkText={sec?.linkText}
           />
         ))}
       </VStack>
