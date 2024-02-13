@@ -36,7 +36,7 @@ const FoundCard = ({
       overflow="hidden"
       w={"18rem"}
       borderRadius={"10px"}
-      maxHeight={"17rem"}
+      height="fit-content"
     >
       <Stack className="blur-border-light" borderRadius={"10px"}>
         <CardBody py={"0.5rem"}>

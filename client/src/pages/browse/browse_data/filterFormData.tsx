@@ -65,22 +65,22 @@ export const leafFilters: filterObj[] = [
     helperLink: "",
     formName: "leafShape",
   },
-  {
-    label: "Leaf Size",
-    values: ["Under 2 inches", "2-6 inches", "6 - 10 inches", "over 10 inches"],
-    helperText: [
-      {
-        img: "/filter-form/simple-leaf.jpeg",
-        text: "Measure the size of the entire leaf from where it connects to the stem to its tip.",
-      },
-      {
-        img: "/filter-form/compound-leaf.jpeg",
-        text: "If the leaf is compound, measure one leaflet in the group of leaves.",
-      },
-    ],
-    helperLink: "",
-    formName: "leafSize",
-  },
+  // {
+  //   label: "Leaf Size",
+  //   values: ["Under 2 inches", "2-6 inches", "6 - 10 inches", "over 10 inches"],
+  //   helperText: [
+  //     {
+  //       img: "/filter-form/simple-leaf.jpeg",
+  //       text: "Measure the size of the entire leaf from where it connects to the stem to its tip.",
+  //     },
+  //     {
+  //       img: "/filter-form/compound-leaf.jpeg",
+  //       text: "If the leaf is compound, measure one leaflet in the group of leaves.",
+  //     },
+  //   ],
+  //   helperLink: "",
+  //   formName: "leafSize",
+  // },
 ];
 
 export const barkFilters: filterObj[] = [

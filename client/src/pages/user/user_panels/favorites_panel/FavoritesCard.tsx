@@ -61,7 +61,7 @@ const FavoritesCard = ({
 
         <CardFooter>
           <Flex direction={"column"} gap="0.5rem">
-            <Button variant="solidDark" size="sm">
+            <Button variant="solidDark" size="sm" whiteSpace={"pre-wrap"} maxW={"100%"} p={'0.25rem'}>
               <Link to={`/tree/${id}`}>View {title}</Link>
             </Button>
             <RemoveBtn title={title} id={id} dataKey={"favorites"} size="sm" />

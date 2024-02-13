@@ -78,7 +78,7 @@ const TreeCard = ({
       <Divider />
       <CardFooter>
         <ButtonGroup spacing="2">
-          <Button variant="solidDark">
+          <Button variant="solidDark" whiteSpace={'pre-wrap'}>
             <Link to={`/tree/${id}`}>View {title}</Link>
           </Button>
         </ButtonGroup>

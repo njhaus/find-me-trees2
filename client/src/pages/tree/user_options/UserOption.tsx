@@ -144,12 +144,14 @@ const UserOption = ({
       {noUserMsg && (
         <Flex
           position={"absolute"}
-          top={"-3rem"}
-          left={"-4rem"}
+          bottom={"-5rem"}
+          left={"0"}
           fontSize={"0.8rem"}
           bg={"white"}
           border={"1px solid black"}
-          width={"10rem"}
+          width={"8rem"}
+          zIndex={"100"}
+          padding={'0.25rem'}
         >
           <Text>
             Log in to add this tree to your{" "}
